@@ -1,0 +1,1 @@
+define(["zepto"],function(n){return n.config={router:!0,autoInit:!1,autoInitSwiper:!1},n.config});

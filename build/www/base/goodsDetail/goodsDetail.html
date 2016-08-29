@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>设置</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../../../css/common/normalize-3.0.3.min.css?v=-bd8ab49">
+    <link rel="stylesheet" href="../../../js/sui/css/sm.min.css?v=-93c2214">
+  </head>
+  <body>
+
+  <div class="page-group">
+    <!--页面css-->
+    <link rel="stylesheet" href="../../../js/sui/css/sm-extend.min.css?v=-15dd40e">
+    <link rel="stylesheet" href="../../../css/base/goodsDetail/goodsDetail.css?v=-2152937">
+    <!--页面css.end-->
+        <div class="page page-current" id="goodsDetail">
+            <!-- 标题栏 -->
+            <header class="bar bar-nav">
+                <a class="button button-link button-nav pull-left back" href="#">
+                  <span class="icon icon-left"></span>
+                  返回
+                </a>
+                <h1 class="title">商品详情</h1>
+            </header>
+            <div class="content">
+              <!-- Slider -->
+              <div class="swiper-container">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide"><img src="" alt=""></div>
+                </div>
+                <div class="swiper-pagination"></div>
+              </div>
+              <h3 id="goodsName"></h3>
+            </div>
+        </div>
+        <script type="text/html" id="swiper_TPL">
+          {{each}}
+            <div class="swiper-slide"><img src="{{$value}}" alt="loading..."></div>
+          {{/each}}
+        </script>
+  </div>
+<!--moduleJS begin-->
+<script type="text/javascript" data-main="../../../js/router.js" src="../../../js/require.js?v=-35fe476"></script>
+<!--moduleJS end-->
+  </body>
+</html>

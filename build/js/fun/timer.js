@@ -1,0 +1,1 @@
+function timeout(t){var e=setInterval(function(){t=1*t-1,0!=t?postMessage(t):clearInterval(e)},1e3)}this.addEventListener("message",function(t){timeout(t.data)});
