@@ -30,7 +30,6 @@ define(['app','template','smExtend'],function(app,template,smExtend){
                     //模拟加载次数.end
                     var html = template('goodlist_TPL', mydata);
                     $('#goodList').html(html);
-                    alert($('.pic img').attr('src'));
                 },
                 complete : function(){
                     // 加载完毕需要重置
