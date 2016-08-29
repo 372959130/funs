@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>list</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../../../css/common/normalize-3.0.3.min.css">
+    <link rel="stylesheet" href="../../../js/sui/css/sm.min.css">
+    <link rel="stylesheet" href="../../../js/sui/css/sm-extend.min.css">
+    <style type="text/css">
+
+  #carList ul .controlItem {
+    position: absolute;
+    right: 0px;
+    /*top: 52%;
+    margin-top: -10px;*/
+    display: inline-block;
+    border: 1px solid #b2b2b2;
+    border-radius: 2px;
+    height: 30px;
+    overflow: hidden; }
+  #carList ul .controlItem span {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -4px;
+    padding: 0 0.3rem;
+    font: inherit;
+    font-size: 20px;
+    width: 28px;
+    height: 30px;
+    line-height: 30px; }
+  #carList ul .cut {
+    padding-top: 0.05rem !important; }
+  #carList ul .cut small {
+    position: absolute;
+    display: block;
+    border-right: 1px solid #b2b2b2;
+    height: 100px;
+    right: 0;
+    top: 0; }
+  #carList ul .add small {
+    position: absolute;
+    display: block;
+    border-right: 1px solid #b2b2b2;
+    height: 100px;
+    left: 0;
+    top: 0; }
+  #carList ul .controlItem input {
+    padding: 0px;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border: none;
+    outline: none;
+    font-size: 10px !important; }
+    </style>
+  </head>
+  <body>
+<div class="page-group">
+        <div class="page page-current" id="list">
+              <header class="bar bar-nav">
+                <h1 class="title">视图列表</h1>
+              </header>
+              <div class="content">
+                <div class="content-block-title">图标、标题和副标题</div>
+                <div class="list-block">
+                  <ul>
+                    <li class="item-content">
+                      <div class="item-media"><i class="icon icon-f7"></i></div>
+                      <div class="item-inner">
+                        <div class="item-title">商品名称</div>
+                        <div class="item-after">杜蕾斯</div>
+                      </div>
+                    </li>
+                    <li class="item-content">
+                      <div class="item-media"><i class="icon icon-f7"></i></div>
+                      <div class="item-inner">
+                        <div class="item-title">型号</div>
+                        <div class="item-after">极致超薄型</div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="content-block-title">标题和副标题</div>
+                <div class="list-block">
+                  <ul>
+                    <li class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title">商品名称</div>
+                        <div class="item-after">杜蕾斯</div>
+                      </div>
+                    </li>
+                    <li class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title">型号</div>
+                        <div class="item-after">极致超薄型</div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="content-block-title">带箭头</div>
+                <div class="list-block">
+                  <ul>
+                    <li class="item-content item-link">
+                      <div class="item-media"><i class="icon icon-f7"></i></div>
+                      <div class="item-inner">
+                        <div class="item-title">商品名称</div>
+                        <div class="item-after">杜蕾斯</div>
+                      </div>
+                    </li>
+                    <li class="item-content item-link">
+                      <div class="item-media"><i class="icon icon-f7"></i></div>
+                      <div class="item-inner">
+                        <div class="item-title">型号</div>
+                        <div class="item-after">极致超薄型</div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="">
+                  <div class="content-block-title">单选</div>
+                  <div class="list-block media-list" id="carList">
+                    <ul>
+                      <li>
+                        <div class="swiper-container">
+                          <div class="swiper-wrapper">
+                            <div class="swiper-slide red-slide" style="width: 100%;">
+                              <label class="label-checkbox item-content">
+                                <input type="radio" name="my-radio">
+                                <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                                <div class="item-inner">
+                                  <div class="item-title-row">
+                                    <div class="item-title">石头</div>
+                                    <div class="item-after">17:14</div>
+                                  </div>
+                                  <div class="item-subtitle">New messages from John Doe</div>
+                                  <!-- <div class="item-text">Lorem ipsum dolor sit amet...</div> -->
+                                  <div class="item-text" style="display: flex;">
+                                    <span class="controlItem">
+                                      <span class="cut" carid="3811DB45743742B8B80B6E3192A865BD">－<small></small></span><input class="proInput" type="number" value="1" ><span class="add" carid="3811DB45743742B8B80B6E3192A865BD">＋<small></small></span>
+                                    </span>
+                                  </div>
+                                </div>
+                              </label>
+                            </div>
+                            <div class="swiper-slide blue-slide" style="width: 150px;background-color: red;text-align: center;">
+                              <!-- <div class="title">Slide 2</div> -->
+                               删除
+                            </div>
+                          </div>
+                        </div>
+                        
+                      </li>
+                      <li>
+                        <label class="label-checkbox item-content">
+                          <input type="radio" name="my-radio">
+                          <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                          <div class="item-inner">
+                            <div class="item-title-row">
+                              <div class="item-title">剪刀</div>
+                              <div class="item-after">17:14</div>
+                            </div>
+                            <div class="item-subtitle">New messages from John Doe</div>
+                            <div class="item-text">Lorem ipsum dolor sit amet...</div>
+                          </div>
+                        </label>
+                      </li>
+                      <li>
+                        <label class="label-checkbox item-content">
+                          <input type="radio" name="my-radio">
+                          <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                          <div class="item-inner">
+                            <div class="item-title-row">
+                              <div class="item-title">布</div>
+                              <div class="item-after">17:14</div>
+                            </div>
+                            <div class="item-subtitle">New messages from John Doe</div>
+                            <div class="item-text">Lorem ipsum dolor sit amet...</div>
+                          </div>
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="content-block-title">多选</div>
+                  <div class="list-block media-list">
+                    <ul>
+                      <li>
+                        <label class="label-checkbox item-content">
+                          <input type="checkbox" name="checkbox">
+                          <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                          <div class="item-inner">
+                            <div class="item-title-row">
+                              <div class="item-title">石头</div>
+                              <div class="item-after">17:14</div>
+                            </div>
+                            <div class="item-subtitle">New messages from John Doe</div>
+                            <div class="item-text">Lorem ipsum dolor sit amet...</div>
+                          </div>
+                        </label>
+                      </li>
+                      <li>
+                        <label class="label-checkbox item-content">
+                          <input type="checkbox" name="checkbox">
+                          <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                          <div class="item-inner">
+                            <div class="item-title-row">
+                              <div class="item-title">剪刀</div>
+                              <div class="item-after">17:14</div>
+                            </div>
+                            <div class="item-subtitle">New messages from John Doe</div>
+                            <div class="item-text">Lorem ipsum dolor sit amet...</div>
+                          </div>
+                        </label>
+                      </li>
+                      <li>
+                        <label class="label-checkbox item-content">
+                          <input type="checkbox" name="checkbox">
+                          <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                          <div class="item-inner">
+                            <div class="item-title-row">
+                              <div class="item-title">布</div>
+                              <div class="item-after">17:14</div>
+                            </div>
+                            <div class="item-subtitle">New messages from John Doe</div>
+                            <div class="item-text">Lorem ipsum dolor sit amet...</div>
+                          </div>
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+              </div>
+
+              </div>
+
+              
+</div>
+</div>
+
+<!--moduleJS begin-->
+<script type="text/javascript" data-main="../../../js/router.js" src="../../../js/require.js"></script>
+<!--moduleJS end-->
+  </body>
+</html>
