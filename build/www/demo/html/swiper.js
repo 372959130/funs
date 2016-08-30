@@ -1,8 +1,1 @@
-define(['zepto','smExtend'],function($){
-	$(".swiper-container").swiper({
-    // pagination: '.pagination',
-    paginationClickable: true,
-    slidesPerView: 'auto'
-  });
-
-})
+define(["zepto","smExtend"],function(e){e(".swiper-container").swiper({paginationClickable:!0,slidesPerView:"auto"})});

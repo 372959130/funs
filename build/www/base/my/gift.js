@@ -1,7 +1,1 @@
-define(['zepto','app'],function($,app){
-  var exportsObj = {};
-  exportsObj.init = function () {
-    app.setPageTitle("礼品");
-  }
-  return exportsObj;
-})
+define(["zepto","app"],function(e,n){var t={};return t.init=function(){n.setPageTitle("礼品")},t});
