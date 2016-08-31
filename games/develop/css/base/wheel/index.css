@@ -293,6 +293,7 @@ p{
   text-overflow:ellipsis;
   white-space:nowrap;
   padding:0 0.08rem;
+  word-break: break-all;
 }
 .infoBox .prizeDetail .prizeLevel{
   color: #000;
