@@ -12,27 +12,108 @@ p{
 .textCenter{
   text-align: center;
 }
+/* font-size set start */
+.font12{
+    font-size: 12px;
+}
+[data-dpr="2"] .font12{
+    font-size: 24px;
+}
+[data-dpr="3"] .font12{
+    font-size: 36px;
+}
+
+.font14{
+    font-size: 14px;
+}
+[data-dpr="2"] .font14{
+    font-size: 28px;
+}
+[data-dpr="3"] .font14{
+    font-size: 42px;
+}
+
+.font16{
+    font-size: 16px;
+}
+[data-dpr="2"] .font16{
+    font-size: 32px;
+}
+[data-dpr="3"] .font16{
+    font-size: 48px;
+}
+
+.font18{
+    font-size: 18px;
+}
+[data-dpr="2"] .font18{
+    font-size: 36px;
+}
+[data-dpr="3"] .font18{
+    font-size: 54px;
+}
+
+.font20{
+    font-size: 20px;
+}
+[data-dpr="2"] .font20{
+    font-size: 40px;
+}
+[data-dpr="3"] .font20{
+    font-size: 60px;
+}
+
+.font22{
+    font-size: 22px;
+}
+[data-dpr="2"] .font24{
+    font-size: 44px;
+}
+[data-dpr="3"] .font24{
+    font-size: 66px;
+}
+
 .font24{
-  font-size: 0.32rem;
+    font-size: 24px;
 }
-.font26{
-  font-size: 0.346667rem;
+[data-dpr="2"] .font24{
+    font-size: 48px;
 }
+[data-dpr="3"] .font24{
+    font-size: 72px;
+}
+
 .font30{
-  font-size: 0.4rem;
+    font-size: 30px;
 }
+[data-dpr="2"] .font30{
+    font-size: 60px;
+}
+[data-dpr="3"] .font30{
+    font-size: 90px;
+}
+
 .font36{
-  font-size: 0.48rem;
+    font-size: 36px;
 }
+[data-dpr="2"] .font36{
+    font-size: 72px;
+}
+[data-dpr="3"] .font36{
+    font-size: 108px;
+}
+/* font-size set end */
+
 .red{
   color: #f00;
 }
 .blue{
   color: #4798eb;
 }
-.mrT22{
-  margin-top: 0.293333rem;
+.mrT16{
+  margin-top: 0.213333rem
 }
+
 /*公共*/
 .bg{
   background: url(../../../images/base/wheel/bg.png) no-repeat center center;
@@ -128,6 +209,7 @@ p{
   transform: translateX(-50%) translateY(-50%);
   margin-top: -0.22rem;/*因为按钮不是1:1,所以加margin-top,使得按钮居中*/
   z-index: 4;
+  -webkit-tap-highlight-color: transparent;
 }
 .test{
       -webkit-transform: rotate(3380deg) translate3d(-50%,-50%,0) !important;
@@ -161,6 +243,7 @@ p{
 }
 .infoBox .title{
   position: relative;
+  display: -webkit-flex;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -184,4 +267,9 @@ p{
 }
 .infoBox .title:after{
   transform: translate3d(115%,-50%,0) rotate(180deg);
+}
+.infoBox .activityDetail p{
+  padding-left: 0.586667rem;
+  padding-right: 0.586667rem;
+  line-height: 2;
 }
