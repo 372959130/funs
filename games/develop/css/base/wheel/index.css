@@ -180,11 +180,11 @@ p{
   left: 50%;
   border-radius: 100%;
   /*旋转*/
-  -o-transition:  transform 16s ease-in-out;
-  -ms-transition:  transform 16s ease-in-out;
-  -moz-transition:  transform 16s ease-in-out;    
-  -webkit-transition:  transform 16s ease-in-out;
-  transition: transform 16s ease-in-out;
+  -o-transition:  transform 6s ease-in-out;
+  -ms-transition:  transform 6s ease-in-out;
+  -moz-transition:  transform 6s ease-in-out;    
+  -webkit-transition:  transform 6s ease-in-out;
+  transition: transform 6s ease-in-out;
   -o-transform-origin:  0 0;
   -ms-transform-origin:  0 0;
   -moz-transform-origin:  0 0;    
@@ -208,9 +208,57 @@ p{
   z-index: 4;
   -webkit-tap-highlight-color: transparent;
 }
+
+/*奖品*/
+.prizeBox{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1.20rem;
+  height: 2.5rem;
+  background: transparent;
+  background-size: 100% 100%;
+  transform-origin: center bottom;
+  transform: translate3d(-50%,-100%,0);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.prizeBox-0{
+  transform: translate3d(-50%,-100%,0) rotate(0deg);
+}
+.prizeBox-1{
+  transform: translate3d(-50%,-100%,0) rotate(45deg);
+}
+.prizeBox-2{
+  transform: translate3d(-50%,-100%,0) rotate(90deg);
+}
+.prizeBox-3{
+  transform: translate3d(-50%,-100%,0) rotate(135deg);
+}
+.prizeBox-4{
+  transform: translate3d(-50%,-100%,0) rotate(180deg);
+}
+.prizeBox-5{
+  transform: translate3d(-50%,-100%,0) rotate(225deg);
+}
+.prizeBox-6{
+  transform: translate3d(-50%,-100%,0) rotate(270deg);
+}
+.prizeBox-7{
+  transform: translate3d(-50%,-100%,0) rotate(315deg);
+}
+/*奖品*/
+
+/*谢谢参与*/
+.thanksPic{
+  width: 0.853333rem;
+  height: 0.853333rem;
+}
+
 .test{
-      -webkit-transform: rotate(3380deg) translate3d(-50%,-50%,0) !important;
-      transform: rotate(3380deg) translate3d(-50%,-50%,0) !important;
+      -webkit-transform: rotate(1680deg) translate3d(-50%,-50%,0) !important;
+      transform: rotate(1680deg) translate3d(-50%,-50%,0) !important;
 }
 /*信息框*/
 .infoBox{
