@@ -1,0 +1,1 @@
+define(["jquery"],function(e){var n={};return n});
