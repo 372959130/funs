@@ -1,1 +1,1 @@
-require.config({baseUrl:"../../../js/app/",paths:{FastClick:"../tool/fastclick",jquery:"../tool/jquery-3.1.0.min",Swiper:"../tool/swiper-3.3.1.jquery.min-AMD",wheelRun:"../fun/wheel/wheelRun",wheelPrizePostion_8:"../fun/wheel/wheelPrizePostion_8"}});
+require.config({baseUrl:"../../../js/app/",paths:{FastClick:"../tool/fastclick",jquery:"../tool/jquery-3.1.0.min",Swiper:"../tool/swiper-3.3.1.jquery.min-AMD",app:"../fun/app",loading:"../fun/loading",wheelRun:"../fun/wheel/wheelRun",wheelPrizePostion_8:"../fun/wheel/wheelPrizePostion_8"}});
