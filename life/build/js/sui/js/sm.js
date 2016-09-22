@@ -1,4 +1,8101 @@
-+function(t){"use strict";var e={autoInit:!1,showPageLoadingIndicator:!0,router:!0,swipePanel:"left",swipePanelOnlyClose:!0,autoInitSwiper:!1};t.smConfig=t.extend(e,t.config)}(Zepto),+function(t){"use strict";t.compareVersion=function(t,e){var n=t.split("."),i=e.split(".");if(t===e)return 0;for(var a=0;a<n.length;a++){var r=parseInt(n[a]);if(!i[a])return 1;var o=parseInt(i[a]);if(r<o)return-1;if(r>o)return 1}return-1},t.getCurrentPage=function(){return t(".page-current")[0]||t(".page")[0]||document.body}}(Zepto),function(t){"use strict";function e(t,e){function n(t){if(t.target===this)for(e.call(this,t),i=0;i<a.length;i++)r.off(a[i],n)}var i,a=t,r=this;if(e)for(i=0;i<a.length;i++)r.on(a[i],n)}["width","height"].forEach(function(e){var n=e.replace(/./,function(t){return t[0].toUpperCase()});t.fn["outer"+n]=function(t){var n=this;if(n){var i=n[e](),a={width:["left","right"],height:["top","bottom"]};return a[e].forEach(function(e){t&&(i+=parseInt(n.css("margin-"+e),10))}),i}return null}}),t.support=function(){var t={touch:!!("ontouchstart"in window||window.DocumentTouch&&document instanceof window.DocumentTouch)};return t}(),t.touchEvents={start:t.support.touch?"touchstart":"mousedown",move:t.support.touch?"touchmove":"mousemove",end:t.support.touch?"touchend":"mouseup"},t.getTranslate=function(t,e){var n,i,a,r;return"undefined"==typeof e&&(e="x"),a=window.getComputedStyle(t,null),window.WebKitCSSMatrix?r=new WebKitCSSMatrix("none"===a.webkitTransform?"":a.webkitTransform):(r=a.MozTransform||a.transform||a.getPropertyValue("transform").replace("translate(","matrix(1, 0, 0, 1,"),n=r.toString().split(",")),"x"===e&&(i=window.WebKitCSSMatrix?r.m41:16===n.length?parseFloat(n[12]):parseFloat(n[4])),"y"===e&&(i=window.WebKitCSSMatrix?r.m42:16===n.length?parseFloat(n[13]):parseFloat(n[5])),i||0},t.requestAnimationFrame=function(t){return window.requestAnimationFrame?window.requestAnimationFrame(t):window.webkitRequestAnimationFrame?window.webkitRequestAnimationFrame(t):window.mozRequestAnimationFrame?window.mozRequestAnimationFrame(t):window.setTimeout(t,1e3/60)},t.cancelAnimationFrame=function(t){return window.cancelAnimationFrame?window.cancelAnimationFrame(t):window.webkitCancelAnimationFrame?window.webkitCancelAnimationFrame(t):window.mozCancelAnimationFrame?window.mozCancelAnimationFrame(t):window.clearTimeout(t)},t.fn.dataset=function(){var e={},n=this[0].dataset;for(var i in n){var a=e[i]=n[i];"false"===a?e[i]=!1:"true"===a?e[i]=!0:parseFloat(a)===1*a&&(e[i]=1*a)}return t.extend({},e,this[0].__eleData)},t.fn.data=function(e,n){var i=t(this).dataset();if(!e)return i;if("undefined"==typeof n){var a=i[e],r=this[0].__eleData;return r&&e in r?r[e]:a}for(var o=0;o<this.length;o++){var s=this[o];e in i&&delete s.dataset[e],s.__eleData||(s.__eleData={}),s.__eleData[e]=n}return this},t.fn.animationEnd=function(t){return e.call(this,["webkitAnimationEnd","animationend"],t),this},t.fn.transitionEnd=function(t){return e.call(this,["webkitTransitionEnd","transitionend"],t),this},t.fn.transition=function(t){"string"!=typeof t&&(t+="ms");for(var e=0;e<this.length;e++){var n=this[e].style;n.webkitTransitionDuration=n.MozTransitionDuration=n.transitionDuration=t}return this},t.fn.transform=function(t){for(var e=0;e<this.length;e++){var n=this[e].style;n.webkitTransform=n.MozTransform=n.transform=t}return this},t.fn.prevAll=function(e){var n=[],i=this[0];if(!i)return t([]);for(;i.previousElementSibling;){var a=i.previousElementSibling;e?t(a).is(e)&&n.push(a):n.push(a),i=a}return t(n)},t.fn.nextAll=function(e){var n=[],i=this[0];if(!i)return t([]);for(;i.nextElementSibling;){var a=i.nextElementSibling;e?t(a).is(e)&&n.push(a):n.push(a),i=a}return t(n)},t.fn.show=function(){function t(t){var n,i;return e[t]||(n=document.createElement(t),document.body.appendChild(n),i=getComputedStyle(n,"").getPropertyValue("display"),n.parentNode.removeChild(n),"none"===i&&(i="block"),e[t]=i),e[t]}var e={};return this.each(function(){"none"===this.style.display&&(this.style.display=""),"none"===getComputedStyle(this,"").getPropertyValue("display"),this.style.display=t(this.nodeName)})}}(Zepto),function(t){"use strict";var e={},n=navigator.userAgent,i=n.match(/(Android);?[\s\/]+([\d.]+)?/),a=n.match(/(iPad).*OS\s([\d_]+)/),r=n.match(/(iPod)(.*OS\s([\d_]+))?/),o=!a&&n.match(/(iPhone\sOS)\s([\d_]+)/);if(e.ios=e.android=e.iphone=e.ipad=e.androidChrome=!1,i&&(e.os="android",e.osVersion=i[2],e.android=!0,e.androidChrome=n.toLowerCase().indexOf("chrome")>=0),(a||o||r)&&(e.os="ios",e.ios=!0),o&&!r&&(e.osVersion=o[2].replace(/_/g,"."),e.iphone=!0),a&&(e.osVersion=a[2].replace(/_/g,"."),e.ipad=!0),r&&(e.osVersion=r[3]?r[3].replace(/_/g,"."):null,e.iphone=!0),e.ios&&e.osVersion&&n.indexOf("Version/")>=0&&"10"===e.osVersion.split(".")[0]&&(e.osVersion=n.toLowerCase().split("version/")[1].split(" ")[0]),e.webView=(o||a||r)&&n.match(/.*AppleWebKit(?!.*Safari)/i),e.os&&"ios"===e.os){var s=e.osVersion.split(".");e.minimalUi=!e.webView&&(r||o)&&(1*s[0]===7?1*s[1]>=1:1*s[0]>7)&&t('meta[name="viewport"]').length>0&&t('meta[name="viewport"]').attr("content").indexOf("minimal-ui")>=0}var l=t(window).width(),c=t(window).height();e.statusBar=!1,e.webView&&l*c===screen.width*screen.height?e.statusBar=!0:e.statusBar=!1;var h=[];if(e.pixelRatio=window.devicePixelRatio||1,h.push("pixel-ratio-"+Math.floor(e.pixelRatio)),e.pixelRatio>=2&&h.push("retina"),e.os&&(h.push(e.os,e.os+"-"+e.osVersion.split(".")[0],e.os+"-"+e.osVersion.replace(/\./g,"-")),"ios"===e.os))for(var p=parseInt(e.osVersion.split(".")[0],10),d=p-1;d>=6;d--)h.push("ios-gt-"+d);e.statusBar?h.push("with-statusbar-overlay"):t("html").removeClass("with-statusbar-overlay"),h.length>0&&t("html").addClass(h.join(" ")),e.isWeixin=/MicroMessenger/i.test(n),t.device=e}(Zepto),function(){"use strict";function t(e,i){function a(t,e){return function(){return t.apply(e,arguments)}}var r;if(i=i||{},this.trackingClick=!1,this.trackingClickStart=0,this.targetElement=null,this.touchStartX=0,this.touchStartY=0,this.lastTouchIdentifier=0,this.touchBoundary=i.touchBoundary||10,this.layer=e,this.tapDelay=i.tapDelay||200,this.tapTimeout=i.tapTimeout||700,!t.notNeeded(e)){for(var o=["onMouse","onClick","onTouchStart","onTouchMove","onTouchEnd","onTouchCancel"],s=this,l=0,c=o.length;l<c;l++)s[o[l]]=a(s[o[l]],s);n&&(e.addEventListener("mouseover",this.onMouse,!0),e.addEventListener("mousedown",this.onMouse,!0),e.addEventListener("mouseup",this.onMouse,!0)),e.addEventListener("click",this.onClick,!0),e.addEventListener("touchstart",this.onTouchStart,!1),e.addEventListener("touchmove",this.onTouchMove,!1),e.addEventListener("touchend",this.onTouchEnd,!1),e.addEventListener("touchcancel",this.onTouchCancel,!1),Event.prototype.stopImmediatePropagation||(e.removeEventListener=function(t,n,i){var a=Node.prototype.removeEventListener;"click"===t?a.call(e,t,n.hijacked||n,i):a.call(e,t,n,i)},e.addEventListener=function(t,n,i){var a=Node.prototype.addEventListener;"click"===t?a.call(e,t,n.hijacked||(n.hijacked=function(t){t.propagationStopped||n(t)}),i):a.call(e,t,n,i)}),"function"==typeof e.onclick&&(r=e.onclick,e.addEventListener("click",function(t){r(t)},!1),e.onclick=null)}}var e=navigator.userAgent.indexOf("Windows Phone")>=0,n=navigator.userAgent.indexOf("Android")>0&&!e,i=/iP(ad|hone|od)/.test(navigator.userAgent)&&!e,a=i&&/OS 4_\d(_\d)?/.test(navigator.userAgent),r=i&&/OS [6-7]_\d/.test(navigator.userAgent),o=navigator.userAgent.indexOf("BB10")>0,s=!1;t.prototype.needsClick=function(t){for(var e=t;e&&"BODY"!==e.tagName.toUpperCase();){if("LABEL"===e.tagName.toUpperCase()&&(s=!0,/\bneedsclick\b/.test(e.className)))return!0;e=e.parentNode}switch(t.nodeName.toLowerCase()){case"button":case"select":case"textarea":if(t.disabled)return!0;break;case"input":if(i&&"file"===t.type||t.disabled)return!0;break;case"label":case"iframe":case"video":return!0}return/\bneedsclick\b/.test(t.className)},t.prototype.needsFocus=function(t){switch(t.nodeName.toLowerCase()){case"textarea":return!0;case"select":return!n;case"input":switch(t.type){case"button":case"checkbox":case"file":case"image":case"radio":case"submit":return!1}return!t.disabled&&!t.readOnly;default:return/\bneedsfocus\b/.test(t.className)}},t.prototype.sendClick=function(t,e){var n,i;document.activeElement&&document.activeElement!==t&&document.activeElement.blur(),i=e.changedTouches[0],n=document.createEvent("MouseEvents"),n.initMouseEvent(this.determineEventType(t),!0,!0,window,1,i.screenX,i.screenY,i.clientX,i.clientY,!1,!1,!1,!1,0,null),n.forwardedTouchEvent=!0,t.dispatchEvent(n)},t.prototype.determineEventType=function(t){return n&&"select"===t.tagName.toLowerCase()?"mousedown":"click"},t.prototype.focus=function(t){var e,n=["date","time","month","number","email"];i&&t.setSelectionRange&&n.indexOf(t.type)===-1?(e=t.value.length,t.setSelectionRange(e,e)):t.focus()},t.prototype.updateScrollParent=function(t){var e,n;if(e=t.fastClickScrollParent,!e||!e.contains(t)){n=t;do{if(n.scrollHeight>n.offsetHeight){e=n,t.fastClickScrollParent=n;break}n=n.parentElement}while(n)}e&&(e.fastClickLastScrollTop=e.scrollTop)},t.prototype.getTargetElementFromEventTarget=function(t){return t.nodeType===Node.TEXT_NODE?t.parentNode:t},t.prototype.onTouchStart=function(t){var e,n,r;if(t.targetTouches.length>1)return!0;if(e=this.getTargetElementFromEventTarget(t.target),n=t.targetTouches[0],i){if(r=window.getSelection(),r.rangeCount&&!r.isCollapsed)return!0;if(!a){if(n.identifier&&n.identifier===this.lastTouchIdentifier)return t.preventDefault(),!1;this.lastTouchIdentifier=n.identifier,this.updateScrollParent(e)}}return this.trackingClick=!0,this.trackingClickStart=t.timeStamp,this.targetElement=e,this.touchStartX=n.pageX,this.touchStartY=n.pageY,t.timeStamp-this.lastClickTime<this.tapDelay&&t.preventDefault(),!0},t.prototype.touchHasMoved=function(t){var e=t.changedTouches[0],n=this.touchBoundary;return Math.abs(e.pageX-this.touchStartX)>n||Math.abs(e.pageY-this.touchStartY)>n},t.prototype.onTouchMove=function(t){return!this.trackingClick||((this.targetElement!==this.getTargetElementFromEventTarget(t.target)||this.touchHasMoved(t))&&(this.trackingClick=!1,this.targetElement=null),!0)},t.prototype.findControl=function(t){return void 0!==t.control?t.control:t.htmlFor?document.getElementById(t.htmlFor):t.querySelector("button, input:not([type=hidden]), keygen, meter, output, progress, select, textarea")},t.prototype.onTouchEnd=function(t){var e,o,s,l,c,h=this.targetElement;if(!this.trackingClick)return!0;if(t.timeStamp-this.lastClickTime<this.tapDelay)return this.cancelNextClick=!0,!0;if(t.timeStamp-this.trackingClickStart>this.tapTimeout)return!0;var p=["date","time","month"];if(p.indexOf(t.target.type)!==-1)return!1;if(this.cancelNextClick=!1,this.lastClickTime=t.timeStamp,o=this.trackingClickStart,this.trackingClick=!1,this.trackingClickStart=0,r&&(c=t.changedTouches[0],h=document.elementFromPoint(c.pageX-window.pageXOffset,c.pageY-window.pageYOffset)||h,h.fastClickScrollParent=this.targetElement.fastClickScrollParent),s=h.tagName.toLowerCase(),"label"===s){if(e=this.findControl(h)){if(this.focus(h),n)return!1;h=e}}else if(this.needsFocus(h))return t.timeStamp-o>100||i&&window.top!==window&&"input"===s?(this.targetElement=null,!1):(this.focus(h),this.sendClick(h,t),i&&"select"===s||(this.targetElement=null,t.preventDefault()),!1);return!(!i||a||(l=h.fastClickScrollParent,!l||l.fastClickLastScrollTop===l.scrollTop))||(this.needsClick(h)||(t.preventDefault(),this.sendClick(h,t)),!1)},t.prototype.onTouchCancel=function(){this.trackingClick=!1,this.targetElement=null},t.prototype.onMouse=function(t){return!this.targetElement||(!!t.forwardedTouchEvent||(!t.cancelable||(!(!this.needsClick(this.targetElement)||this.cancelNextClick)||(t.stopImmediatePropagation?t.stopImmediatePropagation():t.propagationStopped=!0,t.stopPropagation(),s||t.preventDefault(),!1))))},t.prototype.onClick=function(t){var e;return this.trackingClick?(this.targetElement=null,this.trackingClick=!1,!0):"submit"===t.target.type&&0===t.detail||(e=this.onMouse(t),e||(this.targetElement=null),e)},t.prototype.destroy=function(){var t=this.layer;n&&(t.removeEventListener("mouseover",this.onMouse,!0),t.removeEventListener("mousedown",this.onMouse,!0),t.removeEventListener("mouseup",this.onMouse,!0)),t.removeEventListener("click",this.onClick,!0),t.removeEventListener("touchstart",this.onTouchStart,!1),t.removeEventListener("touchmove",this.onTouchMove,!1),t.removeEventListener("touchend",this.onTouchEnd,!1),t.removeEventListener("touchcancel",this.onTouchCancel,!1)},t.notNeeded=function(t){var e,i,a,r;if("undefined"==typeof window.ontouchstart)return!0;if(i=+(/Chrome\/([0-9]+)/.exec(navigator.userAgent)||[,0])[1]){if(!n)return!0;if(e=document.querySelector("meta[name=viewport]")){if(e.content.indexOf("user-scalable=no")!==-1)return!0;if(i>31&&document.documentElement.scrollWidth<=window.outerWidth)return!0}}if(o&&(a=navigator.userAgent.match(/Version\/([0-9]*)\.([0-9]*)/),a[1]>=10&&a[2]>=3&&(e=document.querySelector("meta[name=viewport]")))){if(e.content.indexOf("user-scalable=no")!==-1)return!0;if(document.documentElement.scrollWidth<=window.outerWidth)return!0}return"none"===t.style.msTouchAction||"manipulation"===t.style.touchAction||(r=+(/Firefox\/([0-9]+)/.exec(navigator.userAgent)||[,0])[1],!!(r>=27&&(e=document.querySelector("meta[name=viewport]"),e&&(e.content.indexOf("user-scalable=no")!==-1||document.documentElement.scrollWidth<=window.outerWidth)))||("none"===t.style.touchAction||"manipulation"===t.style.touchAction))},t.attach=function(e,n){return new t(e,n)},window.FastClick=t}(),+function(t){"use strict";function e(e){var n,a=t(this),r=(a.attr("href"),a.dataset());a.hasClass("open-popup")&&(n=r.popup?r.popup:".popup",t.popup(n)),a.hasClass("close-popup")&&(n=r.popup?r.popup:".popup.modal-in",t.closeModal(n)),a.hasClass("modal-overlay")&&(t(".modal.modal-in").length>0&&i.modalCloseByOutside&&t.closeModal(".modal.modal-in"),t(".actions-modal.modal-in").length>0&&i.actionsCloseByOutside&&t.closeModal(".actions-modal.modal-in")),a.hasClass("popup-overlay")&&t(".popup.modal-in").length>0&&i.popupCloseByOutside&&t.closeModal(".popup.modal-in")}var n=document.createElement("div");t.modalStack=[],t.modalStackClearQueue=function(){t.modalStack.length&&t.modalStack.shift()()},t.modal=function(e){e=e||{};var a="",r="";if(e.buttons&&e.buttons.length>0)for(var o=0;o<e.buttons.length;o++)r+='<span class="modal-button'+(e.buttons[o].bold?" modal-button-bold":"")+'">'+e.buttons[o].text+"</span>";var s=e.extraClass||"",l=e.title?'<div class="modal-title">'+e.title+"</div>":"",c=e.text?'<div class="modal-text">'+e.text+"</div>":"",h=e.afterText?e.afterText:"",p=e.buttons&&0!==e.buttons.length?"":"modal-no-buttons",d=e.verticalButtons?"modal-buttons-vertical":"";a='<div class="modal '+s+" "+p+'"><div class="modal-inner">'+(l+c+h)+'</div><div class="modal-buttons '+d+'">'+r+"</div></div>",n.innerHTML=a;var u=t(n).children();return t(i.modalContainer).append(u[0]),u.find(".modal-button").each(function(n,i){t(i).on("click",function(i){e.buttons[n].close!==!1&&t.closeModal(u),e.buttons[n].onClick&&e.buttons[n].onClick(u,i),e.onClick&&e.onClick(u,n)})}),t.openModal(u),u[0]},t.alert=function(e,n,a){return"function"==typeof n&&(a=arguments[1],n=void 0),t.modal({text:e||"",title:"undefined"==typeof n?i.modalTitle:n,buttons:[{text:i.modalButtonOk,bold:!0,onClick:a}]})},t.confirm=function(e,n,a,r){return"function"==typeof n&&(r=arguments[2],a=arguments[1],n=void 0),t.modal({text:e||"",title:"undefined"==typeof n?i.modalTitle:n,buttons:[{text:i.modalButtonCancel,onClick:r},{text:i.modalButtonOk,bold:!0,onClick:a}]})},t.prompt=function(e,n,a,r){return"function"==typeof n&&(r=arguments[2],a=arguments[1],n=void 0),t.modal({text:e||"",title:"undefined"==typeof n?i.modalTitle:n,afterText:'<input type="text" class="modal-text-input">',buttons:[{text:i.modalButtonCancel},{text:i.modalButtonOk,bold:!0}],onClick:function(e,n){0===n&&r&&r(t(e).find(".modal-text-input").val()),1===n&&a&&a(t(e).find(".modal-text-input").val())}})},t.modalLogin=function(e,n,a,r){return"function"==typeof n&&(r=arguments[2],a=arguments[1],n=void 0),t.modal({text:e||"",title:"undefined"==typeof n?i.modalTitle:n,afterText:'<input type="text" name="modal-username" placeholder="'+i.modalUsernamePlaceholder+'" class="modal-text-input modal-text-input-double"><input type="password" name="modal-password" placeholder="'+i.modalPasswordPlaceholder+'" class="modal-text-input modal-text-input-double">',buttons:[{text:i.modalButtonCancel},{text:i.modalButtonOk,bold:!0}],onClick:function(e,n){var i=t(e).find('.modal-text-input[name="modal-username"]').val(),o=t(e).find('.modal-text-input[name="modal-password"]').val();0===n&&r&&r(i,o),1===n&&a&&a(i,o)}})},t.modalPassword=function(e,n,a,r){return"function"==typeof n&&(r=arguments[2],a=arguments[1],n=void 0),t.modal({text:e||"",title:"undefined"==typeof n?i.modalTitle:n,afterText:'<input type="password" name="modal-password" placeholder="'+i.modalPasswordPlaceholder+'" class="modal-text-input">',buttons:[{text:i.modalButtonCancel},{text:i.modalButtonOk,bold:!0}],onClick:function(e,n){var i=t(e).find('.modal-text-input[name="modal-password"]').val();0===n&&r&&r(i),1===n&&a&&a(i)}})},t.showPreloader=function(e){return t.hidePreloader(),t.showPreloader.preloaderModal=t.modal({title:e||i.modalPreloaderTitle,text:'<div class="preloader"></div>'}),t.showPreloader.preloaderModal},t.hidePreloader=function(){t.showPreloader.preloaderModal&&t.closeModal(t.showPreloader.preloaderModal)},t.showIndicator=function(){t(".preloader-indicator-modal")[0]||t(i.modalContainer).append('<div class="preloader-indicator-overlay"></div><div class="preloader-indicator-modal"><span class="preloader preloader-white"></span></div>')},t.hideIndicator=function(){t(".preloader-indicator-overlay, .preloader-indicator-modal").remove()},t.actions=function(e){var a,r,o;e=e||[],e.length>0&&!t.isArray(e[0])&&(e=[e]);for(var s,l="",c=0;c<e.length;c++)for(var h=0;h<e[c].length;h++){0===h&&(l+='<div class="actions-modal-group">');var p=e[c][h],d=p.label?"actions-modal-label":"actions-modal-button";p.bold&&(d+=" actions-modal-button-bold"),p.color&&(d+=" color-"+p.color),p.bg&&(d+=" bg-"+p.bg),p.disabled&&(d+=" disabled"),l+='<span class="'+d+'">'+p.text+"</span>",h===e[c].length-1&&(l+="</div>")}s='<div class="actions-modal">'+l+"</div>",n.innerHTML=s,a=t(n).children(),t(i.modalContainer).append(a[0]),r=".actions-modal-group",o=".actions-modal-button";var u=a.find(r);return u.each(function(n,i){var r=n;t(i).children().each(function(n,i){var s,l=n,c=e[r][l];t(i).is(o)&&(s=t(i)),s&&s.on("click",function(e){c.close!==!1&&t.closeModal(a),c.onClick&&c.onClick(a,e)})})}),t.openModal(a),a[0]},t.popup=function(e,n){if("undefined"==typeof n&&(n=!0),"string"==typeof e&&e.indexOf("<")>=0){var a=document.createElement("div");if(a.innerHTML=e.trim(),!(a.childNodes.length>0))return!1;e=a.childNodes[0],n&&e.classList.add("remove-on-close"),t(i.modalContainer).append(e)}return e=t(e),0!==e.length&&(e.show(),e.find(".content").scroller("refresh"),e.find("."+i.viewClass).length>0&&t.sizeNavbars(e.find("."+i.viewClass)[0]),t.openModal(e),e[0])},t.pickerModal=function(e,n){if("undefined"==typeof n&&(n=!0),"string"==typeof e&&e.indexOf("<")>=0){if(e=t(e),!(e.length>0))return!1;n&&e.addClass("remove-on-close"),t(i.modalContainer).append(e[0])}return e=t(e),0!==e.length&&(e.show(),t.openModal(e),e[0])},t.loginScreen=function(e){return e||(e=".login-screen"),e=t(e),0!==e.length&&(e.show(),e.find("."+i.viewClass).length>0&&t.sizeNavbars(e.find("."+i.viewClass)[0]),t.openModal(e),e[0])},t.toast=function(e,n,i){var a=t('<div class="modal toast '+(i||"")+'">'+e+"</div>").appendTo(document.body);t.openModal(a,function(){setTimeout(function(){t.closeModal(a)},n||2e3)})},t.openModal=function(e,n){e=t(e);var a=e.hasClass("modal"),r=!e.hasClass("toast");if(t(".modal.modal-in:not(.modal-out)").length&&i.modalStack&&a&&r)return void t.modalStack.push(function(){t.openModal(e,n)});var o=e.hasClass("popup"),s=e.hasClass("login-screen"),l=e.hasClass("picker-modal"),c=e.hasClass("toast");a&&(e.show(),e.css({marginTop:-Math.round(e.outerHeight()/2)+"px"})),c&&e.css({marginLeft:-Math.round(e.outerWidth()/2/1.185)+"px"});var h;s||l||c||(0!==t(".modal-overlay").length||o||t(i.modalContainer).append('<div class="modal-overlay"></div>'),0===t(".popup-overlay").length&&o&&t(i.modalContainer).append('<div class="popup-overlay"></div>'),h=t(o?".popup-overlay":".modal-overlay"));e[0].clientLeft;return e.trigger("open"),l&&t(i.modalContainer).addClass("with-picker-modal"),s||l||c||h.addClass("modal-overlay-visible"),e.removeClass("modal-out").addClass("modal-in").transitionEnd(function(t){e.hasClass("modal-out")?e.trigger("closed"):e.trigger("opened")}),"function"==typeof n&&n.call(this),!0},t.closeModal=function(e){if(e=t(e||".modal-in"),"undefined"==typeof e||0!==e.length){var n=e.hasClass("modal"),a=e.hasClass("popup"),r=e.hasClass("toast"),o=e.hasClass("login-screen"),s=e.hasClass("picker-modal"),l=e.hasClass("remove-on-close"),c=t(a?".popup-overlay":".modal-overlay");return a?e.length===t(".popup.modal-in").length&&c.removeClass("modal-overlay-visible"):s||r||c.removeClass("modal-overlay-visible"),e.trigger("close"),s&&(t(i.modalContainer).removeClass("with-picker-modal"),t(i.modalContainer).addClass("picker-modal-closing")),e.removeClass("modal-in").addClass("modal-out").transitionEnd(function(n){e.hasClass("modal-out")?e.trigger("closed"):e.trigger("opened"),s&&t(i.modalContainer).removeClass("picker-modal-closing"),a||o||s?(e.removeClass("modal-out").hide(),l&&e.length>0&&e.remove()):e.remove()}),n&&i.modalStack&&t.modalStackClearQueue(),!0}},t(document).on("click"," .modal-overlay, .popup-overlay, .close-popup, .open-popup, .close-picker",e);var i=t.modal.prototype.defaults={modalStack:!0,modalButtonOk:"确定",modalButtonCancel:"取消",modalPreloaderTitle:"加载中",modalContainer:document.body?document.body:"body"}}(Zepto),+function(t){"use strict";var e=!1,n=function(n){function i(t){t=new Date(t);var e=t.getFullYear(),n=t.getMonth(),i=n+1,a=t.getDate(),r=t.getDay();return s.params.dateFormat.replace(/yyyy/g,e).replace(/yy/g,(e+"").substring(2)).replace(/mm/g,i<10?"0"+i:i).replace(/m/g,i).replace(/MM/g,s.params.monthNames[n]).replace(/M/g,s.params.monthNamesShort[n]).replace(/dd/g,a<10?"0"+a:a).replace(/d/g,a).replace(/DD/g,s.params.dayNames[r]).replace(/D/g,s.params.dayNamesShort[r])}function a(e){if(e.preventDefault(),t.device.isWeixin&&t.device.android&&s.params.inputReadOnly&&(this.focus(),this.blur()),!s.opened&&(s.open(),s.params.scrollToInput)){var n=s.input.parents(".content");if(0===n.length)return;var i,a=parseInt(n.css("padding-top"),10),r=parseInt(n.css("padding-bottom"),10),o=n[0].offsetHeight-a-s.container.height(),l=n[0].scrollHeight-a-s.container.height(),c=s.input.offset().top-a+s.input[0].offsetHeight;if(c>o){var h=n.scrollTop()+c-o;h+o>l&&(i=h+o-l+r,o===l&&(i=s.container.height()),n.css({"padding-bottom":i+"px"})),n.scrollTop(h,300)}}}function r(e){s.input&&s.input.length>0?e.target!==s.input[0]&&0===t(e.target).parents(".picker-modal").length&&s.close():0===t(e.target).parents(".picker-modal").length&&s.close()}function o(){s.opened=!1,s.input&&s.input.length>0&&s.input.parents(".content").css({"padding-bottom":""}),s.params.onClose&&s.params.onClose(s),s.destroyCalendarEvents()}var s=this,l={monthNames:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],monthNamesShort:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],dayNames:["周日","周一","周二","周三","周四","周五","周六"],dayNamesShort:["周日","周一","周二","周三","周四","周五","周六"],firstDay:1,weekendDays:[0,6],multiple:!1,dateFormat:"yyyy-mm-dd",direction:"horizontal",minDate:null,maxDate:null,touchMove:!0,animate:!0,closeOnSelect:!0,monthPicker:!0,monthPickerTemplate:'<div class="picker-calendar-month-picker"><a href="#" class="link icon-only picker-calendar-prev-month"><i class="icon icon-prev"></i></a><div class="current-month-value"></div><a href="#" class="link icon-only picker-calendar-next-month"><i class="icon icon-next"></i></a></div>',yearPicker:!0,yearPickerTemplate:'<div class="picker-calendar-year-picker"><a href="#" class="link icon-only picker-calendar-prev-year"><i class="icon icon-prev"></i></a><span class="current-year-value"></span><a href="#" class="link icon-only picker-calendar-next-year"><i class="icon icon-next"></i></a></div>',weekHeader:!0,scrollToInput:!0,inputReadOnly:!0,toolbar:!0,toolbarCloseText:"Done",toolbarTemplate:'<div class="toolbar"><div class="toolbar-inner">{{monthPicker}}{{yearPicker}}</div></div>'};n=n||{};for(var c in l)"undefined"==typeof n[c]&&(n[c]=l[c]);s.params=n,s.initialized=!1,s.inline=!!s.params.container,s.isH="horizontal"===s.params.direction;var h=s.isH&&e?-1:1;return s.animating=!1,s.addValue=function(t){if(s.params.multiple){s.value||(s.value=[]);for(var e,n=0;n<s.value.length;n++)new Date(t).getTime()===new Date(s.value[n]).getTime()&&(e=n);"undefined"==typeof e?s.value.push(t):s.value.splice(e,1),s.updateValue()}else s.value=[t],s.updateValue()},s.setValue=function(t){s.value=t,s.updateValue()},s.updateValue=function(){s.wrapper.find(".picker-calendar-day-selected").removeClass("picker-calendar-day-selected");var e,n;for(e=0;e<s.value.length;e++){var a=new Date(s.value[e]);s.wrapper.find('.picker-calendar-day[data-date="'+a.getFullYear()+"-"+a.getMonth()+"-"+a.getDate()+'"]').addClass("picker-calendar-day-selected")}if(s.params.onChange&&s.params.onChange(s,s.value,s.value.map(i)),s.input&&s.input.length>0){if(s.params.formatValue)n=s.params.formatValue(s,s.value);else{for(n=[],e=0;e<s.value.length;e++)n.push(i(s.value[e]));n=n.join(", ")}t(s.input).val(n),t(s.input).trigger("change")}},s.initCalendarEvents=function(){function n(t){f||u||(u=!0,m=y="touchstart"===t.type?t.targetTouches[0].pageX:t.pageX,v=y="touchstart"===t.type?t.targetTouches[0].pageY:t.pageY,w=(new Date).getTime(),S=0,P=!0,E=void 0,T=x=s.monthsTranslate)}function i(t){if(u){if(g="touchmove"===t.type?t.targetTouches[0].pageX:t.pageX,y="touchmove"===t.type?t.targetTouches[0].pageY:t.pageY,"undefined"==typeof E&&(E=!!(E||Math.abs(y-v)>Math.abs(g-m))),s.isH&&E)return void(u=!1);if(t.preventDefault(),s.animating)return void(u=!1);P=!1,f||(f=!0,C=s.wrapper[0].offsetWidth,b=s.wrapper[0].offsetHeight,s.wrapper.transition(0)),t.preventDefault(),M=s.isH?g-m:y-v,S=M/(s.isH?C:b),x=100*(s.monthsTranslate*h+S),s.wrapper.transform("translate3d("+(s.isH?x:0)+"%, "+(s.isH?0:x)+"%, 0)")}}function a(t){return u&&f?(u=f=!1,k=(new Date).getTime(),k-w<300?Math.abs(M)<10?s.resetMonth():M>=10?e?s.nextMonth():s.prevMonth():e?s.prevMonth():s.nextMonth():S<=-.5?e?s.prevMonth():s.nextMonth():S>=.5?e?s.nextMonth():s.prevMonth():s.resetMonth(),void setTimeout(function(){P=!0},100)):void(u=f=!1)}function r(e){if(P){var n=t(e.target).parents(".picker-calendar-day");if(0===n.length&&t(e.target).hasClass("picker-calendar-day")&&(n=t(e.target)),0!==n.length&&(!n.hasClass("picker-calendar-day-selected")||s.params.multiple)&&!n.hasClass("picker-calendar-day-disabled")){n.hasClass("picker-calendar-day-next")&&s.nextMonth(),n.hasClass("picker-calendar-day-prev")&&s.prevMonth();var i=n.attr("data-year"),a=n.attr("data-month"),r=n.attr("data-day");s.params.onDayClick&&s.params.onDayClick(s,n[0],i,a,r),s.addValue(new Date(i,a,r).getTime()),s.params.closeOnSelect&&s.close()}}}function o(t){f||u||(u=!0,m=y="touchstart"===t.type?t.targetTouches[0].pageX:t.pageX,v=y="touchstart"===t.type?t.targetTouches[0].pageY:t.pageY,w=(new Date).getTime(),S=0,P=!0,E=void 0,T=x=s.yearsTranslate)}function l(t){if(u){if(g="touchmove"===t.type?t.targetTouches[0].pageX:t.pageX,y="touchmove"===t.type?t.targetTouches[0].pageY:t.pageY,"undefined"==typeof E&&(E=!!(E||Math.abs(y-v)>Math.abs(g-m))),s.isH&&E)return void(u=!1);if(t.preventDefault(),s.animating)return void(u=!1);P=!1,f||(f=!0,C=s.yearsPickerWrapper[0].offsetWidth,b=s.yearsPickerWrapper[0].offsetHeight,s.yearsPickerWrapper.transition(0)),t.preventDefault(),M=s.isH?g-m:y-v,S=M/(s.isH?C:b),x=100*(s.yearsTranslate*h+S),s.yearsPickerWrapper.transform("translate3d("+(s.isH?x:0)+"%, "+(s.isH?0:x)+"%, 0)")}}function c(t){return u&&f?(u=f=!1,k=(new Date).getTime(),k-w<300?Math.abs(M)<10?s.resetYearsGroup():M>=10?e?s.nextYearsGroup():s.prevYearsGroup():e?s.prevYearsGroup():s.nextYearsGroup():S<=-.5?e?s.prevYearsGroup():s.nextYearsGroup():S>=.5?e?s.nextYearsGroup():s.prevYearsGroup():s.resetYearsGroup(),void setTimeout(function(){P=!0},100)):void(u=f=!1)}function p(){var e=(t(this).text(),s.container.find(".picker-calendar-years-picker"));e.show().transform("translate3d(0, 0, 0)"),s.updateSelectedInPickers(),e.on("click",".picker-calendar-year-unit",s.pickYear)}function d(){var t=s.container.find(".picker-calendar-months-picker");t.show().transform("translate3d(0, 0, 0)"),s.updateSelectedInPickers(),t.on("click",".picker-calendar-month-unit",s.pickMonth)}var u,f,m,v,g,y,w,k,T,x,C,b,S,M,E,P=!0;s.container.find(".picker-calendar-prev-month").on("click",s.prevMonth),s.container.find(".picker-calendar-next-month").on("click",s.nextMonth),s.container.find(".picker-calendar-prev-year").on("click",s.prevYear),s.container.find(".picker-calendar-next-year").on("click",s.nextYear),s.container.find(".current-year-value").on("click",p),s.container.find(".current-month-value").on("click",d),s.wrapper.on("click",r),s.params.touchMove&&(s.yearsPickerWrapper.on(t.touchEvents.start,o),s.yearsPickerWrapper.on(t.touchEvents.move,l),s.yearsPickerWrapper.on(t.touchEvents.end,c),s.wrapper.on(t.touchEvents.start,n),s.wrapper.on(t.touchEvents.move,i),s.wrapper.on(t.touchEvents.end,a)),s.container[0].f7DestroyCalendarEvents=function(){s.container.find(".picker-calendar-prev-month").off("click",s.prevMonth),s.container.find(".picker-calendar-next-month").off("click",s.nextMonth),s.container.find(".picker-calendar-prev-year").off("click",s.prevYear),s.container.find(".picker-calendar-next-year").off("click",s.nextYear),s.wrapper.off("click",r),s.params.touchMove&&(s.wrapper.off(t.touchEvents.start,n),s.wrapper.off(t.touchEvents.move,i),s.wrapper.off(t.touchEvents.end,a))}},s.destroyCalendarEvents=function(t){"f7DestroyCalendarEvents"in s.container[0]&&s.container[0].f7DestroyCalendarEvents()},s.yearsGroupHTML=function(t,e){t=new Date(t);var n=t.getFullYear(),i=(new Date).getFullYear(),a=25,r=n-Math.floor(a/2),o="";"next"===e&&(r+=a),"prev"===e&&(r-=a);for(var s=0;s<5;s+=1){var l="";l+='<div class="picker-calendar-row">';for(var c=0;c<5;c+=1)l+=r===i?'<div class="picker-calendar-year-unit current-calendar-year-unit" data-year="'+r+'"><span>'+r+"</span></div>":r===n?'<div class="picker-calendar-year-unit picker-calendar-year-unit-selected" data-year="'+r+'"><span>'+r+"</span></div>":'<div class="picker-calendar-year-unit" data-year="'+r+'"><span>'+r+"</span></div>",r+=1;l+="</div>",o+=l}return o='<div class="picker-calendar-years-group">'+o+"</div>"},s.pickYear=function(){var e=t(this).text(),n=s.wrapper.find(".picker-calendar-month-current").attr("data-year");s.yearsPickerWrapper.find(".picker-calendar-year-unit").removeClass("picker-calendar-year-unit-selected"),t(this).addClass("picker-calendar-year-unit-selected"),n!==e?(s.setYearMonth(e),s.container.find(".picker-calendar-years-picker").hide().transform("translate3d(0, 100%, 0)")):s.container.find(".picker-calendar-years-picker").transform("translate3d(0, 100%, 0)")},s.onYearsChangeEnd=function(t){s.animating=!1;var e,n,i,a=s.yearsPickerWrapper.children(".picker-calendar-years-next").find(".picker-calendar-year-unit").length;if("next"===t){var i=parseInt(s.yearsPickerWrapper.children(".picker-calendar-years-next").find(".picker-calendar-year-unit").eq(Math.floor(a/2)).text());e=s.yearsGroupHTML(new Date(i,s.currentMonth),"next"),s.yearsPickerWrapper.append(e),s.yearsPickerWrapper.children().first().remove(),s.yearsGroups=s.container.find(".picker-calendar-years-group")}if("prev"===t){var i=parseInt(s.yearsPickerWrapper.children(".picker-calendar-years-prev").find(".picker-calendar-year-unit").eq(Math.floor(a/2)).text());
-n=s.yearsGroupHTML(new Date(i,s.currentMonth),"prev"),s.yearsPickerWrapper.prepend(n),s.yearsPickerWrapper.children().last().remove(),s.yearsGroups=s.container.find(".picker-calendar-years-group")}s.setYearsTranslate(s.yearsTranslate)},s.monthsGroupHTML=function(t){t=new Date(t);for(var e=t.getMonth()+1,n=(new Date).getMonth()+1,i=1,a="",r=0;r<3;r+=1){var o="";o+='<div class="picker-calendar-row">';for(var l=0;l<4;l+=1)o+=i===n?'<div class="picker-calendar-month-unit current-calendar-month-unit" data-month="'+(i-1)+'"><span>'+s.params.monthNames[i-1]+"</span></div>":i===e?'<div class="picker-calendar-month-unit picker-calendar-month-selected" data-month="'+(i-1)+'"><span>'+s.params.monthNames[i-1]+"</span></div>":'<div class="picker-calendar-month-unit" data-month="'+(i-1)+'"><span>'+s.params.monthNames[i-1]+"</span></div>",i+=1;o+="</div>",a+=o}return a='<div class="picker-calendar-months-group">'+a+"</div>"},s.pickMonth=function(){var e=t(this).attr("data-month"),n=s.wrapper.find(".picker-calendar-month-current").attr("data-year"),i=s.wrapper.find(".picker-calendar-month-current").attr("data-month");s.monthsPickerWrapper.find(".picker-calendar-month-unit").removeClass("picker-calendar-month-unit-selected"),t(this).addClass("picker-calendar-month-unit-selected"),i!==e?(s.setYearMonth(n,e),s.container.find(".picker-calendar-months-picker").hide().transform("translate3d(0, 100%, 0)")):s.container.find(".picker-calendar-months-picker").transform("translate3d(0, 100%, 0)")},s.daysInMonth=function(t){var e=new Date(t);return new Date(e.getFullYear(),e.getMonth()+1,0).getDate()},s.monthHTML=function(t,e){t=new Date(t);var n=t.getFullYear(),i=t.getMonth();t.getDate();"next"===e&&(t=11===i?new Date(n+1,0):new Date(n,i+1,1)),"prev"===e&&(t=0===i?new Date(n-1,11):new Date(n,i-1,1)),"next"!==e&&"prev"!==e||(i=t.getMonth(),n=t.getFullYear());var a=s.daysInMonth(new Date(t.getFullYear(),t.getMonth()).getTime()-864e6),r=s.daysInMonth(t),o=new Date(t.getFullYear(),t.getMonth()).getDay();0===o&&(o=7);var l,c,h,p=[],d=6,u=7,f="",m=0+(s.params.firstDay-1),v=(new Date).setHours(0,0,0,0),g=s.params.minDate?new Date(s.params.minDate).getTime():null,y=s.params.maxDate?new Date(s.params.maxDate).getTime():null;if(s.value&&s.value.length)for(c=0;c<s.value.length;c++)p.push(new Date(s.value[c]).setHours(0,0,0,0));for(c=1;c<=d;c++){var w="";for(h=1;h<=u;h++){var k=h;m++;var T=m-o,x="";T<0?(T=a+T+1,x+=" picker-calendar-day-prev",l=new Date(i-1<0?n-1:n,i-1<0?11:i-1,T).getTime()):(T+=1,T>r?(T-=r,x+=" picker-calendar-day-next",l=new Date(i+1>11?n+1:n,i+1>11?0:i+1,T).getTime()):l=new Date(n,i,T).getTime()),l===v&&(x+=" picker-calendar-day-today"),p.indexOf(l)>=0&&(x+=" picker-calendar-day-selected"),s.params.weekendDays.indexOf(k-1)>=0&&(x+=" picker-calendar-day-weekend"),(g&&l<g||y&&l>y)&&(x+=" picker-calendar-day-disabled"),l=new Date(l);var C=l.getFullYear(),b=l.getMonth();w+='<div data-year="'+C+'" data-month="'+b+'" data-day="'+T+'" class="picker-calendar-day'+x+'" data-date="'+(C+"-"+b+"-"+T)+'"><span>'+T+"</span></div>"}f+='<div class="picker-calendar-row">'+w+"</div>"}return f='<div class="picker-calendar-month" data-year="'+n+'" data-month="'+i+'">'+f+"</div>"},s.animating=!1,s.updateCurrentMonthYear=function(t){"undefined"==typeof t?(s.currentMonth=parseInt(s.months.eq(1).attr("data-month"),10),s.currentYear=parseInt(s.months.eq(1).attr("data-year"),10)):(s.currentMonth=parseInt(s.months.eq("next"===t?s.months.length-1:0).attr("data-month"),10),s.currentYear=parseInt(s.months.eq("next"===t?s.months.length-1:0).attr("data-year"),10)),s.container.find(".current-month-value").text(s.params.monthNames[s.currentMonth]),s.container.find(".current-year-value").text(s.currentYear)},s.onMonthChangeStart=function(t){s.updateCurrentMonthYear(t),s.months.removeClass("picker-calendar-month-current picker-calendar-month-prev picker-calendar-month-next");var e="next"===t?s.months.length-1:0;s.months.eq(e).addClass("picker-calendar-month-current"),s.months.eq("next"===t?e-1:e+1).addClass("next"===t?"picker-calendar-month-prev":"picker-calendar-month-next"),s.params.onMonthYearChangeStart&&s.params.onMonthYearChangeStart(s,s.currentYear,s.currentMonth)},s.onMonthChangeEnd=function(t,e){s.animating=!1;var n,i,a;s.wrapper.find(".picker-calendar-month:not(.picker-calendar-month-prev):not(.picker-calendar-month-current):not(.picker-calendar-month-next)").remove(),"undefined"==typeof t&&(t="next",e=!0),e?(s.wrapper.find(".picker-calendar-month-next, .picker-calendar-month-prev").remove(),i=s.monthHTML(new Date(s.currentYear,s.currentMonth),"prev"),n=s.monthHTML(new Date(s.currentYear,s.currentMonth),"next")):a=s.monthHTML(new Date(s.currentYear,s.currentMonth),t),("next"===t||e)&&s.wrapper.append(a||n),("prev"===t||e)&&s.wrapper.prepend(a||i),s.months=s.wrapper.find(".picker-calendar-month"),s.setMonthsTranslate(s.monthsTranslate),s.params.onMonthAdd&&s.params.onMonthAdd(s,"next"===t?s.months.eq(s.months.length-1)[0]:s.months.eq(0)[0]),s.params.onMonthYearChangeEnd&&s.params.onMonthYearChangeEnd(s,s.currentYear,s.currentMonth),s.updateSelectedInPickers()},s.updateSelectedInPickers=function(){var t=parseInt(s.wrapper.find(".picker-calendar-month-current").attr("data-year"),10),e=(new Date).getFullYear(),n=parseInt(s.wrapper.find(".picker-calendar-month-current").attr("data-month"),10),i=(new Date).getMonth(),a=parseInt(s.yearsPickerWrapper.find(".picker-calendar-year-unit-selected").attr("data-year"),10),r=parseInt(s.monthsPickerWrapper.find(".picker-calendar-month-unit-selected").attr("data-month"),10);a!==t&&(s.yearsPickerWrapper.find(".picker-calendar-year-unit").removeClass("picker-calendar-year-unit-selected"),s.yearsPickerWrapper.find('.picker-calendar-year-unit[data-year="'+t+'"]').addClass("picker-calendar-year-unit-selected")),r!==n&&(s.monthsPickerWrapper.find(".picker-calendar-month-unit").removeClass("picker-calendar-month-unit-selected"),s.monthsPickerWrapper.find('.picker-calendar-month-unit[data-month="'+n+'"]').addClass("picker-calendar-month-unit-selected")),e!==t?s.monthsPickerWrapper.find(".picker-calendar-month-unit").removeClass("current-calendar-month-unit"):s.monthsPickerWrapper.find('.picker-calendar-month-unit[data-month="'+i+'"]').addClass("current-calendar-month-unit")},s.setYearsTranslate=function(t){t=t||s.yearsTranslate||0,"undefined"==typeof s.yearsTranslate&&(s.yearsTranslate=t),s.yearsGroups.removeClass("picker-calendar-years-current picker-calendar-years-prev picker-calendar-years-next");var e=100*-(t+1)*h,n=100*-t*h,i=100*-(t-1)*h;s.yearsGroups.eq(0).transform("translate3d("+(s.isH?e:0)+"%, "+(s.isH?0:e)+"%, 0)").addClass("picker-calendar-years-prev"),s.yearsGroups.eq(1).transform("translate3d("+(s.isH?n:0)+"%, "+(s.isH?0:n)+"%, 0)").addClass("picker-calendar-years-current"),s.yearsGroups.eq(2).transform("translate3d("+(s.isH?i:0)+"%, "+(s.isH?0:i)+"%, 0)").addClass("picker-calendar-years-next")},s.nextYearsGroup=function(t){"undefined"!=typeof t&&"object"!=typeof t||(t="",s.params.animate||(t=0));var e=!s.animating;s.yearsTranslate--,s.animating=!0;var n=100*s.yearsTranslate*h;s.yearsPickerWrapper.transition(t).transform("translate3d("+(s.isH?n:0)+"%, "+(s.isH?0:n)+"%, 0)"),e&&s.yearsPickerWrapper.transitionEnd(function(){s.onYearsChangeEnd("next")}),s.params.animate||s.onYearsChangeEnd("next")},s.prevYearsGroup=function(t){"undefined"!=typeof t&&"object"!=typeof t||(t="",s.params.animate||(t=0));var e=!s.animating;s.yearsTranslate++,s.animating=!0;var n=100*s.yearsTranslate*h;s.yearsPickerWrapper.transition(t).transform("translate3d("+(s.isH?n:0)+"%, "+(s.isH?0:n)+"%, 0)"),e&&s.yearsPickerWrapper.transitionEnd(function(){s.onYearsChangeEnd("prev")}),s.params.animate||s.onYearsChangeEnd("prev")},s.resetYearsGroup=function(t){"undefined"==typeof t&&(t="");var e=100*s.yearsTranslate*h;s.yearsPickerWrapper.transition(t).transform("translate3d("+(s.isH?e:0)+"%, "+(s.isH?0:e)+"%, 0)")},s.setMonthsTranslate=function(t){t=t||s.monthsTranslate||0,"undefined"==typeof s.monthsTranslate&&(s.monthsTranslate=t),s.months.removeClass("picker-calendar-month-current picker-calendar-month-prev picker-calendar-month-next");var e=100*-(t+1)*h,n=100*-t*h,i=100*-(t-1)*h;s.months.eq(0).transform("translate3d("+(s.isH?e:0)+"%, "+(s.isH?0:e)+"%, 0)").addClass("picker-calendar-month-prev"),s.months.eq(1).transform("translate3d("+(s.isH?n:0)+"%, "+(s.isH?0:n)+"%, 0)").addClass("picker-calendar-month-current"),s.months.eq(2).transform("translate3d("+(s.isH?i:0)+"%, "+(s.isH?0:i)+"%, 0)").addClass("picker-calendar-month-next")},s.nextMonth=function(e){"undefined"!=typeof e&&"object"!=typeof e||(e="",s.params.animate||(e=0));var n=parseInt(s.months.eq(s.months.length-1).attr("data-month"),10),i=parseInt(s.months.eq(s.months.length-1).attr("data-year"),10),a=new Date(i,n),r=a.getTime(),o=!s.animating;if(s.params.maxDate&&r>new Date(s.params.maxDate).getTime())return s.resetMonth();if(s.monthsTranslate--,n===s.currentMonth){var l=100*-s.monthsTranslate*h,c=t(s.monthHTML(r,"next")).transform("translate3d("+(s.isH?l:0)+"%, "+(s.isH?0:l)+"%, 0)").addClass("picker-calendar-month-next");s.wrapper.append(c[0]),s.months=s.wrapper.find(".picker-calendar-month"),s.params.onMonthAdd&&s.params.onMonthAdd(s,s.months.eq(s.months.length-1)[0])}s.animating=!0,s.onMonthChangeStart("next");var p=100*s.monthsTranslate*h;s.wrapper.transition(e).transform("translate3d("+(s.isH?p:0)+"%, "+(s.isH?0:p)+"%, 0)"),o&&s.wrapper.transitionEnd(function(){s.onMonthChangeEnd("next")}),s.params.animate||s.onMonthChangeEnd("next")},s.prevMonth=function(e){"undefined"!=typeof e&&"object"!=typeof e||(e="",s.params.animate||(e=0));var n=parseInt(s.months.eq(0).attr("data-month"),10),i=parseInt(s.months.eq(0).attr("data-year"),10),a=new Date(i,n+1,(-1)),r=a.getTime(),o=!s.animating;if(s.params.minDate&&r<new Date(s.params.minDate).getTime())return s.resetMonth();if(s.monthsTranslate++,n===s.currentMonth){var l=100*-s.monthsTranslate*h,c=t(s.monthHTML(r,"prev")).transform("translate3d("+(s.isH?l:0)+"%, "+(s.isH?0:l)+"%, 0)").addClass("picker-calendar-month-prev");s.wrapper.prepend(c[0]),s.months=s.wrapper.find(".picker-calendar-month"),s.params.onMonthAdd&&s.params.onMonthAdd(s,s.months.eq(0)[0])}s.animating=!0,s.onMonthChangeStart("prev");var p=100*s.monthsTranslate*h;s.wrapper.transition(e).transform("translate3d("+(s.isH?p:0)+"%, "+(s.isH?0:p)+"%, 0)"),o&&s.wrapper.transitionEnd(function(){s.onMonthChangeEnd("prev")}),s.params.animate||s.onMonthChangeEnd("prev")},s.resetMonth=function(t){"undefined"==typeof t&&(t="");var e=100*s.monthsTranslate*h;s.wrapper.transition(t).transform("translate3d("+(s.isH?e:0)+"%, "+(s.isH?0:e)+"%, 0)")},s.setYearMonth=function(t,e,n){"undefined"==typeof t&&(t=s.currentYear),"undefined"==typeof e&&(e=s.currentMonth),"undefined"!=typeof n&&"object"!=typeof n||(n="",s.params.animate||(n=0));var i;if(i=t<s.currentYear?new Date(t,e+1,(-1)).getTime():new Date(t,e).getTime(),s.params.maxDate&&i>new Date(s.params.maxDate).getTime())return!1;if(s.params.minDate&&i<new Date(s.params.minDate).getTime())return!1;var a=new Date(s.currentYear,s.currentMonth).getTime(),r=i>a?"next":"prev",o=s.monthHTML(new Date(t,e));s.monthsTranslate=s.monthsTranslate||0;var l,c,p=s.monthsTranslate,d=!s.animating;i>a?(s.monthsTranslate--,s.animating||s.months.eq(s.months.length-1).remove(),s.wrapper.append(o),s.months=s.wrapper.find(".picker-calendar-month"),l=100*-(p-1)*h,s.months.eq(s.months.length-1).transform("translate3d("+(s.isH?l:0)+"%, "+(s.isH?0:l)+"%, 0)").addClass("picker-calendar-month-next")):(s.monthsTranslate++,s.animating||s.months.eq(0).remove(),s.wrapper.prepend(o),s.months=s.wrapper.find(".picker-calendar-month"),l=100*-(p+1)*h,s.months.eq(0).transform("translate3d("+(s.isH?l:0)+"%, "+(s.isH?0:l)+"%, 0)").addClass("picker-calendar-month-prev")),s.params.onMonthAdd&&s.params.onMonthAdd(s,"next"===r?s.months.eq(s.months.length-1)[0]:s.months.eq(0)[0]),s.animating=!0,s.onMonthChangeStart(r),c=100*s.monthsTranslate*h,s.wrapper.transition(n).transform("translate3d("+(s.isH?c:0)+"%, "+(s.isH?0:c)+"%, 0)"),d&&s.wrapper.transitionEnd(function(){s.onMonthChangeEnd(r,!0)}),s.params.animate||s.onMonthChangeEnd(r)},s.nextYear=function(){s.setYearMonth(s.currentYear+1)},s.prevYear=function(){s.setYearMonth(s.currentYear-1)},s.layout=function(){var t,e="",n="",i=s.value&&s.value.length?s.value[0]:(new Date).setHours(0,0,0,0),a=s.yearsGroupHTML(i,"prev"),r=s.yearsGroupHTML(i),o=s.yearsGroupHTML(i,"next"),l='<div class="picker-calendar-years-picker"><div class="picker-calendar-years-picker-wrapper">'+(a+r+o)+"</div></div>",c='<div class="picker-calendar-months-picker"><div class="picker-calendar-months-picker-wrapper">'+s.monthsGroupHTML(i)+"</div></div>",h=s.monthHTML(i,"prev"),p=s.monthHTML(i),d=s.monthHTML(i,"next"),u='<div class="picker-calendar-months"><div class="picker-calendar-months-wrapper">'+(h+p+d)+"</div></div>",f="";if(s.params.weekHeader){for(t=0;t<7;t++){var m=t+s.params.firstDay>6?t-7+s.params.firstDay:t+s.params.firstDay,v=s.params.dayNamesShort[m];f+='<div class="picker-calendar-week-day '+(s.params.weekendDays.indexOf(m)>=0?"picker-calendar-week-day-weekend":"")+'"> '+v+"</div>"}f='<div class="picker-calendar-week-days">'+f+"</div>"}n="picker-modal picker-calendar "+(s.params.cssClass||"");var g=s.params.toolbar?s.params.toolbarTemplate.replace(/{{closeText}}/g,s.params.toolbarCloseText):"";s.params.toolbar&&(g=s.params.toolbarTemplate.replace(/{{closeText}}/g,s.params.toolbarCloseText).replace(/{{monthPicker}}/g,s.params.monthPicker?s.params.monthPickerTemplate:"").replace(/{{yearPicker}}/g,s.params.yearPicker?s.params.yearPickerTemplate:"")),e='<div class="'+n+'">'+g+'<div class="picker-modal-inner">'+f+u+"</div>"+c+l+"</div>",s.pickerHTML=e},s.params.input&&(s.input=t(s.params.input),s.input.length>0&&(s.params.inputReadOnly&&s.input.prop("readOnly",!0),s.inline||s.input.on("click",a),t(document).on("beforePageSwitch",function(){s.input.off("click",a),t(document).off("beforePageSwitch")}))),s.inline||t("html").on("click",r),s.opened=!1,s.open=function(){var e=!1;s.opened||(s.value||s.params.value&&(s.value=s.params.value,e=!0),s.layout(),s.inline?(s.container=t(s.pickerHTML),s.container.addClass("picker-modal-inline"),t(s.params.container).append(s.container)):(s.container=t(t.pickerModal(s.pickerHTML)),t(s.container).on("close",function(){o()})),s.container[0].f7Calendar=s,s.wrapper=s.container.find(".picker-calendar-months-wrapper"),s.yearsPickerWrapper=s.container.find(".picker-calendar-years-picker-wrapper"),s.yearsGroups=s.yearsPickerWrapper.find(".picker-calendar-years-group"),s.monthsPickerWrapper=s.container.find(".picker-calendar-months-picker-wrapper"),s.months=s.wrapper.find(".picker-calendar-month"),s.updateCurrentMonthYear(),s.yearsTranslate=0,s.setYearsTranslate(),s.monthsTranslate=0,s.setMonthsTranslate(),s.initCalendarEvents(),e&&s.updateValue()),s.opened=!0,s.initialized=!0,s.params.onMonthAdd&&s.months.each(function(){s.params.onMonthAdd(s,this)}),s.params.onOpen&&s.params.onOpen(s)},s.close=function(){s.opened&&!s.inline&&t.closeModal(s.container)},s.destroy=function(){s.close(),s.params.input&&s.input.length>0&&s.input.off("click",a),t("html").off("click",r)},s.inline&&s.open(),s};t.fn.calendar=function(e){return this.each(function(){var i=t(this);if(i[0]){var a={};"INPUT"===i[0].tagName.toUpperCase()?a.input=i:a.container=i,new n(t.extend(a,e))}})},t.initCalendar=function(e){var n=t(e?e:document.body);n.find("[data-toggle='date']").each(function(){t(this).calendar()})}}(Zepto),+function(t){"use strict";var e=function(e){function n(){if(o.opened)for(var t=0;t<o.cols.length;t++)o.cols[t].divider||(o.cols[t].calcSize(),o.cols[t].setValue(o.cols[t].value,0,!1))}function i(e){if(e.preventDefault(),t.device.isWeixin&&t.device.android&&o.params.inputReadOnly&&(this.focus(),this.blur()),!o.opened){if(t.closeModal(t(".picker-modal")),o.open(),o.params.scrollToInput){var n=o.input.parents(".content");if(0===n.length)return;var i,a=parseInt(n.css("padding-top"),10),r=parseInt(n.css("padding-bottom"),10),s=n[0].offsetHeight-a-o.container.height(),l=n[0].scrollHeight-a-o.container.height(),c=o.input.offset().top-a+o.input[0].offsetHeight;if(c>s){var h=n.scrollTop()+c-s;h+s>l&&(i=h+s-l+r,s===l&&(i=o.container.height()),n.css({"padding-bottom":i+"px"})),n.scrollTop(h,300)}}e.stopPropagation()}}function a(e){o.opened&&(o.input&&o.input.length>0?e.target!==o.input[0]&&0===t(e.target).parents(".picker-modal").length&&o.close():0===t(e.target).parents(".picker-modal").length&&o.close())}function r(){o.opened=!1,o.input&&o.input.length>0&&o.input.parents(".content").css({"padding-bottom":""}),o.params.onClose&&o.params.onClose(o),o.container.find(".picker-items-col").each(function(){o.destroyPickerCol(this)})}var o=this,s={updateValuesOnMomentum:!1,updateValuesOnTouchmove:!0,rotateEffect:!1,momentumRatio:7,freeMode:!1,scrollToInput:!0,inputReadOnly:!0,toolbar:!0,toolbarCloseText:"确定",toolbarTemplate:'<header class="bar bar-nav">                <button class="button button-link pull-right close-picker">确定</button>                <h1 class="title">请选择</h1>                </header>'};e=e||{};for(var l in s)"undefined"==typeof e[l]&&(e[l]=s[l]);o.params=e,o.cols=[],o.initialized=!1,o.inline=!!o.params.container;var c=t.device.ios||navigator.userAgent.toLowerCase().indexOf("safari")>=0&&navigator.userAgent.toLowerCase().indexOf("chrome")<0&&!t.device.android;return o.setValue=function(t,e){for(var n=0,i=0;i<o.cols.length;i++)o.cols[i]&&!o.cols[i].divider&&(o.cols[i].setValue(t[n],e),n++)},o.updateValue=function(){for(var e=[],n=[],i=0;i<o.cols.length;i++)o.cols[i].divider||(e.push(o.cols[i].value),n.push(o.cols[i].displayValue));e.indexOf(void 0)>=0||(o.value=e,o.displayValue=n,o.params.onChange&&o.params.onChange(o,o.value,o.displayValue),o.input&&o.input.length>0&&(t(o.input).val(o.params.formatValue?o.params.formatValue(o,o.value,o.displayValue):o.value.join(" ")),t(o.input).trigger("change")))},o.initPickerCol=function(e,n){function i(){y=t.requestAnimationFrame(function(){d.updateItems(void 0,void 0,0),i()})}function a(e){k||w||(e.preventDefault(),w=!0,T=x="touchstart"===e.type?e.targetTouches[0].pageY:e.pageY,C=(new Date).getTime(),_=!0,S=E=t.getTranslate(d.wrapper[0],"y"))}function r(e){if(w){e.preventDefault(),_=!1,x="touchmove"===e.type?e.targetTouches[0].pageY:e.pageY,k||(t.cancelAnimationFrame(y),k=!0,S=E=t.getTranslate(d.wrapper[0],"y"),d.wrapper.transition(0)),e.preventDefault();var n=x-T;E=S+n,M=void 0,E<v&&(E=v-Math.pow(v-E,.8),M="min"),E>g&&(E=g+Math.pow(E-g,.8),M="max"),d.wrapper.transform("translate3d(0,"+E+"px,0)"),d.updateItems(void 0,E,0,o.params.updateValuesOnTouchmove),D=E-P||E,Y=(new Date).getTime(),P=E}}function s(e){if(!w||!k)return void(w=k=!1);w=k=!1,d.wrapper.transition(""),M&&("min"===M?d.wrapper.transform("translate3d(0,"+v+"px,0)"):d.wrapper.transform("translate3d(0,"+g+"px,0)")),b=(new Date).getTime();var n,a;b-C>300?a=E:(n=Math.abs(D/(b-Y)),a=E+D*o.params.momentumRatio),a=Math.max(Math.min(a,g),v);var r=-Math.floor((a-g)/f);o.params.freeMode||(a=-r*f+g),d.wrapper.transform("translate3d(0,"+parseInt(a,10)+"px,0)"),d.updateItems(r,a,"",!0),o.params.updateValuesOnMomentum&&(i(),d.wrapper.transitionEnd(function(){t.cancelAnimationFrame(y)})),setTimeout(function(){_=!0},100)}function l(e){if(_){t.cancelAnimationFrame(y);var n=t(this).attr("data-picker-value");d.setValue(n)}}var h=t(e),p=h.index(),d=o.cols[p];if(!d.divider){d.container=h,d.wrapper=d.container.find(".picker-items-col-wrapper"),d.items=d.wrapper.find(".picker-item");var u,f,m,v,g;d.replaceValues=function(t,e){d.destroyEvents(),d.values=t,d.displayValues=e;var n=o.columnHTML(d,!0);d.wrapper.html(n),d.items=d.wrapper.find(".picker-item"),d.calcSize(),d.setValue(d.values[0],0,!0),d.initEvents()},d.calcSize=function(){o.params.rotateEffect&&(d.container.removeClass("picker-items-col-absolute"),d.width||d.container.css({width:""}));var e,n;e=0,n=d.container[0].offsetHeight,u=d.wrapper[0].offsetHeight,f=d.items[0].offsetHeight,m=f*d.items.length,v=n/2-m+f/2,g=n/2-f/2,d.width&&(e=d.width,parseInt(e,10)===e&&(e+="px"),d.container.css({width:e})),o.params.rotateEffect&&(d.width||(d.items.each(function(){var n=t(this);n.css({width:"auto"}),e=Math.max(e,n[0].offsetWidth),n.css({width:""})}),d.container.css({width:e+2+"px"})),d.container.addClass("picker-items-col-absolute"))},d.calcSize(),d.wrapper.transform("translate3d(0,"+g+"px,0)").transition(0);var y;d.setValue=function(e,n,a){"undefined"==typeof n&&(n="");var r=d.wrapper.find('.picker-item[data-picker-value="'+e+'"]').index();if("undefined"!=typeof r&&r!==-1){var s=-r*f+g;d.wrapper.transition(n),d.wrapper.transform("translate3d(0,"+s+"px,0)"),o.params.updateValuesOnMomentum&&d.activeIndex&&d.activeIndex!==r&&(t.cancelAnimationFrame(y),d.wrapper.transitionEnd(function(){t.cancelAnimationFrame(y)}),i()),d.updateItems(r,s,n,a)}},d.updateItems=function(e,n,i,a){"undefined"==typeof n&&(n=t.getTranslate(d.wrapper[0],"y")),"undefined"==typeof e&&(e=-Math.round((n-g)/f)),e<0&&(e=0),e>=d.items.length&&(e=d.items.length-1);var r=d.activeIndex;d.activeIndex=e,d.wrapper.find(".picker-selected").removeClass("picker-selected"),o.params.rotateEffect&&d.items.transition(i);var s=d.items.eq(e).addClass("picker-selected").transform("");if((a||"undefined"==typeof a)&&(d.value=s.attr("data-picker-value"),d.displayValue=d.displayValues?d.displayValues[e]:d.value,r!==e&&(d.onChange&&d.onChange(o,d.value,d.displayValue),o.updateValue())),o.params.rotateEffect){(n-(Math.floor((n-g)/f)*f+g))/f;d.items.each(function(){var e=t(this),i=e.index()*f,a=g-n,r=i-a,o=r/f,s=Math.ceil(d.height/f/2)+1,l=-18*o;l>180&&(l=180),l<-180&&(l=-180),Math.abs(o)>s?e.addClass("picker-item-far"):e.removeClass("picker-item-far"),e.transform("translate3d(0, "+(-n+g)+"px, "+(c?-110:0)+"px) rotateX("+l+"deg)")})}},n&&d.updateItems(0,g,0);var w,k,T,x,C,b,S,M,E,P,D,Y,_=!0;d.initEvents=function(e){var n=e?"off":"on";d.container[n](t.touchEvents.start,a),d.container[n](t.touchEvents.move,r),d.container[n](t.touchEvents.end,s),d.items[n]("click",l)},d.destroyEvents=function(){d.initEvents(!0)},d.container[0].f7DestroyPickerCol=function(){d.destroyEvents()},d.initEvents()}},o.destroyPickerCol=function(e){e=t(e),"f7DestroyPickerCol"in e[0]&&e[0].f7DestroyPickerCol()},t(window).on("resize",n),o.columnHTML=function(t,e){var n="",i="";if(t.divider)i+='<div class="picker-items-col picker-items-col-divider '+(t.textAlign?"picker-items-col-"+t.textAlign:"")+" "+(t.cssClass||"")+'">'+t.content+"</div>";else{for(var a=0;a<t.values.length;a++)n+='<div class="picker-item" data-picker-value="'+t.values[a]+'">'+(t.displayValues?t.displayValues[a]:t.values[a])+"</div>";i+='<div class="picker-items-col '+(t.textAlign?"picker-items-col-"+t.textAlign:"")+" "+(t.cssClass||"")+'"><div class="picker-items-col-wrapper">'+n+"</div></div>"}return e?n:i},o.layout=function(){var t,e="",n="";o.cols=[];var i="";for(t=0;t<o.params.cols.length;t++){var a=o.params.cols[t];i+=o.columnHTML(o.params.cols[t]),o.cols.push(a)}n="picker-modal picker-columns "+(o.params.cssClass||"")+(o.params.rotateEffect?" picker-3d":""),e='<div class="'+n+'">'+(o.params.toolbar?o.params.toolbarTemplate.replace(/{{closeText}}/g,o.params.toolbarCloseText):"")+'<div class="picker-modal-inner picker-items">'+i+'<div class="picker-center-highlight"></div></div></div>',o.pickerHTML=e},o.params.input&&(o.input=t(o.params.input),o.input.length>0&&(o.params.inputReadOnly&&o.input.prop("readOnly",!0),o.inline||o.input.on("click",i))),o.inline||t("html").on("click",a),o.opened=!1,o.open=function(){o.opened||(o.layout(),o.opened=!0,o.inline?(o.container=t(o.pickerHTML),o.container.addClass("picker-modal-inline"),t(o.params.container).append(o.container)):(o.container=t(t.pickerModal(o.pickerHTML)),t(o.container).on("close",function(){r()})),o.container[0].f7Picker=o,o.container.find(".picker-items-col").each(function(){var t=!0;(!o.initialized&&o.params.value||o.initialized&&o.value)&&(t=!1),o.initPickerCol(this,t)}),o.initialized?o.value&&o.setValue(o.value,0):o.params.value&&o.setValue(o.params.value,0)),o.initialized=!0,o.params.onOpen&&o.params.onOpen(o)},o.close=function(){o.opened&&!o.inline&&t.closeModal(o.container)},o.destroy=function(){o.close(),o.params.input&&o.input.length>0&&o.input.off("click",i),t("html").off("click",a),t(window).off("resize",n)},o.inline&&o.open(),o};t(document).on("click",".close-picker",function(){var e=t(".picker-modal.modal-in");t.closeModal(e)}),t.fn.picker=function(n){var i=arguments;return this.each(function(){if(this){var a=t(this),r=a.data("picker");if(!r){var o=t.extend({input:this,value:a.val()?a.val().split(" "):""},n);r=new e(o),a.data("picker",r)}"string"==typeof n&&r[n].apply(r,Array.prototype.slice.call(i,1))}})}}(Zepto),+function(t){"use strict";var e=new Date,n=function(t){for(var e=[],n=1;n<=(t||31);n++)e.push(n<10?"0"+n:n);return e},i=function(t,e){var i=new Date(e,parseInt(t)+1-1,1),a=new Date(i-1);return n(a.getDate())},a=function(t){return t<10?"0"+t:t},r="01 02 03 04 05 06 07 08 09 10 11 12".split(" "),o=function(){for(var t=[],e=1950;e<=2030;e++)t.push(e);return t}(),s={rotateEffect:!1,value:[e.getFullYear(),a(e.getMonth()+1),a(e.getDate()),e.getHours(),a(e.getMinutes())],onChange:function(t,e,n){var a=i(t.cols[1].value,t.cols[0].value),r=t.cols[2].value;r>a.length&&(r=a.length),t.cols[2].setValue(r)},formatValue:function(t,e,n){return n[0]+"-"+e[1]+"-"+e[2]+" "+e[3]+":"+e[4]},cols:[{values:o},{values:r},{values:n()},{divider:!0,content:"  "},{values:function(){for(var t=[],e=0;e<=23;e++)t.push(e);return t}()},{divider:!0,content:":"},{values:function(){for(var t=[],e=0;e<=59;e++)t.push(e<10?"0"+e:e);return t}()}]};t.fn.datetimePicker=function(e){return this.each(function(){if(this){var n=t.extend(s,e);t(this).picker(n),e.value&&t(this).val(n.formatValue(n,n.value,n.value))}})}}(Zepto),+function(t){"use strict";function e(t,e){this.wrapper="string"==typeof t?document.querySelector(t):t,this.scroller=$(this.wrapper).find(".content-inner")[0],this.scrollerStyle=this.scroller&&this.scroller.style,this.options={resizeScrollbars:!0,mouseWheelSpeed:20,snapThreshold:.334,startX:0,startY:0,scrollY:!0,directionLockThreshold:5,momentum:!0,bounce:!0,bounceTime:600,bounceEasing:"",preventDefault:!0,preventDefaultException:{tagName:/^(INPUT|TEXTAREA|BUTTON|SELECT)$/},HWCompositing:!0,useTransition:!0,useTransform:!0,eventPassthrough:void 0};for(var n in e)this.options[n]=e[n];this.translateZ=this.options.HWCompositing&&r.hasPerspective?" translateZ(0)":"",this.options.useTransition=r.hasTransition&&this.options.useTransition,this.options.useTransform=r.hasTransform&&this.options.useTransform,this.options.eventPassthrough=this.options.eventPassthrough===!0?"vertical":this.options.eventPassthrough,this.options.preventDefault=!this.options.eventPassthrough&&this.options.preventDefault,this.options.scrollY="vertical"!==this.options.eventPassthrough&&this.options.scrollY,this.options.scrollX="horizontal"!==this.options.eventPassthrough&&this.options.scrollX,this.options.freeScroll=this.options.freeScroll&&!this.options.eventPassthrough,this.options.directionLockThreshold=this.options.eventPassthrough?0:this.options.directionLockThreshold,this.options.bounceEasing="string"==typeof this.options.bounceEasing?r.ease[this.options.bounceEasing]||r.ease.circular:this.options.bounceEasing,this.options.resizePolling=void 0===this.options.resizePolling?60:this.options.resizePolling,this.options.tap===!0&&(this.options.tap="tap"),"scale"===this.options.shrinkScrollbars&&(this.options.useTransition=!1),this.options.invertWheelDirection=this.options.invertWheelDirection?-1:1,3===this.options.probeType&&(this.options.useTransition=!1),this.x=0,this.y=0,this.directionX=0,this.directionY=0,this._events={},this._init(),this.refresh(),this.scrollTo(this.options.startX,this.options.startY),this.enable()}function n(t,e,n){var i=document.createElement("div"),a=document.createElement("div");return n===!0&&(i.style.cssText="position:absolute;z-index:9999",a.style.cssText="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;position:absolute;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.9);border-radius:3px"),a.className="iScrollIndicator","h"===t?(n===!0&&(i.style.cssText+=";height:5px;left:2px;right:2px;bottom:0",a.style.height="100%"),i.className="iScrollHorizontalScrollbar"):(n===!0&&(i.style.cssText+=";width:5px;bottom:2px;top:2px;right:1px",a.style.width="100%"),i.className="iScrollVerticalScrollbar"),i.style.cssText+=";overflow:hidden",e||(i.style.pointerEvents="none"),i.appendChild(a),i}function i(e,n){this.wrapper="string"==typeof n.el?document.querySelector(n.el):n.el,this.wrapperStyle=this.wrapper.style,this.indicator=this.wrapper.children[0],this.indicatorStyle=this.indicator.style,this.scroller=e,this.options={listenX:!0,listenY:!0,interactive:!1,resize:!0,defaultScrollbars:!1,shrink:!1,fade:!1,speedRatioX:0,speedRatioY:0};for(var i in n)this.options[i]=n[i];this.sizeRatioX=1,this.sizeRatioY=1,this.maxPosX=0,this.maxPosY=0,this.options.interactive&&(this.options.disableTouch||(r.addEvent(this.indicator,"touchstart",this),r.addEvent(t,"touchend",this)),this.options.disablePointer||(r.addEvent(this.indicator,r.prefixPointerEvent("pointerdown"),this),r.addEvent(t,r.prefixPointerEvent("pointerup"),this)),this.options.disableMouse||(r.addEvent(this.indicator,"mousedown",this),r.addEvent(t,"mouseup",this))),this.options.fade&&(this.wrapperStyle[r.style.transform]=this.scroller.translateZ,this.wrapperStyle[r.style.transitionDuration]=r.isBadAndroid?"0.001s":"0ms",this.wrapperStyle.opacity="0")}var a=t.requestAnimationFrame||t.webkitRequestAnimationFrame||t.mozRequestAnimationFrame||t.oRequestAnimationFrame||t.msRequestAnimationFrame||function(e){t.setTimeout(e,1e3/60)},r=function(){function e(t){return r!==!1&&(""===r?t:r+t.charAt(0).toUpperCase()+t.substr(1))}var n={},i=document.createElement("div").style,r=function(){for(var t,e=["t","webkitT","MozT","msT","OT"],n=0,a=e.length;n<a;n++)if(t=e[n]+"ransform",t in i)return e[n].substr(0,e[n].length-1);return!1}();n.getTime=Date.now||function(){return(new Date).getTime()},n.extend=function(t,e){for(var n in e)t[n]=e[n]},n.addEvent=function(t,e,n,i){t.addEventListener(e,n,!!i)},n.removeEvent=function(t,e,n,i){t.removeEventListener(e,n,!!i)},n.prefixPointerEvent=function(e){return t.MSPointerEvent?"MSPointer"+e.charAt(9).toUpperCase()+e.substr(10):e},n.momentum=function(t,e,n,i,r,o,s){function l(){+new Date-f>50&&(s._execEvent("scroll"),f=+new Date),+new Date-u<h&&a(l)}var c,h,p=t-e,d=Math.abs(p)/n;d/=2,d=d>1.5?1.5:d,o=void 0===o?6e-4:o,c=t+d*d/(2*o)*(p<0?-1:1),h=d/o,c<i?(c=r?i-r/2.5*(d/8):i,p=Math.abs(c-t),h=p/d):c>0&&(c=r?r/2.5*(d/8):0,p=Math.abs(t)+c,h=p/d);var u=+new Date,f=u;return a(l),{destination:Math.round(c),duration:h}};var o=e("transform");return n.extend(n,{hasTransform:o!==!1,hasPerspective:e("perspective")in i,hasTouch:"ontouchstart"in t,hasPointer:t.PointerEvent||t.MSPointerEvent,hasTransition:e("transition")in i}),n.isBadAndroid=/Android /.test(t.navigator.appVersion)&&!/Chrome\/\d/.test(t.navigator.appVersion)&&!1,n.extend(n.style={},{transform:o,transitionTimingFunction:e("transitionTimingFunction"),transitionDuration:e("transitionDuration"),transitionDelay:e("transitionDelay"),transformOrigin:e("transformOrigin")}),n.hasClass=function(t,e){var n=new RegExp("(^|\\s)"+e+"(\\s|$)");return n.test(t.className)},n.addClass=function(t,e){if(!n.hasClass(t,e)){var i=t.className.split(" ");i.push(e),t.className=i.join(" ")}},n.removeClass=function(t,e){if(n.hasClass(t,e)){var i=new RegExp("(^|\\s)"+e+"(\\s|$)","g");t.className=t.className.replace(i," ")}},n.offset=function(t){for(var e=-t.offsetLeft,n=-t.offsetTop;t=t.offsetParent;)e-=t.offsetLeft,n-=t.offsetTop;return{left:e,top:n}},n.preventDefaultException=function(t,e){for(var n in e)if(e[n].test(t[n]))return!0;return!1},n.extend(n.eventType={},{
-touchstart:1,touchmove:1,touchend:1,mousedown:2,mousemove:2,mouseup:2,pointerdown:3,pointermove:3,pointerup:3,MSPointerDown:3,MSPointerMove:3,MSPointerUp:3}),n.extend(n.ease={},{quadratic:{style:"cubic-bezier(0.25, 0.46, 0.45, 0.94)",fn:function(t){return t*(2-t)}},circular:{style:"cubic-bezier(0.1, 0.57, 0.1, 1)",fn:function(t){return Math.sqrt(1- --t*t)}},back:{style:"cubic-bezier(0.175, 0.885, 0.32, 1.275)",fn:function(t){var e=4;return(t-=1)*t*((e+1)*t+e)+1}},bounce:{style:"",fn:function(t){return(t/=1)<1/2.75?7.5625*t*t:t<2/2.75?7.5625*(t-=1.5/2.75)*t+.75:t<2.5/2.75?7.5625*(t-=2.25/2.75)*t+.9375:7.5625*(t-=2.625/2.75)*t+.984375}},elastic:{style:"",fn:function(t){var e=.22,n=.4;return 0===t?0:1===t?1:n*Math.pow(2,-10*t)*Math.sin((t-e/4)*(2*Math.PI)/e)+1}}}),n.tap=function(t,e){var n=document.createEvent("Event");n.initEvent(e,!0,!0),n.pageX=t.pageX,n.pageY=t.pageY,t.target.dispatchEvent(n)},n.click=function(t){var e,n=t.target;/(SELECT|INPUT|TEXTAREA)/i.test(n.tagName)||(e=document.createEvent("MouseEvents"),e.initMouseEvent("click",!0,!0,t.view,1,n.screenX,n.screenY,n.clientX,n.clientY,t.ctrlKey,t.altKey,t.shiftKey,t.metaKey,0,null),e._constructed=!0,n.dispatchEvent(e))},n}();e.prototype={version:"5.1.3",_init:function(){this._initEvents(),(this.options.scrollbars||this.options.indicators)&&this._initIndicators(),this.options.mouseWheel&&this._initWheel(),this.options.snap&&this._initSnap(),this.options.keyBindings&&this._initKeys()},destroy:function(){this._initEvents(!0),this._execEvent("destroy")},_transitionEnd:function(t){t.target===this.scroller&&this.isInTransition&&(this._transitionTime(),this.resetPosition(this.options.bounceTime)||(this.isInTransition=!1,this._execEvent("scrollEnd")))},_start:function(t){if((1===r.eventType[t.type]||0===t.button)&&this.enabled&&(!this.initiated||r.eventType[t.type]===this.initiated)){!this.options.preventDefault||r.isBadAndroid||r.preventDefaultException(t.target,this.options.preventDefaultException)||t.preventDefault();var e,n=t.touches?t.touches[0]:t;this.initiated=r.eventType[t.type],this.moved=!1,this.distX=0,this.distY=0,this.directionX=0,this.directionY=0,this.directionLocked=0,this._transitionTime(),this.startTime=r.getTime(),this.options.useTransition&&this.isInTransition?(this.isInTransition=!1,e=this.getComputedPosition(),this._translate(Math.round(e.x),Math.round(e.y)),this._execEvent("scrollEnd")):!this.options.useTransition&&this.isAnimating&&(this.isAnimating=!1,this._execEvent("scrollEnd")),this.startX=this.x,this.startY=this.y,this.absStartX=this.x,this.absStartY=this.y,this.pointX=n.pageX,this.pointY=n.pageY,this._execEvent("beforeScrollStart")}},_move:function(t){if(this.enabled&&r.eventType[t.type]===this.initiated){this.options.preventDefault&&t.preventDefault();var e,n,i,a,o=t.touches?t.touches[0]:t,s=o.pageX-this.pointX,l=o.pageY-this.pointY,c=r.getTime();if(this.pointX=o.pageX,this.pointY=o.pageY,this.distX+=s,this.distY+=l,i=Math.abs(this.distX),a=Math.abs(this.distY),!(c-this.endTime>300&&i<10&&a<10)){if(this.directionLocked||this.options.freeScroll||(i>a+this.options.directionLockThreshold?this.directionLocked="h":a>=i+this.options.directionLockThreshold?this.directionLocked="v":this.directionLocked="n"),"h"===this.directionLocked){if("vertical"===this.options.eventPassthrough)t.preventDefault();else if("horizontal"===this.options.eventPassthrough)return void(this.initiated=!1);l=0}else if("v"===this.directionLocked){if("horizontal"===this.options.eventPassthrough)t.preventDefault();else if("vertical"===this.options.eventPassthrough)return void(this.initiated=!1);s=0}s=this.hasHorizontalScroll?s:0,l=this.hasVerticalScroll?l:0,e=this.x+s,n=this.y+l,(e>0||e<this.maxScrollX)&&(e=this.options.bounce?this.x+s/3:e>0?0:this.maxScrollX),(n>0||n<this.maxScrollY)&&(n=this.options.bounce?this.y+l/3:n>0?0:this.maxScrollY),this.directionX=s>0?-1:s<0?1:0,this.directionY=l>0?-1:l<0?1:0,this.moved||this._execEvent("scrollStart"),this.moved=!0,this._translate(e,n),c-this.startTime>300&&(this.startTime=c,this.startX=this.x,this.startY=this.y,1===this.options.probeType&&this._execEvent("scroll")),this.options.probeType>1&&this._execEvent("scroll")}}},_end:function(t){if(this.enabled&&r.eventType[t.type]===this.initiated){this.options.preventDefault&&!r.preventDefaultException(t.target,this.options.preventDefaultException)&&t.preventDefault();var e,n,i=r.getTime()-this.startTime,a=Math.round(this.x),o=Math.round(this.y),s=Math.abs(a-this.startX),l=Math.abs(o-this.startY),c=0,h="";if(this.isInTransition=0,this.initiated=0,this.endTime=r.getTime(),!this.resetPosition(this.options.bounceTime)){if(this.scrollTo(a,o),!this.moved)return this.options.tap&&r.tap(t,this.options.tap),this.options.click&&r.click(t),void this._execEvent("scrollCancel");if(this._events.flick&&i<200&&s<100&&l<100)return void this._execEvent("flick");if(this.options.momentum&&i<300&&(e=this.hasHorizontalScroll?r.momentum(this.x,this.startX,i,this.maxScrollX,this.options.bounce?this.wrapperWidth:0,this.options.deceleration,this):{destination:a,duration:0},n=this.hasVerticalScroll?r.momentum(this.y,this.startY,i,this.maxScrollY,this.options.bounce?this.wrapperHeight:0,this.options.deceleration,this):{destination:o,duration:0},a=e.destination,o=n.destination,c=Math.max(e.duration,n.duration),this.isInTransition=1),this.options.snap){var p=this._nearestSnap(a,o);this.currentPage=p,c=this.options.snapSpeed||Math.max(Math.max(Math.min(Math.abs(a-p.x),1e3),Math.min(Math.abs(o-p.y),1e3)),300),a=p.x,o=p.y,this.directionX=0,this.directionY=0,h=this.options.bounceEasing}return a!==this.x||o!==this.y?((a>0||a<this.maxScrollX||o>0||o<this.maxScrollY)&&(h=r.ease.quadratic),void this.scrollTo(a,o,c,h)):void this._execEvent("scrollEnd")}}},_resize:function(){var t=this;clearTimeout(this.resizeTimeout),this.resizeTimeout=setTimeout(function(){t.refresh()},this.options.resizePolling)},resetPosition:function(e){var n=this.x,i=this.y;if(e=e||0,!this.hasHorizontalScroll||this.x>0?n=0:this.x<this.maxScrollX&&(n=this.maxScrollX),!this.hasVerticalScroll||this.y>0?i=0:this.y<this.maxScrollY&&(i=this.maxScrollY),n===this.x&&i===this.y)return!1;if(this.options.ptr&&this.y>44&&this.startY*-1<$(t).height()&&!this.ptrLock){i=this.options.ptrOffset||44,this._execEvent("ptr"),this.ptrLock=!0;var a=this;setTimeout(function(){a.ptrLock=!1},500)}return this.scrollTo(n,i,e,this.options.bounceEasing),!0},disable:function(){this.enabled=!1},enable:function(){this.enabled=!0},refresh:function(){this.wrapperWidth=this.wrapper.clientWidth,this.wrapperHeight=this.wrapper.clientHeight,this.scrollerWidth=this.scroller.offsetWidth,this.scrollerHeight=this.scroller.offsetHeight,this.maxScrollX=this.wrapperWidth-this.scrollerWidth,this.maxScrollY=this.wrapperHeight-this.scrollerHeight,this.hasHorizontalScroll=this.options.scrollX&&this.maxScrollX<0,this.hasVerticalScroll=this.options.scrollY&&this.maxScrollY<0,this.hasHorizontalScroll||(this.maxScrollX=0,this.scrollerWidth=this.wrapperWidth),this.hasVerticalScroll||(this.maxScrollY=0,this.scrollerHeight=this.wrapperHeight),this.endTime=0,this.directionX=0,this.directionY=0,this.wrapperOffset=r.offset(this.wrapper),this._execEvent("refresh"),this.resetPosition()},on:function(t,e){this._events[t]||(this._events[t]=[]),this._events[t].push(e)},off:function(t,e){if(this._events[t]){var n=this._events[t].indexOf(e);n>-1&&this._events[t].splice(n,1)}},_execEvent:function(t){if(this._events[t]){var e=0,n=this._events[t].length;if(n)for(;e<n;e++)this._events[t][e].apply(this,[].slice.call(arguments,1))}},scrollBy:function(t,e,n,i){t=this.x+t,e=this.y+e,n=n||0,this.scrollTo(t,e,n,i)},scrollTo:function(t,e,n,i){i=i||r.ease.circular,this.isInTransition=this.options.useTransition&&n>0,!n||this.options.useTransition&&i.style?(this._transitionTimingFunction(i.style),this._transitionTime(n),this._translate(t,e)):this._animate(t,e,n,i.fn)},scrollToElement:function(t,e,n,i,a){if(t=t.nodeType?t:this.scroller.querySelector(t)){var o=r.offset(t);o.left-=this.wrapperOffset.left,o.top-=this.wrapperOffset.top,n===!0&&(n=Math.round(t.offsetWidth/2-this.wrapper.offsetWidth/2)),i===!0&&(i=Math.round(t.offsetHeight/2-this.wrapper.offsetHeight/2)),o.left-=n||0,o.top-=i||0,o.left=o.left>0?0:o.left<this.maxScrollX?this.maxScrollX:o.left,o.top=o.top>0?0:o.top<this.maxScrollY?this.maxScrollY:o.top,e=void 0===e||null===e||"auto"===e?Math.max(Math.abs(this.x-o.left),Math.abs(this.y-o.top)):e,this.scrollTo(o.left,o.top,e,a)}},_transitionTime:function(t){if(t=t||0,this.scrollerStyle[r.style.transitionDuration]=t+"ms",!t&&r.isBadAndroid&&(this.scrollerStyle[r.style.transitionDuration]="0.001s"),this.indicators)for(var e=this.indicators.length;e--;)this.indicators[e].transitionTime(t)},_transitionTimingFunction:function(t){if(this.scrollerStyle[r.style.transitionTimingFunction]=t,this.indicators)for(var e=this.indicators.length;e--;)this.indicators[e].transitionTimingFunction(t)},_translate:function(t,e){if(this.options.useTransform?this.scrollerStyle[r.style.transform]="translate("+t+"px,"+e+"px)"+this.translateZ:(t=Math.round(t),e=Math.round(e),this.scrollerStyle.left=t+"px",this.scrollerStyle.top=e+"px"),this.x=t,this.y=e,this.indicators)for(var n=this.indicators.length;n--;)this.indicators[n].updatePosition()},_initEvents:function(e){var n=e?r.removeEvent:r.addEvent,i=this.options.bindToWrapper?this.wrapper:t;n(t,"orientationchange",this),n(t,"resize",this),this.options.click&&n(this.wrapper,"click",this,!0),this.options.disableMouse||(n(this.wrapper,"mousedown",this),n(i,"mousemove",this),n(i,"mousecancel",this),n(i,"mouseup",this)),r.hasPointer&&!this.options.disablePointer&&(n(this.wrapper,r.prefixPointerEvent("pointerdown"),this),n(i,r.prefixPointerEvent("pointermove"),this),n(i,r.prefixPointerEvent("pointercancel"),this),n(i,r.prefixPointerEvent("pointerup"),this)),r.hasTouch&&!this.options.disableTouch&&(n(this.wrapper,"touchstart",this),n(i,"touchmove",this),n(i,"touchcancel",this),n(i,"touchend",this)),n(this.scroller,"transitionend",this),n(this.scroller,"webkitTransitionEnd",this),n(this.scroller,"oTransitionEnd",this),n(this.scroller,"MSTransitionEnd",this)},getComputedPosition:function(){var e,n,i=t.getComputedStyle(this.scroller,null);return this.options.useTransform?(i=i[r.style.transform].split(")")[0].split(", "),e=+(i[12]||i[4]),n=+(i[13]||i[5])):(e=+i.left.replace(/[^-\d.]/g,""),n=+i.top.replace(/[^-\d.]/g,"")),{x:e,y:n}},_initIndicators:function(){function t(t){for(var e=s.indicators.length;e--;)t.call(s.indicators[e])}var e,a=this.options.interactiveScrollbars,r="string"!=typeof this.options.scrollbars,o=[],s=this;this.indicators=[],this.options.scrollbars&&(this.options.scrollY&&(e={el:n("v",a,this.options.scrollbars),interactive:a,defaultScrollbars:!0,customStyle:r,resize:this.options.resizeScrollbars,shrink:this.options.shrinkScrollbars,fade:this.options.fadeScrollbars,listenX:!1},this.wrapper.appendChild(e.el),o.push(e)),this.options.scrollX&&(e={el:n("h",a,this.options.scrollbars),interactive:a,defaultScrollbars:!0,customStyle:r,resize:this.options.resizeScrollbars,shrink:this.options.shrinkScrollbars,fade:this.options.fadeScrollbars,listenY:!1},this.wrapper.appendChild(e.el),o.push(e))),this.options.indicators&&(o=o.concat(this.options.indicators));for(var l=o.length;l--;)this.indicators.push(new i(this,o[l]));this.options.fadeScrollbars&&(this.on("scrollEnd",function(){t(function(){this.fade()})}),this.on("scrollCancel",function(){t(function(){this.fade()})}),this.on("scrollStart",function(){t(function(){this.fade(1)})}),this.on("beforeScrollStart",function(){t(function(){this.fade(1,!0)})})),this.on("refresh",function(){t(function(){this.refresh()})}),this.on("destroy",function(){t(function(){this.destroy()}),delete this.indicators})},_initWheel:function(){r.addEvent(this.wrapper,"wheel",this),r.addEvent(this.wrapper,"mousewheel",this),r.addEvent(this.wrapper,"DOMMouseScroll",this),this.on("destroy",function(){r.removeEvent(this.wrapper,"wheel",this),r.removeEvent(this.wrapper,"mousewheel",this),r.removeEvent(this.wrapper,"DOMMouseScroll",this)})},_wheel:function(t){if(this.enabled){t.preventDefault(),t.stopPropagation();var e,n,i,a,r=this;if(void 0===this.wheelTimeout&&r._execEvent("scrollStart"),clearTimeout(this.wheelTimeout),this.wheelTimeout=setTimeout(function(){r._execEvent("scrollEnd"),r.wheelTimeout=void 0},400),"deltaX"in t)1===t.deltaMode?(e=-t.deltaX*this.options.mouseWheelSpeed,n=-t.deltaY*this.options.mouseWheelSpeed):(e=-t.deltaX,n=-t.deltaY);else if("wheelDeltaX"in t)e=t.wheelDeltaX/120*this.options.mouseWheelSpeed,n=t.wheelDeltaY/120*this.options.mouseWheelSpeed;else if("wheelDelta"in t)e=n=t.wheelDelta/120*this.options.mouseWheelSpeed;else{if(!("detail"in t))return;e=n=-t.detail/3*this.options.mouseWheelSpeed}if(e*=this.options.invertWheelDirection,n*=this.options.invertWheelDirection,this.hasVerticalScroll||(e=n,n=0),this.options.snap)return i=this.currentPage.pageX,a=this.currentPage.pageY,e>0?i--:e<0&&i++,n>0?a--:n<0&&a++,void this.goToPage(i,a);i=this.x+Math.round(this.hasHorizontalScroll?e:0),a=this.y+Math.round(this.hasVerticalScroll?n:0),i>0?i=0:i<this.maxScrollX&&(i=this.maxScrollX),a>0?a=0:a<this.maxScrollY&&(a=this.maxScrollY),this.scrollTo(i,a,0),this._execEvent("scroll")}},_initSnap:function(){this.currentPage={},"string"==typeof this.options.snap&&(this.options.snap=this.scroller.querySelectorAll(this.options.snap)),this.on("refresh",function(){var t,e,n,i,a,r,o=0,s=0,l=0,c=this.options.snapStepX||this.wrapperWidth,h=this.options.snapStepY||this.wrapperHeight;if(this.pages=[],this.wrapperWidth&&this.wrapperHeight&&this.scrollerWidth&&this.scrollerHeight){if(this.options.snap===!0)for(n=Math.round(c/2),i=Math.round(h/2);l>-this.scrollerWidth;){for(this.pages[o]=[],t=0,a=0;a>-this.scrollerHeight;)this.pages[o][t]={x:Math.max(l,this.maxScrollX),y:Math.max(a,this.maxScrollY),width:c,height:h,cx:l-n,cy:a-i},a-=h,t++;l-=c,o++}else for(r=this.options.snap,t=r.length,e=-1;o<t;o++)(0===o||r[o].offsetLeft<=r[o-1].offsetLeft)&&(s=0,e++),this.pages[s]||(this.pages[s]=[]),l=Math.max(-r[o].offsetLeft,this.maxScrollX),a=Math.max(-r[o].offsetTop,this.maxScrollY),n=l-Math.round(r[o].offsetWidth/2),i=a-Math.round(r[o].offsetHeight/2),this.pages[s][e]={x:l,y:a,width:r[o].offsetWidth,height:r[o].offsetHeight,cx:n,cy:i},l>this.maxScrollX&&s++;this.goToPage(this.currentPage.pageX||0,this.currentPage.pageY||0,0),this.options.snapThreshold%1===0?(this.snapThresholdX=this.options.snapThreshold,this.snapThresholdY=this.options.snapThreshold):(this.snapThresholdX=Math.round(this.pages[this.currentPage.pageX][this.currentPage.pageY].width*this.options.snapThreshold),this.snapThresholdY=Math.round(this.pages[this.currentPage.pageX][this.currentPage.pageY].height*this.options.snapThreshold))}}),this.on("flick",function(){var t=this.options.snapSpeed||Math.max(Math.max(Math.min(Math.abs(this.x-this.startX),1e3),Math.min(Math.abs(this.y-this.startY),1e3)),300);this.goToPage(this.currentPage.pageX+this.directionX,this.currentPage.pageY+this.directionY,t)})},_nearestSnap:function(t,e){if(!this.pages.length)return{x:0,y:0,pageX:0,pageY:0};var n=0,i=this.pages.length,a=0;if(Math.abs(t-this.absStartX)<this.snapThresholdX&&Math.abs(e-this.absStartY)<this.snapThresholdY)return this.currentPage;for(t>0?t=0:t<this.maxScrollX&&(t=this.maxScrollX),e>0?e=0:e<this.maxScrollY&&(e=this.maxScrollY);n<i;n++)if(t>=this.pages[n][0].cx){t=this.pages[n][0].x;break}for(i=this.pages[n].length;a<i;a++)if(e>=this.pages[0][a].cy){e=this.pages[0][a].y;break}return n===this.currentPage.pageX&&(n+=this.directionX,n<0?n=0:n>=this.pages.length&&(n=this.pages.length-1),t=this.pages[n][0].x),a===this.currentPage.pageY&&(a+=this.directionY,a<0?a=0:a>=this.pages[0].length&&(a=this.pages[0].length-1),e=this.pages[0][a].y),{x:t,y:e,pageX:n,pageY:a}},goToPage:function(t,e,n,i){i=i||this.options.bounceEasing,t>=this.pages.length?t=this.pages.length-1:t<0&&(t=0),e>=this.pages[t].length?e=this.pages[t].length-1:e<0&&(e=0);var a=this.pages[t][e].x,r=this.pages[t][e].y;n=void 0===n?this.options.snapSpeed||Math.max(Math.max(Math.min(Math.abs(a-this.x),1e3),Math.min(Math.abs(r-this.y),1e3)),300):n,this.currentPage={x:a,y:r,pageX:t,pageY:e},this.scrollTo(a,r,n,i)},next:function(t,e){var n=this.currentPage.pageX,i=this.currentPage.pageY;n++,n>=this.pages.length&&this.hasVerticalScroll&&(n=0,i++),this.goToPage(n,i,t,e)},prev:function(t,e){var n=this.currentPage.pageX,i=this.currentPage.pageY;n--,n<0&&this.hasVerticalScroll&&(n=0,i--),this.goToPage(n,i,t,e)},_initKeys:function(){var e,n={pageUp:33,pageDown:34,end:35,home:36,left:37,up:38,right:39,down:40};if("object"==typeof this.options.keyBindings)for(e in this.options.keyBindings)"string"==typeof this.options.keyBindings[e]&&(this.options.keyBindings[e]=this.options.keyBindings[e].toUpperCase().charCodeAt(0));else this.options.keyBindings={};for(e in n)this.options.keyBindings[e]=this.options.keyBindings[e]||n[e];r.addEvent(t,"keydown",this),this.on("destroy",function(){r.removeEvent(t,"keydown",this)})},_key:function(t){if(this.enabled){var e,n=this.options.snap,i=n?this.currentPage.pageX:this.x,a=n?this.currentPage.pageY:this.y,o=r.getTime(),s=this.keyTime||0,l=.25;switch(this.options.useTransition&&this.isInTransition&&(e=this.getComputedPosition(),this._translate(Math.round(e.x),Math.round(e.y)),this.isInTransition=!1),this.keyAcceleration=o-s<200?Math.min(this.keyAcceleration+l,50):0,t.keyCode){case this.options.keyBindings.pageUp:this.hasHorizontalScroll&&!this.hasVerticalScroll?i+=n?1:this.wrapperWidth:a+=n?1:this.wrapperHeight;break;case this.options.keyBindings.pageDown:this.hasHorizontalScroll&&!this.hasVerticalScroll?i-=n?1:this.wrapperWidth:a-=n?1:this.wrapperHeight;break;case this.options.keyBindings.end:i=n?this.pages.length-1:this.maxScrollX,a=n?this.pages[0].length-1:this.maxScrollY;break;case this.options.keyBindings.home:i=0,a=0;break;case this.options.keyBindings.left:i+=n?-1:5+this.keyAcceleration>>0;break;case this.options.keyBindings.up:a+=n?1:5+this.keyAcceleration>>0;break;case this.options.keyBindings.right:i-=n?-1:5+this.keyAcceleration>>0;break;case this.options.keyBindings.down:a-=n?1:5+this.keyAcceleration>>0;break;default:return}if(n)return void this.goToPage(i,a);i>0?(i=0,this.keyAcceleration=0):i<this.maxScrollX&&(i=this.maxScrollX,this.keyAcceleration=0),a>0?(a=0,this.keyAcceleration=0):a<this.maxScrollY&&(a=this.maxScrollY,this.keyAcceleration=0),this.scrollTo(i,a,0),this.keyTime=o}},_animate:function(t,e,n,i){function o(){var d,u,f,m=r.getTime();return m>=p?(s.isAnimating=!1,s._translate(t,e),void(s.resetPosition(s.options.bounceTime)||s._execEvent("scrollEnd"))):(m=(m-h)/n,f=i(m),d=(t-l)*f+l,u=(e-c)*f+c,s._translate(d,u),s.isAnimating&&a(o),void(3===s.options.probeType&&s._execEvent("scroll")))}var s=this,l=this.x,c=this.y,h=r.getTime(),p=h+n;this.isAnimating=!0,o()},handleEvent:function(t){switch(t.type){case"touchstart":case"pointerdown":case"MSPointerDown":case"mousedown":this._start(t);break;case"touchmove":case"pointermove":case"MSPointerMove":case"mousemove":this._move(t);break;case"touchend":case"pointerup":case"MSPointerUp":case"mouseup":case"touchcancel":case"pointercancel":case"MSPointerCancel":case"mousecancel":this._end(t);break;case"orientationchange":case"resize":this._resize();break;case"transitionend":case"webkitTransitionEnd":case"oTransitionEnd":case"MSTransitionEnd":this._transitionEnd(t);break;case"wheel":case"DOMMouseScroll":case"mousewheel":this._wheel(t);break;case"keydown":this._key(t);break;case"click":t._constructed||(t.preventDefault(),t.stopPropagation())}}},i.prototype={handleEvent:function(t){switch(t.type){case"touchstart":case"pointerdown":case"MSPointerDown":case"mousedown":this._start(t);break;case"touchmove":case"pointermove":case"MSPointerMove":case"mousemove":this._move(t);break;case"touchend":case"pointerup":case"MSPointerUp":case"mouseup":case"touchcancel":case"pointercancel":case"MSPointerCancel":case"mousecancel":this._end(t)}},destroy:function(){this.options.interactive&&(r.removeEvent(this.indicator,"touchstart",this),r.removeEvent(this.indicator,r.prefixPointerEvent("pointerdown"),this),r.removeEvent(this.indicator,"mousedown",this),r.removeEvent(t,"touchmove",this),r.removeEvent(t,r.prefixPointerEvent("pointermove"),this),r.removeEvent(t,"mousemove",this),r.removeEvent(t,"touchend",this),r.removeEvent(t,r.prefixPointerEvent("pointerup"),this),r.removeEvent(t,"mouseup",this)),this.options.defaultScrollbars&&this.wrapper.parentNode.removeChild(this.wrapper)},_start:function(e){var n=e.touches?e.touches[0]:e;e.preventDefault(),e.stopPropagation(),this.transitionTime(),this.initiated=!0,this.moved=!1,this.lastPointX=n.pageX,this.lastPointY=n.pageY,this.startTime=r.getTime(),this.options.disableTouch||r.addEvent(t,"touchmove",this),this.options.disablePointer||r.addEvent(t,r.prefixPointerEvent("pointermove"),this),this.options.disableMouse||r.addEvent(t,"mousemove",this),this.scroller._execEvent("beforeScrollStart")},_move:function(t){var e,n,i,a,o=t.touches?t.touches[0]:t,s=r.getTime();this.moved||this.scroller._execEvent("scrollStart"),this.moved=!0,e=o.pageX-this.lastPointX,this.lastPointX=o.pageX,n=o.pageY-this.lastPointY,this.lastPointY=o.pageY,i=this.x+e,a=this.y+n,this._pos(i,a),1===this.scroller.options.probeType&&s-this.startTime>300?(this.startTime=s,this.scroller._execEvent("scroll")):this.scroller.options.probeType>1&&this.scroller._execEvent("scroll"),t.preventDefault(),t.stopPropagation()},_end:function(e){if(this.initiated){if(this.initiated=!1,e.preventDefault(),e.stopPropagation(),r.removeEvent(t,"touchmove",this),r.removeEvent(t,r.prefixPointerEvent("pointermove"),this),r.removeEvent(t,"mousemove",this),this.scroller.options.snap){var n=this.scroller._nearestSnap(this.scroller.x,this.scroller.y),i=this.options.snapSpeed||Math.max(Math.max(Math.min(Math.abs(this.scroller.x-n.x),1e3),Math.min(Math.abs(this.scroller.y-n.y),1e3)),300);this.scroller.x===n.x&&this.scroller.y===n.y||(this.scroller.directionX=0,this.scroller.directionY=0,this.scroller.currentPage=n,this.scroller.scrollTo(n.x,n.y,i,this.scroller.options.bounceEasing))}this.moved&&this.scroller._execEvent("scrollEnd")}},transitionTime:function(t){t=t||0,this.indicatorStyle[r.style.transitionDuration]=t+"ms",!t&&r.isBadAndroid&&(this.indicatorStyle[r.style.transitionDuration]="0.001s")},transitionTimingFunction:function(t){this.indicatorStyle[r.style.transitionTimingFunction]=t},refresh:function(){this.transitionTime(),this.options.listenX&&!this.options.listenY?this.indicatorStyle.display=this.scroller.hasHorizontalScroll?"block":"none":this.options.listenY&&!this.options.listenX?this.indicatorStyle.display=this.scroller.hasVerticalScroll?"block":"none":this.indicatorStyle.display=this.scroller.hasHorizontalScroll||this.scroller.hasVerticalScroll?"block":"none",this.scroller.hasHorizontalScroll&&this.scroller.hasVerticalScroll?(r.addClass(this.wrapper,"iScrollBothScrollbars"),r.removeClass(this.wrapper,"iScrollLoneScrollbar"),this.options.defaultScrollbars&&this.options.customStyle&&(this.options.listenX?this.wrapper.style.right="8px":this.wrapper.style.bottom="8px")):(r.removeClass(this.wrapper,"iScrollBothScrollbars"),r.addClass(this.wrapper,"iScrollLoneScrollbar"),this.options.defaultScrollbars&&this.options.customStyle&&(this.options.listenX?this.wrapper.style.right="2px":this.wrapper.style.bottom="2px")),this.options.listenX&&(this.wrapperWidth=this.wrapper.clientWidth,this.options.resize?(this.indicatorWidth=Math.max(Math.round(this.wrapperWidth*this.wrapperWidth/(this.scroller.scrollerWidth||this.wrapperWidth||1)),8),this.indicatorStyle.width=this.indicatorWidth+"px"):this.indicatorWidth=this.indicator.clientWidth,this.maxPosX=this.wrapperWidth-this.indicatorWidth,"clip"===this.options.shrink?(this.minBoundaryX=-this.indicatorWidth+8,this.maxBoundaryX=this.wrapperWidth-8):(this.minBoundaryX=0,this.maxBoundaryX=this.maxPosX),this.sizeRatioX=this.options.speedRatioX||this.scroller.maxScrollX&&this.maxPosX/this.scroller.maxScrollX),this.options.listenY&&(this.wrapperHeight=this.wrapper.clientHeight,this.options.resize?(this.indicatorHeight=Math.max(Math.round(this.wrapperHeight*this.wrapperHeight/(this.scroller.scrollerHeight||this.wrapperHeight||1)),8),this.indicatorStyle.height=this.indicatorHeight+"px"):this.indicatorHeight=this.indicator.clientHeight,this.maxPosY=this.wrapperHeight-this.indicatorHeight,"clip"===this.options.shrink?(this.minBoundaryY=-this.indicatorHeight+8,this.maxBoundaryY=this.wrapperHeight-8):(this.minBoundaryY=0,this.maxBoundaryY=this.maxPosY),this.maxPosY=this.wrapperHeight-this.indicatorHeight,this.sizeRatioY=this.options.speedRatioY||this.scroller.maxScrollY&&this.maxPosY/this.scroller.maxScrollY),this.updatePosition()},updatePosition:function(){var t=this.options.listenX&&Math.round(this.sizeRatioX*this.scroller.x)||0,e=this.options.listenY&&Math.round(this.sizeRatioY*this.scroller.y)||0;this.options.ignoreBoundaries||(t<this.minBoundaryX?("scale"===this.options.shrink&&(this.width=Math.max(this.indicatorWidth+t,8),this.indicatorStyle.width=this.width+"px"),t=this.minBoundaryX):t>this.maxBoundaryX?"scale"===this.options.shrink?(this.width=Math.max(this.indicatorWidth-(t-this.maxPosX),8),this.indicatorStyle.width=this.width+"px",t=this.maxPosX+this.indicatorWidth-this.width):t=this.maxBoundaryX:"scale"===this.options.shrink&&this.width!==this.indicatorWidth&&(this.width=this.indicatorWidth,this.indicatorStyle.width=this.width+"px"),e<this.minBoundaryY?("scale"===this.options.shrink&&(this.height=Math.max(this.indicatorHeight+3*e,8),this.indicatorStyle.height=this.height+"px"),e=this.minBoundaryY):e>this.maxBoundaryY?"scale"===this.options.shrink?(this.height=Math.max(this.indicatorHeight-3*(e-this.maxPosY),8),this.indicatorStyle.height=this.height+"px",e=this.maxPosY+this.indicatorHeight-this.height):e=this.maxBoundaryY:"scale"===this.options.shrink&&this.height!==this.indicatorHeight&&(this.height=this.indicatorHeight,this.indicatorStyle.height=this.height+"px")),this.x=t,this.y=e,this.scroller.options.useTransform?this.indicatorStyle[r.style.transform]="translate("+t+"px,"+e+"px)"+this.scroller.translateZ:(this.indicatorStyle.left=t+"px",this.indicatorStyle.top=e+"px")},_pos:function(t,e){t<0?t=0:t>this.maxPosX&&(t=this.maxPosX),e<0?e=0:e>this.maxPosY&&(e=this.maxPosY),t=this.options.listenX?Math.round(t/this.sizeRatioX):this.scroller.x,e=this.options.listenY?Math.round(e/this.sizeRatioY):this.scroller.y,this.scroller.scrollTo(t,e)},fade:function(t,e){if(!e||this.visible){clearTimeout(this.fadeTimeout),this.fadeTimeout=null;var n=t?250:500,i=t?0:300;t=t?"1":"0",this.wrapperStyle[r.style.transitionDuration]=n+"ms",this.fadeTimeout=setTimeout(function(t){this.wrapperStyle.opacity=t,this.visible=+t}.bind(this,t),i)}}},e.utils=r,t.IScroll=e}(window),+function(t){"use strict";function e(e){var n=Array.apply(null,arguments);n.shift();var a;return this.each(function(){var r=t(this),o=t.extend({},r.dataset(),"object"==typeof e&&e),s=r.data("scroller");if(s||r.data("scroller",s=new i(this,o)),"string"==typeof e&&"function"==typeof s[e]&&(a=s[e].apply(s,n),void 0!==a))return!1}),void 0!==a?a:this}var n={scrollTop:t.fn.scrollTop,scrollLeft:t.fn.scrollLeft};!function(){t.extend(t.fn,{scrollTop:function(t,e){if(this.length){var i=this.data("scroller");return i&&i.scroller?i.scrollTop(t,e):n.scrollTop.apply(this,arguments)}}}),t.extend(t.fn,{scrollLeft:function(t,e){if(this.length){var i=this.data("scroller");return i&&i.scroller?i.scrollLeft(t,e):n.scrollLeft.apply(this,arguments)}}})}();var i=function(e,n){var i=this.$pageContent=t(e);this.options=t.extend({},this._defaults,n);var a=this.options.type,r="js"===a||"auto"===a&&t.device.android&&t.compareVersion("4.4.0",t.device.osVersion)>-1||"auto"===a&&t.device.ios&&t.compareVersion("6.0.0",t.device.osVersion)>-1;if(r){var o=i.find(".content-inner");if(!o[0]){var s=i.children();s.length<1?i.children().wrapAll('<div class="content-inner"></div>'):i.html('<div class="content-inner">'+i.html()+"</div>")}if(i.hasClass("pull-to-refresh-content")){var l=t(window).height()+(i.prev().hasClass(".bar")?1:61);i.find(".content-inner").css("min-height",l+"px")}var c=t(e).hasClass("pull-to-refresh-content"),h=0===i.find(".fixed-tab").length,p={probeType:1,mouseWheel:!0,click:t.device.androidChrome,useTransform:h,scrollX:!0};c&&(p.ptr=!0,p.ptrOffset=44),this.scroller=new IScroll(e,p),this._bindEventToDomWhenJs(),t.initPullToRefresh=t._pullToRefreshJSScroll.initPullToRefresh,t.pullToRefreshDone=t._pullToRefreshJSScroll.pullToRefreshDone,t.pullToRefreshTrigger=t._pullToRefreshJSScroll.pullToRefreshTrigger,t.destroyToRefresh=t._pullToRefreshJSScroll.destroyToRefresh,i.addClass("javascript-scroll"),h||i.find(".content-inner").css({width:"100%",position:"absolute"});var d=this.$pageContent[0].scrollTop;d&&(this.$pageContent[0].scrollTop=0,this.scrollTop(d))}else i.addClass("native-scroll")};i.prototype={_defaults:{type:"native"},_bindEventToDomWhenJs:function(){if(this.scroller){var t=this;this.scroller.on("scrollStart",function(){t.$pageContent.trigger("scrollstart")}),this.scroller.on("scroll",function(){t.$pageContent.trigger("scroll")}),this.scroller.on("scrollEnd",function(){t.$pageContent.trigger("scrollend")})}},scrollTop:function(t,e){return this.scroller?void 0===t?this.scroller.getComputedPosition().y*-1:(this.scroller.scrollTo(0,-1*t,e),this):this.$pageContent.scrollTop(t,e)},scrollLeft:function(t,e){return this.scroller?void 0===t?this.scroller.getComputedPosition().x*-1:(this.scroller.scrollTo(-1*t,0),this):this.$pageContent.scrollTop(t,e)},on:function(t,e){return this.scroller?this.scroller.on(t,function(){e.call(this.wrapper)}):this.$pageContent.on(t,e),this},off:function(t,e){return this.scroller?this.scroller.off(t,e):this.$pageContent.off(t,e),this},refresh:function(){return this.scroller&&this.scroller.refresh(),this},scrollHeight:function(){return this.scroller?this.scroller.scrollerHeight:this.$pageContent[0].scrollHeight}};var a=t.fn.scroller;t.fn.scroller=e,t.fn.scroller.Constructor=i,t.fn.scroller.noConflict=function(){return t.fn.scroller=a,this},t(function(){t('[data-toggle="scroller"]').scroller()}),t.refreshScroller=function(e){e?t(e).scroller("refresh"):t(".javascript-scroll").each(function(){t(this).scroller("refresh")})},t.initScroller=function(e){this.options=t.extend({},"object"==typeof e&&e),t('[data-toggle="scroller"],.content').scroller(e)},t.getScroller=function(e){return e=e.hasClass("content")?e:e.parents(".content"),e?t(e).data("scroller"):t(".content.javascript-scroll").data("scroller")},t.detectScrollerType=function(e){if(e)return t(e).data("scroller")&&t(e).data("scroller").scroller?"js":"native"}}(Zepto),+function(t){"use strict";var e=function(e,n,i){var a=t(e);if(2===arguments.length&&"boolean"==typeof n&&(i=n),0===a.length)return!1;if(a.hasClass("active"))return i&&a.trigger("show"),!1;var r=a.parent(".tabs");if(0===r.length)return!1;var o=r.children(".tab.active").removeClass("active");if(a.addClass("active"),a.trigger("show"),n?n=t(n):(n=t("string"==typeof e?'.tab-link[href="'+e+'"]':'.tab-link[href="#'+a.attr("id")+'"]'),(!n||n&&0===n.length)&&t("[data-tab]").each(function(){a.is(t(this).attr("data-tab"))&&(n=t(this))})),0!==n.length){var s;if(o&&o.length>0){var l=o.attr("id");l&&(s=t('.tab-link[href="#'+l+'"]')),(!s||s&&0===s.length)&&t("[data-tab]").each(function(){o.is(t(this).attr("data-tab"))&&(s=t(this))})}return n&&n.length>0&&n.addClass("active"),s&&s.length>0&&s.removeClass("active"),n.trigger("active"),!0}},n=t.showTab;t.showTab=e,t.showTab.noConflict=function(){return t.showTab=n,this},t(document).on("click",".tab-link",function(n){n.preventDefault();var i=t(this);e(i.data("tab")||i.attr("href"),i)})}(Zepto),+function(t){"use strict";function e(e){var i=Array.apply(null,arguments);i.shift(),this.each(function(){var i=t(this),a=t.extend({},i.dataset(),"object"==typeof e&&e),r=i.data("fixedtab");r||i.data("fixedtab",r=new n(this,a));
-})}t.initFixedTab=function(){var e=t(".fixed-tab");0!==e.length&&t(".fixed-tab").fixedTab()};var n=function(e,n){var i=this.$pageContent=t(e),a=i.clone(),r=i[0].getBoundingClientRect().top;a.css("visibility","hidden"),this.options=t.extend({},this._defaults,{fixedTop:r,shadow:a,offset:0},n),this._bindEvents()};n.prototype={_defaults:{offset:0},_bindEvents:function(){this.$pageContent.parents(".content").on("scroll",this._scrollHandler.bind(this)),this.$pageContent.on("active",".tab-link",this._tabLinkHandler.bind(this))},_tabLinkHandler:function(e){var n=t(e.target).parents(".buttons-fixed").length>0,i=this.options.fixedTop,a=this.options.offset;t.refreshScroller(),n&&this.$pageContent.parents(".content").scrollTop(i-a)},_scrollHandler:function(e){var n=t(e.target),i=this.$pageContent,a=this.options.shadow,r=this.options.offset,o=this.options.fixedTop,s=n.scrollTop(),l=s>=o-r;l?(a.insertAfter(i),i.addClass("buttons-fixed").css("top",r)):(a.remove(),i.removeClass("buttons-fixed").css("top",0))}},t.fn.fixedTab=e,t.fn.fixedTab.Constructor=n,t(document).on("pageInit",function(){t.initFixedTab()})}(Zepto),+function(t){"use strict";var e=0,n=function(n){function i(){c.hasClass("refreshing")||(l.scrollTop()*-1>=44?c.removeClass("pull-down").addClass("pull-up"):c.removeClass("pull-up").addClass("pull-down"))}function a(){c.hasClass("refreshing")||(c.removeClass("pull-down pull-up"),c.addClass("refreshing transitioning"),c.trigger("refresh"),e=+new Date)}function r(){l.off("scroll",i),l.scroller.off("ptr",a)}var o=t(n);if(o.hasClass("pull-to-refresh-content")||(o=o.find(".pull-to-refresh-content")),o&&0!==o.length){var s=o.hasClass("content")?o:o.parents(".content"),l=t.getScroller(s[0]);if(l){var c=o;l.on("scroll",i),l.scroller.on("ptr",a),o[0].destroyPullToRefresh=r}}},i=function(n){if(n=t(n),0===n.length&&(n=t(".pull-to-refresh-content.refreshing")),0!==n.length){var i=+new Date-e,a=i>1e3?0:1e3-i,r=t.getScroller(n);setTimeout(function(){r.refresh(),n.removeClass("refreshing"),n.transitionEnd(function(){n.removeClass("transitioning")})},a)}},a=function(e){if(e=t(e),0===e.length&&(e=t(".pull-to-refresh-content")),!e.hasClass("refreshing")){e.addClass("refreshing");var n=t.getScroller(e);n.scrollTop(45,200),e.trigger("refresh")}},r=function(e){e=t(e);var n=e.hasClass("pull-to-refresh-content")?e:e.find(".pull-to-refresh-content");0!==n.length&&n[0].destroyPullToRefresh&&n[0].destroyPullToRefresh()};t._pullToRefreshJSScroll={initPullToRefresh:n,pullToRefreshDone:i,pullToRefreshTrigger:a,destroyPullToRefresh:r}}(Zepto),+function(t){"use strict";t.initPullToRefresh=function(e){function n(e){if(s){if(!t.device.android)return;if("targetTouches"in e&&e.targetTouches.length>1)return}l=!1,s=!0,c=void 0,m=void 0,y.x="touchstart"===e.type?e.targetTouches[0].pageX:e.pageX,y.y="touchstart"===e.type?e.targetTouches[0].pageY:e.pageY,p=(new Date).getTime(),d=t(this)}function i(e){if(s){var n="touchmove"===e.type?e.targetTouches[0].pageX:e.pageX,i="touchmove"===e.type?e.targetTouches[0].pageY:e.pageY;if("undefined"==typeof c&&(c=!!(c||Math.abs(i-y.y)>Math.abs(n-y.x))),!c)return void(s=!1);if(f=d[0].scrollTop,"undefined"==typeof m&&0!==f&&(m=!0),!l){if(d.removeClass("transitioning"),f>d[0].offsetHeight)return void(s=!1);g&&(v=d.attr("data-ptr-distance"),v.indexOf("%")>=0&&(v=d[0].offsetHeight*parseInt(v,10)/100)),T=d.hasClass("refreshing")?v:0,k=d[0].scrollHeight===d[0].offsetHeight||!t.device.ios,k=!0}return l=!0,h=i-y.y,h>0&&f<=0||f<0?(t.device.ios&&parseInt(t.device.osVersion.split(".")[0],10)>7&&0===f&&!m&&(k=!0),k&&(e.preventDefault(),u=Math.pow(h,.85)+T,d.transform("translate3d(0,"+u+"px,0)")),k&&Math.pow(h,.85)>v||!k&&h>=2*v?(w=!0,d.addClass("pull-up").removeClass("pull-down")):(w=!1,d.removeClass("pull-up").addClass("pull-down")),void 0):(d.removeClass("pull-up pull-down"),void(w=!1))}}function a(){if(!s||!l)return s=!1,void(l=!1);if(u&&(d.addClass("transitioning"),u=0),d.transform(""),w){if(d.hasClass("refreshing"))return;d.addClass("refreshing"),d.trigger("refresh")}else d.removeClass("pull-down");s=!1,l=!1}function r(){o.off(t.touchEvents.start,n),o.off(t.touchEvents.move,i),o.off(t.touchEvents.end,a)}var o=t(e);if(o.hasClass("pull-to-refresh-content")||(o=o.find(".pull-to-refresh-content")),o&&0!==o.length){var s,l,c,h,p,d,u,f,m,v,g,y={},w=!1,k=!1,T=0;d=o,d.attr("data-ptr-distance")?g=!0:v=44,o.on(t.touchEvents.start,n),o.on(t.touchEvents.move,i),o.on(t.touchEvents.end,a),o[0].destroyPullToRefresh=r}},t.pullToRefreshDone=function(e){t(window).scrollTop(0),e=t(e),0===e.length&&(e=t(".pull-to-refresh-content.refreshing")),e.removeClass("refreshing").addClass("transitioning"),e.transitionEnd(function(){e.removeClass("transitioning pull-up pull-down")})},t.pullToRefreshTrigger=function(e){e=t(e),0===e.length&&(e=t(".pull-to-refresh-content")),e.hasClass("refreshing")||(e.addClass("transitioning refreshing"),e.trigger("refresh"))},t.destroyPullToRefresh=function(e){e=t(e);var n=e.hasClass("pull-to-refresh-content")?e:e.find(".pull-to-refresh-content");0!==n.length&&n[0].destroyPullToRefresh&&n[0].destroyPullToRefresh()}}(Zepto),+function(t){"use strict";function e(){var e,n=t(this),i=t.getScroller(n),a=i.scrollTop(),r=i.scrollHeight(),o=n[0].offsetHeight,s=n[0].getAttribute("data-distance"),l=n.find(".virtual-list"),c=n.hasClass("infinite-scroll-top");if(s||(s=50),"string"==typeof s&&s.indexOf("%")>=0&&(s=parseInt(s,10)/100*o),s>o&&(s=o),c)a<s&&n.trigger("infinite");else if(a+o>=r-s){if(l.length>0&&(e=l[0].f7VirtualList,e&&!e.reachEnd))return;n.trigger("infinite")}}t.attachInfiniteScroll=function(n){t.getScroller(n).on("scroll",e)},t.detachInfiniteScroll=function(n){t.getScroller(n).off("scroll",e)},t.initInfiniteScroll=function(e){function n(){t.detachInfiniteScroll(i),e.off("pageBeforeRemove",n)}e=t(e);var i=e.hasClass("infinite-scroll")?e:e.find(".infinite-scroll");0!==i.length&&(t.attachInfiniteScroll(i),e.forEach(function(e){if(t(e).hasClass("infinite-scroll-top")){var n=e.scrollHeight-e.clientHeight;t(e).scrollTop(n)}}),e.on("pageBeforeRemove",n))}}(Zepto),+function(t){"use strict";t(function(){t(document).on("focus",".searchbar input",function(e){var n=t(e.target);n.parents(".searchbar").addClass("searchbar-active")}),t(document).on("click",".searchbar-cancel",function(e){var n=t(e.target);n.parents(".searchbar").removeClass("searchbar-active")}),t(document).on("blur",".searchbar input",function(e){var n=t(e.target);n.parents(".searchbar").removeClass("searchbar-active")})})}(Zepto),+function(t){"use strict";t.allowPanelOpen=!0,t.openPanel=function(e){function n(){r.transitionEnd(function(i){i.target===r[0]?(e.hasClass("active")?e.trigger("opened"):e.trigger("closed"),t.allowPanelOpen=!0):n()})}if(!t.allowPanelOpen)return!1;"left"!==e&&"right"!==e||(e=".panel-"+e),e=e?t(e):t(".panel").eq(0);var i=e.hasClass("panel-right")?"right":"left";if(0===e.length||e.hasClass("active"))return!1;t.closePanel(),t.allowPanelOpen=!1;var a=e.hasClass("panel-reveal")?"reveal":"cover";e.css({display:"block"}).addClass("active"),e.trigger("open");var r=(e[0].clientLeft,"reveal"===a?t(t.getCurrentPage()):e);return n(),t(document.body).addClass("with-panel-"+i+"-"+a),!0},t.closePanel=function(){var e=t(".panel.active");if(0===e.length)return!1;var n=e.hasClass("panel-reveal")?"reveal":"cover",i=e.hasClass("panel-left")?"left":"right";e.removeClass("active");var a="reveal"===n?t(".page"):e;e.trigger("close"),t.allowPanelOpen=!1,a.transitionEnd(function(){e.hasClass("active")||(e.css({display:""}),e.trigger("closed"),t("body").removeClass("panel-closing"),t.allowPanelOpen=!0)}),t("body").addClass("panel-closing").removeClass("with-panel-"+i+"-"+n)},t(document).on("click",".open-panel",function(e){var n=t(e.target).data("panel");t.openPanel(n)}),t(document).on("click",".close-panel, .panel-overlay",function(e){t.closePanel()}),t.initSwipePanels=function(){function e(e){if(t.allowPanelOpen&&(o||s)&&!d&&!(t(".modal-in, .photo-browser-in").length>0)&&(l||s||!(t(".panel.active").length>0)||a.hasClass("active"))){if(C.x="touchstart"===e.type?e.targetTouches[0].pageX:e.pageX,C.y="touchstart"===e.type?e.targetTouches[0].pageY:e.pageY,l||s){if(t(".panel.active").length>0)r=t(".panel.active").hasClass("panel-left")?"left":"right";else{if(s)return;r=o}if(!r)return}if(a=t(".panel.panel-"+r),a[0]){if(y=a.hasClass("active"),c&&!y){if("left"===r&&C.x>c)return;if("right"===r&&C.x<window.innerWidth-c)return}u=!1,d=!0,f=void 0,m=(new Date).getTime(),T=void 0}}}function n(e){if(d&&a[0]&&!e.f7PreventPanelSwipe){var n="touchmove"===e.type?e.targetTouches[0].pageX:e.pageX,i="touchmove"===e.type?e.targetTouches[0].pageY:e.pageY;if("undefined"==typeof f&&(f=!!(f||Math.abs(i-C.y)>Math.abs(n-C.x))),f)return void(d=!1);if(!T&&(T=n>C.x?"to-right":"to-left","left"===r&&"to-left"===T&&!a.hasClass("active")||"right"===r&&"to-right"===T&&!a.hasClass("active")))return void(d=!1);if(p){var o=(new Date).getTime()-m;return o<300&&("to-left"===T&&("right"===r&&t.openPanel(r),"left"===r&&a.hasClass("active")&&t.closePanel()),"to-right"===T&&("left"===r&&t.openPanel(r),"right"===r&&a.hasClass("active")&&t.closePanel())),d=!1,console.log(3),void(u=!1)}u||(k=a.hasClass("panel-cover")?"cover":"reveal",y||(a.show(),x.show()),w=a[0].offsetWidth,a.transition(0)),u=!0,e.preventDefault();var s=y?0:-h;"right"===r&&(s=-s),v=n-C.x+s,"right"===r?(g=v-(y?w:0),g>0&&(g=0),g<-w&&(g=-w)):(g=v+(y?w:0),g<0&&(g=0),g>w&&(g=w)),"reveal"===k?(b.transform("translate3d("+g+"px,0,0)").transition(0),x.transform("translate3d("+g+"px,0,0)")):a.transform("translate3d("+g+"px,0,0)").transition(0)}}function i(e){if(!d||!u)return d=!1,void(u=!1);d=!1,u=!1;var n,i=(new Date).getTime()-m,o=0===g||Math.abs(g)===w;if(n=y?g===-w?"reset":i<300&&Math.abs(g)>=0||i>=300&&Math.abs(g)<=w/2?"left"===r&&g===w?"reset":"swap":"reset":0===g?"reset":i<300&&Math.abs(g)>0||i>=300&&Math.abs(g)>=w/2?"swap":"reset","swap"===n&&(t.allowPanelOpen=!0,y?(t.closePanel(),o&&(a.css({display:""}),t("body").removeClass("panel-closing"))):t.openPanel(r),o&&(t.allowPanelOpen=!0)),"reset"===n)if(y)t.allowPanelOpen=!0,t.openPanel(r);else if(t.closePanel(),o)t.allowPanelOpen=!0,a.css({display:""});else{var s="reveal"===k?b:a;t("body").addClass("panel-closing"),s.transitionEnd(function(){t.allowPanelOpen=!0,a.css({display:""}),t("body").removeClass("panel-closing")})}"reveal"===k&&(b.transition(""),b.transform("")),a.transition("").transform(""),x.css({display:""}).transform("")}var a,r,o=t.smConfig.swipePanel,s=t.smConfig.swipePanelOnlyClose,l=!0,c=!1,h=2,p=!1;if(o||s){var d,u,f,m,v,g,y,w,k,T,x=t(".panel-overlay"),C={},b=t(".page");t(document).on(t.touchEvents.start,e),t(document).on(t.touchEvents.move,n),t(document).on(t.touchEvents.end,i)}},t.initSwipePanels()}(Zepto),+function(t){"use strict";function e(t){for(var e=["external","tab-link","open-popup","close-popup","open-panel","close-panel"],n=e.length-1;n>=0;n--)if(t.hasClass(e[n]))return!0;var i=t.get(0),a=i.getAttribute("href"),r=["http","https"];return!!(/^(\w+):/.test(a)&&r.indexOf(RegExp.$1)<0)||!!i.hasAttribute("external")}function n(e){var n=t.smConfig.routerFilter;if(t.isFunction(n)){var i=n(e);if("boolean"==typeof i)return i}return!0}window.CustomEvent||(window.CustomEvent=function(t,e){e=e||{bubbles:!1,cancelable:!1,detail:void 0};var n=document.createEvent("CustomEvent");return n.initCustomEvent(t,e.bubbles,e.cancelable,e.detail),n},window.CustomEvent.prototype=window.Event.prototype);var i={pageLoadStart:"pageLoadStart",pageLoadCancel:"pageLoadCancel",pageLoadError:"pageLoadError",pageLoadComplete:"pageLoadComplete",pageAnimationStart:"pageAnimationStart",pageAnimationEnd:"pageAnimationEnd",beforePageRemove:"beforePageRemove",pageRemoved:"pageRemoved",beforePageSwitch:"beforePageSwitch",pageInit:"pageInitInternal"},a={getUrlFragment:function(t){var e=t.indexOf("#");return e===-1?"":t.slice(e+1)},getAbsoluteUrl:function(t){var e=document.createElement("a");e.setAttribute("href",t);var n=e.href;return e=null,n},getBaseUrl:function(t){var e=t.indexOf("#");return e===-1?t.slice(0):t.slice(0,e)},toUrlObject:function(t){var e=this.getAbsoluteUrl(t),n=this.getBaseUrl(e),i=this.getUrlFragment(t);return{base:n,full:e,original:t,fragment:i}},supportStorage:function(){var t="sm.router.storage.ability";try{return sessionStorage.setItem(t,t),sessionStorage.removeItem(t),!0}catch(t){return!1}}},r={sectionGroupClass:"page-group",curPageClass:"page-current",visiblePageClass:"page-visible",pageClass:"page"},o={leftToRight:"from-left-to-right",rightToLeft:"from-right-to-left"},s=window.history,l=function(){this.sessionNames={currentState:"sm.router.currentState",maxStateId:"sm.router.maxStateId"},this._init(),this.xhr=null,window.addEventListener("popstate",this._onPopState.bind(this))};l.prototype._init=function(){this.$view=t("body"),this.cache={};var e=t(document),n=location.href;this._saveDocumentIntoCache(e,n);var i,o,l=a.toUrlObject(n),c=e.find("."+r.pageClass),h=e.find("."+r.curPageClass),p=h.eq(0);if(l.fragment&&(o=e.find("#"+l.fragment)),o&&o.length?h=o.eq(0):h.length||(h=c.eq(0)),h.attr("id")||h.attr("id",this._generateRandomId()),p.length&&p.attr("id")!==h.attr("id")?(p.removeClass(r.curPageClass),h.addClass(r.curPageClass)):h.addClass(r.curPageClass),i=h.attr("id"),null===s.state){var d={id:this._getNextStateId(),url:a.toUrlObject(n),pageId:i};s.replaceState(d,"",n),this._saveAsCurrentState(d),this._incMaxStateId()}},l.prototype.load=function(e,n){void 0===n&&(n=!1),this._isTheSameDocument(location.href,e)?this._switchToSection(a.getUrlFragment(e)):(this._saveDocumentIntoCache(t(document),location.href),this._switchToDocument(e,n))},l.prototype.forward=function(){s.forward()},l.prototype.back=function(){s.back()},l.prototype.loadPage=l.prototype.load,l.prototype._switchToSection=function(e){if(e){var n=this._getCurrentSection(),i=t("#"+e);n!==i&&(this._animateSection(n,i,o.rightToLeft),this._pushNewState("#"+e,e))}},l.prototype._switchToDocument=function(t,e,n,i){var r=a.toUrlObject(t).base;e&&delete this.cache[r];var o=this.cache[r],s=this;o?this._doSwitchDocument(t,n,i):this._loadDocument(t,{success:function(e){try{s._parseDocument(t,e),s._doSwitchDocument(t,n,i)}catch(e){location.href=t}},error:function(){location.href=t}})},l.prototype._doSwitchDocument=function(e,n,o){"undefined"==typeof n&&(n=!0);var s,l=a.toUrlObject(e),c=this.$view.find("."+r.sectionGroupClass),h=t(t("<div></div>").append(this.cache[l.base].$content).html()),p=h.find("."+r.pageClass),d=h.find("."+r.curPageClass);l.fragment&&(s=h.find("#"+l.fragment)),s&&s.length?d=s.eq(0):d.length||(d=p.eq(0)),d.attr("id")||d.attr("id",this._generateRandomId());var u=this._getCurrentSection();u.trigger(i.beforePageSwitch,[u.attr("id"),u]),p.removeClass(r.curPageClass),d.addClass(r.curPageClass),this.$view.prepend(h),this._animateDocument(c,h,d,o),n&&this._pushNewState(e,d.attr("id"))},l.prototype._isTheSameDocument=function(t,e){return a.toUrlObject(t).base===a.toUrlObject(e).base},l.prototype._loadDocument=function(e,n){this.xhr&&this.xhr.readyState<4&&(this.xhr.onreadystatechange=function(){},this.xhr.abort(),this.dispatch(i.pageLoadCancel)),this.dispatch(i.pageLoadStart),n=n||{};var a=this;this.xhr=t.ajax({url:e,success:t.proxy(function(e,i,a){var r=t("<html></html>");r.append(e),n.success&&n.success.call(null,r,i,a)},this),error:function(t,e,r){n.error&&n.error.call(null,t,e,r),a.dispatch(i.pageLoadError)},complete:function(t,e){n.complete&&n.complete.call(null,t,e),a.dispatch(i.pageLoadComplete)}})},l.prototype._parseDocument=function(t,e){var n=e.find("."+r.sectionGroupClass);if(!n.length)throw new Error("missing router view mark: "+r.sectionGroupClass);this._saveDocumentIntoCache(e,t)},l.prototype._saveDocumentIntoCache=function(e,n){var i=a.toUrlObject(n).base,o=t(e);this.cache[i]={$doc:o,$content:o.find("."+r.sectionGroupClass)}},l.prototype._getLastState=function(){var t=sessionStorage.getItem(this.sessionNames.currentState);try{t=JSON.parse(t)}catch(e){t=null}return t},l.prototype._saveAsCurrentState=function(t){sessionStorage.setItem(this.sessionNames.currentState,JSON.stringify(t))},l.prototype._getNextStateId=function(){var t=sessionStorage.getItem(this.sessionNames.maxStateId);return t?parseInt(t,10)+1:1},l.prototype._incMaxStateId=function(){sessionStorage.setItem(this.sessionNames.maxStateId,this._getNextStateId())},l.prototype._animateDocument=function(e,n,a,o){var s=a.attr("id"),l=e.find("."+r.curPageClass);l.addClass(r.visiblePageClass).removeClass(r.curPageClass),a.trigger(i.pageAnimationStart,[s,a]),this._animateElement(e,n,o),e.animationEnd(function(){l.removeClass(r.visiblePageClass),t(window).trigger(i.beforePageRemove,[e]),e.remove(),t(window).trigger(i.pageRemoved)}),n.animationEnd(function(){a.trigger(i.pageAnimationEnd,[s,a]),a.trigger(i.pageInit,[s,a])})},l.prototype._animateSection=function(t,e,n){var a=e.attr("id");t.trigger(i.beforePageSwitch,[t.attr("id"),t]),t.removeClass(r.curPageClass),e.addClass(r.curPageClass),e.trigger(i.pageAnimationStart,[a,e]),this._animateElement(t,e,n),e.animationEnd(function(){e.trigger(i.pageAnimationEnd,[a,e]),e.trigger(i.pageInit,[a,e])})},l.prototype._animateElement=function(t,e,n){"undefined"==typeof n&&(n=o.rightToLeft);var i,a,r=["page-from-center-to-left","page-from-center-to-right","page-from-right-to-center","page-from-left-to-center"].join(" ");switch(n){case o.rightToLeft:i="page-from-center-to-left",a="page-from-right-to-center";break;case o.leftToRight:i="page-from-center-to-right",a="page-from-left-to-center";break;default:i="page-from-center-to-left",a="page-from-right-to-center"}t.removeClass(r).addClass(i),e.removeClass(r).addClass(a),t.animationEnd(function(){t.removeClass(r)}),e.animationEnd(function(){e.removeClass(r)})},l.prototype._getCurrentSection=function(){return this.$view.find("."+r.curPageClass).eq(0)},l.prototype._back=function(e,n){if(this._isTheSameDocument(e.url.full,n.url.full)){var i=t("#"+e.pageId);if(i.length){var a=this._getCurrentSection();this._animateSection(a,i,o.leftToRight),this._saveAsCurrentState(e)}else location.href=e.url.full}else this._saveDocumentIntoCache(t(document),n.url.full),this._switchToDocument(e.url.full,!1,!1,o.leftToRight),this._saveAsCurrentState(e)},l.prototype._forward=function(e,n){if(this._isTheSameDocument(e.url.full,n.url.full)){var i=t("#"+e.pageId);if(i.length){var a=this._getCurrentSection();this._animateSection(a,i,o.rightToLeft),this._saveAsCurrentState(e)}else location.href=e.url.full}else this._saveDocumentIntoCache(t(document),n.url.full),this._switchToDocument(e.url.full,!1,!1,o.rightToLeft),this._saveAsCurrentState(e)},l.prototype._onPopState=function(t){var e=t.state;if(e&&e.pageId){var n=this._getLastState();return n?void(e.id!==n.id&&(e.id<n.id?this._back(e,n):this._forward(e,n))):void(console.error&&console.error("Missing last state when backward or forward"))}},l.prototype._pushNewState=function(t,e){var n={id:this._getNextStateId(),pageId:e,url:a.toUrlObject(t)};s.pushState(n,"",t),this._saveAsCurrentState(n),this._incMaxStateId()},l.prototype._generateRandomId=function(){return"page-"+ +new Date},l.prototype.dispatch=function(t){var e=new CustomEvent(t,{bubbles:!0,cancelable:!0});window.dispatchEvent(e)},t(function(){if(t.smConfig.router&&a.supportStorage()){var i=t("."+r.pageClass);if(!i.length){var o="Disable router function because of no .page elements";return void(window.console&&window.console.warn&&console.warn(o))}var s=t.router=new l;t(document).on("click","a",function(i){var a=t(i.currentTarget),r=n(a);if(r&&!e(a))if(i.preventDefault(),a.hasClass("back"))s.back();else{var o=a.attr("href");if(!o||"#"===o)return;var l="true"===a.attr("data-no-cache");s.load(o,l)}})}})}(Zepto),+function(t){"use strict";t.lastPosition=function(e){function n(e,n){a.forEach(function(i,a){if(0!==t(i).length){var r=e,o=sessionStorage.getItem(r);n.find(i).scrollTop(parseInt(o))}})}function i(e,n){var i=e;a.forEach(function(e,a){0!==t(e).length&&sessionStorage.setItem(i,n.find(e).scrollTop())})}if(sessionStorage){var a=e.needMemoryClass||[];t(window).off("beforePageSwitch").on("beforePageSwitch",function(t,e,n){i(e,n)}),t(window).off("pageAnimationStart").on("pageAnimationStart",function(t,e,i){n(e,i)})}}}(Zepto),+function(t){"use strict";var e=function(){var e=t(".page-current");return e[0]||(e=t(".page").addClass("page-current")),e};t.initPage=function(n){var i=e();i[0]||(i=t(document.body));var a=i.hasClass("content")?i:i.find(".content");a.scroller(),t.initPullToRefresh(a),t.initInfiniteScroll(a),t.initCalendar(a),t.smConfig.autoInitSwiper&&t.initSwiper&&t.initSwiper(a)},t.smConfig.showPageLoadingIndicator&&(t(window).on("pageLoadStart",function(){t.showIndicator()}),t(window).on("pageAnimationStart",function(){t.hideIndicator()}),t(window).on("pageLoadCancel",function(){t.hideIndicator()}),t(window).on("pageLoadComplete",function(){t.hideIndicator()}),t(window).on("pageLoadError",function(){t.hideIndicator(),t.toast("加载失败")})),t(window).on("pageAnimationStart",function(e,n,i){t.closeModal(),t.closePanel(),t("body").removeClass("panel-closing"),t.allowPanelOpen=!0}),t(window).on("pageInit",function(){t.hideIndicator(),t.lastPosition({needMemoryClass:[".content"]})}),window.addEventListener("pageshow",function(t){t.persisted&&location.reload()}),t.init=function(){var n=e(),i=n[0].id;t.initPage(),n.trigger("pageInit",[i,n])},t(function(){FastClick.attach(document.body),t.smConfig.autoInit&&t.init(),t(document).on("pageInitInternal",function(e,n,i){t.init()})})}(Zepto),+function(t){"use strict";if(t.device.ios){var e=function(t){var e,n;t=t||document.querySelector(t),t&&t.addEventListener("touchstart",function(i){e=i.touches[0].pageY,n=t.scrollTop,n<=0&&(t.scrollTop=1),n+t.offsetHeight>=t.scrollHeight&&(t.scrollTop=t.scrollHeight-t.offsetHeight-1)},!1)},n=function(){var n=t(".page-current").length>0?".page-current ":"",i=t(n+".content");new e(i[0])};t(document).on(t.touchEvents.move,".page-current .bar",function(){event.preventDefault()}),t(document).on("pageLoadComplete",function(){n()}),t(document).on("pageAnimationEnd",function(){n()}),n()}}(Zepto);
+/**
+	* grgUI V1.0.0
+	* Mon Aug 22 2016 16:29:26 GMT+0800 (中国标准时间)
+	*/
++function ($) {
+    "use strict";
+
+    //全局配置
+    var defaults = {
+        autoInit: false, //自动初始化页面
+        showPageLoadingIndicator: true, //push.js加载页面的时候显示一个加载提示
+        router: true, //默认使用router
+        swipePanel: "left", //滑动打开侧栏
+        swipePanelOnlyClose: true,  //只允许滑动关闭，不允许滑动打开侧栏
+        autoInitSwiper : false //是否允许自动生成swiper插件($.initSwiper),开启该功能,有可能会引起异步生成的swiper出现滑动等错误 @2016.8.22 by:lzsheng02
+    };
+
+    $.smConfig = $.extend(defaults, $.config);
+
+}(Zepto);
+
++ function($) {
+    "use strict";
+
+    //比较一个字符串版本号
+    //a > b === 1
+    //a = b === 0
+    //a < b === -1
+    $.compareVersion = function(a, b) {
+        var as = a.split('.');
+        var bs = b.split('.');
+        if (a === b) return 0;
+
+        for (var i = 0; i < as.length; i++) {
+            var x = parseInt(as[i]);
+            if (!bs[i]) return 1;
+            var y = parseInt(bs[i]);
+            if (x < y) return -1;
+            if (x > y) return 1;
+        }
+        return -1;
+    };
+
+    $.getCurrentPage = function() {
+        return $(".page-current")[0] || $(".page")[0] || document.body;
+    };
+
+}(Zepto);
+
+/* global WebKitCSSMatrix:true */
+
+(function($) {
+    "use strict";
+    ['width', 'height'].forEach(function(dimension) {
+        var  Dimension = dimension.replace(/./, function(m) {
+            return m[0].toUpperCase();
+        });
+        $.fn['outer' + Dimension] = function(margin) {
+            var elem = this;
+            if (elem) {
+                var size = elem[dimension]();
+                var sides = {
+                    'width': ['left', 'right'],
+                    'height': ['top', 'bottom']
+                };
+                sides[dimension].forEach(function(side) {
+                    if (margin) size += parseInt(elem.css('margin-' + side), 10);
+                });
+                return size;
+            } else {
+                return null;
+            }
+        };
+    });
+
+    //support
+    $.support = (function() {
+        var support = {
+            touch: !!(('ontouchstart' in window) || window.DocumentTouch && document instanceof window.DocumentTouch)
+        };
+        return support;
+    })();
+
+    $.touchEvents = {
+        start: $.support.touch ? 'touchstart' : 'mousedown',
+        move: $.support.touch ? 'touchmove' : 'mousemove',
+        end: $.support.touch ? 'touchend' : 'mouseup'
+    };
+
+    $.getTranslate = function (el, axis) {
+        var matrix, curTransform, curStyle, transformMatrix;
+
+        // automatic axis detection
+        if (typeof axis === 'undefined') {
+            axis = 'x';
+        }
+
+        curStyle = window.getComputedStyle(el, null);
+        if (window.WebKitCSSMatrix) {
+            // Some old versions of Webkit choke when 'none' is passed; pass
+            // empty string instead in this case
+            transformMatrix = new WebKitCSSMatrix(curStyle.webkitTransform === 'none' ? '' : curStyle.webkitTransform);
+        }
+        else {
+            transformMatrix = curStyle.MozTransform || curStyle.transform || curStyle.getPropertyValue('transform').replace('translate(', 'matrix(1, 0, 0, 1,');
+            matrix = transformMatrix.toString().split(',');
+        }
+
+        if (axis === 'x') {
+            //Latest Chrome and webkits Fix
+            if (window.WebKitCSSMatrix)
+                curTransform = transformMatrix.m41;
+            //Crazy IE10 Matrix
+            else if (matrix.length === 16)
+                curTransform = parseFloat(matrix[12]);
+            //Normal Browsers
+            else
+                curTransform = parseFloat(matrix[4]);
+        }
+        if (axis === 'y') {
+            //Latest Chrome and webkits Fix
+            if (window.WebKitCSSMatrix)
+                curTransform = transformMatrix.m42;
+            //Crazy IE10 Matrix
+            else if (matrix.length === 16)
+                curTransform = parseFloat(matrix[13]);
+            //Normal Browsers
+            else
+                curTransform = parseFloat(matrix[5]);
+        }
+
+        return curTransform || 0;
+    };
+    /* jshint ignore:start */
+    $.requestAnimationFrame = function (callback) {
+        if (window.requestAnimationFrame) return window.requestAnimationFrame(callback);
+        else if (window.webkitRequestAnimationFrame) return window.webkitRequestAnimationFrame(callback);
+        else if (window.mozRequestAnimationFrame) return window.mozRequestAnimationFrame(callback);
+        else {
+            return window.setTimeout(callback, 1000 / 60);
+        }
+    };
+    $.cancelAnimationFrame = function (id) {
+        if (window.cancelAnimationFrame) return window.cancelAnimationFrame(id);
+        else if (window.webkitCancelAnimationFrame) return window.webkitCancelAnimationFrame(id);
+        else if (window.mozCancelAnimationFrame) return window.mozCancelAnimationFrame(id);
+        else {
+            return window.clearTimeout(id);
+        }
+    };
+    /* jshint ignore:end */
+
+    $.fn.dataset = function() {
+        var dataset = {},
+            ds = this[0].dataset;
+        for (var key in ds) { // jshint ignore:line
+            var item = (dataset[key] = ds[key]);
+            if (item === 'false') dataset[key] = false;
+            else if (item === 'true') dataset[key] = true;
+            else if (parseFloat(item) === item * 1) dataset[key] = item * 1;
+        }
+        // mixin dataset and __eleData
+        return $.extend({}, dataset, this[0].__eleData);
+    };
+    $.fn.data = function(key, value) {
+        var tmpData = $(this).dataset();
+        if (!key) {
+            return tmpData;
+        }
+        // value may be 0, false, null
+        if (typeof value === 'undefined') {
+            // Get value
+            var dataVal = tmpData[key],
+                __eD = this[0].__eleData;
+
+            //if (dataVal !== undefined) {
+            if (__eD && (key in __eD)) {
+                return __eD[key];
+            } else {
+                return dataVal;
+            }
+
+        } else {
+            // Set value,uniformly set in extra ```__eleData```
+            for (var i = 0; i < this.length; i++) {
+                var el = this[i];
+                // delete multiple data in dataset
+                if (key in tmpData) delete el.dataset[key];
+
+                if (!el.__eleData) el.__eleData = {};
+                el.__eleData[key] = value;
+            }
+            return this;
+        }
+    };
+    function __dealCssEvent(eventNameArr, callback) {
+        var events = eventNameArr,
+            i, dom = this;// jshint ignore:line
+
+        function fireCallBack(e) {
+            /*jshint validthis:true */
+            if (e.target !== this) return;
+            callback.call(this, e);
+            for (i = 0; i < events.length; i++) {
+                dom.off(events[i], fireCallBack);
+            }
+        }
+        if (callback) {
+            for (i = 0; i < events.length; i++) {
+                dom.on(events[i], fireCallBack);
+            }
+        }
+    }
+    $.fn.animationEnd = function(callback) {
+        __dealCssEvent.call(this, ['webkitAnimationEnd', 'animationend'], callback);
+        return this;
+    };
+    $.fn.transitionEnd = function(callback) {
+        __dealCssEvent.call(this, ['webkitTransitionEnd', 'transitionend'], callback);
+        return this;
+    };
+    $.fn.transition = function(duration) {
+        if (typeof duration !== 'string') {
+            duration = duration + 'ms';
+        }
+        for (var i = 0; i < this.length; i++) {
+            var elStyle = this[i].style;
+            elStyle.webkitTransitionDuration = elStyle.MozTransitionDuration = elStyle.transitionDuration = duration;
+        }
+        return this;
+    };
+    $.fn.transform = function(transform) {
+        for (var i = 0; i < this.length; i++) {
+            var elStyle = this[i].style;
+            elStyle.webkitTransform = elStyle.MozTransform = elStyle.transform = transform;
+        }
+        return this;
+    };
+    $.fn.prevAll = function (selector) {
+        var prevEls = [];
+        var el = this[0];
+        if (!el) return $([]);
+        while (el.previousElementSibling) {
+            var prev = el.previousElementSibling;
+            if (selector) {
+                if($(prev).is(selector)) prevEls.push(prev);
+            }
+            else prevEls.push(prev);
+            el = prev;
+        }
+        return $(prevEls);
+    };
+    $.fn.nextAll = function (selector) {
+        var nextEls = [];
+        var el = this[0];
+        if (!el) return $([]);
+        while (el.nextElementSibling) {
+            var next = el.nextElementSibling;
+            if (selector) {
+                if($(next).is(selector)) nextEls.push(next);
+            }
+            else nextEls.push(next);
+            el = next;
+        }
+        return $(nextEls);
+    };
+
+    //重置zepto的show方法，防止有些人引用的版本中 show 方法操作 opacity 属性影响动画执行
+    $.fn.show = function(){
+        var elementDisplay = {};
+        function defaultDisplay(nodeName) {
+            var element, display;
+            if (!elementDisplay[nodeName]) {
+                element = document.createElement(nodeName);
+                document.body.appendChild(element);
+                display = getComputedStyle(element, '').getPropertyValue("display");
+                element.parentNode.removeChild(element);
+                display === "none" && (display = "block");
+                elementDisplay[nodeName] = display;
+            }
+            return elementDisplay[nodeName];
+        }
+
+        return this.each(function(){
+            this.style.display === "none" && (this.style.display = '');
+            if (getComputedStyle(this, '').getPropertyValue("display") === "none");
+            this.style.display = defaultDisplay(this.nodeName);
+        });
+    };
+})(Zepto);
+
+/*===========================
+Device/OS Detection
+===========================*/
+;(function ($) {
+    "use strict";
+    var device = {};
+    var ua = navigator.userAgent;
+
+    var android = ua.match(/(Android);?[\s\/]+([\d.]+)?/);
+    var ipad = ua.match(/(iPad).*OS\s([\d_]+)/);
+    var ipod = ua.match(/(iPod)(.*OS\s([\d_]+))?/);
+    var iphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/);
+
+    device.ios = device.android = device.iphone = device.ipad = device.androidChrome = false;
+
+    // Android
+    if (android) {
+        device.os = 'android';
+        device.osVersion = android[2];
+        device.android = true;
+        device.androidChrome = ua.toLowerCase().indexOf('chrome') >= 0;
+    }
+    if (ipad || iphone || ipod) {
+        device.os = 'ios';
+        device.ios = true;
+    }
+    // iOS
+    if (iphone && !ipod) {
+        device.osVersion = iphone[2].replace(/_/g, '.');
+        device.iphone = true;
+    }
+    if (ipad) {
+        device.osVersion = ipad[2].replace(/_/g, '.');
+        device.ipad = true;
+    }
+    if (ipod) {
+        device.osVersion = ipod[3] ? ipod[3].replace(/_/g, '.') : null;
+        device.iphone = true;
+    }
+    // iOS 8+ changed UA
+    if (device.ios && device.osVersion && ua.indexOf('Version/') >= 0) {
+        if (device.osVersion.split('.')[0] === '10') {
+            device.osVersion = ua.toLowerCase().split('version/')[1].split(' ')[0];
+        }
+    }
+
+    // Webview
+    device.webView = (iphone || ipad || ipod) && ua.match(/.*AppleWebKit(?!.*Safari)/i);
+
+    // Minimal UI
+    if (device.os && device.os === 'ios') {
+        var osVersionArr = device.osVersion.split('.');
+        device.minimalUi = !device.webView &&
+            (ipod || iphone) &&
+            (osVersionArr[0] * 1 === 7 ? osVersionArr[1] * 1 >= 1 : osVersionArr[0] * 1 > 7) &&
+            $('meta[name="viewport"]').length > 0 && $('meta[name="viewport"]').attr('content').indexOf('minimal-ui') >= 0;
+    }
+
+    // Check for status bar and fullscreen app mode
+    var windowWidth = $(window).width();
+    var windowHeight = $(window).height();
+    device.statusBar = false;
+    if (device.webView && (windowWidth * windowHeight === screen.width * screen.height)) {
+        device.statusBar = true;
+    }
+    else {
+        device.statusBar = false;
+    }
+
+    // Classes
+    var classNames = [];
+
+    // Pixel Ratio
+    device.pixelRatio = window.devicePixelRatio || 1;
+    classNames.push('pixel-ratio-' + Math.floor(device.pixelRatio));
+    if (device.pixelRatio >= 2) {
+        classNames.push('retina');
+    }
+
+    // OS classes
+    if (device.os) {
+        classNames.push(device.os, device.os + '-' + device.osVersion.split('.')[0], device.os + '-' + device.osVersion.replace(/\./g, '-'));
+        if (device.os === 'ios') {
+            var major = parseInt(device.osVersion.split('.')[0], 10);
+            for (var i = major - 1; i >= 6; i--) {
+                classNames.push('ios-gt-' + i);
+            }
+        }
+
+    }
+    // Status bar classes
+    if (device.statusBar) {
+        classNames.push('with-statusbar-overlay');
+    }
+    else {
+        $('html').removeClass('with-statusbar-overlay');
+    }
+
+    // Add html classes
+    if (classNames.length > 0) $('html').addClass(classNames.join(' '));
+
+    // keng..
+    device.isWeixin = /MicroMessenger/i.test(ua);
+
+    $.device = device;
+})(Zepto);
+
+;(function () {
+    'use strict';
+
+    /**
+     * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
+     *
+     * @codingstandard ftlabs-jsv2
+     * @copyright The Financial Times Limited [All Rights Reserved]
+     * @license MIT License (see LICENSE.txt)
+     */
+
+    /*jslint browser:true, node:true, elision:true*/
+    /*global Event, Node*/
+
+
+    /**
+     * Instantiate fast-clicking listeners on the specified layer.
+     *
+     * @constructor
+     * @param {Element} layer The layer to listen on
+     * @param {Object} [options={}] The options to override the defaults
+     */
+    function FastClick(layer, options) {
+        var oldOnClick;
+
+        options = options || {};
+
+        /**
+         * Whether a click is currently being tracked.
+         *
+         * @type boolean
+         */
+        this.trackingClick = false;
+
+
+        /**
+         * Timestamp for when click tracking started.
+         *
+         * @type number
+         */
+        this.trackingClickStart = 0;
+
+
+        /**
+         * The element being tracked for a click.
+         *
+         * @type EventTarget
+         */
+        this.targetElement = null;
+
+
+        /**
+         * X-coordinate of touch start event.
+         *
+         * @type number
+         */
+        this.touchStartX = 0;
+
+
+        /**
+         * Y-coordinate of touch start event.
+         *
+         * @type number
+         */
+        this.touchStartY = 0;
+
+
+        /**
+         * ID of the last touch, retrieved from Touch.identifier.
+         *
+         * @type number
+         */
+        this.lastTouchIdentifier = 0;
+
+
+        /**
+         * Touchmove boundary, beyond which a click will be cancelled.
+         *
+         * @type number
+         */
+        this.touchBoundary = options.touchBoundary || 10;
+
+
+        /**
+         * The FastClick layer.
+         *
+         * @type Element
+         */
+        this.layer = layer;
+
+        /**
+         * The minimum time between tap(touchstart and touchend) events
+         *
+         * @type number
+         */
+        this.tapDelay = options.tapDelay || 200;
+
+        /**
+         * The maximum time for a tap
+         *
+         * @type number
+         */
+        this.tapTimeout = options.tapTimeout || 700;
+
+        if (FastClick.notNeeded(layer)) {
+            return;
+        }
+
+        // Some old versions of Android don't have Function.prototype.bind
+        function bind(method, context) {
+            return function() { return method.apply(context, arguments); };
+        }
+
+
+        var methods = ['onMouse', 'onClick', 'onTouchStart', 'onTouchMove', 'onTouchEnd', 'onTouchCancel'];
+        var context = this;
+        for (var i = 0, l = methods.length; i < l; i++) {
+            context[methods[i]] = bind(context[methods[i]], context);
+        }
+
+        // Set up event handlers as required
+        if (deviceIsAndroid) {
+            layer.addEventListener('mouseover', this.onMouse, true);
+            layer.addEventListener('mousedown', this.onMouse, true);
+            layer.addEventListener('mouseup', this.onMouse, true);
+        }
+
+        layer.addEventListener('click', this.onClick, true);
+        layer.addEventListener('touchstart', this.onTouchStart, false);
+        layer.addEventListener('touchmove', this.onTouchMove, false);
+        layer.addEventListener('touchend', this.onTouchEnd, false);
+        layer.addEventListener('touchcancel', this.onTouchCancel, false);
+
+        // Hack is required for browsers that don't support Event#stopImmediatePropagation (e.g. Android 2)
+        // which is how FastClick normally stops click events bubbling to callbacks registered on the FastClick
+        // layer when they are cancelled.
+        if (!Event.prototype.stopImmediatePropagation) {
+            layer.removeEventListener = function(type, callback, capture) {
+                var rmv = Node.prototype.removeEventListener;
+                if (type === 'click') {
+                    rmv.call(layer, type, callback.hijacked || callback, capture);
+                } else {
+                    rmv.call(layer, type, callback, capture);
+                }
+            };
+
+            layer.addEventListener = function(type, callback, capture) {
+                var adv = Node.prototype.addEventListener;
+                if (type === 'click') {
+                    adv.call(layer, type, callback.hijacked || (callback.hijacked = function(event) {
+                        if (!event.propagationStopped) {
+                            callback(event);
+                        }
+                    }), capture);
+                } else {
+                    adv.call(layer, type, callback, capture);
+                }
+            };
+        }
+
+        // If a handler is already declared in the element's onclick attribute, it will be fired before
+        // FastClick's onClick handler. Fix this by pulling out the user-defined handler function and
+        // adding it as listener.
+        if (typeof layer.onclick === 'function') {
+
+            // Android browser on at least 3.2 requires a new reference to the function in layer.onclick
+            // - the old one won't work if passed to addEventListener directly.
+            oldOnClick = layer.onclick;
+            layer.addEventListener('click', function(event) {
+                oldOnClick(event);
+            }, false);
+            layer.onclick = null;
+        }
+    }
+
+    /**
+     * Windows Phone 8.1 fakes user agent string to look like Android and iPhone.
+     *
+     * @type boolean
+     */
+    var deviceIsWindowsPhone = navigator.userAgent.indexOf("Windows Phone") >= 0;
+
+    /**
+     * Android requires exceptions.
+     *
+     * @type boolean
+     */
+    var deviceIsAndroid = navigator.userAgent.indexOf('Android') > 0 && !deviceIsWindowsPhone;
+
+
+    /**
+     * iOS requires exceptions.
+     *
+     * @type boolean
+     */
+    var deviceIsIOS = /iP(ad|hone|od)/.test(navigator.userAgent) && !deviceIsWindowsPhone;
+
+
+    /**
+     * iOS 4 requires an exception for select elements.
+     *
+     * @type boolean
+     */
+    var deviceIsIOS4 = deviceIsIOS && (/OS 4_\d(_\d)?/).test(navigator.userAgent);
+
+
+    /**
+     * iOS 6.0-7.* requires the target element to be manually derived
+     *
+     * @type boolean
+     */
+    var deviceIsIOSWithBadTarget = deviceIsIOS && (/OS [6-7]_\d/).test(navigator.userAgent);
+
+    /**
+     * BlackBerry requires exceptions.
+     *
+     * @type boolean
+     */
+    var deviceIsBlackBerry10 = navigator.userAgent.indexOf('BB10') > 0;
+
+    /**
+     * 判断是否组合型label
+     * @type {Boolean}
+     */
+    var isCompositeLabel = false;
+
+    /**
+     * Determine whether a given element requires a native click.
+     *
+     * @param {EventTarget|Element} target Target DOM element
+     * @returns {boolean} Returns true if the element needs a native click
+     */
+    FastClick.prototype.needsClick = function(target) {
+
+        // 修复bug: 如果父元素中有 label
+        // 如果label上有needsclick这个类，则用原生的点击，否则，用模拟点击
+        var parent = target;
+        while(parent && (parent.tagName.toUpperCase() !== "BODY")) {
+            if (parent.tagName.toUpperCase() === "LABEL") {
+                isCompositeLabel = true;
+                if ((/\bneedsclick\b/).test(parent.className)) return true;
+            }
+            parent = parent.parentNode;
+        }
+
+        switch (target.nodeName.toLowerCase()) {
+
+            // Don't send a synthetic click to disabled inputs (issue #62)
+            case 'button':
+            case 'select':
+            case 'textarea':
+                if (target.disabled) {
+                    return true;
+                }
+
+                break;
+            case 'input':
+
+                // File inputs need real clicks on iOS 6 due to a browser bug (issue #68)
+                if ((deviceIsIOS && target.type === 'file') || target.disabled) {
+                    return true;
+                }
+
+                break;
+            case 'label':
+            case 'iframe': // iOS8 homescreen apps can prevent events bubbling into frames
+            case 'video':
+                return true;
+        }
+
+        return (/\bneedsclick\b/).test(target.className);
+    };
+
+
+    /**
+     * Determine whether a given element requires a call to focus to simulate click into element.
+     *
+     * @param {EventTarget|Element} target Target DOM element
+     * @returns {boolean} Returns true if the element requires a call to focus to simulate native click.
+     */
+    FastClick.prototype.needsFocus = function(target) {
+        switch (target.nodeName.toLowerCase()) {
+            case 'textarea':
+                return true;
+            case 'select':
+                return !deviceIsAndroid;
+            case 'input':
+                switch (target.type) {
+                    case 'button':
+                    case 'checkbox':
+                    case 'file':
+                    case 'image':
+                    case 'radio':
+                    case 'submit':
+                        return false;
+                }
+
+                // No point in attempting to focus disabled inputs
+                return !target.disabled && !target.readOnly;
+            default:
+                return (/\bneedsfocus\b/).test(target.className);
+        }
+    };
+
+
+    /**
+     * Send a click event to the specified element.
+     *
+     * @param {EventTarget|Element} targetElement
+     * @param {Event} event
+     */
+    FastClick.prototype.sendClick = function(targetElement, event) {
+        var clickEvent, touch;
+
+        // On some Android devices activeElement needs to be blurred otherwise the synthetic click will have no effect (#24)
+        if (document.activeElement && document.activeElement !== targetElement) {
+            document.activeElement.blur();
+        }
+
+        touch = event.changedTouches[0];
+
+        // Synthesise a click event, with an extra attribute so it can be tracked
+        clickEvent = document.createEvent('MouseEvents');
+        clickEvent.initMouseEvent(this.determineEventType(targetElement), true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY, false, false, false, false, 0, null);
+        clickEvent.forwardedTouchEvent = true;
+        targetElement.dispatchEvent(clickEvent);
+    };
+
+    FastClick.prototype.determineEventType = function(targetElement) {
+
+        //Issue #159: Android Chrome Select Box does not open with a synthetic click event
+        if (deviceIsAndroid && targetElement.tagName.toLowerCase() === 'select') {
+            return 'mousedown';
+        }
+
+        return 'click';
+    };
+
+
+    /**
+     * @param {EventTarget|Element} targetElement
+     */
+    FastClick.prototype.focus = function(targetElement) {
+        var length;
+
+        // Issue #160: on iOS 7, some input elements (e.g. date datetime month) throw a vague TypeError on setSelectionRange. These elements don't have an integer value for the selectionStart and selectionEnd properties, but unfortunately that can't be used for detection because accessing the properties also throws a TypeError. Just check the type instead. Filed as Apple bug #15122724.
+        var unsupportedType = ['date', 'time', 'month', 'number', 'email'];
+        if (deviceIsIOS && targetElement.setSelectionRange && unsupportedType.indexOf(targetElement.type) === -1) {
+            length = targetElement.value.length;
+            targetElement.setSelectionRange(length, length);
+        } else {
+            targetElement.focus();
+        }
+    };
+
+
+    /**
+     * Check whether the given target element is a child of a scrollable layer and if so, set a flag on it.
+     *
+     * @param {EventTarget|Element} targetElement
+     */
+    FastClick.prototype.updateScrollParent = function(targetElement) {
+        var scrollParent, parentElement;
+
+        scrollParent = targetElement.fastClickScrollParent;
+
+        // Attempt to discover whether the target element is contained within a scrollable layer. Re-check if the
+        // target element was moved to another parent.
+        if (!scrollParent || !scrollParent.contains(targetElement)) {
+            parentElement = targetElement;
+            do {
+                if (parentElement.scrollHeight > parentElement.offsetHeight) {
+                    scrollParent = parentElement;
+                    targetElement.fastClickScrollParent = parentElement;
+                    break;
+                }
+
+                parentElement = parentElement.parentElement;
+            } while (parentElement);
+        }
+
+        // Always update the scroll top tracker if possible.
+        if (scrollParent) {
+            scrollParent.fastClickLastScrollTop = scrollParent.scrollTop;
+        }
+    };
+
+
+    /**
+     * @param {EventTarget} targetElement
+     * @returns {Element|EventTarget}
+     */
+    FastClick.prototype.getTargetElementFromEventTarget = function(eventTarget) {
+
+        // On some older browsers (notably Safari on iOS 4.1 - see issue #56) the event target may be a text node.
+        if (eventTarget.nodeType === Node.TEXT_NODE) {
+            return eventTarget.parentNode;
+        }
+
+        return eventTarget;
+    };
+
+
+    /**
+     * On touch start, record the position and scroll offset.
+     *
+     * @param {Event} event
+     * @returns {boolean}
+     */
+    FastClick.prototype.onTouchStart = function(event) {
+        var targetElement, touch, selection;
+
+        // Ignore multiple touches, otherwise pinch-to-zoom is prevented if both fingers are on the FastClick element (issue #111).
+        if (event.targetTouches.length > 1) {
+            return true;
+        }
+
+        targetElement = this.getTargetElementFromEventTarget(event.target);
+        touch = event.targetTouches[0];
+
+        if (deviceIsIOS) {
+
+            // Only trusted events will deselect text on iOS (issue #49)
+            selection = window.getSelection();
+            if (selection.rangeCount && !selection.isCollapsed) {
+                return true;
+            }
+
+            if (!deviceIsIOS4) {
+
+                // Weird things happen on iOS when an alert or confirm dialog is opened from a click event callback (issue #23):
+                // when the user next taps anywhere else on the page, new touchstart and touchend events are dispatched
+                // with the same identifier as the touch event that previously triggered the click that triggered the alert.
+                // Sadly, there is an issue on iOS 4 that causes some normal touch events to have the same identifier as an
+                // immediately preceeding touch event (issue #52), so this fix is unavailable on that platform.
+                // Issue 120: touch.identifier is 0 when Chrome dev tools 'Emulate touch events' is set with an iOS device UA string,
+                // which causes all touch events to be ignored. As this block only applies to iOS, and iOS identifiers are always long,
+                // random integers, it's safe to to continue if the identifier is 0 here.
+                if (touch.identifier && touch.identifier === this.lastTouchIdentifier) {
+                    event.preventDefault();
+                    return false;
+                }
+
+                this.lastTouchIdentifier = touch.identifier;
+
+                // If the target element is a child of a scrollable layer (using -webkit-overflow-scrolling: touch) and:
+                // 1) the user does a fling scroll on the scrollable layer
+                // 2) the user stops the fling scroll with another tap
+                // then the event.target of the last 'touchend' event will be the element that was under the user's finger
+                // when the fling scroll was started, causing FastClick to send a click event to that layer - unless a check
+                // is made to ensure that a parent layer was not scrolled before sending a synthetic click (issue #42).
+                this.updateScrollParent(targetElement);
+            }
+        }
+
+        this.trackingClick = true;
+        this.trackingClickStart = event.timeStamp;
+        this.targetElement = targetElement;
+
+        this.touchStartX = touch.pageX;
+        this.touchStartY = touch.pageY;
+
+        // Prevent phantom clicks on fast double-tap (issue #36)
+        if ((event.timeStamp - this.lastClickTime) < this.tapDelay) {
+            event.preventDefault();
+        }
+
+        return true;
+    };
+
+
+    /**
+     * Based on a touchmove event object, check whether the touch has moved past a boundary since it started.
+     *
+     * @param {Event} event
+     * @returns {boolean}
+     */
+    FastClick.prototype.touchHasMoved = function(event) {
+        var touch = event.changedTouches[0], boundary = this.touchBoundary;
+
+        if (Math.abs(touch.pageX - this.touchStartX) > boundary || Math.abs(touch.pageY - this.touchStartY) > boundary) {
+            return true;
+        }
+
+        return false;
+    };
+
+
+    /**
+     * Update the last position.
+     *
+     * @param {Event} event
+     * @returns {boolean}
+     */
+    FastClick.prototype.onTouchMove = function(event) {
+        if (!this.trackingClick) {
+            return true;
+        }
+
+        // If the touch has moved, cancel the click tracking
+        if (this.targetElement !== this.getTargetElementFromEventTarget(event.target) || this.touchHasMoved(event)) {
+            this.trackingClick = false;
+            this.targetElement = null;
+        }
+
+        return true;
+    };
+
+
+    /**
+     * Attempt to find the labelled control for the given label element.
+     *
+     * @param {EventTarget|HTMLLabelElement} labelElement
+     * @returns {Element|null}
+     */
+    FastClick.prototype.findControl = function(labelElement) {
+
+        // Fast path for newer browsers supporting the HTML5 control attribute
+        if (labelElement.control !== undefined) {
+            return labelElement.control;
+        }
+
+        // All browsers under test that support touch events also support the HTML5 htmlFor attribute
+        if (labelElement.htmlFor) {
+            return document.getElementById(labelElement.htmlFor);
+        }
+
+        // If no for attribute exists, attempt to retrieve the first labellable descendant element
+        // the list of which is defined here: http://www.w3.org/TR/html5/forms.html#category-label
+        return labelElement.querySelector('button, input:not([type=hidden]), keygen, meter, output, progress, select, textarea');
+    };
+
+
+    /**
+     * On touch end, determine whether to send a click event at once.
+     *
+     * @param {Event} event
+     * @returns {boolean}
+     */
+    FastClick.prototype.onTouchEnd = function(event) {
+        var forElement, trackingClickStart, targetTagName, scrollParent, touch, targetElement = this.targetElement;
+
+        if (!this.trackingClick) {
+            return true;
+        }
+
+        // Prevent phantom clicks on fast double-tap (issue #36)
+        if ((event.timeStamp - this.lastClickTime) < this.tapDelay) {
+            this.cancelNextClick = true;
+            return true;
+        }
+
+        if ((event.timeStamp - this.trackingClickStart) > this.tapTimeout) {
+            return true;
+        }
+        //修复安卓微信下，input type="date" 的bug，经测试date,time,month已没问题
+        var unsupportedType = ['date', 'time', 'month'];
+        if(unsupportedType.indexOf(event.target.type) !== -1){
+            　　　　return false;
+            　　}
+        // Reset to prevent wrong click cancel on input (issue #156).
+        this.cancelNextClick = false;
+
+        this.lastClickTime = event.timeStamp;
+
+        trackingClickStart = this.trackingClickStart;
+        this.trackingClick = false;
+        this.trackingClickStart = 0;
+
+        // On some iOS devices, the targetElement supplied with the event is invalid if the layer
+        // is performing a transition or scroll, and has to be re-detected manually. Note that
+        // for this to function correctly, it must be called *after* the event target is checked!
+        // See issue #57; also filed as rdar://13048589 .
+        if (deviceIsIOSWithBadTarget) {
+            touch = event.changedTouches[0];
+
+            // In certain cases arguments of elementFromPoint can be negative, so prevent setting targetElement to null
+            targetElement = document.elementFromPoint(touch.pageX - window.pageXOffset, touch.pageY - window.pageYOffset) || targetElement;
+            targetElement.fastClickScrollParent = this.targetElement.fastClickScrollParent;
+        }
+
+        targetTagName = targetElement.tagName.toLowerCase();
+        if (targetTagName === 'label') {
+            forElement = this.findControl(targetElement);
+            if (forElement) {
+                this.focus(targetElement);
+                if (deviceIsAndroid) {
+                    return false;
+                }
+
+                targetElement = forElement;
+            }
+        } else if (this.needsFocus(targetElement)) {
+
+            // Case 1: If the touch started a while ago (best guess is 100ms based on tests for issue #36) then focus will be triggered anyway. Return early and unset the target element reference so that the subsequent click will be allowed through.
+            // Case 2: Without this exception for input elements tapped when the document is contained in an iframe, then any inputted text won't be visible even though the value attribute is updated as the user types (issue #37).
+            if ((event.timeStamp - trackingClickStart) > 100 || (deviceIsIOS && window.top !== window && targetTagName === 'input')) {
+                this.targetElement = null;
+                return false;
+            }
+
+            this.focus(targetElement);
+            this.sendClick(targetElement, event);
+
+            // Select elements need the event to go through on iOS 4, otherwise the selector menu won't open.
+            // Also this breaks opening selects when VoiceOver is active on iOS6, iOS7 (and possibly others)
+            if (!deviceIsIOS || targetTagName !== 'select') {
+                this.targetElement = null;
+                event.preventDefault();
+            }
+
+            return false;
+        }
+
+        if (deviceIsIOS && !deviceIsIOS4) {
+
+            // Don't send a synthetic click event if the target element is contained within a parent layer that was scrolled
+            // and this tap is being used to stop the scrolling (usually initiated by a fling - issue #42).
+            scrollParent = targetElement.fastClickScrollParent;
+            if (scrollParent && scrollParent.fastClickLastScrollTop !== scrollParent.scrollTop) {
+                return true;
+            }
+        }
+
+        // Prevent the actual click from going though - unless the target node is marked as requiring
+        // real clicks or if it is in the whitelist in which case only non-programmatic clicks are permitted.
+        if (!this.needsClick(targetElement)) {
+            event.preventDefault();
+            this.sendClick(targetElement, event);
+        }
+
+        return false;
+    };
+
+
+    /**
+     * On touch cancel, stop tracking the click.
+     *
+     * @returns {void}
+     */
+    FastClick.prototype.onTouchCancel = function() {
+        this.trackingClick = false;
+        this.targetElement = null;
+    };
+
+
+    /**
+     * Determine mouse events which should be permitted.
+     *
+     * @param {Event} event
+     * @returns {boolean}
+     */
+    FastClick.prototype.onMouse = function(event) {
+
+        // If a target element was never set (because a touch event was never fired) allow the event
+        if (!this.targetElement) {
+            return true;
+        }
+
+        if (event.forwardedTouchEvent) {
+            return true;
+        }
+
+        // Programmatically generated events targeting a specific element should be permitted
+        if (!event.cancelable) {
+            return true;
+        }
+
+        // Derive and check the target element to see whether the mouse event needs to be permitted;
+        // unless explicitly enabled, prevent non-touch click events from triggering actions,
+        // to prevent ghost/doubleclicks.
+        if (!this.needsClick(this.targetElement) || this.cancelNextClick) {
+
+            // Prevent any user-added listeners declared on FastClick element from being fired.
+            if (event.stopImmediatePropagation) {
+                event.stopImmediatePropagation();
+            } else {
+
+                // Part of the hack for browsers that don't support Event#stopImmediatePropagation (e.g. Android 2)
+                event.propagationStopped = true;
+            }
+
+            // Cancel the event
+            event.stopPropagation();
+            // 允许组合型label冒泡
+            if (!isCompositeLabel) {
+                event.preventDefault();
+            }
+            // 允许组合型label冒泡
+            return false;
+        }
+
+        // If the mouse event is permitted, return true for the action to go through.
+        return true;
+    };
+
+
+    /**
+     * On actual clicks, determine whether this is a touch-generated click, a click action occurring
+     * naturally after a delay after a touch (which needs to be cancelled to avoid duplication), or
+     * an actual click which should be permitted.
+     *
+     * @param {Event} event
+     * @returns {boolean}
+     */
+    FastClick.prototype.onClick = function(event) {
+        var permitted;
+
+        // It's possible for another FastClick-like library delivered with third-party code to fire a click event before FastClick does (issue #44). In that case, set the click-tracking flag back to false and return early. This will cause onTouchEnd to return early.
+        if (this.trackingClick) {
+            this.targetElement = null;
+            this.trackingClick = false;
+            return true;
+        }
+
+        // Very odd behaviour on iOS (issue #18): if a submit element is present inside a form and the user hits enter in the iOS simulator or clicks the Go button on the pop-up OS keyboard the a kind of 'fake' click event will be triggered with the submit-type input element as the target.
+        if (event.target.type === 'submit' && event.detail === 0) {
+            return true;
+        }
+
+        permitted = this.onMouse(event);
+
+        // Only unset targetElement if the click is not permitted. This will ensure that the check for !targetElement in onMouse fails and the browser's click doesn't go through.
+        if (!permitted) {
+            this.targetElement = null;
+        }
+
+        // If clicks are permitted, return true for the action to go through.
+        return permitted;
+    };
+
+
+    /**
+     * Remove all FastClick's event listeners.
+     *
+     * @returns {void}
+     */
+    FastClick.prototype.destroy = function() {
+        var layer = this.layer;
+
+        if (deviceIsAndroid) {
+            layer.removeEventListener('mouseover', this.onMouse, true);
+            layer.removeEventListener('mousedown', this.onMouse, true);
+            layer.removeEventListener('mouseup', this.onMouse, true);
+        }
+
+        layer.removeEventListener('click', this.onClick, true);
+        layer.removeEventListener('touchstart', this.onTouchStart, false);
+        layer.removeEventListener('touchmove', this.onTouchMove, false);
+        layer.removeEventListener('touchend', this.onTouchEnd, false);
+        layer.removeEventListener('touchcancel', this.onTouchCancel, false);
+    };
+
+
+    /**
+     * Check whether FastClick is needed.
+     *
+     * @param {Element} layer The layer to listen on
+     */
+    FastClick.notNeeded = function(layer) {
+        var metaViewport;
+        var chromeVersion;
+        var blackberryVersion;
+        var firefoxVersion;
+
+        // Devices that don't support touch don't need FastClick
+        if (typeof window.ontouchstart === 'undefined') {
+            return true;
+        }
+
+        // Chrome version - zero for other browsers
+        chromeVersion = +(/Chrome\/([0-9]+)/.exec(navigator.userAgent) || [,0])[1];
+
+        if (chromeVersion) {
+
+            if (deviceIsAndroid) {
+                metaViewport = document.querySelector('meta[name=viewport]');
+
+                if (metaViewport) {
+                    // Chrome on Android with user-scalable="no" doesn't need FastClick (issue #89)
+                    if (metaViewport.content.indexOf('user-scalable=no') !== -1) {
+                        return true;
+                    }
+                    // Chrome 32 and above with width=device-width or less don't need FastClick
+                    if (chromeVersion > 31 && document.documentElement.scrollWidth <= window.outerWidth) {
+                        return true;
+                    }
+                }
+
+                // Chrome desktop doesn't need FastClick (issue #15)
+            } else {
+                return true;
+            }
+        }
+
+        if (deviceIsBlackBerry10) {
+            blackberryVersion = navigator.userAgent.match(/Version\/([0-9]*)\.([0-9]*)/);
+
+            // BlackBerry 10.3+ does not require Fastclick library.
+            // https://github.com/ftlabs/fastclick/issues/251
+            if (blackberryVersion[1] >= 10 && blackberryVersion[2] >= 3) {
+                metaViewport = document.querySelector('meta[name=viewport]');
+
+                if (metaViewport) {
+                    // user-scalable=no eliminates click delay.
+                    if (metaViewport.content.indexOf('user-scalable=no') !== -1) {
+                        return true;
+                    }
+                    // width=device-width (or less than device-width) eliminates click delay.
+                    if (document.documentElement.scrollWidth <= window.outerWidth) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        // IE10 with -ms-touch-action: none or manipulation, which disables double-tap-to-zoom (issue #97)
+        if (layer.style.msTouchAction === 'none' || layer.style.touchAction === 'manipulation') {
+            return true;
+        }
+
+        // Firefox version - zero for other browsers
+        firefoxVersion = +(/Firefox\/([0-9]+)/.exec(navigator.userAgent) || [,0])[1];
+
+        if (firefoxVersion >= 27) {
+            // Firefox 27+ does not have tap delay if the content is not zoomable - https://bugzilla.mozilla.org/show_bug.cgi?id=922896
+
+            metaViewport = document.querySelector('meta[name=viewport]');
+            if (metaViewport && (metaViewport.content.indexOf('user-scalable=no') !== -1 || document.documentElement.scrollWidth <= window.outerWidth)) {
+                return true;
+            }
+        }
+
+        // IE11: prefixed -ms-touch-action is no longer supported and it's recomended to use non-prefixed version
+        // http://msdn.microsoft.com/en-us/library/windows/apps/Hh767313.aspx
+        if (layer.style.touchAction === 'none' || layer.style.touchAction === 'manipulation') {
+            return true;
+        }
+
+        return false;
+    };
+
+
+    /**
+     * Factory method for creating a FastClick object
+     *
+     * @param {Element} layer The layer to listen on
+     * @param {Object} [options={}] The options to override the defaults
+     */
+    FastClick.attach = function(layer, options) {
+        return new FastClick(layer, options);
+    };
+
+    window.FastClick = FastClick;
+}());
+
+/*======================================================
+************   Modals   ************
+======================================================*/
+/*jshint unused: false*/
++function ($) {
+    "use strict";
+    var _modalTemplateTempDiv = document.createElement('div');
+
+    $.modalStack = [];
+
+    $.modalStackClearQueue = function () {
+        if ($.modalStack.length) {
+            ($.modalStack.shift())();
+        }
+    };
+    $.modal = function (params) {
+        params = params || {};
+        var modalHTML = '';
+        var buttonsHTML = '';
+        if (params.buttons && params.buttons.length > 0) {
+            for (var i = 0; i < params.buttons.length; i++) {
+                buttonsHTML += '<span class="modal-button' + (params.buttons[i].bold ? ' modal-button-bold' : '') + '">' + params.buttons[i].text + '</span>';
+            }
+        }
+        var extraClass = params.extraClass || '';
+        var titleHTML = params.title ? '<div class="modal-title">' + params.title + '</div>' : '';
+        var textHTML = params.text ? '<div class="modal-text">' + params.text + '</div>' : '';
+        var afterTextHTML = params.afterText ? params.afterText : '';
+        var noButtons = !params.buttons || params.buttons.length === 0 ? 'modal-no-buttons' : '';
+        var verticalButtons = params.verticalButtons ? 'modal-buttons-vertical' : '';
+        modalHTML = '<div class="modal ' + extraClass + ' ' + noButtons + '"><div class="modal-inner">' + (titleHTML + textHTML + afterTextHTML) + '</div><div class="modal-buttons ' + verticalButtons + '">' + buttonsHTML + '</div></div>';
+
+        _modalTemplateTempDiv.innerHTML = modalHTML;
+
+        var modal = $(_modalTemplateTempDiv).children();
+
+        $(defaults.modalContainer).append(modal[0]);
+
+        // Add events on buttons
+        modal.find('.modal-button').each(function (index, el) {
+            $(el).on('click', function (e) {
+                if (params.buttons[index].close !== false) $.closeModal(modal);
+                if (params.buttons[index].onClick) params.buttons[index].onClick(modal, e);
+                if (params.onClick) params.onClick(modal, index);
+            });
+        });
+        $.openModal(modal);
+        return modal[0];
+    };
+    $.alert = function (text, title, callbackOk) {
+        if (typeof title === 'function') {
+            callbackOk = arguments[1];
+            title = undefined;
+        }
+        return $.modal({
+            text: text || '',
+            title: typeof title === 'undefined' ? defaults.modalTitle : title,
+            buttons: [ {text: defaults.modalButtonOk, bold: true, onClick: callbackOk} ]
+        });
+    };
+    $.confirm = function (text, title, callbackOk, callbackCancel) {
+        if (typeof title === 'function') {
+            callbackCancel = arguments[2];
+            callbackOk = arguments[1];
+            title = undefined;
+        }
+        return $.modal({
+            text: text || '',
+            title: typeof title === 'undefined' ? defaults.modalTitle : title,
+            buttons: [
+                {text: defaults.modalButtonCancel, onClick: callbackCancel},
+                {text: defaults.modalButtonOk, bold: true, onClick: callbackOk}
+            ]
+        });
+    };
+    $.prompt = function (text, title, callbackOk, callbackCancel) {
+        if (typeof title === 'function') {
+            callbackCancel = arguments[2];
+            callbackOk = arguments[1];
+            title = undefined;
+        }
+        return $.modal({
+            text: text || '',
+            title: typeof title === 'undefined' ? defaults.modalTitle : title,
+            afterText: '<input type="text" class="modal-text-input">',
+            buttons: [
+                {
+                    text: defaults.modalButtonCancel
+                },
+                {
+                    text: defaults.modalButtonOk,
+                    bold: true
+                }
+            ],
+            onClick: function (modal, index) {
+                if (index === 0 && callbackCancel) callbackCancel($(modal).find('.modal-text-input').val());
+                if (index === 1 && callbackOk) callbackOk($(modal).find('.modal-text-input').val());
+            }
+        });
+    };
+    $.modalLogin = function (text, title, callbackOk, callbackCancel) {
+        if (typeof title === 'function') {
+            callbackCancel = arguments[2];
+            callbackOk = arguments[1];
+            title = undefined;
+        }
+        return $.modal({
+            text: text || '',
+            title: typeof title === 'undefined' ? defaults.modalTitle : title,
+            afterText: '<input type="text" name="modal-username" placeholder="' + defaults.modalUsernamePlaceholder + '" class="modal-text-input modal-text-input-double"><input type="password" name="modal-password" placeholder="' + defaults.modalPasswordPlaceholder + '" class="modal-text-input modal-text-input-double">',
+            buttons: [
+                {
+                    text: defaults.modalButtonCancel
+                },
+                {
+                    text: defaults.modalButtonOk,
+                    bold: true
+                }
+            ],
+            onClick: function (modal, index) {
+                var username = $(modal).find('.modal-text-input[name="modal-username"]').val();
+                var password = $(modal).find('.modal-text-input[name="modal-password"]').val();
+                if (index === 0 && callbackCancel) callbackCancel(username, password);
+                if (index === 1 && callbackOk) callbackOk(username, password);
+            }
+        });
+    };
+    $.modalPassword = function (text, title, callbackOk, callbackCancel) {
+        if (typeof title === 'function') {
+            callbackCancel = arguments[2];
+            callbackOk = arguments[1];
+            title = undefined;
+        }
+        return $.modal({
+            text: text || '',
+            title: typeof title === 'undefined' ? defaults.modalTitle : title,
+            afterText: '<input type="password" name="modal-password" placeholder="' + defaults.modalPasswordPlaceholder + '" class="modal-text-input">',
+            buttons: [
+                {
+                    text: defaults.modalButtonCancel
+                },
+                {
+                    text: defaults.modalButtonOk,
+                    bold: true
+                }
+            ],
+            onClick: function (modal, index) {
+                var password = $(modal).find('.modal-text-input[name="modal-password"]').val();
+                if (index === 0 && callbackCancel) callbackCancel(password);
+                if (index === 1 && callbackOk) callbackOk(password);
+            }
+        });
+    };
+    $.showPreloader = function (title) {
+        $.hidePreloader();
+        $.showPreloader.preloaderModal = $.modal({
+            title: title || defaults.modalPreloaderTitle,
+            text: '<div class="preloader"></div>'
+        });
+
+        return $.showPreloader.preloaderModal;
+    };
+    $.hidePreloader = function () {
+        $.showPreloader.preloaderModal && $.closeModal($.showPreloader.preloaderModal);
+    };
+    $.showIndicator = function () {
+        if ($('.preloader-indicator-modal')[0]) return;
+        $(defaults.modalContainer).append('<div class="preloader-indicator-overlay"></div><div class="preloader-indicator-modal"><span class="preloader preloader-white"></span></div>');
+    };
+    $.hideIndicator = function () {
+        $('.preloader-indicator-overlay, .preloader-indicator-modal').remove();
+    };
+    // Action Sheet
+    $.actions = function (params) {
+        var modal, groupSelector, buttonSelector;
+        params = params || [];
+
+        if (params.length > 0 && !$.isArray(params[0])) {
+            params = [params];
+        }
+        var modalHTML;
+        var buttonsHTML = '';
+        for (var i = 0; i < params.length; i++) {
+            for (var j = 0; j < params[i].length; j++) {
+                if (j === 0) buttonsHTML += '<div class="actions-modal-group">';
+                var button = params[i][j];
+                var buttonClass = button.label ? 'actions-modal-label' : 'actions-modal-button';
+                if (button.bold) buttonClass += ' actions-modal-button-bold';
+                if (button.color) buttonClass += ' color-' + button.color;
+                if (button.bg) buttonClass += ' bg-' + button.bg;
+                if (button.disabled) buttonClass += ' disabled';
+                buttonsHTML += '<span class="' + buttonClass + '">' + button.text + '</span>';
+                if (j === params[i].length - 1) buttonsHTML += '</div>';
+            }
+        }
+        modalHTML = '<div class="actions-modal">' + buttonsHTML + '</div>';
+        _modalTemplateTempDiv.innerHTML = modalHTML;
+        modal = $(_modalTemplateTempDiv).children();
+        $(defaults.modalContainer).append(modal[0]);
+        groupSelector = '.actions-modal-group';
+        buttonSelector = '.actions-modal-button';
+
+        var groups = modal.find(groupSelector);
+        groups.each(function (index, el) {
+            var groupIndex = index;
+            $(el).children().each(function (index, el) {
+                var buttonIndex = index;
+                var buttonParams = params[groupIndex][buttonIndex];
+                var clickTarget;
+                if ($(el).is(buttonSelector)) clickTarget = $(el);
+                // if (toPopover && $(el).find(buttonSelector).length > 0) clickTarget = $(el).find(buttonSelector);
+
+                if (clickTarget) {
+                    clickTarget.on('click', function (e) {
+                        if (buttonParams.close !== false) $.closeModal(modal);
+                        if (buttonParams.onClick) buttonParams.onClick(modal, e);
+                    });
+                }
+            });
+        });
+        $.openModal(modal);
+        return modal[0];
+    };
+    $.popup = function (modal, removeOnClose) {
+        if (typeof removeOnClose === 'undefined') removeOnClose = true;
+        if (typeof modal === 'string' && modal.indexOf('<') >= 0) {
+            var _modal = document.createElement('div');
+            _modal.innerHTML = modal.trim();
+            if (_modal.childNodes.length > 0) {
+                modal = _modal.childNodes[0];
+                if (removeOnClose) modal.classList.add('remove-on-close');
+                $(defaults.modalContainer).append(modal);
+            }
+            else return false; //nothing found
+        }
+        modal = $(modal);
+        if (modal.length === 0) return false;
+        modal.show();
+        modal.find(".content").scroller("refresh");
+        if (modal.find('.' + defaults.viewClass).length > 0) {
+            $.sizeNavbars(modal.find('.' + defaults.viewClass)[0]);
+        }
+        $.openModal(modal);
+
+        return modal[0];
+    };
+    $.pickerModal = function (pickerModal, removeOnClose) {
+        if (typeof removeOnClose === 'undefined') removeOnClose = true;
+        if (typeof pickerModal === 'string' && pickerModal.indexOf('<') >= 0) {
+            pickerModal = $(pickerModal);
+            if (pickerModal.length > 0) {
+                if (removeOnClose) pickerModal.addClass('remove-on-close');
+                $(defaults.modalContainer).append(pickerModal[0]);
+            }
+            else return false; //nothing found
+        }
+        pickerModal = $(pickerModal);
+        if (pickerModal.length === 0) return false;
+        pickerModal.show();
+        $.openModal(pickerModal);
+        return pickerModal[0];
+    };
+    $.loginScreen = function (modal) {
+        if (!modal) modal = '.login-screen';
+        modal = $(modal);
+        if (modal.length === 0) return false;
+        modal.show();
+        if (modal.find('.' + defaults.viewClass).length > 0) {
+            $.sizeNavbars(modal.find('.' + defaults.viewClass)[0]);
+        }
+        $.openModal(modal);
+        return modal[0];
+    };
+    //显示一个消息，会在2秒钟后自动消失
+    $.toast = function(msg, duration, extraclass) {
+        var $toast = $('<div class="modal toast ' + (extraclass || '') + '">' + msg + '</div>').appendTo(document.body);
+        $.openModal($toast, function(){
+            setTimeout(function() {
+                $.closeModal($toast);
+            }, duration || 2000);
+        });
+    };
+    $.openModal = function (modal, cb) {
+        modal = $(modal);
+        var isModal = modal.hasClass('modal'),
+            isNotToast = !modal.hasClass('toast');
+        if ($('.modal.modal-in:not(.modal-out)').length && defaults.modalStack && isModal && isNotToast) {
+            $.modalStack.push(function () {
+                $.openModal(modal, cb);
+            });
+            return;
+        }
+        var isPopup = modal.hasClass('popup');
+        var isLoginScreen = modal.hasClass('login-screen');
+        var isPickerModal = modal.hasClass('picker-modal');
+        var isToast = modal.hasClass('toast');
+        if (isModal) {
+            modal.show();
+            modal.css({
+                marginTop: - Math.round(modal.outerHeight() / 2) + 'px'
+            });
+        }
+        if (isToast) {
+            modal.css({
+                marginLeft: - Math.round(modal.outerWidth() / 2 / 1.185) + 'px' //1.185 是初始化时候的放大效果
+            });
+        }
+
+        var overlay;
+        if (!isLoginScreen && !isPickerModal && !isToast) {
+            if ($('.modal-overlay').length === 0 && !isPopup) {
+                $(defaults.modalContainer).append('<div class="modal-overlay"></div>');
+            }
+            if ($('.popup-overlay').length === 0 && isPopup) {
+                $(defaults.modalContainer).append('<div class="popup-overlay"></div>');
+            }
+            overlay = isPopup ? $('.popup-overlay') : $('.modal-overlay');
+        }
+
+        //Make sure that styles are applied, trigger relayout;
+        var clientLeft = modal[0].clientLeft;
+
+        // Trugger open event
+        modal.trigger('open');
+
+        // Picker modal body class
+        if (isPickerModal) {
+            $(defaults.modalContainer).addClass('with-picker-modal');
+        }
+
+        // Classes for transition in
+        if (!isLoginScreen && !isPickerModal && !isToast) overlay.addClass('modal-overlay-visible');
+        modal.removeClass('modal-out').addClass('modal-in').transitionEnd(function (e) {
+            if (modal.hasClass('modal-out')) modal.trigger('closed');
+            else modal.trigger('opened');
+        });
+        // excute callback
+        if (typeof cb === 'function') {
+          cb.call(this);
+        }
+        return true;
+    };
+    $.closeModal = function (modal) {
+        modal = $(modal || '.modal-in');
+        if (typeof modal !== 'undefined' && modal.length === 0) {
+            return;
+        }
+        var isModal = modal.hasClass('modal'),
+            isPopup = modal.hasClass('popup'),
+            isToast = modal.hasClass('toast'),
+            isLoginScreen = modal.hasClass('login-screen'),
+            isPickerModal = modal.hasClass('picker-modal'),
+            removeOnClose = modal.hasClass('remove-on-close'),
+            overlay = isPopup ? $('.popup-overlay') : $('.modal-overlay');
+        if (isPopup){
+            if (modal.length === $('.popup.modal-in').length) {
+                overlay.removeClass('modal-overlay-visible');
+            }
+        }
+        else if (!(isPickerModal || isToast)) {
+            overlay.removeClass('modal-overlay-visible');
+        }
+
+        modal.trigger('close');
+
+        // Picker modal body class
+        if (isPickerModal) {
+            $(defaults.modalContainer).removeClass('with-picker-modal');
+            $(defaults.modalContainer).addClass('picker-modal-closing');
+        }
+
+        modal.removeClass('modal-in').addClass('modal-out').transitionEnd(function (e) {
+            if (modal.hasClass('modal-out')) modal.trigger('closed');
+            else modal.trigger('opened');
+
+            if (isPickerModal) {
+                $(defaults.modalContainer).removeClass('picker-modal-closing');
+            }
+            if (isPopup || isLoginScreen || isPickerModal) {
+                modal.removeClass('modal-out').hide();
+                if (removeOnClose && modal.length > 0) {
+                    modal.remove();
+                }
+            }
+            else {
+                modal.remove();
+            }
+        });
+        if (isModal &&  defaults.modalStack ) {
+            $.modalStackClearQueue();
+        }
+
+        return true;
+    };
+    function handleClicks(e) {
+        /*jshint validthis:true */
+        var clicked = $(this);
+        var url = clicked.attr('href');
+
+
+        //Collect Clicked data- attributes
+        var clickedData = clicked.dataset();
+
+        // Popup
+        var popup;
+        if (clicked.hasClass('open-popup')) {
+            if (clickedData.popup) {
+                popup = clickedData.popup;
+            }
+            else popup = '.popup';
+            $.popup(popup);
+        }
+        if (clicked.hasClass('close-popup')) {
+            if (clickedData.popup) {
+                popup = clickedData.popup;
+            }
+            else popup = '.popup.modal-in';
+            $.closeModal(popup);
+        }
+
+        // Close Modal
+        if (clicked.hasClass('modal-overlay')) {
+            if ($('.modal.modal-in').length > 0 && defaults.modalCloseByOutside)
+                $.closeModal('.modal.modal-in');
+            if ($('.actions-modal.modal-in').length > 0 && defaults.actionsCloseByOutside)
+                $.closeModal('.actions-modal.modal-in');
+
+        }
+        if (clicked.hasClass('popup-overlay')) {
+            if ($('.popup.modal-in').length > 0 && defaults.popupCloseByOutside)
+                $.closeModal('.popup.modal-in');
+        }
+
+
+
+
+    }
+    $(document).on('click', ' .modal-overlay, .popup-overlay, .close-popup, .open-popup, .close-picker', handleClicks);
+    var defaults =  $.modal.prototype.defaults  = {
+        modalStack: true,
+        modalButtonOk: '确定',
+        modalButtonCancel: '取消',
+        modalPreloaderTitle: '加载中',
+        modalContainer : document.body ? document.body : 'body'
+    };
+}(Zepto);
+
+/*======================================================
+************   Calendar   ************
+======================================================*/
+/*jshint unused: false*/
++function ($) {
+    "use strict";
+    var rtl = false;
+    var Calendar = function (params) {
+        var p = this;
+        var defaults = {
+            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月' , '九月' , '十月', '十一月', '十二月'],
+            monthNamesShort: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月' , '九月' , '十月', '十一月', '十二月'],
+            dayNames: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+            dayNamesShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+            firstDay: 1, // First day of the week, Monday
+            weekendDays: [0, 6], // Sunday and Saturday
+            multiple: false,
+            dateFormat: 'yyyy-mm-dd',
+            direction: 'horizontal', // or 'vertical'
+            minDate: null,
+            maxDate: null,
+            touchMove: true,
+            animate: true,
+            closeOnSelect: true,
+            monthPicker: true,
+            monthPickerTemplate:
+                '<div class="picker-calendar-month-picker">' +
+                '<a href="#" class="link icon-only picker-calendar-prev-month"><i class="icon icon-prev"></i></a>' +
+                '<div class="current-month-value"></div>' +
+                '<a href="#" class="link icon-only picker-calendar-next-month"><i class="icon icon-next"></i></a>' +
+                '</div>',
+            yearPicker: true,
+            yearPickerTemplate:
+                '<div class="picker-calendar-year-picker">' +
+                '<a href="#" class="link icon-only picker-calendar-prev-year"><i class="icon icon-prev"></i></a>' +
+                '<span class="current-year-value"></span>' +
+                '<a href="#" class="link icon-only picker-calendar-next-year"><i class="icon icon-next"></i></a>' +
+                '</div>',
+            weekHeader: true,
+            // Common settings
+            scrollToInput: true,
+            inputReadOnly: true,
+            toolbar: true,
+            toolbarCloseText: 'Done',
+            toolbarTemplate:
+                '<div class="toolbar">' +
+                '<div class="toolbar-inner">' +
+                '{{monthPicker}}' +
+                '{{yearPicker}}' +
+                // '<a href="#" class="link close-picker">{{closeText}}</a>' +
+                '</div>' +
+                '</div>',
+            /* Callbacks
+               onMonthAdd
+               onChange
+               onOpen
+               onClose
+               onDayClick
+               onMonthYearChangeStart
+               onMonthYearChangeEnd
+               */
+        };
+        params = params || {};
+        for (var def in defaults) {
+            if (typeof params[def] === 'undefined') {
+                params[def] = defaults[def];
+            }
+        }
+        p.params = params;
+        p.initialized = false;
+
+        // Inline flag
+        p.inline = p.params.container ? true : false;
+
+        // Is horizontal
+        p.isH = p.params.direction === 'horizontal';
+
+        // RTL inverter
+        var inverter = p.isH ? (rtl ? -1 : 1) : 1;
+
+        // Animating flag
+        p.animating = false;
+
+        // Format date
+        function formatDate(date) {
+            date = new Date(date);
+            var year = date.getFullYear();
+            var month = date.getMonth();
+            var month1 = month + 1;
+            var day = date.getDate();
+            var weekDay = date.getDay();
+            return p.params.dateFormat
+                .replace(/yyyy/g, year)
+                .replace(/yy/g, (year + '').substring(2))
+                .replace(/mm/g, month1 < 10 ? '0' + month1 : month1)
+                .replace(/m/g, month1)
+                .replace(/MM/g, p.params.monthNames[month])
+                .replace(/M/g, p.params.monthNamesShort[month])
+                .replace(/dd/g, day < 10 ? '0' + day : day)
+                .replace(/d/g, day)
+                .replace(/DD/g, p.params.dayNames[weekDay])
+                .replace(/D/g, p.params.dayNamesShort[weekDay]);
+        }
+
+
+        // Value
+        p.addValue = function (value) {
+            if (p.params.multiple) {
+                if (!p.value) p.value = [];
+                var inValuesIndex;
+                for (var i = 0; i < p.value.length; i++) {
+                    if (new Date(value).getTime() === new Date(p.value[i]).getTime()) {
+                        inValuesIndex = i;
+                    }
+                }
+                if (typeof inValuesIndex === 'undefined') {
+                    p.value.push(value);
+                }
+                else {
+                    p.value.splice(inValuesIndex, 1);
+                }
+                p.updateValue();
+            }
+            else {
+                p.value = [value];
+                p.updateValue();
+            }
+        };
+        p.setValue = function (arrValues) {
+            p.value = arrValues;
+            p.updateValue();
+        };
+        p.updateValue = function () {
+            p.wrapper.find('.picker-calendar-day-selected').removeClass('picker-calendar-day-selected');
+            var i, inputValue;
+            for (i = 0; i < p.value.length; i++) {
+                var valueDate = new Date(p.value[i]);
+                p.wrapper.find('.picker-calendar-day[data-date="' + valueDate.getFullYear() + '-' + valueDate.getMonth() + '-' + valueDate.getDate() + '"]').addClass('picker-calendar-day-selected');
+            }
+            if (p.params.onChange) {
+                p.params.onChange(p, p.value, p.value.map(formatDate));
+            }
+            if (p.input && p.input.length > 0) {
+                if (p.params.formatValue) inputValue = p.params.formatValue(p, p.value);
+                else {
+                    inputValue = [];
+                    for (i = 0; i < p.value.length; i++) {
+                        inputValue.push(formatDate(p.value[i]));
+                    }
+                    inputValue = inputValue.join(', ');
+                }
+                $(p.input).val(inputValue);
+                $(p.input).trigger('change');
+            }
+        };
+
+        // Columns Handlers
+        p.initCalendarEvents = function () {
+            var col;
+            var allowItemClick = true;
+            var isTouched, isMoved, touchStartX, touchStartY, touchCurrentX, touchCurrentY, touchStartTime, touchEndTime, startTranslate, currentTranslate, wrapperWidth, wrapperHeight, percentage, touchesDiff, isScrolling;
+            function handleTouchStart (e) {
+                if (isMoved || isTouched) return;
+                // e.preventDefault();
+                isTouched = true;
+                touchStartX = touchCurrentY = e.type === 'touchstart' ? e.targetTouches[0].pageX : e.pageX;
+                touchStartY = touchCurrentY = e.type === 'touchstart' ? e.targetTouches[0].pageY : e.pageY;
+                touchStartTime = (new Date()).getTime();
+                percentage = 0;
+                allowItemClick = true;
+                isScrolling = undefined;
+                startTranslate = currentTranslate = p.monthsTranslate;
+            }
+            function handleTouchMove (e) {
+                if (!isTouched) return;
+
+                touchCurrentX = e.type === 'touchmove' ? e.targetTouches[0].pageX : e.pageX;
+                touchCurrentY = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY;
+                if (typeof isScrolling === 'undefined') {
+                    isScrolling = !!(isScrolling || Math.abs(touchCurrentY - touchStartY) > Math.abs(touchCurrentX - touchStartX));
+                }
+                if (p.isH && isScrolling) {
+                    isTouched = false;
+                    return;
+                }
+                e.preventDefault();
+                if (p.animating) {
+                    isTouched = false;
+                    return;
+                }
+                allowItemClick = false;
+                if (!isMoved) {
+                    // First move
+                    isMoved = true;
+                    wrapperWidth = p.wrapper[0].offsetWidth;
+                    wrapperHeight = p.wrapper[0].offsetHeight;
+                    p.wrapper.transition(0);
+                }
+                e.preventDefault();
+
+                touchesDiff = p.isH ? touchCurrentX - touchStartX : touchCurrentY - touchStartY;
+                percentage = touchesDiff/(p.isH ? wrapperWidth : wrapperHeight);
+                currentTranslate = (p.monthsTranslate * inverter + percentage) * 100;
+
+                // Transform wrapper
+                p.wrapper.transform('translate3d(' + (p.isH ? currentTranslate : 0) + '%, ' + (p.isH ? 0 : currentTranslate) + '%, 0)');
+
+            }
+            function handleTouchEnd (e) {
+                if (!isTouched || !isMoved) {
+                    isTouched = isMoved = false;
+                    return;
+                }
+                isTouched = isMoved = false;
+
+                touchEndTime = new Date().getTime();
+                if (touchEndTime - touchStartTime < 300) {
+                    if (Math.abs(touchesDiff) < 10) {
+                        p.resetMonth();
+                    }
+                    else if (touchesDiff >= 10) {
+                        if (rtl) p.nextMonth();
+                        else p.prevMonth();
+                    }
+                    else {
+                        if (rtl) p.prevMonth();
+                        else p.nextMonth();
+                    }
+                }
+                else {
+                    if (percentage <= -0.5) {
+                        if (rtl) p.prevMonth();
+                        else p.nextMonth();
+                    }
+                    else if (percentage >= 0.5) {
+                        if (rtl) p.nextMonth();
+                        else p.prevMonth();
+                    }
+                    else {
+                        p.resetMonth();
+                    }
+                }
+
+                // Allow click
+                setTimeout(function () {
+                    allowItemClick = true;
+                }, 100);
+            }
+
+            function handleDayClick(e) {
+                if (!allowItemClick) return;
+                var day = $(e.target).parents('.picker-calendar-day');
+                if (day.length === 0 && $(e.target).hasClass('picker-calendar-day')) {
+                    day = $(e.target);
+                }
+                if (day.length === 0) return;
+                if (day.hasClass('picker-calendar-day-selected') && !p.params.multiple) return;
+                if (day.hasClass('picker-calendar-day-disabled')) return;
+                if (day.hasClass('picker-calendar-day-next')) p.nextMonth();
+                if (day.hasClass('picker-calendar-day-prev')) p.prevMonth();
+                var dateYear = day.attr('data-year');
+                var dateMonth = day.attr('data-month');
+                var dateDay = day.attr('data-day');
+                if (p.params.onDayClick) {
+                    p.params.onDayClick(p, day[0], dateYear, dateMonth, dateDay);
+                }
+                p.addValue(new Date(dateYear, dateMonth, dateDay).getTime());
+                if (p.params.closeOnSelect) p.close();
+            }
+
+            p.container.find('.picker-calendar-prev-month').on('click', p.prevMonth);
+            p.container.find('.picker-calendar-next-month').on('click', p.nextMonth);
+            p.container.find('.picker-calendar-prev-year').on('click', p.prevYear);
+            p.container.find('.picker-calendar-next-year').on('click', p.nextYear);
+
+            /**
+             * 处理选择年份时的手势操作事件
+             *
+             * Start - edit by JSoon
+             */
+            function handleYearTouchStart (e) {
+                if (isMoved || isTouched) return;
+                // e.preventDefault();
+                isTouched = true;
+                touchStartX = touchCurrentY = e.type === 'touchstart' ? e.targetTouches[0].pageX : e.pageX;
+                touchStartY = touchCurrentY = e.type === 'touchstart' ? e.targetTouches[0].pageY : e.pageY;
+                touchStartTime = (new Date()).getTime();
+                percentage = 0;
+                allowItemClick = true;
+                isScrolling = undefined;
+                startTranslate = currentTranslate = p.yearsTranslate;
+            }
+
+            function handleYearTouchMove (e) {
+                if (!isTouched) return;
+
+                touchCurrentX = e.type === 'touchmove' ? e.targetTouches[0].pageX : e.pageX;
+                touchCurrentY = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY;
+                if (typeof isScrolling === 'undefined') {
+                    isScrolling = !!(isScrolling || Math.abs(touchCurrentY - touchStartY) > Math.abs(touchCurrentX - touchStartX));
+                }
+                if (p.isH && isScrolling) {
+                    isTouched = false;
+                    return;
+                }
+                e.preventDefault();
+                if (p.animating) {
+                    isTouched = false;
+                    return;
+                }
+                allowItemClick = false;
+                if (!isMoved) {
+                    // First move
+                    isMoved = true;
+                    wrapperWidth = p.yearsPickerWrapper[0].offsetWidth;
+                    wrapperHeight = p.yearsPickerWrapper[0].offsetHeight;
+                    p.yearsPickerWrapper.transition(0);
+                }
+                e.preventDefault();
+
+                touchesDiff = p.isH ? touchCurrentX - touchStartX : touchCurrentY - touchStartY;
+                percentage = touchesDiff/(p.isH ? wrapperWidth : wrapperHeight);
+                currentTranslate = (p.yearsTranslate * inverter + percentage) * 100;
+
+                // Transform wrapper
+                p.yearsPickerWrapper.transform('translate3d(' + (p.isH ? currentTranslate : 0) + '%, ' + (p.isH ? 0 : currentTranslate) + '%, 0)');
+
+            }
+
+            function handleYearTouchEnd (e) {
+                if (!isTouched || !isMoved) {
+                    isTouched = isMoved = false;
+                    return;
+                }
+                isTouched = isMoved = false;
+
+                touchEndTime = new Date().getTime();
+                if (touchEndTime - touchStartTime < 300) {
+                    if (Math.abs(touchesDiff) < 10) {
+                        p.resetYearsGroup();
+                    }
+                    else if (touchesDiff >= 10) {
+                        if (rtl) p.nextYearsGroup();
+                        else p.prevYearsGroup();
+                    }
+                    else {
+                        if (rtl) p.prevYearsGroup();
+                        else p.nextYearsGroup();
+                    }
+                }
+                else {
+                    if (percentage <= -0.5) {
+                        if (rtl) p.prevYearsGroup();
+                        else p.nextYearsGroup();
+                    }
+                    else if (percentage >= 0.5) {
+                        if (rtl) p.nextYearsGroup();
+                        else p.prevYearsGroup();
+                    }
+                    else {
+                        p.resetYearsGroup();
+                    }
+                }
+
+                // Allow click
+                setTimeout(function () {
+                    allowItemClick = true;
+                }, 100);
+            }
+
+            function handleYearSelector() {
+                var curYear = $(this).text(),
+                    yearsPicker = p.container.find('.picker-calendar-years-picker');
+                yearsPicker.show().transform('translate3d(0, 0, 0)');
+                p.updateSelectedInPickers();
+                yearsPicker.on('click', '.picker-calendar-year-unit', p.pickYear);
+            }
+
+            function handleMonthSelector() {
+                var monthsPicker = p.container.find('.picker-calendar-months-picker');
+                monthsPicker.show().transform('translate3d(0, 0, 0)');
+                p.updateSelectedInPickers();
+                monthsPicker.on('click', '.picker-calendar-month-unit', p.pickMonth);
+            }
+
+            // 选择年份
+            p.container.find('.current-year-value').on('click', handleYearSelector);
+
+            // 选择月份
+            p.container.find('.current-month-value').on('click', handleMonthSelector);
+            /**
+             * End - edit by JSoon
+             */
+
+            p.wrapper.on('click', handleDayClick);
+            if (p.params.touchMove) {
+                /**
+                 * 给年份选择器绑定手势操作事件
+                 *
+                 * Start - edit by JSoon
+                 */
+                p.yearsPickerWrapper.on($.touchEvents.start, handleYearTouchStart);
+                p.yearsPickerWrapper.on($.touchEvents.move, handleYearTouchMove);
+                p.yearsPickerWrapper.on($.touchEvents.end, handleYearTouchEnd);
+                /**
+                 * Start - edit by JSoon
+                 */
+
+                p.wrapper.on($.touchEvents.start, handleTouchStart);
+                p.wrapper.on($.touchEvents.move, handleTouchMove);
+                p.wrapper.on($.touchEvents.end, handleTouchEnd);
+            }
+
+            p.container[0].f7DestroyCalendarEvents = function () {
+                p.container.find('.picker-calendar-prev-month').off('click', p.prevMonth);
+                p.container.find('.picker-calendar-next-month').off('click', p.nextMonth);
+                p.container.find('.picker-calendar-prev-year').off('click', p.prevYear);
+                p.container.find('.picker-calendar-next-year').off('click', p.nextYear);
+                p.wrapper.off('click', handleDayClick);
+                if (p.params.touchMove) {
+                    p.wrapper.off($.touchEvents.start, handleTouchStart);
+                    p.wrapper.off($.touchEvents.move, handleTouchMove);
+                    p.wrapper.off($.touchEvents.end, handleTouchEnd);
+                }
+            };
+
+
+        };
+        p.destroyCalendarEvents = function (colContainer) {
+            if ('f7DestroyCalendarEvents' in p.container[0]) p.container[0].f7DestroyCalendarEvents();
+        };
+
+        // Calendar Methods
+
+        /**
+         * 1. 生成年份和月份选择器DOM结构
+         * 2. 年份选择和月份选择的pick事件函数
+         * 3. 年份选择手势操作结束后，更新年分组DOM结构
+         *
+         * Start - edit by JSoon
+         */
+        p.yearsGroupHTML = function(date, offset) {
+            date = new Date(date);
+            var curYear = date.getFullYear(), // 日历上的当前年份
+                trueYear = new Date().getFullYear(), // 当前真实年份
+                yearNum = 25, // 年份面板年份总数量
+                firstYear = curYear - Math.floor(yearNum/2), // 年份面板第一格年份
+                yearsHTML = '';
+            if (offset === 'next') {
+                firstYear = firstYear + yearNum;
+            }
+            if (offset === 'prev') {
+                firstYear = firstYear - yearNum;
+            }
+            for (var i = 0; i < 5; i += 1) {
+                var rowHTML = '';
+                var row = i;
+                rowHTML += '<div class="picker-calendar-row">';
+                for (var j = 0; j < 5; j += 1) {
+                    if (firstYear === trueYear) {
+                        rowHTML += '<div class="picker-calendar-year-unit current-calendar-year-unit" data-year="'+ firstYear +'"><span>' + firstYear + '</span></div>';
+                    } else if (firstYear === curYear) {
+                        rowHTML += '<div class="picker-calendar-year-unit picker-calendar-year-unit-selected" data-year="'+ firstYear +'"><span>' + firstYear + '</span></div>';
+                    } else {
+                        rowHTML += '<div class="picker-calendar-year-unit" data-year="'+ firstYear +'"><span>' + firstYear + '</span></div>';
+                    }
+                    firstYear += 1;
+                }
+                rowHTML += '</div>';
+                yearsHTML += rowHTML;
+            }
+            yearsHTML = '<div class="picker-calendar-years-group">' + yearsHTML + '</div>';
+            return yearsHTML;
+        };
+
+        p.pickYear = function() {
+            var year = $(this).text(),
+                curYear = p.wrapper.find('.picker-calendar-month-current').attr('data-year');
+            p.yearsPickerWrapper.find('.picker-calendar-year-unit').removeClass('picker-calendar-year-unit-selected');
+            $(this).addClass('picker-calendar-year-unit-selected');
+            if (curYear !== year) {
+                p.setYearMonth(year);
+                p.container.find('.picker-calendar-years-picker').hide().transform('translate3d(0, 100%, 0)');
+            } else {
+                p.container.find('.picker-calendar-years-picker').transform('translate3d(0, 100%, 0)');
+            }
+        };
+
+        p.onYearsChangeEnd = function (dir) {
+            p.animating = false;
+            var nextYearsHTML, prevYearsHTML, newCurFirstYear;
+            var yearNum = p.yearsPickerWrapper.children('.picker-calendar-years-next').find('.picker-calendar-year-unit').length;
+            if (dir === 'next') {
+                var newCurFirstYear = parseInt(p.yearsPickerWrapper.children('.picker-calendar-years-next').find('.picker-calendar-year-unit').eq(Math.floor(yearNum/2)).text());
+                nextYearsHTML = p.yearsGroupHTML(new Date(newCurFirstYear, p.currentMonth), 'next');
+                p.yearsPickerWrapper.append(nextYearsHTML);
+                p.yearsPickerWrapper.children().first().remove();
+                p.yearsGroups = p.container.find('.picker-calendar-years-group');
+            }
+            if (dir === 'prev') {
+                var newCurFirstYear = parseInt(p.yearsPickerWrapper.children('.picker-calendar-years-prev').find('.picker-calendar-year-unit').eq(Math.floor(yearNum/2)).text());
+                prevYearsHTML = p.yearsGroupHTML(new Date(newCurFirstYear, p.currentMonth), 'prev');
+                p.yearsPickerWrapper.prepend(prevYearsHTML);
+                p.yearsPickerWrapper.children().last().remove();
+                p.yearsGroups = p.container.find('.picker-calendar-years-group');
+            }
+            p.setYearsTranslate(p.yearsTranslate);
+        };
+
+        p.monthsGroupHTML = function(date) {
+            date = new Date(date);
+            var curMonth = date.getMonth() + 1, // 日历上的当前月份
+                trueMonth = new Date().getMonth() + 1, // 当前真实月份
+                monthNum = 12, // 月份面板月份总数量
+                firstMonth = 1,
+                monthsHTML = '';
+            for (var i = 0; i < 3; i += 1) {
+                var rowHTML = '';
+                var row = i;
+                rowHTML += '<div class="picker-calendar-row">';
+                for (var j = 0; j < 4; j += 1) {
+                    if (firstMonth === trueMonth) {
+                        rowHTML += '<div class="picker-calendar-month-unit current-calendar-month-unit" data-month="'+ (firstMonth-1) +'"><span>' + p.params.monthNames[firstMonth-1] + '</span></div>';
+                    } else if (firstMonth === curMonth) {
+                        rowHTML += '<div class="picker-calendar-month-unit picker-calendar-month-selected" data-month="'+ (firstMonth-1) +'"><span>' + p.params.monthNames[firstMonth-1] + '</span></div>';
+                    } else {
+                        rowHTML += '<div class="picker-calendar-month-unit" data-month="'+ (firstMonth-1) +'"><span>' + p.params.monthNames[firstMonth-1] + '</span></div>';
+                    }
+                    firstMonth += 1;
+                }
+                rowHTML += '</div>';
+                monthsHTML += rowHTML;
+            }
+            monthsHTML = '<div class="picker-calendar-months-group">' + monthsHTML + '</div>';
+            return monthsHTML;
+        };
+
+        p.pickMonth = function() {
+            var month = $(this).attr('data-month'),
+                curYear = p.wrapper.find('.picker-calendar-month-current').attr('data-year'),
+                curMonth = p.wrapper.find('.picker-calendar-month-current').attr('data-month');
+            p.monthsPickerWrapper.find('.picker-calendar-month-unit').removeClass('picker-calendar-month-unit-selected');
+            $(this).addClass('picker-calendar-month-unit-selected');
+            if (curMonth !== month) {
+                p.setYearMonth(curYear, month);
+                p.container.find('.picker-calendar-months-picker').hide().transform('translate3d(0, 100%, 0)');
+            } else {
+                p.container.find('.picker-calendar-months-picker').transform('translate3d(0, 100%, 0)');
+            }
+        };
+        /**
+         * End - edit by JSoon
+         */
+
+        p.daysInMonth = function (date) {
+            var d = new Date(date);
+            return new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+        };
+        p.monthHTML = function (date, offset) {
+            date = new Date(date);
+            var year = date.getFullYear(),
+                month = date.getMonth(),
+                day = date.getDate();
+            if (offset === 'next') {
+                if (month === 11) date = new Date(year + 1, 0);
+                else date = new Date(year, month + 1, 1);
+            }
+            if (offset === 'prev') {
+                if (month === 0) date = new Date(year - 1, 11);
+                else date = new Date(year, month - 1, 1);
+            }
+            if (offset === 'next' || offset === 'prev') {
+                month = date.getMonth();
+                year = date.getFullYear();
+            }
+            var daysInPrevMonth = p.daysInMonth(new Date(date.getFullYear(), date.getMonth()).getTime() - 10 * 24 * 60 * 60 * 1000),
+                daysInMonth = p.daysInMonth(date),
+                firstDayOfMonthIndex = new Date(date.getFullYear(), date.getMonth()).getDay();
+            if (firstDayOfMonthIndex === 0) firstDayOfMonthIndex = 7;
+
+            var dayDate, currentValues = [], i, j,
+                rows = 6, cols = 7,
+                monthHTML = '',
+                dayIndex = 0 + (p.params.firstDay - 1),
+                today = new Date().setHours(0,0,0,0),
+                minDate = p.params.minDate ? new Date(p.params.minDate).getTime() : null,
+                maxDate = p.params.maxDate ? new Date(p.params.maxDate).getTime() : null;
+
+            if (p.value && p.value.length) {
+                for (i = 0; i < p.value.length; i++) {
+                    currentValues.push(new Date(p.value[i]).setHours(0,0,0,0));
+                }
+            }
+
+            for (i = 1; i <= rows; i++) {
+                var rowHTML = '';
+                var row = i;
+                for (j = 1; j <= cols; j++) {
+                    var col = j;
+                    dayIndex ++;
+                    var dayNumber = dayIndex - firstDayOfMonthIndex;
+                    var addClass = '';
+                    if (dayNumber < 0) {
+                        dayNumber = daysInPrevMonth + dayNumber + 1;
+                        addClass += ' picker-calendar-day-prev';
+                        dayDate = new Date(month - 1 < 0 ? year - 1 : year, month - 1 < 0 ? 11 : month - 1, dayNumber).getTime();
+                    }
+                    else {
+                        dayNumber = dayNumber + 1;
+                        if (dayNumber > daysInMonth) {
+                            dayNumber = dayNumber - daysInMonth;
+                            addClass += ' picker-calendar-day-next';
+                            dayDate = new Date(month + 1 > 11 ? year + 1 : year, month + 1 > 11 ? 0 : month + 1, dayNumber).getTime();
+                        }
+                        else {
+                            dayDate = new Date(year, month, dayNumber).getTime();
+                        }
+                    }
+                    // Today
+                    if (dayDate === today) addClass += ' picker-calendar-day-today';
+                    // Selected
+                    if (currentValues.indexOf(dayDate) >= 0) addClass += ' picker-calendar-day-selected';
+                    // Weekend
+                    if (p.params.weekendDays.indexOf(col - 1) >= 0) {
+                        addClass += ' picker-calendar-day-weekend';
+                    }
+                    // Disabled
+                    if ((minDate && dayDate < minDate) || (maxDate && dayDate > maxDate)) {
+                        addClass += ' picker-calendar-day-disabled';
+                    }
+
+                    dayDate = new Date(dayDate);
+                    var dayYear = dayDate.getFullYear();
+                    var dayMonth = dayDate.getMonth();
+                    rowHTML += '<div data-year="' + dayYear + '" data-month="' + dayMonth + '" data-day="' + dayNumber + '" class="picker-calendar-day' + (addClass) + '" data-date="' + (dayYear + '-' + dayMonth + '-' + dayNumber) + '"><span>'+dayNumber+'</span></div>';
+                }
+                monthHTML += '<div class="picker-calendar-row">' + rowHTML + '</div>';
+            }
+            monthHTML = '<div class="picker-calendar-month" data-year="' + year + '" data-month="' + month + '">' + monthHTML + '</div>';
+            return monthHTML;
+        };
+        p.animating = false;
+        p.updateCurrentMonthYear = function (dir) {
+            if (typeof dir === 'undefined') {
+                p.currentMonth = parseInt(p.months.eq(1).attr('data-month'), 10);
+                p.currentYear = parseInt(p.months.eq(1).attr('data-year'), 10);
+            }
+            else {
+                p.currentMonth = parseInt(p.months.eq(dir === 'next' ? (p.months.length - 1) : 0).attr('data-month'), 10);
+                p.currentYear = parseInt(p.months.eq(dir === 'next' ? (p.months.length - 1) : 0).attr('data-year'), 10);
+            }
+            p.container.find('.current-month-value').text(p.params.monthNames[p.currentMonth]);
+            p.container.find('.current-year-value').text(p.currentYear);
+
+        };
+        p.onMonthChangeStart = function (dir) {
+            p.updateCurrentMonthYear(dir);
+            p.months.removeClass('picker-calendar-month-current picker-calendar-month-prev picker-calendar-month-next');
+            var currentIndex = dir === 'next' ? p.months.length - 1 : 0;
+
+            p.months.eq(currentIndex).addClass('picker-calendar-month-current');
+            p.months.eq(dir === 'next' ? currentIndex - 1 : currentIndex + 1).addClass(dir === 'next' ? 'picker-calendar-month-prev' : 'picker-calendar-month-next');
+
+            if (p.params.onMonthYearChangeStart) {
+                p.params.onMonthYearChangeStart(p, p.currentYear, p.currentMonth);
+            }
+        };
+        p.onMonthChangeEnd = function (dir, rebuildBoth) {
+            p.animating = false;
+            var nextMonthHTML, prevMonthHTML, newMonthHTML;
+            p.wrapper.find('.picker-calendar-month:not(.picker-calendar-month-prev):not(.picker-calendar-month-current):not(.picker-calendar-month-next)').remove();
+
+            if (typeof dir === 'undefined') {
+                dir = 'next';
+                rebuildBoth = true;
+            }
+            if (!rebuildBoth) {
+                newMonthHTML = p.monthHTML(new Date(p.currentYear, p.currentMonth), dir);
+            }
+            else {
+                p.wrapper.find('.picker-calendar-month-next, .picker-calendar-month-prev').remove();
+                prevMonthHTML = p.monthHTML(new Date(p.currentYear, p.currentMonth), 'prev');
+                nextMonthHTML = p.monthHTML(new Date(p.currentYear, p.currentMonth), 'next');
+            }
+            if (dir === 'next' || rebuildBoth) {
+                p.wrapper.append(newMonthHTML || nextMonthHTML);
+            }
+            if (dir === 'prev' || rebuildBoth) {
+                p.wrapper.prepend(newMonthHTML || prevMonthHTML);
+            }
+            p.months = p.wrapper.find('.picker-calendar-month');
+            p.setMonthsTranslate(p.monthsTranslate);
+            if (p.params.onMonthAdd) {
+                p.params.onMonthAdd(p, dir === 'next' ? p.months.eq(p.months.length - 1)[0] : p.months.eq(0)[0]);
+            }
+            if (p.params.onMonthYearChangeEnd) {
+                p.params.onMonthYearChangeEnd(p, p.currentYear, p.currentMonth);
+            }
+            /**
+             * 月历面板结束手势操作后，更新年份/月份选择器中的选中高亮状态
+             *
+             * Start - edit by JSoon
+             */
+            p.updateSelectedInPickers();
+            /**
+             * End - edit by JSoon
+             */
+        };
+
+        /**
+         * 1. 更新年份/月份选择器中的选中高亮状态函数
+         * 2. 年份选择器过渡动画函数
+         * 3. 下一个/上一个/当前年分组手势操作函数
+         *
+         * Start - edit by JSoon
+         */
+        p.updateSelectedInPickers = function() {
+            var curYear = parseInt(p.wrapper.find('.picker-calendar-month-current').attr('data-year'), 10),
+                trueYear = new Date().getFullYear(),
+                curMonth = parseInt(p.wrapper.find('.picker-calendar-month-current').attr('data-month'), 10),
+                trueMonth = new Date().getMonth(),
+                selectedYear = parseInt(p.yearsPickerWrapper.find('.picker-calendar-year-unit-selected').attr('data-year'), 10),
+                selectedMonth = parseInt(p.monthsPickerWrapper.find('.picker-calendar-month-unit-selected').attr('data-month'), 10);
+            if (selectedYear !== curYear) {
+                p.yearsPickerWrapper.find('.picker-calendar-year-unit').removeClass('picker-calendar-year-unit-selected');
+                p.yearsPickerWrapper.find('.picker-calendar-year-unit[data-year="' + curYear + '"]').addClass('picker-calendar-year-unit-selected');
+            }
+            if (selectedMonth !== curMonth) {
+                p.monthsPickerWrapper.find('.picker-calendar-month-unit').removeClass('picker-calendar-month-unit-selected');
+                p.monthsPickerWrapper.find('.picker-calendar-month-unit[data-month="' + curMonth + '"]').addClass('picker-calendar-month-unit-selected');
+            }
+            if (trueYear !== curYear) {
+                p.monthsPickerWrapper.find('.picker-calendar-month-unit').removeClass('current-calendar-month-unit');
+            } else {
+                p.monthsPickerWrapper.find('.picker-calendar-month-unit[data-month="' + trueMonth + '"]').addClass('current-calendar-month-unit');
+            }
+        };
+
+        p.setYearsTranslate = function (translate) {
+            translate = translate || p.yearsTranslate || 0;
+            if (typeof p.yearsTranslate === 'undefined') p.yearsTranslate = translate;
+            p.yearsGroups.removeClass('picker-calendar-years-current picker-calendar-years-prev picker-calendar-years-next');
+            var prevYearTranslate = -(translate + 1) * 100 * inverter;
+            var currentYearTranslate = -translate * 100 * inverter;
+            var nextYearTranslate = -(translate - 1) * 100 * inverter;
+            p.yearsGroups.eq(0).transform('translate3d(' + (p.isH ? prevYearTranslate : 0) + '%, ' + (p.isH ? 0 : prevYearTranslate) + '%, 0)').addClass('picker-calendar-years-prev');
+            p.yearsGroups.eq(1).transform('translate3d(' + (p.isH ? currentYearTranslate : 0) + '%, ' + (p.isH ? 0 : currentYearTranslate) + '%, 0)').addClass('picker-calendar-years-current');
+            p.yearsGroups.eq(2).transform('translate3d(' + (p.isH ? nextYearTranslate : 0) + '%, ' + (p.isH ? 0 : nextYearTranslate) + '%, 0)').addClass('picker-calendar-years-next');
+        };
+
+        p.nextYearsGroup = function (transition) {
+            if (typeof transition === 'undefined' || typeof transition === 'object') {
+                transition = '';
+                if (!p.params.animate) transition = 0;
+            }
+            var transitionEndCallback = p.animating ? false : true;
+            p.yearsTranslate --;
+            p.animating = true;
+            var translate = (p.yearsTranslate * 100) * inverter;
+            p.yearsPickerWrapper.transition(transition).transform('translate3d(' + (p.isH ? translate : 0) + '%, ' + (p.isH ? 0 : translate) + '%, 0)');
+            if (transitionEndCallback) {
+                p.yearsPickerWrapper.transitionEnd(function () {
+                    p.onYearsChangeEnd('next');
+                });
+            }
+            if (!p.params.animate) {
+                p.onYearsChangeEnd('next');
+            }
+        };
+
+        p.prevYearsGroup = function (transition) {
+            if (typeof transition === 'undefined' || typeof transition === 'object') {
+                transition = '';
+                if (!p.params.animate) transition = 0;
+            }
+            var transitionEndCallback = p.animating ? false : true;
+            p.yearsTranslate ++;
+            p.animating = true;
+            var translate = (p.yearsTranslate * 100) * inverter;
+            p.yearsPickerWrapper.transition(transition).transform('translate3d(' + (p.isH ? translate : 0) + '%, ' + (p.isH ? 0 : translate) + '%, 0)');
+            if (transitionEndCallback) {
+                p.yearsPickerWrapper.transitionEnd(function () {
+                    p.onYearsChangeEnd('prev');
+                });
+            }
+            if (!p.params.animate) {
+                p.onYearsChangeEnd('prev');
+            }
+        };
+
+        p.resetYearsGroup = function (transition) {
+            if (typeof transition === 'undefined') transition = '';
+            var translate = (p.yearsTranslate * 100) * inverter;
+            p.yearsPickerWrapper.transition(transition).transform('translate3d(' + (p.isH ? translate : 0) + '%, ' + (p.isH ? 0 : translate) + '%, 0)');
+        };
+        /**
+         * End - edit by JSoon
+         */
+
+        p.setMonthsTranslate = function (translate) {
+            translate = translate || p.monthsTranslate || 0;
+            if (typeof p.monthsTranslate === 'undefined') p.monthsTranslate = translate;
+            p.months.removeClass('picker-calendar-month-current picker-calendar-month-prev picker-calendar-month-next');
+            var prevMonthTranslate = -(translate + 1) * 100 * inverter;
+            var currentMonthTranslate = -translate * 100 * inverter;
+            var nextMonthTranslate = -(translate - 1) * 100 * inverter;
+            p.months.eq(0).transform('translate3d(' + (p.isH ? prevMonthTranslate : 0) + '%, ' + (p.isH ? 0 : prevMonthTranslate) + '%, 0)').addClass('picker-calendar-month-prev');
+            p.months.eq(1).transform('translate3d(' + (p.isH ? currentMonthTranslate : 0) + '%, ' + (p.isH ? 0 : currentMonthTranslate) + '%, 0)').addClass('picker-calendar-month-current');
+            p.months.eq(2).transform('translate3d(' + (p.isH ? nextMonthTranslate : 0) + '%, ' + (p.isH ? 0 : nextMonthTranslate) + '%, 0)').addClass('picker-calendar-month-next');
+        };
+        p.nextMonth = function (transition) {
+            if (typeof transition === 'undefined' || typeof transition === 'object') {
+                transition = '';
+                if (!p.params.animate) transition = 0;
+            }
+            var nextMonth = parseInt(p.months.eq(p.months.length - 1).attr('data-month'), 10);
+            var nextYear = parseInt(p.months.eq(p.months.length - 1).attr('data-year'), 10);
+            var nextDate = new Date(nextYear, nextMonth);
+            var nextDateTime = nextDate.getTime();
+            var transitionEndCallback = p.animating ? false : true;
+            if (p.params.maxDate) {
+                if (nextDateTime > new Date(p.params.maxDate).getTime()) {
+                    return p.resetMonth();
+                }
+            }
+            p.monthsTranslate --;
+            if (nextMonth === p.currentMonth) {
+                var nextMonthTranslate = -(p.monthsTranslate) * 100 * inverter;
+                var nextMonthHTML = $(p.monthHTML(nextDateTime, 'next')).transform('translate3d(' + (p.isH ? nextMonthTranslate : 0) + '%, ' + (p.isH ? 0 : nextMonthTranslate) + '%, 0)').addClass('picker-calendar-month-next');
+                p.wrapper.append(nextMonthHTML[0]);
+                p.months = p.wrapper.find('.picker-calendar-month');
+                if (p.params.onMonthAdd) {
+                    p.params.onMonthAdd(p, p.months.eq(p.months.length - 1)[0]);
+                }
+            }
+            p.animating = true;
+            p.onMonthChangeStart('next');
+            var translate = (p.monthsTranslate * 100) * inverter;
+
+            p.wrapper.transition(transition).transform('translate3d(' + (p.isH ? translate : 0) + '%, ' + (p.isH ? 0 : translate) + '%, 0)');
+            if (transitionEndCallback) {
+                p.wrapper.transitionEnd(function () {
+                    p.onMonthChangeEnd('next');
+                });
+            }
+            if (!p.params.animate) {
+                p.onMonthChangeEnd('next');
+            }
+        };
+        p.prevMonth = function (transition) {
+            if (typeof transition === 'undefined' || typeof transition === 'object') {
+                transition = '';
+                if (!p.params.animate) transition = 0;
+            }
+            var prevMonth = parseInt(p.months.eq(0).attr('data-month'), 10);
+            var prevYear = parseInt(p.months.eq(0).attr('data-year'), 10);
+            var prevDate = new Date(prevYear, prevMonth + 1, -1);
+            var prevDateTime = prevDate.getTime();
+            var transitionEndCallback = p.animating ? false : true;
+            if (p.params.minDate) {
+                if (prevDateTime < new Date(p.params.minDate).getTime()) {
+                    return p.resetMonth();
+                }
+            }
+            p.monthsTranslate ++;
+            if (prevMonth === p.currentMonth) {
+                var prevMonthTranslate = -(p.monthsTranslate) * 100 * inverter;
+                var prevMonthHTML = $(p.monthHTML(prevDateTime, 'prev')).transform('translate3d(' + (p.isH ? prevMonthTranslate : 0) + '%, ' + (p.isH ? 0 : prevMonthTranslate) + '%, 0)').addClass('picker-calendar-month-prev');
+                p.wrapper.prepend(prevMonthHTML[0]);
+                p.months = p.wrapper.find('.picker-calendar-month');
+                if (p.params.onMonthAdd) {
+                    p.params.onMonthAdd(p, p.months.eq(0)[0]);
+                }
+            }
+            p.animating = true;
+            p.onMonthChangeStart('prev');
+            var translate = (p.monthsTranslate * 100) * inverter;
+            p.wrapper.transition(transition).transform('translate3d(' + (p.isH ? translate : 0) + '%, ' + (p.isH ? 0 : translate) + '%, 0)');
+            if (transitionEndCallback) {
+                p.wrapper.transitionEnd(function () {
+                    p.onMonthChangeEnd('prev');
+                });
+            }
+            if (!p.params.animate) {
+                p.onMonthChangeEnd('prev');
+            }
+        };
+        p.resetMonth = function (transition) {
+            if (typeof transition === 'undefined') transition = '';
+            var translate = (p.monthsTranslate * 100) * inverter;
+            p.wrapper.transition(transition).transform('translate3d(' + (p.isH ? translate : 0) + '%, ' + (p.isH ? 0 : translate) + '%, 0)');
+        };
+        p.setYearMonth = function (year, month, transition) {
+            if (typeof year === 'undefined') year = p.currentYear;
+            if (typeof month === 'undefined') month = p.currentMonth;
+            if (typeof transition === 'undefined' || typeof transition === 'object') {
+                transition = '';
+                if (!p.params.animate) transition = 0;
+            }
+            var targetDate;
+            if (year < p.currentYear) {
+                targetDate = new Date(year, month + 1, -1).getTime();
+            } else {
+                targetDate = new Date(year, month).getTime();
+            }
+            if (p.params.maxDate && targetDate > new Date(p.params.maxDate).getTime()) {
+                return false;
+            }
+            if (p.params.minDate && targetDate < new Date(p.params.minDate).getTime()) {
+                return false;
+            }
+            var currentDate = new Date(p.currentYear, p.currentMonth).getTime();
+            var dir = targetDate > currentDate ? 'next' : 'prev';
+            var newMonthHTML = p.monthHTML(new Date(year, month));
+            p.monthsTranslate = p.monthsTranslate || 0;
+            var prevTranslate = p.monthsTranslate;
+            var monthTranslate, wrapperTranslate;
+            var transitionEndCallback = p.animating ? false : true;
+            if (targetDate > currentDate) {
+                // To next
+                p.monthsTranslate --;
+                if (!p.animating) p.months.eq(p.months.length - 1).remove();
+                p.wrapper.append(newMonthHTML);
+                p.months = p.wrapper.find('.picker-calendar-month');
+                monthTranslate = -(prevTranslate - 1) * 100 * inverter;
+                p.months.eq(p.months.length - 1).transform('translate3d(' + (p.isH ? monthTranslate : 0) + '%, ' + (p.isH ? 0 : monthTranslate) + '%, 0)').addClass('picker-calendar-month-next');
+            }
+            else {
+                // To prev
+                p.monthsTranslate ++;
+                if (!p.animating) p.months.eq(0).remove();
+                p.wrapper.prepend(newMonthHTML);
+                p.months = p.wrapper.find('.picker-calendar-month');
+                monthTranslate = -(prevTranslate + 1) * 100 * inverter;
+                p.months.eq(0).transform('translate3d(' + (p.isH ? monthTranslate : 0) + '%, ' + (p.isH ? 0 : monthTranslate) + '%, 0)').addClass('picker-calendar-month-prev');
+            }
+            if (p.params.onMonthAdd) {
+                p.params.onMonthAdd(p, dir === 'next' ? p.months.eq(p.months.length - 1)[0] : p.months.eq(0)[0]);
+            }
+            p.animating = true;
+            p.onMonthChangeStart(dir);
+            wrapperTranslate = (p.monthsTranslate * 100) * inverter;
+            p.wrapper.transition(transition).transform('translate3d(' + (p.isH ? wrapperTranslate : 0) + '%, ' + (p.isH ? 0 : wrapperTranslate) + '%, 0)');
+            if (transitionEndCallback) {
+                p.wrapper.transitionEnd(function () {
+                    p.onMonthChangeEnd(dir, true);
+                });
+            }
+            if (!p.params.animate) {
+                p.onMonthChangeEnd(dir);
+            }
+        };
+        p.nextYear = function () {
+            p.setYearMonth(p.currentYear + 1);
+        };
+        p.prevYear = function () {
+            p.setYearMonth(p.currentYear - 1);
+        };
+
+
+        // HTML Layout
+        p.layout = function () {
+            var pickerHTML = '';
+            var pickerClass = '';
+            var i;
+
+            var layoutDate = p.value && p.value.length ? p.value[0] : new Date().setHours(0,0,0,0);
+            /**
+             * 生成年份组和月份组DOM
+             *
+             * Start - edit by JSoon
+             */
+            var prevYearsHTML = p.yearsGroupHTML(layoutDate, 'prev');
+            var currentYearsHTML = p.yearsGroupHTML(layoutDate);
+            var nextYearsHTML = p.yearsGroupHTML(layoutDate, 'next');
+            var yearsGroupHTML = '<div class="picker-calendar-years-picker"><div class="picker-calendar-years-picker-wrapper">' + (prevYearsHTML + currentYearsHTML + nextYearsHTML) + '</div></div>';
+
+            var monthsGroupHTML = '<div class="picker-calendar-months-picker"><div class="picker-calendar-months-picker-wrapper">' + p.monthsGroupHTML(layoutDate) + '</div></div>';
+            /**
+             * End - edit by JSoon
+             */
+            var prevMonthHTML = p.monthHTML(layoutDate, 'prev');
+            var currentMonthHTML = p.monthHTML(layoutDate);
+            var nextMonthHTML = p.monthHTML(layoutDate, 'next');
+            var monthsHTML = '<div class="picker-calendar-months"><div class="picker-calendar-months-wrapper">' + (prevMonthHTML + currentMonthHTML + nextMonthHTML) + '</div></div>';
+            // Week days header
+            var weekHeaderHTML = '';
+            if (p.params.weekHeader) {
+                for (i = 0; i < 7; i++) {
+                    var weekDayIndex = (i + p.params.firstDay > 6) ? (i - 7 + p.params.firstDay) : (i + p.params.firstDay);
+                    var dayName = p.params.dayNamesShort[weekDayIndex];
+                    weekHeaderHTML += '<div class="picker-calendar-week-day ' + ((p.params.weekendDays.indexOf(weekDayIndex) >= 0) ? 'picker-calendar-week-day-weekend' : '') + '"> ' + dayName + '</div>';
+
+                }
+                weekHeaderHTML = '<div class="picker-calendar-week-days">' + weekHeaderHTML + '</div>';
+            }
+            pickerClass = 'picker-modal picker-calendar ' + (p.params.cssClass || '');
+            var toolbarHTML = p.params.toolbar ? p.params.toolbarTemplate.replace(/{{closeText}}/g, p.params.toolbarCloseText) : '';
+            if (p.params.toolbar) {
+                toolbarHTML = p.params.toolbarTemplate
+                    .replace(/{{closeText}}/g, p.params.toolbarCloseText)
+                    .replace(/{{monthPicker}}/g, (p.params.monthPicker ? p.params.monthPickerTemplate : ''))
+                    .replace(/{{yearPicker}}/g, (p.params.yearPicker ? p.params.yearPickerTemplate : ''));
+            }
+
+            /**
+             * 将年份组/月份组DOM添加document中
+             *
+             * Start - edit by JSoon
+             */
+            pickerHTML =
+                '<div class="' + (pickerClass) + '">' +
+                toolbarHTML +
+                '<div class="picker-modal-inner">' +
+                weekHeaderHTML +
+                monthsHTML +
+                '</div>' +
+                monthsGroupHTML +
+                yearsGroupHTML +
+                '</div>';
+            /**
+             * End - edit by JSoon
+             */
+
+            p.pickerHTML = pickerHTML;
+        };
+
+        // Input Events
+        function openOnInput(e) {
+            e.preventDefault();
+            // 安卓微信webviewreadonly的input依然弹出软键盘问题修复
+            if ($.device.isWeixin && $.device.android && p.params.inputReadOnly) {
+                /*jshint validthis:true */
+                this.focus();
+                this.blur();
+            }
+            if (p.opened) return;
+            p.open();
+            if (p.params.scrollToInput) {
+                var pageContent = p.input.parents('.content');
+                if (pageContent.length === 0) return;
+
+                var paddingTop = parseInt(pageContent.css('padding-top'), 10),
+                    paddingBottom = parseInt(pageContent.css('padding-bottom'), 10),
+                    pageHeight = pageContent[0].offsetHeight - paddingTop - p.container.height(),
+                    pageScrollHeight = pageContent[0].scrollHeight - paddingTop - p.container.height(),
+                    newPaddingBottom;
+
+                var inputTop = p.input.offset().top - paddingTop + p.input[0].offsetHeight;
+                if (inputTop > pageHeight) {
+                    var scrollTop = pageContent.scrollTop() + inputTop - pageHeight;
+                    if (scrollTop + pageHeight > pageScrollHeight) {
+                        newPaddingBottom = scrollTop + pageHeight - pageScrollHeight + paddingBottom;
+                        if (pageHeight === pageScrollHeight) {
+                            newPaddingBottom = p.container.height();
+                        }
+                        pageContent.css({'padding-bottom': (newPaddingBottom) + 'px'});
+                    }
+                    pageContent.scrollTop(scrollTop, 300);
+                }
+            }
+        }
+        function closeOnHTMLClick(e) {
+            if (p.input && p.input.length > 0) {
+                if (e.target !== p.input[0] && $(e.target).parents('.picker-modal').length === 0) p.close();
+            }
+            else {
+                if ($(e.target).parents('.picker-modal').length === 0) p.close();
+            }
+        }
+
+        if (p.params.input) {
+            p.input = $(p.params.input);
+            if (p.input.length > 0) {
+                if (p.params.inputReadOnly) p.input.prop('readOnly', true);
+                if (!p.inline) {
+                    p.input.on('click', openOnInput);
+                }
+                /**
+                 * 修复[#308](https://github.com/sdc-alibaba/SUI-Mobile/issues/308)
+                 * 场景：内联页面中存在日历控件的input
+                 * 问题：因未在关闭时unbind click openOnInput事件导致多次调用p.open()而生成多个日历
+                 *
+                 * Start - edit by JSoon
+                 */
+                $(document).on('beforePageSwitch', function() {
+                    p.input.off('click', openOnInput);
+                    $(document).off('beforePageSwitch');
+                });
+                /**
+                 * End - edit by JSoon
+                 */
+            }
+
+        }
+
+        if (!p.inline) $('html').on('click', closeOnHTMLClick);
+
+        // Open
+        function onPickerClose() {
+            p.opened = false;
+            if (p.input && p.input.length > 0) p.input.parents('.content').css({'padding-bottom': ''});
+            if (p.params.onClose) p.params.onClose(p);
+
+            // Destroy events
+            p.destroyCalendarEvents();
+        }
+
+        p.opened = false;
+        p.open = function () {
+            var updateValue = false;
+            if (!p.opened) {
+                // Set date value
+                if (!p.value) {
+                    if (p.params.value) {
+                        p.value = p.params.value;
+                        updateValue = true;
+                    }
+                }
+
+                // Layout
+                p.layout();
+
+                // Append
+                if (p.inline) {
+                    p.container = $(p.pickerHTML);
+                    p.container.addClass('picker-modal-inline');
+                    $(p.params.container).append(p.container);
+                }
+                else {
+                    p.container = $($.pickerModal(p.pickerHTML));
+                    $(p.container)
+                        .on('close', function () {
+                            onPickerClose();
+                        });
+                }
+
+                // Store calendar instance
+                p.container[0].f7Calendar = p;
+                p.wrapper = p.container.find('.picker-calendar-months-wrapper');
+
+                /**
+                 * 获取全局年份组及其wrapper的zepto对象
+                 * 获取全局月份组wrapper的zepto对象
+                 *
+                 * Start - edit by JSoon
+                 */
+                p.yearsPickerWrapper = p.container.find('.picker-calendar-years-picker-wrapper');
+                p.yearsGroups = p.yearsPickerWrapper.find('.picker-calendar-years-group');
+
+                p.monthsPickerWrapper = p.container.find('.picker-calendar-months-picker-wrapper');
+                /**
+                 * End - edit by JSoon
+                 */
+
+                // Months
+                p.months = p.wrapper.find('.picker-calendar-month');
+
+                // Update current month and year
+                p.updateCurrentMonthYear();
+
+                // Set initial translate
+                /**
+                 * 初始化年份组过渡动画位置
+                 *
+                 * Start - edit by JSoon
+                 */
+                p.yearsTranslate = 0;
+                p.setYearsTranslate();
+                /**
+                 * End - edit by JSoon
+                 */
+                p.monthsTranslate = 0;
+                p.setMonthsTranslate();
+
+                // Init events
+                p.initCalendarEvents();
+
+                // Update input value
+                if (updateValue) p.updateValue();
+
+            }
+
+            // Set flag
+            p.opened = true;
+            p.initialized = true;
+            if (p.params.onMonthAdd) {
+                p.months.each(function () {
+                    p.params.onMonthAdd(p, this);
+                });
+            }
+            if (p.params.onOpen) p.params.onOpen(p);
+        };
+
+        // Close
+        p.close = function () {
+            if (!p.opened || p.inline) return;
+            $.closeModal(p.container);
+            return;
+        };
+
+        // Destroy
+        p.destroy = function () {
+            p.close();
+            if (p.params.input && p.input.length > 0) {
+                p.input.off('click', openOnInput);
+            }
+            $('html').off('click', closeOnHTMLClick);
+        };
+
+        if (p.inline) {
+            p.open();
+        }
+
+        return p;
+    };
+    $.fn.calendar = function (params) {
+        return this.each(function() {
+            var $this = $(this);
+            if(!$this[0]) return;
+            var p = {};
+            if($this[0].tagName.toUpperCase() === "INPUT") {
+                p.input = $this;
+            } else {
+                p.container = $this;
+            }
+            new Calendar($.extend(p, params));
+        });
+    };
+
+    $.initCalendar = function(content) {
+        var $content = content ? $(content) : $(document.body);
+        $content.find("[data-toggle='date']").each(function() {
+            $(this).calendar();
+        });
+    };
+}(Zepto);
+
+/*======================================================
+************   Picker   ************
+======================================================*/
+/* jshint unused:false */
+/* jshint multistr:true */
++ function($) {
+    "use strict";
+    var Picker = function (params) {
+        var p = this;
+        var defaults = {
+            updateValuesOnMomentum: false,
+            updateValuesOnTouchmove: true,
+            rotateEffect: false,
+            momentumRatio: 7,
+            freeMode: false,
+            // Common settings
+            scrollToInput: true,
+            inputReadOnly: true,
+            toolbar: true,
+            toolbarCloseText: '确定',
+            toolbarTemplate: '<header class="bar bar-nav">\
+                <button class="button button-link pull-right close-picker">确定</button>\
+                <h1 class="title">请选择</h1>\
+                </header>',
+        };
+        params = params || {};
+        for (var def in defaults) {
+            if (typeof params[def] === 'undefined') {
+                params[def] = defaults[def];
+            }
+        }
+        p.params = params;
+        p.cols = [];
+        p.initialized = false;
+
+        // Inline flag
+        p.inline = p.params.container ? true : false;
+
+        // 3D Transforms origin bug, only on safari
+        var originBug = $.device.ios || (navigator.userAgent.toLowerCase().indexOf('safari') >= 0 && navigator.userAgent.toLowerCase().indexOf('chrome') < 0) && !$.device.android;
+
+        // Value
+        p.setValue = function (arrValues, transition) {
+            var valueIndex = 0;
+            for (var i = 0; i < p.cols.length; i++) {
+                if (p.cols[i] && !p.cols[i].divider) {
+                    p.cols[i].setValue(arrValues[valueIndex], transition);
+                    valueIndex++;
+                }
+            }
+        };
+        p.updateValue = function () {
+            var newValue = [];
+            var newDisplayValue = [];
+            for (var i = 0; i < p.cols.length; i++) {
+                if (!p.cols[i].divider) {
+                    newValue.push(p.cols[i].value);
+                    newDisplayValue.push(p.cols[i].displayValue);
+                }
+            }
+            if (newValue.indexOf(undefined) >= 0) {
+                return;
+            }
+            p.value = newValue;
+            p.displayValue = newDisplayValue;
+            if (p.params.onChange) {
+                p.params.onChange(p, p.value, p.displayValue);
+            }
+            if (p.input && p.input.length > 0) {
+                $(p.input).val(p.params.formatValue ? p.params.formatValue(p, p.value, p.displayValue) : p.value.join(' '));
+                $(p.input).trigger('change');
+            }
+        };
+
+        // Columns Handlers
+        p.initPickerCol = function (colElement, updateItems) {
+            var colContainer = $(colElement);
+            var colIndex = colContainer.index();
+            var col = p.cols[colIndex];
+            if (col.divider) return;
+            col.container = colContainer;
+            col.wrapper = col.container.find('.picker-items-col-wrapper');
+            col.items = col.wrapper.find('.picker-item');
+
+            var i, j;
+            var wrapperHeight, itemHeight, itemsHeight, minTranslate, maxTranslate;
+            col.replaceValues = function (values, displayValues) {
+                col.destroyEvents();
+                col.values = values;
+                col.displayValues = displayValues;
+                var newItemsHTML = p.columnHTML(col, true);
+                col.wrapper.html(newItemsHTML);
+                col.items = col.wrapper.find('.picker-item');
+                col.calcSize();
+                col.setValue(col.values[0], 0, true);
+                col.initEvents();
+            };
+            col.calcSize = function () {
+                if (p.params.rotateEffect) {
+                    col.container.removeClass('picker-items-col-absolute');
+                    if (!col.width) col.container.css({width:''});
+                }
+                var colWidth, colHeight;
+                colWidth = 0;
+                colHeight = col.container[0].offsetHeight;
+                wrapperHeight = col.wrapper[0].offsetHeight;
+                itemHeight = col.items[0].offsetHeight;
+                itemsHeight = itemHeight * col.items.length;
+                minTranslate = colHeight / 2 - itemsHeight + itemHeight / 2;
+                maxTranslate = colHeight / 2 - itemHeight / 2;
+                if (col.width) {
+                    colWidth = col.width;
+                    if (parseInt(colWidth, 10) === colWidth) colWidth = colWidth + 'px';
+                    col.container.css({width: colWidth});
+                }
+                if (p.params.rotateEffect) {
+                    if (!col.width) {
+                        col.items.each(function () {
+                            var item = $(this);
+                            item.css({width:'auto'});
+                            colWidth = Math.max(colWidth, item[0].offsetWidth);
+                            item.css({width:''});
+                        });
+                        col.container.css({width: (colWidth + 2) + 'px'});
+                    }
+                    col.container.addClass('picker-items-col-absolute');
+                }
+            };
+            col.calcSize();
+
+            col.wrapper.transform('translate3d(0,' + maxTranslate + 'px,0)').transition(0);
+
+
+            var activeIndex = 0;
+            var animationFrameId;
+
+            // Set Value Function
+            col.setValue = function (newValue, transition, valueCallbacks) {
+                if (typeof transition === 'undefined') transition = '';
+                var newActiveIndex = col.wrapper.find('.picker-item[data-picker-value="' + newValue + '"]').index();
+                if(typeof newActiveIndex === 'undefined' || newActiveIndex === -1) {
+                    return;
+                }
+                var newTranslate = -newActiveIndex * itemHeight + maxTranslate;
+                // Update wrapper
+                col.wrapper.transition(transition);
+                col.wrapper.transform('translate3d(0,' + (newTranslate) + 'px,0)');
+
+                // Watch items
+                if (p.params.updateValuesOnMomentum && col.activeIndex && col.activeIndex !== newActiveIndex ) {
+                    $.cancelAnimationFrame(animationFrameId);
+                    col.wrapper.transitionEnd(function(){
+                        $.cancelAnimationFrame(animationFrameId);
+                    });
+                    updateDuringScroll();
+                }
+
+                // Update items
+                col.updateItems(newActiveIndex, newTranslate, transition, valueCallbacks);
+            };
+
+            col.updateItems = function (activeIndex, translate, transition, valueCallbacks) {
+                if (typeof translate === 'undefined') {
+                    translate = $.getTranslate(col.wrapper[0], 'y');
+                }
+                if(typeof activeIndex === 'undefined') activeIndex = -Math.round((translate - maxTranslate)/itemHeight);
+                if (activeIndex < 0) activeIndex = 0;
+                if (activeIndex >= col.items.length) activeIndex = col.items.length - 1;
+                var previousActiveIndex = col.activeIndex;
+                col.activeIndex = activeIndex;
+                /*
+                   col.wrapper.find('.picker-selected, .picker-after-selected, .picker-before-selected').removeClass('picker-selected picker-after-selected picker-before-selected');
+
+                   col.items.transition(transition);
+                   var selectedItem = col.items.eq(activeIndex).addClass('picker-selected').transform('');
+                   var prevItems = selectedItem.prevAll().addClass('picker-before-selected');
+                   var nextItems = selectedItem.nextAll().addClass('picker-after-selected');
+                   */
+                //去掉 .picker-after-selected, .picker-before-selected 以提高性能
+                col.wrapper.find('.picker-selected').removeClass('picker-selected');
+                if (p.params.rotateEffect) {
+                    col.items.transition(transition);
+                }
+                var selectedItem = col.items.eq(activeIndex).addClass('picker-selected').transform('');
+
+                if (valueCallbacks || typeof valueCallbacks === 'undefined') {
+                    // Update values
+                    col.value = selectedItem.attr('data-picker-value');
+                    col.displayValue = col.displayValues ? col.displayValues[activeIndex] : col.value;
+                    // On change callback
+                    if (previousActiveIndex !== activeIndex) {
+                        if (col.onChange) {
+                            col.onChange(p, col.value, col.displayValue);
+                        }
+                        p.updateValue();
+                    }
+                }
+
+                // Set 3D rotate effect
+                if (!p.params.rotateEffect) {
+                    return;
+                }
+                var percentage = (translate - (Math.floor((translate - maxTranslate)/itemHeight) * itemHeight + maxTranslate)) / itemHeight;
+
+                col.items.each(function () {
+                    var item = $(this);
+                    var itemOffsetTop = item.index() * itemHeight;
+                    var translateOffset = maxTranslate - translate;
+                    var itemOffset = itemOffsetTop - translateOffset;
+                    var percentage = itemOffset / itemHeight;
+
+                    var itemsFit = Math.ceil(col.height / itemHeight / 2) + 1;
+
+                    var angle = (-18*percentage);
+                    if (angle > 180) angle = 180;
+                    if (angle < -180) angle = -180;
+                    // Far class
+                    if (Math.abs(percentage) > itemsFit) item.addClass('picker-item-far');
+                    else item.removeClass('picker-item-far');
+                    // Set transform
+                    item.transform('translate3d(0, ' + (-translate + maxTranslate) + 'px, ' + (originBug ? -110 : 0) + 'px) rotateX(' + angle + 'deg)');
+                });
+            };
+
+            function updateDuringScroll() {
+                animationFrameId = $.requestAnimationFrame(function () {
+                    col.updateItems(undefined, undefined, 0);
+                    updateDuringScroll();
+                });
+            }
+
+            // Update items on init
+            if (updateItems) col.updateItems(0, maxTranslate, 0);
+
+            var allowItemClick = true;
+            var isTouched, isMoved, touchStartY, touchCurrentY, touchStartTime, touchEndTime, startTranslate, returnTo, currentTranslate, prevTranslate, velocityTranslate, velocityTime;
+            function handleTouchStart (e) {
+                if (isMoved || isTouched) return;
+                e.preventDefault();
+                isTouched = true;
+                touchStartY = touchCurrentY = e.type === 'touchstart' ? e.targetTouches[0].pageY : e.pageY;
+                touchStartTime = (new Date()).getTime();
+
+                allowItemClick = true;
+                startTranslate = currentTranslate = $.getTranslate(col.wrapper[0], 'y');
+            }
+            function handleTouchMove (e) {
+                if (!isTouched) return;
+                e.preventDefault();
+                allowItemClick = false;
+                touchCurrentY = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY;
+                if (!isMoved) {
+                    // First move
+                    $.cancelAnimationFrame(animationFrameId);
+                    isMoved = true;
+                    startTranslate = currentTranslate = $.getTranslate(col.wrapper[0], 'y');
+                    col.wrapper.transition(0);
+                }
+                e.preventDefault();
+
+                var diff = touchCurrentY - touchStartY;
+                currentTranslate = startTranslate + diff;
+                returnTo = undefined;
+
+                // Normalize translate
+                if (currentTranslate < minTranslate) {
+                    currentTranslate = minTranslate - Math.pow(minTranslate - currentTranslate, 0.8);
+                    returnTo = 'min';
+                }
+                if (currentTranslate > maxTranslate) {
+                    currentTranslate = maxTranslate + Math.pow(currentTranslate - maxTranslate, 0.8);
+                    returnTo = 'max';
+                }
+                // Transform wrapper
+                col.wrapper.transform('translate3d(0,' + currentTranslate + 'px,0)');
+
+                // Update items
+                col.updateItems(undefined, currentTranslate, 0, p.params.updateValuesOnTouchmove);
+
+                // Calc velocity
+                velocityTranslate = currentTranslate - prevTranslate || currentTranslate;
+                velocityTime = (new Date()).getTime();
+                prevTranslate = currentTranslate;
+            }
+            function handleTouchEnd (e) {
+                if (!isTouched || !isMoved) {
+                    isTouched = isMoved = false;
+                    return;
+                }
+                isTouched = isMoved = false;
+                col.wrapper.transition('');
+                if (returnTo) {
+                    if (returnTo === 'min') {
+                        col.wrapper.transform('translate3d(0,' + minTranslate + 'px,0)');
+                    }
+                    else col.wrapper.transform('translate3d(0,' + maxTranslate + 'px,0)');
+                }
+                touchEndTime = new Date().getTime();
+                var velocity, newTranslate;
+                if (touchEndTime - touchStartTime > 300) {
+                    newTranslate = currentTranslate;
+                }
+                else {
+                    velocity = Math.abs(velocityTranslate / (touchEndTime - velocityTime));
+                    newTranslate = currentTranslate + velocityTranslate * p.params.momentumRatio;
+                }
+
+                newTranslate = Math.max(Math.min(newTranslate, maxTranslate), minTranslate);
+
+                // Active Index
+                var activeIndex = -Math.floor((newTranslate - maxTranslate)/itemHeight);
+
+                // Normalize translate
+                if (!p.params.freeMode) newTranslate = -activeIndex * itemHeight + maxTranslate;
+
+                // Transform wrapper
+                col.wrapper.transform('translate3d(0,' + (parseInt(newTranslate,10)) + 'px,0)');
+
+                // Update items
+                col.updateItems(activeIndex, newTranslate, '', true);
+
+                // Watch items
+                if (p.params.updateValuesOnMomentum) {
+                    updateDuringScroll();
+                    col.wrapper.transitionEnd(function(){
+                        $.cancelAnimationFrame(animationFrameId);
+                    });
+                }
+
+                // Allow click
+                setTimeout(function () {
+                    allowItemClick = true;
+                }, 100);
+            }
+
+            function handleClick(e) {
+                if (!allowItemClick) return;
+                $.cancelAnimationFrame(animationFrameId);
+                /*jshint validthis:true */
+                var value = $(this).attr('data-picker-value');
+                col.setValue(value);
+            }
+
+            col.initEvents = function (detach) {
+                var method = detach ? 'off' : 'on';
+                col.container[method]($.touchEvents.start, handleTouchStart);
+                col.container[method]($.touchEvents.move, handleTouchMove);
+                col.container[method]($.touchEvents.end, handleTouchEnd);
+                col.items[method]('click', handleClick);
+            };
+            col.destroyEvents = function () {
+                col.initEvents(true);
+            };
+
+            col.container[0].f7DestroyPickerCol = function () {
+                col.destroyEvents();
+            };
+
+            col.initEvents();
+
+        };
+        p.destroyPickerCol = function (colContainer) {
+            colContainer = $(colContainer);
+            if ('f7DestroyPickerCol' in colContainer[0]) colContainer[0].f7DestroyPickerCol();
+        };
+        // Resize cols
+        function resizeCols() {
+            if (!p.opened) return;
+            for (var i = 0; i < p.cols.length; i++) {
+                if (!p.cols[i].divider) {
+                    p.cols[i].calcSize();
+                    p.cols[i].setValue(p.cols[i].value, 0, false);
+                }
+            }
+        }
+        $(window).on('resize', resizeCols);
+
+        // HTML Layout
+        p.columnHTML = function (col, onlyItems) {
+            var columnItemsHTML = '';
+            var columnHTML = '';
+            if (col.divider) {
+                columnHTML += '<div class="picker-items-col picker-items-col-divider ' + (col.textAlign ? 'picker-items-col-' + col.textAlign : '') + ' ' + (col.cssClass || '') + '">' + col.content + '</div>';
+            }
+            else {
+                for (var j = 0; j < col.values.length; j++) {
+                    columnItemsHTML += '<div class="picker-item" data-picker-value="' + col.values[j] + '">' + (col.displayValues ? col.displayValues[j] : col.values[j]) + '</div>';
+                }
+
+                columnHTML += '<div class="picker-items-col ' + (col.textAlign ? 'picker-items-col-' + col.textAlign : '') + ' ' + (col.cssClass || '') + '"><div class="picker-items-col-wrapper">' + columnItemsHTML + '</div></div>';
+            }
+            return onlyItems ? columnItemsHTML : columnHTML;
+        };
+        p.layout = function () {
+            var pickerHTML = '';
+            var pickerClass = '';
+            var i;
+            p.cols = [];
+            var colsHTML = '';
+            for (i = 0; i < p.params.cols.length; i++) {
+                var col = p.params.cols[i];
+                colsHTML += p.columnHTML(p.params.cols[i]);
+                p.cols.push(col);
+            }
+            pickerClass = 'picker-modal picker-columns ' + (p.params.cssClass || '') + (p.params.rotateEffect ? ' picker-3d' : '');
+            pickerHTML =
+                '<div class="' + (pickerClass) + '">' +
+                (p.params.toolbar ? p.params.toolbarTemplate.replace(/{{closeText}}/g, p.params.toolbarCloseText) : '') +
+                '<div class="picker-modal-inner picker-items">' +
+                colsHTML +
+                '<div class="picker-center-highlight"></div>' +
+                '</div>' +
+                '</div>';
+
+            p.pickerHTML = pickerHTML;
+        };
+
+        // Input Events
+        function openOnInput(e) {
+            e.preventDefault();
+            // 安卓微信webviewreadonly的input依然弹出软键盘问题修复
+            if ($.device.isWeixin && $.device.android && p.params.inputReadOnly) {
+                /*jshint validthis:true */
+                this.focus();
+                this.blur();
+            }
+            if (p.opened) return;
+            //关闭其他picker
+            $.closeModal($('.picker-modal'));
+            p.open();
+            if (p.params.scrollToInput) {
+                var pageContent = p.input.parents('.content');
+                if (pageContent.length === 0) return;
+
+                var paddingTop = parseInt(pageContent.css('padding-top'), 10),
+                    paddingBottom = parseInt(pageContent.css('padding-bottom'), 10),
+                    pageHeight = pageContent[0].offsetHeight - paddingTop - p.container.height(),
+                    pageScrollHeight = pageContent[0].scrollHeight - paddingTop - p.container.height(),
+                    newPaddingBottom;
+                var inputTop = p.input.offset().top - paddingTop + p.input[0].offsetHeight;
+                if (inputTop > pageHeight) {
+                    var scrollTop = pageContent.scrollTop() + inputTop - pageHeight;
+                    if (scrollTop + pageHeight > pageScrollHeight) {
+                        newPaddingBottom = scrollTop + pageHeight - pageScrollHeight + paddingBottom;
+                        if (pageHeight === pageScrollHeight) {
+                            newPaddingBottom = p.container.height();
+                        }
+                        pageContent.css({'padding-bottom': (newPaddingBottom) + 'px'});
+                    }
+                    pageContent.scrollTop(scrollTop, 300);
+                }
+            }
+            //停止事件冒泡，主动处理
+            e.stopPropagation();
+        }
+        function closeOnHTMLClick(e) {
+            if (!p.opened) return;
+            if (p.input && p.input.length > 0) {
+                if (e.target !== p.input[0] && $(e.target).parents('.picker-modal').length === 0) p.close();
+            }
+            else {
+                if ($(e.target).parents('.picker-modal').length === 0) p.close();
+            }
+        }
+
+        if (p.params.input) {
+            p.input = $(p.params.input);
+            if (p.input.length > 0) {
+                if (p.params.inputReadOnly) p.input.prop('readOnly', true);
+                if (!p.inline) {
+                    p.input.on('click', openOnInput);
+                }
+            }
+        }
+
+        if (!p.inline) $('html').on('click', closeOnHTMLClick);
+
+        // Open
+        function onPickerClose() {
+            p.opened = false;
+            if (p.input && p.input.length > 0) p.input.parents('.content').css({'padding-bottom': ''});
+            if (p.params.onClose) p.params.onClose(p);
+
+            // Destroy events
+            p.container.find('.picker-items-col').each(function () {
+                p.destroyPickerCol(this);
+            });
+        }
+
+        p.opened = false;
+        p.open = function () {
+
+            if (!p.opened) {
+
+                // Layout
+                p.layout();
+                p.opened = true;
+                // Append
+                if (p.inline) {
+                    p.container = $(p.pickerHTML);
+                    p.container.addClass('picker-modal-inline');
+                    $(p.params.container).append(p.container);
+
+                }
+                else {
+
+                    p.container = $($.pickerModal(p.pickerHTML));
+
+                    $(p.container)
+                        .on('close', function () {
+                            onPickerClose();
+                        });
+                }
+
+                // Store picker instance
+                p.container[0].f7Picker = p;
+
+                // Init Events
+                p.container.find('.picker-items-col').each(function () {
+                    var updateItems = true;
+                    if ((!p.initialized && p.params.value) || (p.initialized && p.value)) updateItems = false;
+                    p.initPickerCol(this, updateItems);
+                });
+
+                // Set value
+                if (!p.initialized) {
+                    if (p.params.value) {
+                        p.setValue(p.params.value, 0);
+                    }
+                }
+                else {
+                    if (p.value) p.setValue(p.value, 0);
+                }
+            }
+
+            // Set flag
+            p.initialized = true;
+
+            if (p.params.onOpen) p.params.onOpen(p);
+        };
+
+        // Close
+        p.close = function () {
+            if (!p.opened || p.inline) return;
+            $.closeModal(p.container);
+            return;
+        };
+
+        // Destroy
+        p.destroy = function () {
+            p.close();
+            if (p.params.input && p.input.length > 0) {
+                p.input.off('click', openOnInput);
+            }
+            $('html').off('click', closeOnHTMLClick);
+            $(window).off('resize', resizeCols);
+        };
+
+        if (p.inline) {
+            p.open();
+        }
+
+        return p;
+    };
+
+    $(document).on("click", ".close-picker", function() {
+        var pickerToClose = $('.picker-modal.modal-in');
+        $.closeModal(pickerToClose);
+    });
+
+    $.fn.picker = function(params) {
+        var args = arguments;
+        return this.each(function() {
+            if(!this) return;
+            var $this = $(this);
+
+            var picker = $this.data("picker");
+            if(!picker) {
+                var p = $.extend({
+                    input: this,
+                    value: $this.val() ? $this.val().split(' ') : ''
+                }, params);
+                picker = new Picker(p);
+                $this.data("picker", picker);
+            }
+            if(typeof params === typeof "a") {
+                picker[params].apply(picker, Array.prototype.slice.call(args, 1));
+            }
+        });
+    };
+}(Zepto);
+
+/* jshint unused:false*/
+
++ function($) {
+    "use strict";
+
+    var today = new Date();
+
+    var getDays = function(max) {
+        var days = [];
+        for(var i=1; i<= (max||31);i++) {
+            days.push(i < 10 ? "0"+i : i);
+        }
+        return days;
+    };
+
+    var getDaysByMonthAndYear = function(month, year) {
+        var int_d = new Date(year, parseInt(month)+1-1, 1);
+        var d = new Date(int_d - 1);
+        return getDays(d.getDate());
+    };
+
+    var formatNumber = function (n) {
+        return n < 10 ? "0" + n : n;
+    };
+
+    var initMonthes = ('01 02 03 04 05 06 07 08 09 10 11 12').split(' ');
+
+    var initYears = (function () {
+        var arr = [];
+        for (var i = 1950; i <= 2030; i++) { arr.push(i); }
+        return arr;
+    })();
+
+
+    var defaults = {
+
+        rotateEffect: false,  //为了性能
+
+        value: [today.getFullYear(), formatNumber(today.getMonth()+1), formatNumber(today.getDate()), today.getHours(), formatNumber(today.getMinutes())],
+
+        onChange: function (picker, values, displayValues) {
+            var days = getDaysByMonthAndYear(picker.cols[1].value, picker.cols[0].value);
+            var currentValue = picker.cols[2].value;
+            if(currentValue > days.length) currentValue = days.length;
+            picker.cols[2].setValue(currentValue);
+        },
+
+        formatValue: function (p, values, displayValues) {
+            return displayValues[0] + '-' + values[1] + '-' + values[2] + ' ' + values[3] + ':' + values[4];
+        },
+
+        cols: [
+            // Years
+        {
+            values: initYears
+        },
+        // Months
+        {
+            values: initMonthes
+        },
+        // Days
+        {
+            values: getDays()
+        },
+
+        // Space divider
+        {
+            divider: true,
+            content: '  '
+        },
+        // Hours
+        {
+            values: (function () {
+                var arr = [];
+                for (var i = 0; i <= 23; i++) { arr.push(i); }
+                return arr;
+            })(),
+        },
+        // Divider
+        {
+            divider: true,
+            content: ':'
+        },
+        // Minutes
+        {
+            values: (function () {
+                var arr = [];
+                for (var i = 0; i <= 59; i++) { arr.push(i < 10 ? '0' + i : i); }
+                return arr;
+            })(),
+        }
+        ]
+    };
+
+    $.fn.datetimePicker = function(params) {
+        return this.each(function() {
+            if(!this) return;
+            var p = $.extend(defaults, params);
+            $(this).picker(p);
+            if (params.value) $(this).val(p.formatValue(p, p.value, p.value));
+        });
+    };
+
+}(Zepto);
+
++ function(window) {
+
+    "use strict";
+
+    var rAF = window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        function(callback) {
+            window.setTimeout(callback, 1000 / 60);
+        };
+    /*var cRAF = window.cancelRequestAnimationFrame ||
+        window.webkitCancelRequestAnimationFrame ||
+        window.mozCancelRequestAnimationFrame ||
+        window.oCancelRequestAnimationFrame ||
+        window.msCancelRequestAnimationFrame;*/
+
+    var utils = (function() {
+        var me = {};
+
+        var _elementStyle = document.createElement('div').style;
+        var _vendor = (function() {
+            var vendors = ['t', 'webkitT', 'MozT', 'msT', 'OT'],
+                transform,
+                i = 0,
+                l = vendors.length;
+
+            for (; i < l; i++) {
+                transform = vendors[i] + 'ransform';
+                if (transform in _elementStyle) return vendors[i].substr(0, vendors[i].length - 1);
+            }
+
+            return false;
+        })();
+
+        function _prefixStyle(style) {
+            if (_vendor === false) return false;
+            if (_vendor === '') return style;
+            return _vendor + style.charAt(0).toUpperCase() + style.substr(1);
+        }
+
+        me.getTime = Date.now || function getTime() {
+            return new Date().getTime();
+        };
+
+        me.extend = function(target, obj) {
+            for (var i in obj) {  // jshint ignore:line
+                    target[i] = obj[i];
+            }
+        };
+
+        me.addEvent = function(el, type, fn, capture) {
+            el.addEventListener(type, fn, !!capture);
+        };
+
+        me.removeEvent = function(el, type, fn, capture) {
+            el.removeEventListener(type, fn, !!capture);
+        };
+
+        me.prefixPointerEvent = function(pointerEvent) {
+            return window.MSPointerEvent ?
+                'MSPointer' + pointerEvent.charAt(9).toUpperCase() + pointerEvent.substr(10) :
+                pointerEvent;
+        };
+
+        me.momentum = function(current, start, time, lowerMargin, wrapperSize, deceleration, self) {
+            var distance = current - start,
+                speed = Math.abs(distance) / time,
+                destination,
+                duration;
+
+            // var absDistance = Math.abs(distance);
+            speed = speed / 2; //slowdown
+            speed = speed > 1.5 ? 1.5 : speed; //set max speed to 1
+            deceleration = deceleration === undefined ? 0.0006 : deceleration;
+
+            destination = current + (speed * speed) / (2 * deceleration) * (distance < 0 ? -1 : 1);
+            duration = speed / deceleration;
+
+            if (destination < lowerMargin) {
+                destination = wrapperSize ? lowerMargin - (wrapperSize / 2.5 * (speed / 8)) : lowerMargin;
+                distance = Math.abs(destination - current);
+                duration = distance / speed;
+            } else if (destination > 0) {
+                destination = wrapperSize ? wrapperSize / 2.5 * (speed / 8) : 0;
+                distance = Math.abs(current) + destination;
+                duration = distance / speed;
+            }
+
+            //simple trigger, every 50ms
+            var t = +new Date();
+            var l = t;
+
+            function eventTrigger() {
+                if (+new Date() - l > 50) {
+                    self._execEvent('scroll');
+                    l = +new Date();
+                }
+                if (+new Date() - t < duration) {
+                    rAF(eventTrigger);
+                }
+            }
+            rAF(eventTrigger);
+
+            return {
+                destination: Math.round(destination),
+                duration: duration
+            };
+        };
+
+        var _transform = _prefixStyle('transform');
+
+        me.extend(me, {
+            hasTransform: _transform !== false,
+            hasPerspective: _prefixStyle('perspective') in _elementStyle,
+            hasTouch: 'ontouchstart' in window,
+            hasPointer: window.PointerEvent || window.MSPointerEvent, // IE10 is prefixed
+            hasTransition: _prefixStyle('transition') in _elementStyle
+        });
+
+        // This should find all Android browsers lower than build 535.19 (both stock browser and webview)
+        me.isBadAndroid = /Android /.test(window.navigator.appVersion) && !(/Chrome\/\d/.test(window.navigator.appVersion)) && false; //this will cause many android device scroll flash; so set it to false!
+
+        me.extend(me.style = {}, {
+            transform: _transform,
+            transitionTimingFunction: _prefixStyle('transitionTimingFunction'),
+            transitionDuration: _prefixStyle('transitionDuration'),
+            transitionDelay: _prefixStyle('transitionDelay'),
+            transformOrigin: _prefixStyle('transformOrigin')
+        });
+
+        me.hasClass = function(e, c) {
+            var re = new RegExp('(^|\\s)' + c + '(\\s|$)');
+            return re.test(e.className);
+        };
+
+        me.addClass = function(e, c) {
+            if (me.hasClass(e, c)) {
+                return;
+            }
+
+            var newclass = e.className.split(' ');
+            newclass.push(c);
+            e.className = newclass.join(' ');
+        };
+
+        me.removeClass = function(e, c) {
+            if (!me.hasClass(e, c)) {
+                return;
+            }
+
+            var re = new RegExp('(^|\\s)' + c + '(\\s|$)', 'g');
+            e.className = e.className.replace(re, ' ');
+        };
+
+        me.offset = function(el) {
+            var left = -el.offsetLeft,
+                top = -el.offsetTop;
+
+            // jshint -W084
+            while (el = el.offsetParent) {
+                left -= el.offsetLeft;
+                top -= el.offsetTop;
+            }
+            // jshint +W084
+
+            return {
+                left: left,
+                top: top
+            };
+        };
+
+        me.preventDefaultException = function(el, exceptions) {
+            for (var i in exceptions) {
+                if (exceptions[i].test(el[i])) {
+                    return true;
+                }
+            }
+
+            return false;
+        };
+
+        me.extend(me.eventType = {}, {
+            touchstart: 1,
+            touchmove: 1,
+            touchend: 1,
+
+            mousedown: 2,
+            mousemove: 2,
+            mouseup: 2,
+
+            pointerdown: 3,
+            pointermove: 3,
+            pointerup: 3,
+
+            MSPointerDown: 3,
+            MSPointerMove: 3,
+            MSPointerUp: 3
+        });
+
+        me.extend(me.ease = {}, {
+            quadratic: {
+                style: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                fn: function(k) {
+                    return k * (2 - k);
+                }
+            },
+            circular: {
+                style: 'cubic-bezier(0.1, 0.57, 0.1, 1)', // Not properly 'circular' but this looks better, it should be (0.075, 0.82, 0.165, 1)
+                fn: function(k) {
+                    return Math.sqrt(1 - (--k * k));
+                }
+            },
+            back: {
+                style: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                fn: function(k) {
+                    var b = 4;
+                    return (k = k - 1) * k * ((b + 1) * k + b) + 1;
+                }
+            },
+            bounce: {
+                style: '',
+                fn: function(k) {
+                    if ((k /= 1) < (1 / 2.75)) {
+                        return 7.5625 * k * k;
+                    } else if (k < (2 / 2.75)) {
+                        return 7.5625 * (k -= (1.5 / 2.75)) * k + 0.75;
+                    } else if (k < (2.5 / 2.75)) {
+                        return 7.5625 * (k -= (2.25 / 2.75)) * k + 0.9375;
+                    } else {
+                        return 7.5625 * (k -= (2.625 / 2.75)) * k + 0.984375;
+                    }
+                }
+            },
+            elastic: {
+                style: '',
+                fn: function(k) {
+                    var f = 0.22,
+                        e = 0.4;
+
+                    if (k === 0) {
+                        return 0;
+                    }
+                    if (k === 1) {
+                        return 1;
+                    }
+
+                    return (e * Math.pow(2, -10 * k) * Math.sin((k - f / 4) * (2 * Math.PI) / f) + 1);
+                }
+            }
+        });
+
+        me.tap = function(e, eventName) {
+            var ev = document.createEvent('Event');
+            ev.initEvent(eventName, true, true);
+            ev.pageX = e.pageX;
+            ev.pageY = e.pageY;
+            e.target.dispatchEvent(ev);
+        };
+
+        me.click = function(e) {
+            var target = e.target,
+                ev;
+
+            if (!(/(SELECT|INPUT|TEXTAREA)/i).test(target.tagName)) {
+                ev = document.createEvent('MouseEvents');
+                ev.initMouseEvent('click', true, true, e.view, 1,
+                    target.screenX, target.screenY, target.clientX, target.clientY,
+                    e.ctrlKey, e.altKey, e.shiftKey, e.metaKey,
+                    0, null);
+
+                ev._constructed = true;
+                target.dispatchEvent(ev);
+            }
+        };
+
+        return me;
+    })();
+
+    function IScroll(el, options) {
+        this.wrapper = typeof el === 'string' ? document.querySelector(el) : el;
+        this.scroller = $(this.wrapper).find('.content-inner')[0]; // jshint ignore:line
+
+
+        this.scrollerStyle = this.scroller&&this.scroller.style; // cache style for better performance
+
+        this.options = {
+
+            resizeScrollbars: true,
+
+            mouseWheelSpeed: 20,
+
+            snapThreshold: 0.334,
+
+            // INSERT POINT: OPTIONS
+
+            startX: 0,
+            startY: 0,
+            scrollY: true,
+            directionLockThreshold: 5,
+            momentum: true,
+
+            bounce: true,
+            bounceTime: 600,
+            bounceEasing: '',
+
+            preventDefault: true,
+            preventDefaultException: {
+                tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT)$/
+            },
+
+            HWCompositing: true,
+            useTransition: true,
+            useTransform: true,
+
+            //other options
+            eventPassthrough: undefined, //if you  want to use native scroll, you can set to: true or horizontal
+        };
+
+        for (var i in options) {
+                this.options[i] = options[i];
+        }
+
+        // Normalize options
+        this.translateZ = this.options.HWCompositing && utils.hasPerspective ? ' translateZ(0)' : '';
+
+        this.options.useTransition = utils.hasTransition && this.options.useTransition;
+        this.options.useTransform = utils.hasTransform && this.options.useTransform;
+
+        this.options.eventPassthrough = this.options.eventPassthrough === true ? 'vertical' : this.options.eventPassthrough;
+        this.options.preventDefault = !this.options.eventPassthrough && this.options.preventDefault;
+
+        // If you want eventPassthrough I have to lock one of the axes
+        this.options.scrollY = this.options.eventPassthrough === 'vertical' ? false : this.options.scrollY;
+        this.options.scrollX = this.options.eventPassthrough === 'horizontal' ? false : this.options.scrollX;
+
+        // With eventPassthrough we also need lockDirection mechanism
+        this.options.freeScroll = this.options.freeScroll && !this.options.eventPassthrough;
+        this.options.directionLockThreshold = this.options.eventPassthrough ? 0 : this.options.directionLockThreshold;
+
+        this.options.bounceEasing = typeof this.options.bounceEasing === 'string' ? utils.ease[this.options.bounceEasing] || utils.ease.circular : this.options.bounceEasing;
+
+        this.options.resizePolling = this.options.resizePolling === undefined ? 60 : this.options.resizePolling;
+
+        if (this.options.tap === true) {
+            this.options.tap = 'tap';
+        }
+
+        if (this.options.shrinkScrollbars === 'scale') {
+            this.options.useTransition = false;
+        }
+
+        this.options.invertWheelDirection = this.options.invertWheelDirection ? -1 : 1;
+
+        if (this.options.probeType === 3) {
+            this.options.useTransition = false;
+        }
+
+        // INSERT POINT: NORMALIZATION
+
+        // Some defaults
+        this.x = 0;
+        this.y = 0;
+        this.directionX = 0;
+        this.directionY = 0;
+        this._events = {};
+
+        // INSERT POINT: DEFAULTS
+
+        this._init();
+        this.refresh();
+
+        this.scrollTo(this.options.startX, this.options.startY);
+        this.enable();
+    }
+
+    IScroll.prototype = {
+        version: '5.1.3',
+
+        _init: function() {
+            this._initEvents();
+
+            if (this.options.scrollbars || this.options.indicators) {
+                this._initIndicators();
+            }
+
+            if (this.options.mouseWheel) {
+                this._initWheel();
+            }
+
+            if (this.options.snap) {
+                this._initSnap();
+            }
+
+            if (this.options.keyBindings) {
+                this._initKeys();
+            }
+
+            // INSERT POINT: _init
+
+        },
+
+        destroy: function() {
+            this._initEvents(true);
+
+            this._execEvent('destroy');
+        },
+
+        _transitionEnd: function(e) {
+            if (e.target !== this.scroller || !this.isInTransition) {
+                return;
+            }
+
+            this._transitionTime();
+            if (!this.resetPosition(this.options.bounceTime)) {
+                this.isInTransition = false;
+                this._execEvent('scrollEnd');
+            }
+        },
+
+        _start: function(e) {
+            // React to left mouse button only
+            if (utils.eventType[e.type] !== 1) {
+                if (e.button !== 0) {
+                    return;
+                }
+            }
+
+            if (!this.enabled || (this.initiated && utils.eventType[e.type] !== this.initiated)) {
+                return;
+            }
+
+            if (this.options.preventDefault && !utils.isBadAndroid && !utils.preventDefaultException(e.target, this.options.preventDefaultException)) {
+                e.preventDefault();
+            }
+
+            var point = e.touches ? e.touches[0] : e,
+                pos;
+
+            this.initiated = utils.eventType[e.type];
+            this.moved = false;
+            this.distX = 0;
+            this.distY = 0;
+            this.directionX = 0;
+            this.directionY = 0;
+            this.directionLocked = 0;
+
+            this._transitionTime();
+
+            this.startTime = utils.getTime();
+
+            if (this.options.useTransition && this.isInTransition) {
+                this.isInTransition = false;
+                pos = this.getComputedPosition();
+                this._translate(Math.round(pos.x), Math.round(pos.y));
+                this._execEvent('scrollEnd');
+            } else if (!this.options.useTransition && this.isAnimating) {
+                this.isAnimating = false;
+                this._execEvent('scrollEnd');
+            }
+
+            this.startX = this.x;
+            this.startY = this.y;
+            this.absStartX = this.x;
+            this.absStartY = this.y;
+            this.pointX = point.pageX;
+            this.pointY = point.pageY;
+
+            this._execEvent('beforeScrollStart');
+        },
+
+        _move: function(e) {
+            if (!this.enabled || utils.eventType[e.type] !== this.initiated) {
+                return;
+            }
+
+            if (this.options.preventDefault) { // increases performance on Android? TODO: check!
+                e.preventDefault();
+            }
+
+            var point = e.touches ? e.touches[0] : e,
+                deltaX = point.pageX - this.pointX,
+                deltaY = point.pageY - this.pointY,
+                timestamp = utils.getTime(),
+                newX, newY,
+                absDistX, absDistY;
+
+            this.pointX = point.pageX;
+            this.pointY = point.pageY;
+
+            this.distX += deltaX;
+            this.distY += deltaY;
+            absDistX = Math.abs(this.distX);
+            absDistY = Math.abs(this.distY);
+
+            // We need to move at least 10 pixels for the scrolling to initiate
+            if (timestamp - this.endTime > 300 && (absDistX < 10 && absDistY < 10)) {
+                return;
+            }
+
+            // If you are scrolling in one direction lock the other
+            if (!this.directionLocked && !this.options.freeScroll) {
+                if (absDistX > absDistY + this.options.directionLockThreshold) {
+                    this.directionLocked = 'h'; // lock horizontally
+                } else if (absDistY >= absDistX + this.options.directionLockThreshold) {
+                    this.directionLocked = 'v'; // lock vertically
+                } else {
+                    this.directionLocked = 'n'; // no lock
+                }
+            }
+
+            if (this.directionLocked === 'h') {
+                if (this.options.eventPassthrough === 'vertical') {
+                    e.preventDefault();
+                } else if (this.options.eventPassthrough === 'horizontal') {
+                    this.initiated = false;
+                    return;
+                }
+
+                deltaY = 0;
+            } else if (this.directionLocked === 'v') {
+                if (this.options.eventPassthrough === 'horizontal') {
+                    e.preventDefault();
+                } else if (this.options.eventPassthrough === 'vertical') {
+                    this.initiated = false;
+                    return;
+                }
+
+                deltaX = 0;
+            }
+
+            deltaX = this.hasHorizontalScroll ? deltaX : 0;
+            deltaY = this.hasVerticalScroll ? deltaY : 0;
+
+            newX = this.x + deltaX;
+            newY = this.y + deltaY;
+
+            // Slow down if outside of the boundaries
+            if (newX > 0 || newX < this.maxScrollX) {
+                newX = this.options.bounce ? this.x + deltaX / 3 : newX > 0 ? 0 : this.maxScrollX;
+            }
+            if (newY > 0 || newY < this.maxScrollY) {
+                newY = this.options.bounce ? this.y + deltaY / 3 : newY > 0 ? 0 : this.maxScrollY;
+            }
+
+            this.directionX = deltaX > 0 ? -1 : deltaX < 0 ? 1 : 0;
+            this.directionY = deltaY > 0 ? -1 : deltaY < 0 ? 1 : 0;
+
+            if (!this.moved) {
+                this._execEvent('scrollStart');
+            }
+
+            this.moved = true;
+
+            this._translate(newX, newY);
+
+            /* REPLACE START: _move */
+            if (timestamp - this.startTime > 300) {
+                this.startTime = timestamp;
+                this.startX = this.x;
+                this.startY = this.y;
+
+                if (this.options.probeType === 1) {
+                    this._execEvent('scroll');
+                }
+            }
+
+            if (this.options.probeType > 1) {
+                this._execEvent('scroll');
+            }
+            /* REPLACE END: _move */
+
+        },
+
+        _end: function(e) {
+            if (!this.enabled || utils.eventType[e.type] !== this.initiated) {
+                return;
+            }
+
+            if (this.options.preventDefault && !utils.preventDefaultException(e.target, this.options.preventDefaultException)) {
+                e.preventDefault();
+            }
+
+            var /*point = e.changedTouches ? e.changedTouches[0] : e,*/
+                momentumX,
+                momentumY,
+                duration = utils.getTime() - this.startTime,
+                newX = Math.round(this.x),
+                newY = Math.round(this.y),
+                distanceX = Math.abs(newX - this.startX),
+                distanceY = Math.abs(newY - this.startY),
+                time = 0,
+                easing = '';
+
+            this.isInTransition = 0;
+            this.initiated = 0;
+            this.endTime = utils.getTime();
+
+            // reset if we are outside of the boundaries
+            if (this.resetPosition(this.options.bounceTime)) {
+                return;
+            }
+
+            this.scrollTo(newX, newY); // ensures that the last position is rounded
+
+            // we scrolled less than 10 pixels
+            if (!this.moved) {
+                if (this.options.tap) {
+                    utils.tap(e, this.options.tap);
+                }
+
+                if (this.options.click) {
+                    utils.click(e);
+                }
+
+                this._execEvent('scrollCancel');
+                return;
+            }
+
+            if (this._events.flick && duration < 200 && distanceX < 100 && distanceY < 100) {
+                this._execEvent('flick');
+                return;
+            }
+
+            // start momentum animation if needed
+            if (this.options.momentum && duration < 300) {
+                momentumX = this.hasHorizontalScroll ? utils.momentum(this.x, this.startX, duration, this.maxScrollX, this.options.bounce ? this.wrapperWidth : 0, this.options.deceleration, this) : {
+                    destination: newX,
+                    duration: 0
+                };
+                momentumY = this.hasVerticalScroll ? utils.momentum(this.y, this.startY, duration, this.maxScrollY, this.options.bounce ? this.wrapperHeight : 0, this.options.deceleration, this) : {
+                    destination: newY,
+                    duration: 0
+                };
+                newX = momentumX.destination;
+                newY = momentumY.destination;
+                time = Math.max(momentumX.duration, momentumY.duration);
+                this.isInTransition = 1;
+            }
+
+
+            if (this.options.snap) {
+                var snap = this._nearestSnap(newX, newY);
+                this.currentPage = snap;
+                time = this.options.snapSpeed || Math.max(
+                    Math.max(
+                        Math.min(Math.abs(newX - snap.x), 1000),
+                        Math.min(Math.abs(newY - snap.y), 1000)
+                    ), 300);
+                newX = snap.x;
+                newY = snap.y;
+
+                this.directionX = 0;
+                this.directionY = 0;
+                easing = this.options.bounceEasing;
+            }
+
+            // INSERT POINT: _end
+
+            if (newX !== this.x || newY !== this.y) {
+                // change easing function when scroller goes out of the boundaries
+                if (newX > 0 || newX < this.maxScrollX || newY > 0 || newY < this.maxScrollY) {
+                    easing = utils.ease.quadratic;
+                }
+
+                this.scrollTo(newX, newY, time, easing);
+                return;
+            }
+
+            this._execEvent('scrollEnd');
+        },
+
+        _resize: function() {
+            var that = this;
+
+            clearTimeout(this.resizeTimeout);
+
+            this.resizeTimeout = setTimeout(function() {
+                that.refresh();
+            }, this.options.resizePolling);
+        },
+
+        resetPosition: function(time) {
+            var x = this.x,
+                y = this.y;
+
+            time = time || 0;
+
+            if (!this.hasHorizontalScroll || this.x > 0) {
+                x = 0;
+            } else if (this.x < this.maxScrollX) {
+                x = this.maxScrollX;
+            }
+
+            if (!this.hasVerticalScroll || this.y > 0) {
+                y = 0;
+            } else if (this.y < this.maxScrollY) {
+                y = this.maxScrollY;
+            }
+
+            if (x === this.x && y === this.y) {
+                return false;
+            }
+
+            if (this.options.ptr && this.y > 44 && this.startY * -1 < $(window).height() && !this.ptrLock) {// jshint ignore:line
+                // not trigger ptr when user want to scroll to top
+                y = this.options.ptrOffset || 44;
+                this._execEvent('ptr');
+                // 防止返回的过程中再次触发了 ptr ，导致被定位到 44px（因为可能done事件触发很快，在返回到44px以前就触发done
+                this.ptrLock = true;
+                var self = this;
+                setTimeout(function() {
+                    self.ptrLock = false;
+                }, 500);
+            }
+
+            this.scrollTo(x, y, time, this.options.bounceEasing);
+
+            return true;
+        },
+
+        disable: function() {
+            this.enabled = false;
+        },
+
+        enable: function() {
+            this.enabled = true;
+        },
+
+        refresh: function() {
+            // var rf = this.wrapper.offsetHeight; // Force reflow
+
+            this.wrapperWidth = this.wrapper.clientWidth;
+            this.wrapperHeight = this.wrapper.clientHeight;
+
+            /* REPLACE START: refresh */
+
+            this.scrollerWidth = this.scroller.offsetWidth;
+            this.scrollerHeight = this.scroller.offsetHeight;
+
+            this.maxScrollX = this.wrapperWidth - this.scrollerWidth;
+            this.maxScrollY = this.wrapperHeight - this.scrollerHeight;
+
+            /* REPLACE END: refresh */
+
+            this.hasHorizontalScroll = this.options.scrollX && this.maxScrollX < 0;
+            this.hasVerticalScroll = this.options.scrollY && this.maxScrollY < 0;
+
+            if (!this.hasHorizontalScroll) {
+                this.maxScrollX = 0;
+                this.scrollerWidth = this.wrapperWidth;
+            }
+
+            if (!this.hasVerticalScroll) {
+                this.maxScrollY = 0;
+                this.scrollerHeight = this.wrapperHeight;
+            }
+
+            this.endTime = 0;
+            this.directionX = 0;
+            this.directionY = 0;
+
+            this.wrapperOffset = utils.offset(this.wrapper);
+
+            this._execEvent('refresh');
+
+            this.resetPosition();
+
+            // INSERT POINT: _refresh
+
+        },
+
+        on: function(type, fn) {
+            if (!this._events[type]) {
+                this._events[type] = [];
+            }
+
+            this._events[type].push(fn);
+        },
+
+        off: function(type, fn) {
+            if (!this._events[type]) {
+                return;
+            }
+
+            var index = this._events[type].indexOf(fn);
+
+            if (index > -1) {
+                this._events[type].splice(index, 1);
+            }
+        },
+
+        _execEvent: function(type) {
+            if (!this._events[type]) {
+                return;
+            }
+
+            var i = 0,
+                l = this._events[type].length;
+
+            if (!l) {
+                return;
+            }
+
+            for (; i < l; i++) {
+                this._events[type][i].apply(this, [].slice.call(arguments, 1));
+            }
+        },
+
+        scrollBy: function(x, y, time, easing) {
+            x = this.x + x;
+            y = this.y + y;
+            time = time || 0;
+
+            this.scrollTo(x, y, time, easing);
+        },
+
+        scrollTo: function(x, y, time, easing) {
+            easing = easing || utils.ease.circular;
+
+            this.isInTransition = this.options.useTransition && time > 0;
+
+            if (!time || (this.options.useTransition && easing.style)) {
+                this._transitionTimingFunction(easing.style);
+                this._transitionTime(time);
+                this._translate(x, y);
+            } else {
+                this._animate(x, y, time, easing.fn);
+            }
+        },
+
+        scrollToElement: function(el, time, offsetX, offsetY, easing) {
+            el = el.nodeType ? el : this.scroller.querySelector(el);
+
+            if (!el) {
+                return;
+            }
+
+            var pos = utils.offset(el);
+
+            pos.left -= this.wrapperOffset.left;
+            pos.top -= this.wrapperOffset.top;
+
+            // if offsetX/Y are true we center the element to the screen
+            if (offsetX === true) {
+                offsetX = Math.round(el.offsetWidth / 2 - this.wrapper.offsetWidth / 2);
+            }
+            if (offsetY === true) {
+                offsetY = Math.round(el.offsetHeight / 2 - this.wrapper.offsetHeight / 2);
+            }
+
+            pos.left -= offsetX || 0;
+            pos.top -= offsetY || 0;
+
+            pos.left = pos.left > 0 ? 0 : pos.left < this.maxScrollX ? this.maxScrollX : pos.left;
+            pos.top = pos.top > 0 ? 0 : pos.top < this.maxScrollY ? this.maxScrollY : pos.top;
+
+            time = time === undefined || time === null || time === 'auto' ? Math.max(Math.abs(this.x - pos.left), Math.abs(this.y - pos.top)) : time;
+
+            this.scrollTo(pos.left, pos.top, time, easing);
+        },
+
+        _transitionTime: function(time) {
+            time = time || 0;
+
+            this.scrollerStyle[utils.style.transitionDuration] = time + 'ms';
+
+            if (!time && utils.isBadAndroid) {
+                this.scrollerStyle[utils.style.transitionDuration] = '0.001s';
+            }
+
+
+            if (this.indicators) {
+                for (var i = this.indicators.length; i--;) {
+                    this.indicators[i].transitionTime(time);
+                }
+            }
+
+
+            // INSERT POINT: _transitionTime
+
+        },
+
+        _transitionTimingFunction: function(easing) {
+            this.scrollerStyle[utils.style.transitionTimingFunction] = easing;
+
+
+            if (this.indicators) {
+                for (var i = this.indicators.length; i--;) {
+                    this.indicators[i].transitionTimingFunction(easing);
+                }
+            }
+
+
+            // INSERT POINT: _transitionTimingFunction
+
+        },
+
+        _translate: function(x, y) {
+            if (this.options.useTransform) {
+
+                /* REPLACE START: _translate */
+
+                this.scrollerStyle[utils.style.transform] = 'translate(' + x + 'px,' + y + 'px)' + this.translateZ;
+
+                /* REPLACE END: _translate */
+
+            } else {
+                x = Math.round(x);
+                y = Math.round(y);
+                this.scrollerStyle.left = x + 'px';
+                this.scrollerStyle.top = y + 'px';
+            }
+
+            this.x = x;
+            this.y = y;
+
+
+            if (this.indicators) {
+                for (var i = this.indicators.length; i--;) {
+                    this.indicators[i].updatePosition();
+                }
+            }
+
+
+            // INSERT POINT: _translate
+
+        },
+
+        _initEvents: function(remove) {
+            var eventType = remove ? utils.removeEvent : utils.addEvent,
+                target = this.options.bindToWrapper ? this.wrapper : window;
+
+            eventType(window, 'orientationchange', this);
+            eventType(window, 'resize', this);
+
+            if (this.options.click) {
+                eventType(this.wrapper, 'click', this, true);
+            }
+
+            if (!this.options.disableMouse) {
+                eventType(this.wrapper, 'mousedown', this);
+                eventType(target, 'mousemove', this);
+                eventType(target, 'mousecancel', this);
+                eventType(target, 'mouseup', this);
+            }
+
+            if (utils.hasPointer && !this.options.disablePointer) {
+                eventType(this.wrapper, utils.prefixPointerEvent('pointerdown'), this);
+                eventType(target, utils.prefixPointerEvent('pointermove'), this);
+                eventType(target, utils.prefixPointerEvent('pointercancel'), this);
+                eventType(target, utils.prefixPointerEvent('pointerup'), this);
+            }
+
+            if (utils.hasTouch && !this.options.disableTouch) {
+                eventType(this.wrapper, 'touchstart', this);
+                eventType(target, 'touchmove', this);
+                eventType(target, 'touchcancel', this);
+                eventType(target, 'touchend', this);
+            }
+
+            eventType(this.scroller, 'transitionend', this);
+            eventType(this.scroller, 'webkitTransitionEnd', this);
+            eventType(this.scroller, 'oTransitionEnd', this);
+            eventType(this.scroller, 'MSTransitionEnd', this);
+        },
+
+        getComputedPosition: function() {
+            var matrix = window.getComputedStyle(this.scroller, null),
+                x, y;
+
+            if (this.options.useTransform) {
+                matrix = matrix[utils.style.transform].split(')')[0].split(', ');
+                x = +(matrix[12] || matrix[4]);
+                y = +(matrix[13] || matrix[5]);
+            } else {
+                x = +matrix.left.replace(/[^-\d.]/g, '');
+                y = +matrix.top.replace(/[^-\d.]/g, '');
+            }
+
+            return {
+                x: x,
+                y: y
+            };
+        },
+
+        _initIndicators: function() {
+            var interactive = this.options.interactiveScrollbars,
+                customStyle = typeof this.options.scrollbars !== 'string',
+                indicators = [],
+                indicator;
+
+            var that = this;
+
+            this.indicators = [];
+
+            if (this.options.scrollbars) {
+                // Vertical scrollbar
+                if (this.options.scrollY) {
+                    indicator = {
+                        el: createDefaultScrollbar('v', interactive, this.options.scrollbars),
+                        interactive: interactive,
+                        defaultScrollbars: true,
+                        customStyle: customStyle,
+                        resize: this.options.resizeScrollbars,
+                        shrink: this.options.shrinkScrollbars,
+                        fade: this.options.fadeScrollbars,
+                        listenX: false
+                    };
+
+                    this.wrapper.appendChild(indicator.el);
+                    indicators.push(indicator);
+                }
+
+                // Horizontal scrollbar
+                if (this.options.scrollX) {
+                    indicator = {
+                        el: createDefaultScrollbar('h', interactive, this.options.scrollbars),
+                        interactive: interactive,
+                        defaultScrollbars: true,
+                        customStyle: customStyle,
+                        resize: this.options.resizeScrollbars,
+                        shrink: this.options.shrinkScrollbars,
+                        fade: this.options.fadeScrollbars,
+                        listenY: false
+                    };
+
+                    this.wrapper.appendChild(indicator.el);
+                    indicators.push(indicator);
+                }
+            }
+
+            if (this.options.indicators) {
+                // TODO: check concat compatibility
+                indicators = indicators.concat(this.options.indicators);
+            }
+
+            for (var i = indicators.length; i--;) {
+                this.indicators.push(new Indicator(this, indicators[i]));
+            }
+
+            // TODO: check if we can use array.map (wide compatibility and performance issues)
+            function _indicatorsMap(fn) {
+                for (var i = that.indicators.length; i--;) {
+                    fn.call(that.indicators[i]);
+                }
+            }
+
+            if (this.options.fadeScrollbars) {
+                this.on('scrollEnd', function() {
+                    _indicatorsMap(function() {
+                        this.fade();
+                    });
+                });
+
+                this.on('scrollCancel', function() {
+                    _indicatorsMap(function() {
+                        this.fade();
+                    });
+                });
+
+                this.on('scrollStart', function() {
+                    _indicatorsMap(function() {
+                        this.fade(1);
+                    });
+                });
+
+                this.on('beforeScrollStart', function() {
+                    _indicatorsMap(function() {
+                        this.fade(1, true);
+                    });
+                });
+            }
+
+
+            this.on('refresh', function() {
+                _indicatorsMap(function() {
+                    this.refresh();
+                });
+            });
+
+            this.on('destroy', function() {
+                _indicatorsMap(function() {
+                    this.destroy();
+                });
+
+                delete this.indicators;
+            });
+        },
+
+        _initWheel: function() {
+            utils.addEvent(this.wrapper, 'wheel', this);
+            utils.addEvent(this.wrapper, 'mousewheel', this);
+            utils.addEvent(this.wrapper, 'DOMMouseScroll', this);
+
+            this.on('destroy', function() {
+                utils.removeEvent(this.wrapper, 'wheel', this);
+                utils.removeEvent(this.wrapper, 'mousewheel', this);
+                utils.removeEvent(this.wrapper, 'DOMMouseScroll', this);
+            });
+        },
+
+        _wheel: function(e) {
+            if (!this.enabled) {
+                return;
+            }
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            var wheelDeltaX, wheelDeltaY,
+                newX, newY,
+                that = this;
+
+            if (this.wheelTimeout === undefined) {
+                that._execEvent('scrollStart');
+            }
+
+            // Execute the scrollEnd event after 400ms the wheel stopped scrolling
+            clearTimeout(this.wheelTimeout);
+            this.wheelTimeout = setTimeout(function() {
+                that._execEvent('scrollEnd');
+                that.wheelTimeout = undefined;
+            }, 400);
+
+            if ('deltaX' in e) {
+                if (e.deltaMode === 1) {
+                    wheelDeltaX = -e.deltaX * this.options.mouseWheelSpeed;
+                    wheelDeltaY = -e.deltaY * this.options.mouseWheelSpeed;
+                } else {
+                    wheelDeltaX = -e.deltaX;
+                    wheelDeltaY = -e.deltaY;
+                }
+            } else if ('wheelDeltaX' in e) {
+                wheelDeltaX = e.wheelDeltaX / 120 * this.options.mouseWheelSpeed;
+                wheelDeltaY = e.wheelDeltaY / 120 * this.options.mouseWheelSpeed;
+            } else if ('wheelDelta' in e) {
+                wheelDeltaX = wheelDeltaY = e.wheelDelta / 120 * this.options.mouseWheelSpeed;
+            } else if ('detail' in e) {
+                wheelDeltaX = wheelDeltaY = -e.detail / 3 * this.options.mouseWheelSpeed;
+            } else {
+                return;
+            }
+
+            wheelDeltaX *= this.options.invertWheelDirection;
+            wheelDeltaY *= this.options.invertWheelDirection;
+
+            if (!this.hasVerticalScroll) {
+                wheelDeltaX = wheelDeltaY;
+                wheelDeltaY = 0;
+            }
+
+            if (this.options.snap) {
+                newX = this.currentPage.pageX;
+                newY = this.currentPage.pageY;
+
+                if (wheelDeltaX > 0) {
+                    newX--;
+                } else if (wheelDeltaX < 0) {
+                    newX++;
+                }
+
+                if (wheelDeltaY > 0) {
+                    newY--;
+                } else if (wheelDeltaY < 0) {
+                    newY++;
+                }
+
+                this.goToPage(newX, newY);
+
+                return;
+            }
+
+            newX = this.x + Math.round(this.hasHorizontalScroll ? wheelDeltaX : 0);
+            newY = this.y + Math.round(this.hasVerticalScroll ? wheelDeltaY : 0);
+
+            if (newX > 0) {
+                newX = 0;
+            } else if (newX < this.maxScrollX) {
+                newX = this.maxScrollX;
+            }
+
+            if (newY > 0) {
+                newY = 0;
+            } else if (newY < this.maxScrollY) {
+                newY = this.maxScrollY;
+            }
+
+            this.scrollTo(newX, newY, 0);
+
+            this._execEvent('scroll');
+
+            // INSERT POINT: _wheel
+        },
+
+        _initSnap: function() {
+            this.currentPage = {};
+
+            if (typeof this.options.snap === 'string') {
+                this.options.snap = this.scroller.querySelectorAll(this.options.snap);
+            }
+
+            this.on('refresh', function() {
+                var i = 0,
+                    l,
+                    m = 0,
+                    n,
+                    cx, cy,
+                    x = 0,
+                    y,
+                    stepX = this.options.snapStepX || this.wrapperWidth,
+                    stepY = this.options.snapStepY || this.wrapperHeight,
+                    el;
+
+                this.pages = [];
+
+                if (!this.wrapperWidth || !this.wrapperHeight || !this.scrollerWidth || !this.scrollerHeight) {
+                    return;
+                }
+
+                if (this.options.snap === true) {
+                    cx = Math.round(stepX / 2);
+                    cy = Math.round(stepY / 2);
+
+                    while (x > -this.scrollerWidth) {
+                        this.pages[i] = [];
+                        l = 0;
+                        y = 0;
+
+                        while (y > -this.scrollerHeight) {
+                            this.pages[i][l] = {
+                                x: Math.max(x, this.maxScrollX),
+                                y: Math.max(y, this.maxScrollY),
+                                width: stepX,
+                                height: stepY,
+                                cx: x - cx,
+                                cy: y - cy
+                            };
+
+                            y -= stepY;
+                            l++;
+                        }
+
+                        x -= stepX;
+                        i++;
+                    }
+                } else {
+                    el = this.options.snap;
+                    l = el.length;
+                    n = -1;
+
+                    for (; i < l; i++) {
+                        if (i === 0 || el[i].offsetLeft <= el[i - 1].offsetLeft) {
+                            m = 0;
+                            n++;
+                        }
+
+                        if (!this.pages[m]) {
+                            this.pages[m] = [];
+                        }
+
+                        x = Math.max(-el[i].offsetLeft, this.maxScrollX);
+                        y = Math.max(-el[i].offsetTop, this.maxScrollY);
+                        cx = x - Math.round(el[i].offsetWidth / 2);
+                        cy = y - Math.round(el[i].offsetHeight / 2);
+
+                        this.pages[m][n] = {
+                            x: x,
+                            y: y,
+                            width: el[i].offsetWidth,
+                            height: el[i].offsetHeight,
+                            cx: cx,
+                            cy: cy
+                        };
+
+                        if (x > this.maxScrollX) {
+                            m++;
+                        }
+                    }
+                }
+
+                this.goToPage(this.currentPage.pageX || 0, this.currentPage.pageY || 0, 0);
+
+                // Update snap threshold if needed
+                if (this.options.snapThreshold % 1 === 0) {
+                    this.snapThresholdX = this.options.snapThreshold;
+                    this.snapThresholdY = this.options.snapThreshold;
+                } else {
+                    this.snapThresholdX = Math.round(this.pages[this.currentPage.pageX][this.currentPage.pageY].width * this.options.snapThreshold);
+                    this.snapThresholdY = Math.round(this.pages[this.currentPage.pageX][this.currentPage.pageY].height * this.options.snapThreshold);
+                }
+            });
+
+            this.on('flick', function() {
+                var time = this.options.snapSpeed || Math.max(
+                    Math.max(
+                        Math.min(Math.abs(this.x - this.startX), 1000),
+                        Math.min(Math.abs(this.y - this.startY), 1000)
+                    ), 300);
+
+                this.goToPage(
+                    this.currentPage.pageX + this.directionX,
+                    this.currentPage.pageY + this.directionY,
+                    time
+                );
+            });
+        },
+
+        _nearestSnap: function(x, y) {
+            if (!this.pages.length) {
+                return {
+                    x: 0,
+                    y: 0,
+                    pageX: 0,
+                    pageY: 0
+                };
+            }
+
+            var i = 0,
+                l = this.pages.length,
+                m = 0;
+
+            // Check if we exceeded the snap threshold
+            if (Math.abs(x - this.absStartX) < this.snapThresholdX &&
+                Math.abs(y - this.absStartY) < this.snapThresholdY) {
+                return this.currentPage;
+            }
+
+            if (x > 0) {
+                x = 0;
+            } else if (x < this.maxScrollX) {
+                x = this.maxScrollX;
+            }
+
+            if (y > 0) {
+                y = 0;
+            } else if (y < this.maxScrollY) {
+                y = this.maxScrollY;
+            }
+
+            for (; i < l; i++) {
+                if (x >= this.pages[i][0].cx) {
+                    x = this.pages[i][0].x;
+                    break;
+                }
+            }
+
+            l = this.pages[i].length;
+
+            for (; m < l; m++) {
+                if (y >= this.pages[0][m].cy) {
+                    y = this.pages[0][m].y;
+                    break;
+                }
+            }
+
+            if (i === this.currentPage.pageX) {
+                i += this.directionX;
+
+                if (i < 0) {
+                    i = 0;
+                } else if (i >= this.pages.length) {
+                    i = this.pages.length - 1;
+                }
+
+                x = this.pages[i][0].x;
+            }
+
+            if (m === this.currentPage.pageY) {
+                m += this.directionY;
+
+                if (m < 0) {
+                    m = 0;
+                } else if (m >= this.pages[0].length) {
+                    m = this.pages[0].length - 1;
+                }
+
+                y = this.pages[0][m].y;
+            }
+
+            return {
+                x: x,
+                y: y,
+                pageX: i,
+                pageY: m
+            };
+        },
+
+        goToPage: function(x, y, time, easing) {
+            easing = easing || this.options.bounceEasing;
+
+            if (x >= this.pages.length) {
+                x = this.pages.length - 1;
+            } else if (x < 0) {
+                x = 0;
+            }
+
+            if (y >= this.pages[x].length) {
+                y = this.pages[x].length - 1;
+            } else if (y < 0) {
+                y = 0;
+            }
+
+            var posX = this.pages[x][y].x,
+                posY = this.pages[x][y].y;
+
+            time = time === undefined ? this.options.snapSpeed || Math.max(
+                Math.max(
+                    Math.min(Math.abs(posX - this.x), 1000),
+                    Math.min(Math.abs(posY - this.y), 1000)
+                ), 300) : time;
+
+            this.currentPage = {
+                x: posX,
+                y: posY,
+                pageX: x,
+                pageY: y
+            };
+
+            this.scrollTo(posX, posY, time, easing);
+        },
+
+        next: function(time, easing) {
+            var x = this.currentPage.pageX,
+                y = this.currentPage.pageY;
+
+            x++;
+
+            if (x >= this.pages.length && this.hasVerticalScroll) {
+                x = 0;
+                y++;
+            }
+
+            this.goToPage(x, y, time, easing);
+        },
+
+        prev: function(time, easing) {
+            var x = this.currentPage.pageX,
+                y = this.currentPage.pageY;
+
+            x--;
+
+            if (x < 0 && this.hasVerticalScroll) {
+                x = 0;
+                y--;
+            }
+
+            this.goToPage(x, y, time, easing);
+        },
+
+        _initKeys: function() {
+            // default key bindings
+            var keys = {
+                pageUp: 33,
+                pageDown: 34,
+                end: 35,
+                home: 36,
+                left: 37,
+                up: 38,
+                right: 39,
+                down: 40
+            };
+            var i;
+
+            // if you give me characters I give you keycode
+            if (typeof this.options.keyBindings === 'object') {
+                for (i in this.options.keyBindings) {
+                    if (typeof this.options.keyBindings[i] === 'string') {
+                        this.options.keyBindings[i] = this.options.keyBindings[i].toUpperCase().charCodeAt(0);
+                    }
+                }
+            } else {
+                this.options.keyBindings = {};
+            }
+
+            for (i in keys) { // jshint ignore:line
+                    this.options.keyBindings[i] = this.options.keyBindings[i] || keys[i];
+            }
+
+            utils.addEvent(window, 'keydown', this);
+
+            this.on('destroy', function() {
+                utils.removeEvent(window, 'keydown', this);
+            });
+        },
+
+        _key: function(e) {
+            if (!this.enabled) {
+                return;
+            }
+
+            var snap = this.options.snap, // we are using this alot, better to cache it
+                newX = snap ? this.currentPage.pageX : this.x,
+                newY = snap ? this.currentPage.pageY : this.y,
+                now = utils.getTime(),
+                prevTime = this.keyTime || 0,
+                acceleration = 0.250,
+                pos;
+
+            if (this.options.useTransition && this.isInTransition) {
+                pos = this.getComputedPosition();
+
+                this._translate(Math.round(pos.x), Math.round(pos.y));
+                this.isInTransition = false;
+            }
+
+            this.keyAcceleration = now - prevTime < 200 ? Math.min(this.keyAcceleration + acceleration, 50) : 0;
+
+            switch (e.keyCode) {
+                case this.options.keyBindings.pageUp:
+                    if (this.hasHorizontalScroll && !this.hasVerticalScroll) {
+                        newX += snap ? 1 : this.wrapperWidth;
+                    } else {
+                        newY += snap ? 1 : this.wrapperHeight;
+                    }
+                    break;
+                case this.options.keyBindings.pageDown:
+                    if (this.hasHorizontalScroll && !this.hasVerticalScroll) {
+                        newX -= snap ? 1 : this.wrapperWidth;
+                    } else {
+                        newY -= snap ? 1 : this.wrapperHeight;
+                    }
+                    break;
+                case this.options.keyBindings.end:
+                    newX = snap ? this.pages.length - 1 : this.maxScrollX;
+                    newY = snap ? this.pages[0].length - 1 : this.maxScrollY;
+                    break;
+                case this.options.keyBindings.home:
+                    newX = 0;
+                    newY = 0;
+                    break;
+                case this.options.keyBindings.left:
+                    newX += snap ? -1 : 5 + this.keyAcceleration >> 0; // jshint ignore:line
+                    break;
+                case this.options.keyBindings.up:
+                    newY += snap ? 1 : 5 + this.keyAcceleration >> 0; // jshint ignore:line
+                    break;
+                case this.options.keyBindings.right:
+                    newX -= snap ? -1 : 5 + this.keyAcceleration >> 0; // jshint ignore:line
+                    break;
+                case this.options.keyBindings.down:
+                    newY -= snap ? 1 : 5 + this.keyAcceleration >> 0; // jshint ignore:line
+                    break;
+                default:
+                    return;
+            }
+
+            if (snap) {
+                this.goToPage(newX, newY);
+                return;
+            }
+
+            if (newX > 0) {
+                newX = 0;
+                this.keyAcceleration = 0;
+            } else if (newX < this.maxScrollX) {
+                newX = this.maxScrollX;
+                this.keyAcceleration = 0;
+            }
+
+            if (newY > 0) {
+                newY = 0;
+                this.keyAcceleration = 0;
+            } else if (newY < this.maxScrollY) {
+                newY = this.maxScrollY;
+                this.keyAcceleration = 0;
+            }
+
+            this.scrollTo(newX, newY, 0);
+
+            this.keyTime = now;
+        },
+
+        _animate: function(destX, destY, duration, easingFn) {
+            var that = this,
+                startX = this.x,
+                startY = this.y,
+                startTime = utils.getTime(),
+                destTime = startTime + duration;
+
+            function step() {
+                var now = utils.getTime(),
+                    newX, newY,
+                    easing;
+
+                if (now >= destTime) {
+                    that.isAnimating = false;
+                    that._translate(destX, destY);
+
+                    if (!that.resetPosition(that.options.bounceTime)) {
+                        that._execEvent('scrollEnd');
+                    }
+
+                    return;
+                }
+
+                now = (now - startTime) / duration;
+                easing = easingFn(now);
+                newX = (destX - startX) * easing + startX;
+                newY = (destY - startY) * easing + startY;
+                that._translate(newX, newY);
+
+                if (that.isAnimating) {
+                    rAF(step);
+                }
+
+                if (that.options.probeType === 3) {
+                    that._execEvent('scroll');
+                }
+            }
+
+            this.isAnimating = true;
+            step();
+        },
+
+        handleEvent: function(e) {
+            switch (e.type) {
+                case 'touchstart':
+                case 'pointerdown':
+                case 'MSPointerDown':
+                case 'mousedown':
+                    this._start(e);
+                    break;
+                case 'touchmove':
+                case 'pointermove':
+                case 'MSPointerMove':
+                case 'mousemove':
+                    this._move(e);
+                    break;
+                case 'touchend':
+                case 'pointerup':
+                case 'MSPointerUp':
+                case 'mouseup':
+                case 'touchcancel':
+                case 'pointercancel':
+                case 'MSPointerCancel':
+                case 'mousecancel':
+                    this._end(e);
+                    break;
+                case 'orientationchange':
+                case 'resize':
+                    this._resize();
+                    break;
+                case 'transitionend':
+                case 'webkitTransitionEnd':
+                case 'oTransitionEnd':
+                case 'MSTransitionEnd':
+                    this._transitionEnd(e);
+                    break;
+                case 'wheel':
+                case 'DOMMouseScroll':
+                case 'mousewheel':
+                    this._wheel(e);
+                    break;
+                case 'keydown':
+                    this._key(e);
+                    break;
+                case 'click':
+                    if (!e._constructed) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                    break;
+            }
+        }
+    };
+
+    function createDefaultScrollbar(direction, interactive, type) {
+        var scrollbar = document.createElement('div'),
+            indicator = document.createElement('div');
+
+        if (type === true) {
+            scrollbar.style.cssText = 'position:absolute;z-index:9999';
+            indicator.style.cssText = '-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;position:absolute;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.9);border-radius:3px';
+        }
+
+        indicator.className = 'iScrollIndicator';
+
+        if (direction === 'h') {
+            if (type === true) {
+                scrollbar.style.cssText += ';height:5px;left:2px;right:2px;bottom:0';
+                indicator.style.height = '100%';
+            }
+            scrollbar.className = 'iScrollHorizontalScrollbar';
+        } else {
+            if (type === true) {
+                scrollbar.style.cssText += ';width:5px;bottom:2px;top:2px;right:1px';
+                indicator.style.width = '100%';
+            }
+            scrollbar.className = 'iScrollVerticalScrollbar';
+        }
+
+        scrollbar.style.cssText += ';overflow:hidden';
+
+        if (!interactive) {
+            scrollbar.style.pointerEvents = 'none';
+        }
+
+        scrollbar.appendChild(indicator);
+
+        return scrollbar;
+    }
+
+    function Indicator(scroller, options) {
+        this.wrapper = typeof options.el === 'string' ? document.querySelector(options.el) : options.el;
+        this.wrapperStyle = this.wrapper.style;
+        this.indicator = this.wrapper.children[0];
+        this.indicatorStyle = this.indicator.style;
+        this.scroller = scroller;
+
+        this.options = {
+            listenX: true,
+            listenY: true,
+            interactive: false,
+            resize: true,
+            defaultScrollbars: false,
+            shrink: false,
+            fade: false,
+            speedRatioX: 0,
+            speedRatioY: 0
+        };
+
+        for (var i in options) { // jshint ignore:line
+                this.options[i] = options[i];
+
+        }
+
+        this.sizeRatioX = 1;
+        this.sizeRatioY = 1;
+        this.maxPosX = 0;
+        this.maxPosY = 0;
+
+        if (this.options.interactive) {
+            if (!this.options.disableTouch) {
+                utils.addEvent(this.indicator, 'touchstart', this);
+                utils.addEvent(window, 'touchend', this);
+            }
+            if (!this.options.disablePointer) {
+                utils.addEvent(this.indicator, utils.prefixPointerEvent('pointerdown'), this);
+                utils.addEvent(window, utils.prefixPointerEvent('pointerup'), this);
+            }
+            if (!this.options.disableMouse) {
+                utils.addEvent(this.indicator, 'mousedown', this);
+                utils.addEvent(window, 'mouseup', this);
+            }
+        }
+
+        if (this.options.fade) {
+            this.wrapperStyle[utils.style.transform] = this.scroller.translateZ;
+            this.wrapperStyle[utils.style.transitionDuration] = utils.isBadAndroid ? '0.001s' : '0ms';
+            this.wrapperStyle.opacity = '0';
+        }
+    }
+
+    Indicator.prototype = {
+        handleEvent: function(e) {
+            switch (e.type) {
+                case 'touchstart':
+                case 'pointerdown':
+                case 'MSPointerDown':
+                case 'mousedown':
+                    this._start(e);
+                    break;
+                case 'touchmove':
+                case 'pointermove':
+                case 'MSPointerMove':
+                case 'mousemove':
+                    this._move(e);
+                    break;
+                case 'touchend':
+                case 'pointerup':
+                case 'MSPointerUp':
+                case 'mouseup':
+                case 'touchcancel':
+                case 'pointercancel':
+                case 'MSPointerCancel':
+                case 'mousecancel':
+                    this._end(e);
+                    break;
+            }
+        },
+
+        destroy: function() {
+            if (this.options.interactive) {
+                utils.removeEvent(this.indicator, 'touchstart', this);
+                utils.removeEvent(this.indicator, utils.prefixPointerEvent('pointerdown'), this);
+                utils.removeEvent(this.indicator, 'mousedown', this);
+
+                utils.removeEvent(window, 'touchmove', this);
+                utils.removeEvent(window, utils.prefixPointerEvent('pointermove'), this);
+                utils.removeEvent(window, 'mousemove', this);
+
+                utils.removeEvent(window, 'touchend', this);
+                utils.removeEvent(window, utils.prefixPointerEvent('pointerup'), this);
+                utils.removeEvent(window, 'mouseup', this);
+            }
+
+            if (this.options.defaultScrollbars) {
+                this.wrapper.parentNode.removeChild(this.wrapper);
+            }
+        },
+
+        _start: function(e) {
+            var point = e.touches ? e.touches[0] : e;
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            this.transitionTime();
+
+            this.initiated = true;
+            this.moved = false;
+            this.lastPointX = point.pageX;
+            this.lastPointY = point.pageY;
+
+            this.startTime = utils.getTime();
+
+            if (!this.options.disableTouch) {
+                utils.addEvent(window, 'touchmove', this);
+            }
+            if (!this.options.disablePointer) {
+                utils.addEvent(window, utils.prefixPointerEvent('pointermove'), this);
+            }
+            if (!this.options.disableMouse) {
+                utils.addEvent(window, 'mousemove', this);
+            }
+
+            this.scroller._execEvent('beforeScrollStart');
+        },
+
+        _move: function(e) {
+            var point = e.touches ? e.touches[0] : e,
+                deltaX, deltaY,
+                newX, newY,
+                timestamp = utils.getTime();
+
+            if (!this.moved) {
+                this.scroller._execEvent('scrollStart');
+            }
+
+            this.moved = true;
+
+            deltaX = point.pageX - this.lastPointX;
+            this.lastPointX = point.pageX;
+
+            deltaY = point.pageY - this.lastPointY;
+            this.lastPointY = point.pageY;
+
+            newX = this.x + deltaX;
+            newY = this.y + deltaY;
+
+            this._pos(newX, newY);
+
+
+            if (this.scroller.options.probeType === 1 && timestamp - this.startTime > 300) {
+                this.startTime = timestamp;
+                this.scroller._execEvent('scroll');
+            } else if (this.scroller.options.probeType > 1) {
+                this.scroller._execEvent('scroll');
+            }
+
+
+            // INSERT POINT: indicator._move
+
+            e.preventDefault();
+            e.stopPropagation();
+        },
+
+        _end: function(e) {
+            if (!this.initiated) {
+                return;
+            }
+
+            this.initiated = false;
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            utils.removeEvent(window, 'touchmove', this);
+            utils.removeEvent(window, utils.prefixPointerEvent('pointermove'), this);
+            utils.removeEvent(window, 'mousemove', this);
+
+            if (this.scroller.options.snap) {
+                var snap = this.scroller._nearestSnap(this.scroller.x, this.scroller.y);
+
+                var time = this.options.snapSpeed || Math.max(
+                    Math.max(
+                        Math.min(Math.abs(this.scroller.x - snap.x), 1000),
+                        Math.min(Math.abs(this.scroller.y - snap.y), 1000)
+                    ), 300);
+
+                if (this.scroller.x !== snap.x || this.scroller.y !== snap.y) {
+                    this.scroller.directionX = 0;
+                    this.scroller.directionY = 0;
+                    this.scroller.currentPage = snap;
+                    this.scroller.scrollTo(snap.x, snap.y, time, this.scroller.options.bounceEasing);
+                }
+            }
+
+            if (this.moved) {
+                this.scroller._execEvent('scrollEnd');
+            }
+        },
+
+        transitionTime: function(time) {
+            time = time || 0;
+            this.indicatorStyle[utils.style.transitionDuration] = time + 'ms';
+
+            if (!time && utils.isBadAndroid) {
+                this.indicatorStyle[utils.style.transitionDuration] = '0.001s';
+            }
+        },
+
+        transitionTimingFunction: function(easing) {
+            this.indicatorStyle[utils.style.transitionTimingFunction] = easing;
+        },
+
+        refresh: function() {
+            this.transitionTime();
+
+            if (this.options.listenX && !this.options.listenY) {
+                this.indicatorStyle.display = this.scroller.hasHorizontalScroll ? 'block' : 'none';
+            } else if (this.options.listenY && !this.options.listenX) {
+                this.indicatorStyle.display = this.scroller.hasVerticalScroll ? 'block' : 'none';
+            } else {
+                this.indicatorStyle.display = this.scroller.hasHorizontalScroll || this.scroller.hasVerticalScroll ? 'block' : 'none';
+            }
+
+            if (this.scroller.hasHorizontalScroll && this.scroller.hasVerticalScroll) {
+                utils.addClass(this.wrapper, 'iScrollBothScrollbars');
+                utils.removeClass(this.wrapper, 'iScrollLoneScrollbar');
+
+                if (this.options.defaultScrollbars && this.options.customStyle) {
+                    if (this.options.listenX) {
+                        this.wrapper.style.right = '8px';
+                    } else {
+                        this.wrapper.style.bottom = '8px';
+                    }
+                }
+            } else {
+                utils.removeClass(this.wrapper, 'iScrollBothScrollbars');
+                utils.addClass(this.wrapper, 'iScrollLoneScrollbar');
+
+                if (this.options.defaultScrollbars && this.options.customStyle) {
+                    if (this.options.listenX) {
+                        this.wrapper.style.right = '2px';
+                    } else {
+                        this.wrapper.style.bottom = '2px';
+                    }
+                }
+            }
+
+            // var r = this.wrapper.offsetHeight; // force refresh
+
+            if (this.options.listenX) {
+                this.wrapperWidth = this.wrapper.clientWidth;
+                if (this.options.resize) {
+                    this.indicatorWidth = Math.max(Math.round(this.wrapperWidth * this.wrapperWidth / (this.scroller.scrollerWidth || this.wrapperWidth || 1)), 8);
+                    this.indicatorStyle.width = this.indicatorWidth + 'px';
+                } else {
+                    this.indicatorWidth = this.indicator.clientWidth;
+                }
+
+                this.maxPosX = this.wrapperWidth - this.indicatorWidth;
+
+                if (this.options.shrink === 'clip') {
+                    this.minBoundaryX = -this.indicatorWidth + 8;
+                    this.maxBoundaryX = this.wrapperWidth - 8;
+                } else {
+                    this.minBoundaryX = 0;
+                    this.maxBoundaryX = this.maxPosX;
+                }
+
+                this.sizeRatioX = this.options.speedRatioX || (this.scroller.maxScrollX && (this.maxPosX / this.scroller.maxScrollX));
+            }
+
+            if (this.options.listenY) {
+                this.wrapperHeight = this.wrapper.clientHeight;
+                if (this.options.resize) {
+                    this.indicatorHeight = Math.max(Math.round(this.wrapperHeight * this.wrapperHeight / (this.scroller.scrollerHeight || this.wrapperHeight || 1)), 8);
+                    this.indicatorStyle.height = this.indicatorHeight + 'px';
+                } else {
+                    this.indicatorHeight = this.indicator.clientHeight;
+                }
+
+                this.maxPosY = this.wrapperHeight - this.indicatorHeight;
+
+                if (this.options.shrink === 'clip') {
+                    this.minBoundaryY = -this.indicatorHeight + 8;
+                    this.maxBoundaryY = this.wrapperHeight - 8;
+                } else {
+                    this.minBoundaryY = 0;
+                    this.maxBoundaryY = this.maxPosY;
+                }
+
+                this.maxPosY = this.wrapperHeight - this.indicatorHeight;
+                this.sizeRatioY = this.options.speedRatioY || (this.scroller.maxScrollY && (this.maxPosY / this.scroller.maxScrollY));
+            }
+
+            this.updatePosition();
+        },
+
+        updatePosition: function() {
+            var x = this.options.listenX && Math.round(this.sizeRatioX * this.scroller.x) || 0,
+                y = this.options.listenY && Math.round(this.sizeRatioY * this.scroller.y) || 0;
+
+            if (!this.options.ignoreBoundaries) {
+                if (x < this.minBoundaryX) {
+                    if (this.options.shrink === 'scale') {
+                        this.width = Math.max(this.indicatorWidth + x, 8);
+                        this.indicatorStyle.width = this.width + 'px';
+                    }
+                    x = this.minBoundaryX;
+                } else if (x > this.maxBoundaryX) {
+                    if (this.options.shrink === 'scale') {
+                        this.width = Math.max(this.indicatorWidth - (x - this.maxPosX), 8);
+                        this.indicatorStyle.width = this.width + 'px';
+                        x = this.maxPosX + this.indicatorWidth - this.width;
+                    } else {
+                        x = this.maxBoundaryX;
+                    }
+                } else if (this.options.shrink === 'scale' && this.width !== this.indicatorWidth) {
+                    this.width = this.indicatorWidth;
+                    this.indicatorStyle.width = this.width + 'px';
+                }
+
+                if (y < this.minBoundaryY) {
+                    if (this.options.shrink === 'scale') {
+                        this.height = Math.max(this.indicatorHeight + y * 3, 8);
+                        this.indicatorStyle.height = this.height + 'px';
+                    }
+                    y = this.minBoundaryY;
+                } else if (y > this.maxBoundaryY) {
+                    if (this.options.shrink === 'scale') {
+                        this.height = Math.max(this.indicatorHeight - (y - this.maxPosY) * 3, 8);
+                        this.indicatorStyle.height = this.height + 'px';
+                        y = this.maxPosY + this.indicatorHeight - this.height;
+                    } else {
+                        y = this.maxBoundaryY;
+                    }
+                } else if (this.options.shrink === 'scale' && this.height !== this.indicatorHeight) {
+                    this.height = this.indicatorHeight;
+                    this.indicatorStyle.height = this.height + 'px';
+                }
+            }
+
+            this.x = x;
+            this.y = y;
+
+            if (this.scroller.options.useTransform) {
+                this.indicatorStyle[utils.style.transform] = 'translate(' + x + 'px,' + y + 'px)' + this.scroller.translateZ;
+            } else {
+                this.indicatorStyle.left = x + 'px';
+                this.indicatorStyle.top = y + 'px';
+            }
+        },
+
+        _pos: function(x, y) {
+            if (x < 0) {
+                x = 0;
+            } else if (x > this.maxPosX) {
+                x = this.maxPosX;
+            }
+
+            if (y < 0) {
+                y = 0;
+            } else if (y > this.maxPosY) {
+                y = this.maxPosY;
+            }
+
+            x = this.options.listenX ? Math.round(x / this.sizeRatioX) : this.scroller.x;
+            y = this.options.listenY ? Math.round(y / this.sizeRatioY) : this.scroller.y;
+
+            this.scroller.scrollTo(x, y);
+        },
+
+        fade: function(val, hold) {
+            if (hold && !this.visible) {
+                return;
+            }
+
+            clearTimeout(this.fadeTimeout);
+            this.fadeTimeout = null;
+
+            var time = val ? 250 : 500,
+                delay = val ? 0 : 300;
+
+            val = val ? '1' : '0';
+
+            this.wrapperStyle[utils.style.transitionDuration] = time + 'ms';
+
+            this.fadeTimeout = setTimeout((function(val) {
+                this.wrapperStyle.opacity = val;
+                this.visible = +val;
+            }).bind(this, val), delay);
+        }
+    };
+
+    IScroll.utils = utils;
+
+    window.IScroll = IScroll;
+}(window);
+
+/* ===============================================================================
+************   scroller   ************
+=============================================================================== */
++ function($) {
+    "use strict";
+    //重置zepto自带的滚动条
+    var _zeptoMethodCache = {
+        "scrollTop": $.fn.scrollTop,
+        "scrollLeft": $.fn.scrollLeft
+    };
+    //重置scrollLeft和scrollRight
+    (function() {
+        $.extend($.fn, {
+            scrollTop: function(top, dur) {
+                if (!this.length) return;
+                var scroller = this.data('scroller');
+                if (scroller && scroller.scroller) { //js滚动
+                    return scroller.scrollTop(top, dur);
+                } else {
+                    return _zeptoMethodCache.scrollTop.apply(this, arguments);
+                }
+            }
+        });
+        $.extend($.fn, {
+            scrollLeft: function(left, dur) {
+                if (!this.length) return;
+                var scroller = this.data('scroller');
+                if (scroller && scroller.scroller) { //js滚动
+                    return scroller.scrollLeft(left, dur);
+                } else {
+                    return _zeptoMethodCache.scrollLeft.apply(this, arguments);
+                }
+            }
+        });
+    })();
+
+
+
+    //自定义的滚动条
+    var Scroller = function(pageContent, _options) {
+        var $pageContent = this.$pageContent = $(pageContent);
+
+        this.options = $.extend({}, this._defaults, _options);
+
+        var type = this.options.type;
+        //auto的type,系统版本的小于4.4.0的安卓设备和系统版本小于6.0.0的ios设备，启用js版的iscoll
+        var useJSScroller = (type === 'js') || (type === 'auto' && ($.device.android && $.compareVersion('4.4.0', $.device.osVersion) > -1) || (type === 'auto' && ($.device.ios && $.compareVersion('6.0.0', $.device.osVersion) > -1)));
+
+        if (useJSScroller) {
+
+            var $pageContentInner = $pageContent.find('.content-inner');
+            //如果滚动内容没有被包裹，自动添加wrap
+            if (!$pageContentInner[0]) {
+                // $pageContent.html('<div class="content-inner">' + $pageContent.html() + '</div>');
+                var children = $pageContent.children();
+                if (children.length < 1) {
+                    $pageContent.children().wrapAll('<div class="content-inner"></div>');
+                } else {
+                    $pageContent.html('<div class="content-inner">' + $pageContent.html() + '</div>');
+                }
+            }
+
+            if ($pageContent.hasClass('pull-to-refresh-content')) {
+                //因为iscroll 当页面高度不足 100% 时无法滑动，所以无法触发下拉动作，这里改动一下高度
+                //区分是否有.bar容器，如有，则content的top:0，无则content的top:-2.2rem,这里取2.2rem的最大值，近60
+                var minHeight = $(window).height() + ($pageContent.prev().hasClass(".bar") ? 1 : 61);
+                $pageContent.find('.content-inner').css('min-height', minHeight + 'px');
+            }
+
+            var ptr = $(pageContent).hasClass('pull-to-refresh-content');
+            //js滚动模式，用transform移动内容区位置，会导致fixed失效，表现类似absolute。因此禁用transform模式
+            var useTransform = $pageContent.find('.fixed-tab').length === 0;
+            var options = {
+                probeType: 1,
+                mouseWheel: true,
+                //解决安卓js模式下，刷新滚动条后绑定的事件不响应，对chrome内核浏览器设置click:true
+                click: $.device.androidChrome,
+                useTransform: useTransform,
+                //js模式下允许滚动条横向滚动，但是需要注意，滚动容易宽度必须大于屏幕宽度滚动才生效
+                scrollX: true
+            };
+            if (ptr) {
+                options.ptr = true;
+                options.ptrOffset = 44;
+            }
+            //如果用js滚动条，用transform计算内容区位置，position：fixed将实效。若有.fixed-tab，强制使用native滚动条；备选方案，略粗暴
+            // if($(pageContent).find('.fixed-tab').length>0){
+            //     $pageContent.addClass('native-scroll');
+            //     return;
+            // }
+            this.scroller = new IScroll(pageContent, options); // jshint ignore:line
+            //和native滚动统一起来
+            this._bindEventToDomWhenJs();
+            $.initPullToRefresh = $._pullToRefreshJSScroll.initPullToRefresh;
+            $.pullToRefreshDone = $._pullToRefreshJSScroll.pullToRefreshDone;
+            $.pullToRefreshTrigger = $._pullToRefreshJSScroll.pullToRefreshTrigger;
+            $.destroyToRefresh = $._pullToRefreshJSScroll.destroyToRefresh;
+            $pageContent.addClass('javascript-scroll');
+            if (!useTransform) {
+                $pageContent.find('.content-inner').css({
+                    width: '100%',
+                    position: 'absolute'
+                });
+            }
+
+            //如果页面本身已经进行了原生滚动，那么把这个滚动换成JS的滚动
+            var nativeScrollTop = this.$pageContent[0].scrollTop;
+            if(nativeScrollTop) {
+                this.$pageContent[0].scrollTop = 0;
+                this.scrollTop(nativeScrollTop);
+            }
+        } else {
+            $pageContent.addClass('native-scroll');
+        }
+    };
+    Scroller.prototype = {
+        _defaults: {
+            type: 'native',
+        },
+        _bindEventToDomWhenJs: function() {
+            //"scrollStart", //the scroll started.
+            //"scroll", //the content is scrolling. Available only in scroll-probe.js edition. See onScroll event.
+            //"scrollEnd", //content stopped scrolling.
+            if (this.scroller) {
+                var self = this;
+                this.scroller.on('scrollStart', function() {
+                    self.$pageContent.trigger('scrollstart');
+                });
+                this.scroller.on('scroll', function() {
+                    self.$pageContent.trigger('scroll');
+                });
+                this.scroller.on('scrollEnd', function() {
+                    self.$pageContent.trigger('scrollend');
+                });
+            } else {
+                //TODO: 实现native的scrollStart和scrollEnd
+            }
+        },
+        scrollTop: function(top, dur) {
+            if (this.scroller) {
+                if (top !== undefined) {
+                    this.scroller.scrollTo(0, -1 * top, dur);
+                } else {
+                    return this.scroller.getComputedPosition().y * -1;
+                }
+            } else {
+                return this.$pageContent.scrollTop(top, dur);
+            }
+            return this;
+        },
+        scrollLeft: function(left, dur) {
+            if (this.scroller) {
+                if (left !== undefined) {
+                    this.scroller.scrollTo(-1 * left, 0);
+                } else {
+                    return this.scroller.getComputedPosition().x * -1;
+                }
+            } else {
+                return this.$pageContent.scrollTop(left, dur);
+            }
+            return this;
+        },
+        on: function(event, callback) {
+            if (this.scroller) {
+                this.scroller.on(event, function() {
+                    callback.call(this.wrapper);
+                });
+            } else {
+                this.$pageContent.on(event, callback);
+            }
+            return this;
+        },
+        off: function(event, callback) {
+            if (this.scroller) {
+                this.scroller.off(event, callback);
+            } else {
+                this.$pageContent.off(event, callback);
+            }
+            return this;
+        },
+        refresh: function() {
+            if (this.scroller) this.scroller.refresh();
+            return this;
+        },
+        scrollHeight: function() {
+            if (this.scroller) {
+                return this.scroller.scrollerHeight;
+            } else {
+                return this.$pageContent[0].scrollHeight;
+            }
+        }
+
+    };
+
+    //Scroller PLUGIN DEFINITION
+    // =======================
+
+    function Plugin(option) {
+        var args = Array.apply(null, arguments);
+        args.shift();
+        var internal_return;
+
+        this.each(function() {
+
+            var $this = $(this);
+
+            var options = $.extend({}, $this.dataset(), typeof option === 'object' && option);
+
+            var data = $this.data('scroller');
+            //如果 scroller 没有被初始化，对scroller 进行初始化r
+            if (!data) {
+                //获取data-api的
+                $this.data('scroller', (data = new Scroller(this, options)));
+
+            }
+            if (typeof option === 'string' && typeof data[option] === 'function') {
+                internal_return = data[option].apply(data, args);
+                if (internal_return !== undefined)
+            return false;
+            }
+
+        });
+
+        if (internal_return !== undefined)
+            return internal_return;
+        else
+            return this;
+
+    }
+
+    var old = $.fn.scroller;
+
+    $.fn.scroller = Plugin;
+    $.fn.scroller.Constructor = Scroller;
+
+
+    // Scroll NO CONFLICT
+    // =================
+
+    $.fn.scroller.noConflict = function() {
+        $.fn.scroller = old;
+        return this;
+    };
+    //添加data-api
+    $(function() {
+        $('[data-toggle="scroller"]').scroller();
+    });
+
+    //统一的接口,带有 .javascript-scroll 的content 进行刷新
+    $.refreshScroller = function(content) {
+        if (content) {
+            $(content).scroller('refresh');
+        } else {
+            $('.javascript-scroll').each(function() {
+                $(this).scroller('refresh');
+            });
+        }
+
+    };
+    //全局初始化方法，会对页面上的 [data-toggle="scroller"]，.content. 进行滚动条初始化
+    $.initScroller = function(option) {
+        this.options = $.extend({}, typeof option === 'object' && option);
+        $('[data-toggle="scroller"],.content').scroller(option);
+    };
+    //获取scroller对象
+    $.getScroller = function(content) {
+        //以前默认只能有一个无限滚动，因此infinitescroll都是加在content上，现在允许里面有多个，因此要判断父元素是否有content
+        content = content.hasClass('content') ? content : content.parents('.content');
+        if (content) {
+            return $(content).data('scroller');
+        } else {
+            return $('.content.javascript-scroll').data('scroller');
+        }
+    };
+    //检测滚动类型,
+    //‘js’: javascript 滚动条
+    //‘native’: 原生滚动条
+    $.detectScrollerType = function(content) {
+        if (content) {
+            if ($(content).data('scroller') && $(content).data('scroller').scroller) {
+                return 'js';
+            } else {
+                return 'native';
+            }
+        }
+    };
+
+}(Zepto);
+
+/* ===============================================================================
+************   Tabs   ************
+=============================================================================== */
++function ($) {
+    "use strict";
+
+    var showTab = function (tab, tabLink, force) {
+        var newTab = $(tab);
+        if (arguments.length === 2) {
+            if (typeof tabLink === 'boolean') {
+                force = tabLink;
+            }
+        }
+        if (newTab.length === 0) return false;
+        if (newTab.hasClass('active')) {
+            if (force) newTab.trigger('show');
+            return false;
+        }
+        var tabs = newTab.parent('.tabs');
+        if (tabs.length === 0) return false;
+
+        // Animated tabs
+        /*var isAnimatedTabs = tabs.parent().hasClass('tabs-animated-wrap');
+          if (isAnimatedTabs) {
+          tabs.transform('translate3d(' + -newTab.index() * 100 + '%,0,0)');
+          }*/
+
+        // Remove active class from old tabs
+        var oldTab = tabs.children('.tab.active').removeClass('active');
+        // Add active class to new tab
+        newTab.addClass('active');
+        // Trigger 'show' event on new tab
+        newTab.trigger('show');
+
+        // Update navbars in new tab
+        /*if (!isAnimatedTabs && newTab.find('.navbar').length > 0) {
+        // Find tab's view
+        var viewContainer;
+        if (newTab.hasClass(app.params.viewClass)) viewContainer = newTab[0];
+        else viewContainer = newTab.parents('.' + app.params.viewClass)[0];
+        app.sizeNavbars(viewContainer);
+        }*/
+
+        // Find related link for new tab
+        if (tabLink) tabLink = $(tabLink);
+        else {
+            // Search by id
+            if (typeof tab === 'string') tabLink = $('.tab-link[href="' + tab + '"]');
+            else tabLink = $('.tab-link[href="#' + newTab.attr('id') + '"]');
+            // Search by data-tab
+            if (!tabLink || tabLink && tabLink.length === 0) {
+                $('[data-tab]').each(function () {
+                    if (newTab.is($(this).attr('data-tab'))) tabLink = $(this);
+                });
+            }
+        }
+        if (tabLink.length === 0) return;
+
+        // Find related link for old tab
+        var oldTabLink;
+        if (oldTab && oldTab.length > 0) {
+            // Search by id
+            var oldTabId = oldTab.attr('id');
+            if (oldTabId) oldTabLink = $('.tab-link[href="#' + oldTabId + '"]');
+            // Search by data-tab
+            if (!oldTabLink || oldTabLink && oldTabLink.length === 0) {
+                $('[data-tab]').each(function () {
+                    if (oldTab.is($(this).attr('data-tab'))) oldTabLink = $(this);
+                });
+            }
+        }
+
+        // Update links' classes
+        if (tabLink && tabLink.length > 0) tabLink.addClass('active');
+        if (oldTabLink && oldTabLink.length > 0) oldTabLink.removeClass('active');
+        tabLink.trigger('active');
+
+        //app.refreshScroller();
+
+        return true;
+    };
+
+    var old = $.showTab;
+    $.showTab = showTab;
+
+    $.showTab.noConflict = function () {
+        $.showTab = old;
+        return this;
+    };
+    //a标签上的click事件，在iscroll下响应有问题
+    $(document).on("click", ".tab-link", function(e) {
+        e.preventDefault();
+        var clicked = $(this);
+        showTab(clicked.data("tab") || clicked.attr('href'), clicked);
+    });
+
+
+}(Zepto);
+
+/* ===============================================================================
+************   Tabs   ************
+=============================================================================== */
++function ($) {
+    "use strict";
+    $.initFixedTab = function(){
+        var $fixedTab = $('.fixed-tab');
+        if ($fixedTab.length === 0) return;
+        $('.fixed-tab').fixedTab();//默认{offset: 0}
+    };
+    var FixedTab = function(pageContent, _options) {
+        var $pageContent = this.$pageContent = $(pageContent);
+        var shadow = $pageContent.clone();
+        var fixedTop = $pageContent[0].getBoundingClientRect().top;
+
+        shadow.css('visibility', 'hidden');
+        this.options = $.extend({}, this._defaults, {
+            fixedTop: fixedTop,
+            shadow: shadow,
+            offset: 0
+        }, _options);
+
+        this._bindEvents();
+    };
+
+    FixedTab.prototype = {
+        _defaults: {
+            offset: 0,
+        },
+        _bindEvents: function() {
+            this.$pageContent.parents('.content').on('scroll', this._scrollHandler.bind(this));
+            this.$pageContent.on('active', '.tab-link', this._tabLinkHandler.bind(this));
+        },
+        _tabLinkHandler: function(ev) {
+            var isFixed = $(ev.target).parents('.buttons-fixed').length > 0;
+            var fixedTop = this.options.fixedTop;
+            var offset = this.options.offset;
+            $.refreshScroller();
+            if (!isFixed) return;
+            this.$pageContent.parents('.content').scrollTop(fixedTop - offset);
+        },
+        // 滚动核心代码
+        _scrollHandler: function(ev) {
+            var $scroller = $(ev.target);
+            var $pageContent = this.$pageContent;
+            var shadow = this.options.shadow;
+            var offset = this.options.offset;
+            var fixedTop = this.options.fixedTop;
+            var scrollTop = $scroller.scrollTop();
+            var isFixed = scrollTop >= fixedTop - offset;
+            if (isFixed) {
+                shadow.insertAfter($pageContent);
+                $pageContent.addClass('buttons-fixed').css('top', offset);
+            } else {
+                shadow.remove();
+                $pageContent.removeClass('buttons-fixed').css('top', 0);
+            }
+        }
+    };
+
+    //FixedTab PLUGIN DEFINITION
+    // =======================
+
+    function Plugin(option) {
+        var args = Array.apply(null, arguments);
+        args.shift();
+        this.each(function() {
+            var $this = $(this);
+            var options = $.extend({}, $this.dataset(), typeof option === 'object' && option);
+            var data = $this.data('fixedtab');
+            if (!data) {
+                //获取data-api的
+                $this.data('fixedtab', (data = new FixedTab(this, options)));
+            }
+        });
+
+    }
+    $.fn.fixedTab = Plugin;
+    $.fn.fixedTab.Constructor = FixedTab;
+    $(document).on('pageInit',function(){
+        $.initFixedTab();
+    });
+
+
+
+}(Zepto);
+
++ function($) {
+    "use strict";
+    //这里实在js滚动时使用的下拉刷新代码。
+
+    var refreshTime = 0;
+    var initPullToRefreshJS = function(pageContainer) {
+        var eventsTarget = $(pageContainer);
+        if (!eventsTarget.hasClass('pull-to-refresh-content')) {
+            eventsTarget = eventsTarget.find('.pull-to-refresh-content');
+        }
+        if (!eventsTarget || eventsTarget.length === 0) return;
+
+        var page = eventsTarget.hasClass('content') ? eventsTarget : eventsTarget.parents('.content');
+        var scroller = $.getScroller(page[0]);
+        if(!scroller) return;
+
+
+        var container = eventsTarget;
+
+        function handleScroll() {
+            if (container.hasClass('refreshing')) return;
+            if (scroller.scrollTop() * -1 >= 44) {
+                container.removeClass('pull-down').addClass('pull-up');
+            } else {
+                container.removeClass('pull-up').addClass('pull-down');
+            }
+        }
+
+        function handleRefresh() {
+            if (container.hasClass('refreshing')) return;
+            container.removeClass('pull-down pull-up');
+            container.addClass('refreshing transitioning');
+            container.trigger('refresh');
+            refreshTime = +new Date();
+        }
+        scroller.on('scroll', handleScroll);
+        scroller.scroller.on('ptr', handleRefresh);
+
+        // Detach Events on page remove
+        function destroyPullToRefresh() {
+            scroller.off('scroll', handleScroll);
+            scroller.scroller.off('ptr', handleRefresh);
+        }
+        eventsTarget[0].destroyPullToRefresh = destroyPullToRefresh;
+
+    };
+
+    var pullToRefreshDoneJS = function(container) {
+        container = $(container);
+        if (container.length === 0) container = $('.pull-to-refresh-content.refreshing');
+        if (container.length === 0) return;
+        var interval = (+new Date()) - refreshTime;
+        var timeOut = interval > 1000 ? 0 : 1000 - interval; //long than bounce time
+        var scroller = $.getScroller(container);
+        setTimeout(function() {
+            scroller.refresh();
+            container.removeClass('refreshing');
+            container.transitionEnd(function() {
+                container.removeClass("transitioning");
+            });
+        }, timeOut);
+    };
+    var pullToRefreshTriggerJS = function(container) {
+        container = $(container);
+        if (container.length === 0) container = $('.pull-to-refresh-content');
+        if (container.hasClass('refreshing')) return;
+        container.addClass('refreshing');
+        var scroller = $.getScroller(container);
+        scroller.scrollTop(44 + 1, 200);
+        container.trigger('refresh');
+    };
+
+    var destroyPullToRefreshJS = function(pageContainer) {
+        pageContainer = $(pageContainer);
+        var pullToRefreshContent = pageContainer.hasClass('pull-to-refresh-content') ? pageContainer : pageContainer.find('.pull-to-refresh-content');
+        if (pullToRefreshContent.length === 0) return;
+        if (pullToRefreshContent[0].destroyPullToRefresh) pullToRefreshContent[0].destroyPullToRefresh();
+    };
+
+    $._pullToRefreshJSScroll = {
+        "initPullToRefresh": initPullToRefreshJS,
+        "pullToRefreshDone": pullToRefreshDoneJS,
+        "pullToRefreshTrigger": pullToRefreshTriggerJS,
+        "destroyPullToRefresh": destroyPullToRefreshJS,
+    };
+}(Zepto); // jshint ignore:line
+
++ function($) {
+    'use strict';
+    $.initPullToRefresh = function(pageContainer) {
+        var eventsTarget = $(pageContainer);
+        if (!eventsTarget.hasClass('pull-to-refresh-content')) {
+            eventsTarget = eventsTarget.find('.pull-to-refresh-content');
+        }
+        if (!eventsTarget || eventsTarget.length === 0) return;
+
+        var isTouched, isMoved, touchesStart = {},
+            isScrolling, touchesDiff, touchStartTime, container, refresh = false,
+            useTranslate = false,
+            startTranslate = 0,
+            translate, scrollTop, wasScrolled, triggerDistance, dynamicTriggerDistance;
+
+        container = eventsTarget;
+
+        // Define trigger distance
+        if (container.attr('data-ptr-distance')) {
+            dynamicTriggerDistance = true;
+        } else {
+            triggerDistance = 44;
+        }
+
+        function handleTouchStart(e) {
+            if (isTouched) {
+                if ($.device.android) {
+                    if ('targetTouches' in e && e.targetTouches.length > 1) return;
+                } else return;
+            }
+            isMoved = false;
+            isTouched = true;
+            isScrolling = undefined;
+            wasScrolled = undefined;
+            touchesStart.x = e.type === 'touchstart' ? e.targetTouches[0].pageX : e.pageX;
+            touchesStart.y = e.type === 'touchstart' ? e.targetTouches[0].pageY : e.pageY;
+            touchStartTime = (new Date()).getTime();
+            /*jshint validthis:true */
+            container = $(this);
+        }
+
+        function handleTouchMove(e) {
+            if (!isTouched) return;
+            var pageX = e.type === 'touchmove' ? e.targetTouches[0].pageX : e.pageX;
+            var pageY = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY;
+            if (typeof isScrolling === 'undefined') {
+                isScrolling = !!(isScrolling || Math.abs(pageY - touchesStart.y) > Math.abs(pageX - touchesStart.x));
+            }
+            if (!isScrolling) {
+                isTouched = false;
+                return;
+            }
+
+            scrollTop = container[0].scrollTop;
+            if (typeof wasScrolled === 'undefined' && scrollTop !== 0) wasScrolled = true;
+
+            if (!isMoved) {
+                /*jshint validthis:true */
+                container.removeClass('transitioning');
+                if (scrollTop > container[0].offsetHeight) {
+                    isTouched = false;
+                    return;
+                }
+                if (dynamicTriggerDistance) {
+                    triggerDistance = container.attr('data-ptr-distance');
+                    if (triggerDistance.indexOf('%') >= 0) triggerDistance = container[0].offsetHeight * parseInt(triggerDistance, 10) / 100;
+                }
+                startTranslate = container.hasClass('refreshing') ? triggerDistance : 0;
+                if (container[0].scrollHeight === container[0].offsetHeight || !$.device.ios) {
+                    useTranslate = true;
+                } else {
+                    useTranslate = false;
+                }
+                useTranslate = true;
+            }
+            isMoved = true;
+            touchesDiff = pageY - touchesStart.y;
+
+            if (touchesDiff > 0 && scrollTop <= 0 || scrollTop < 0) {
+                // iOS 8 fix
+                if ($.device.ios && parseInt($.device.osVersion.split('.')[0], 10) > 7 && scrollTop === 0 && !wasScrolled) useTranslate = true;
+
+                if (useTranslate) {
+                    e.preventDefault();
+                    translate = (Math.pow(touchesDiff, 0.85) + startTranslate);
+                    container.transform('translate3d(0,' + translate + 'px,0)');
+                } else {}
+                if ((useTranslate && Math.pow(touchesDiff, 0.85) > triggerDistance) || (!useTranslate && touchesDiff >= triggerDistance * 2)) {
+                    refresh = true;
+                    container.addClass('pull-up').removeClass('pull-down');
+                } else {
+                    refresh = false;
+                    container.removeClass('pull-up').addClass('pull-down');
+                }
+            } else {
+
+                container.removeClass('pull-up pull-down');
+                refresh = false;
+                return;
+            }
+        }
+
+        function handleTouchEnd() {
+            if (!isTouched || !isMoved) {
+                isTouched = false;
+                isMoved = false;
+                return;
+            }
+            if (translate) {
+                container.addClass('transitioning');
+                translate = 0;
+            }
+            container.transform('');
+            if (refresh) {
+                //防止二次触发
+                if(container.hasClass('refreshing')) return;
+                container.addClass('refreshing');
+                container.trigger('refresh');
+            } else {
+                container.removeClass('pull-down');
+            }
+            isTouched = false;
+            isMoved = false;
+        }
+
+        // Attach Events
+        eventsTarget.on($.touchEvents.start, handleTouchStart);
+        eventsTarget.on($.touchEvents.move, handleTouchMove);
+        eventsTarget.on($.touchEvents.end, handleTouchEnd);
+
+
+        function destroyPullToRefresh() {
+            eventsTarget.off($.touchEvents.start, handleTouchStart);
+            eventsTarget.off($.touchEvents.move, handleTouchMove);
+            eventsTarget.off($.touchEvents.end, handleTouchEnd);
+        }
+        eventsTarget[0].destroyPullToRefresh = destroyPullToRefresh;
+
+    };
+    $.pullToRefreshDone = function(container) {
+        $(window).scrollTop(0);//解决微信下拉刷新顶部消失的问题
+        container = $(container);
+        if (container.length === 0) container = $('.pull-to-refresh-content.refreshing');
+        container.removeClass('refreshing').addClass('transitioning');
+        container.transitionEnd(function() {
+            container.removeClass('transitioning pull-up pull-down');
+        });
+    };
+    $.pullToRefreshTrigger = function(container) {
+        container = $(container);
+        if (container.length === 0) container = $('.pull-to-refresh-content');
+        if (container.hasClass('refreshing')) return;
+        container.addClass('transitioning refreshing');
+        container.trigger('refresh');
+    };
+
+    $.destroyPullToRefresh = function(pageContainer) {
+        pageContainer = $(pageContainer);
+        var pullToRefreshContent = pageContainer.hasClass('pull-to-refresh-content') ? pageContainer : pageContainer.find('.pull-to-refresh-content');
+        if (pullToRefreshContent.length === 0) return;
+        if (pullToRefreshContent[0].destroyPullToRefresh) pullToRefreshContent[0].destroyPullToRefresh();
+    };
+
+    //这里是否需要写到 scroller 中去？
+/*    $.initPullToRefresh = function(pageContainer) {
+        var $pageContainer = $(pageContainer);
+        $pageContainer.each(function(index, item) {
+            if ($.detectScrollerType(item) === 'js') {
+                $._pullToRefreshJSScroll.initPullToRefresh(item);
+            } else {
+                initPullToRefresh(item);
+            }
+        });
+    };
+
+
+    $.pullToRefreshDone = function(pageContainer) {
+        var $pageContainer = $(pageContainer);
+        $pageContainer.each(function(index, item) {
+            if ($.detectScrollerType(item) === 'js') {
+                $._pullToRefreshJSScroll.pullToRefreshDone(item);
+            } else {
+                pullToRefreshDone(item);
+            }
+        });
+    };
+
+
+    $.pullToRefreshTrigger = function(pageContainer) {
+       var $pageContainer = $(pageContainer);
+        $pageContainer.each(function(index, item) {
+            if ($.detectScrollerType(item) === 'js') {
+                $._pullToRefreshJSScroll.pullToRefreshTrigger(item);
+            } else {
+                pullToRefreshTrigger(item);
+            }
+        });
+    };
+
+    $.destroyPullToRefresh = function(pageContainer) {
+        var $pageContainer = $(pageContainer);
+        $pageContainer.each(function(index, item) {
+            if ($.detectScrollerType(item) === 'js') {
+                $._pullToRefreshJSScroll.destroyPullToRefresh(item);
+            } else {
+                destroyPullToRefresh(item);
+            }
+        });
+    };
+*/
+
+}(Zepto); //jshint ignore:line
+
++ function($) {
+    'use strict';
+
+    function handleInfiniteScroll() {
+        /*jshint validthis:true */
+        var inf = $(this);
+        var scroller = $.getScroller(inf);
+        var scrollTop = scroller.scrollTop();
+        var scrollHeight = scroller.scrollHeight();
+        var height = inf[0].offsetHeight;
+        var distance = inf[0].getAttribute('data-distance');
+        var virtualListContainer = inf.find('.virtual-list');
+        var virtualList;
+        var onTop = inf.hasClass('infinite-scroll-top');
+        if (!distance) distance = 50;
+        if (typeof distance === 'string' && distance.indexOf('%') >= 0) {
+            distance = parseInt(distance, 10) / 100 * height;
+        }
+        if (distance > height) distance = height;
+        if (onTop) {
+            if (scrollTop < distance) {
+                inf.trigger('infinite');
+            }
+        } else {
+            if (scrollTop + height >= scrollHeight - distance) {
+                if (virtualListContainer.length > 0) {
+                    virtualList = virtualListContainer[0].f7VirtualList;
+                    if (virtualList && !virtualList.reachEnd) return;
+                }
+                inf.trigger('infinite');
+            }
+        }
+
+    }
+    $.attachInfiniteScroll = function(infiniteContent) {
+        $.getScroller(infiniteContent).on('scroll', handleInfiniteScroll);
+    };
+    $.detachInfiniteScroll = function(infiniteContent) {
+        $.getScroller(infiniteContent).off('scroll', handleInfiniteScroll);
+    };
+
+    $.initInfiniteScroll = function(pageContainer) {
+        pageContainer = $(pageContainer);
+        var infiniteContent = pageContainer.hasClass('infinite-scroll')?pageContainer:pageContainer.find('.infinite-scroll');
+        if (infiniteContent.length === 0) return;
+        $.attachInfiniteScroll(infiniteContent);
+        //如果是顶部无限刷新，要将滚动条初始化于最下端
+        pageContainer.forEach(function(v){
+            if($(v).hasClass('infinite-scroll-top')){
+                var height = v.scrollHeight - v.clientHeight;
+                $(v).scrollTop(height);
+            }
+        });
+        function detachEvents() {
+            $.detachInfiniteScroll(infiniteContent);
+            pageContainer.off('pageBeforeRemove', detachEvents);
+        }
+        pageContainer.on('pageBeforeRemove', detachEvents);
+    };
+}(Zepto);
+
++function ($) {
+    "use strict";
+    $(function() {
+        $(document).on("focus", ".searchbar input", function(e) {
+            var $input = $(e.target);
+            $input.parents(".searchbar").addClass("searchbar-active");
+        });
+        $(document).on("click", ".searchbar-cancel", function(e) {
+            var $btn = $(e.target);
+            $btn.parents(".searchbar").removeClass("searchbar-active");
+        });
+        $(document).on("blur", ".searchbar input", function(e) {
+            var $input = $(e.target);
+            $input.parents(".searchbar").removeClass("searchbar-active");
+        });
+    });
+}(Zepto);
+
+/*======================================================
+************   Panels   ************
+======================================================*/
+/*jshint unused: false*/
++function ($) {
+    "use strict";
+    $.allowPanelOpen = true;
+    $.openPanel = function (panel) {
+        if (!$.allowPanelOpen) return false;
+        if(panel === 'left' || panel === 'right') panel = ".panel-" + panel;  //可以传入一个方向
+        panel = panel ? $(panel) : $(".panel").eq(0);
+        var direction = panel.hasClass("panel-right") ? "right" : "left";
+        if (panel.length === 0 || panel.hasClass('active')) return false;
+        $.closePanel(); // Close if some panel is opened
+        $.allowPanelOpen = false;
+        var effect = panel.hasClass('panel-reveal') ? 'reveal' : 'cover';
+        panel.css({display: 'block'}).addClass('active');
+        panel.trigger('open');
+
+        // Trigger reLayout
+        var clientLeft = panel[0].clientLeft;
+
+        // Transition End;
+        var transitionEndTarget = effect === 'reveal' ? $($.getCurrentPage()) : panel;
+        var openedTriggered = false;
+
+        function panelTransitionEnd() {
+            transitionEndTarget.transitionEnd(function (e) {
+                if (e.target === transitionEndTarget[0]) {
+                    if (panel.hasClass('active')) {
+                        panel.trigger('opened');
+                    }
+                    else {
+                        panel.trigger('closed');
+                    }
+            $.allowPanelOpen = true;
+                }
+                else panelTransitionEnd();
+            });
+        }
+        panelTransitionEnd();
+
+        $(document.body).addClass('with-panel-' + direction + '-' + effect);
+        return true;
+    };
+    $.closePanel = function () {
+        var activePanel = $('.panel.active');
+        if (activePanel.length === 0) return false;
+        var effect = activePanel.hasClass('panel-reveal') ? 'reveal' : 'cover';
+        var panelPosition = activePanel.hasClass('panel-left') ? 'left' : 'right';
+        activePanel.removeClass('active');
+        var transitionEndTarget = effect === 'reveal' ? $('.page') : activePanel;
+        activePanel.trigger('close');
+        $.allowPanelOpen = false;
+
+        transitionEndTarget.transitionEnd(function () {
+            if (activePanel.hasClass('active')) return;
+            activePanel.css({display: ''});
+            activePanel.trigger('closed');
+            $('body').removeClass('panel-closing');
+            $.allowPanelOpen = true;
+        });
+
+        $('body').addClass('panel-closing').removeClass('with-panel-' + panelPosition + '-' + effect);
+    };
+
+    $(document).on("click", ".open-panel", function(e) {
+        var panel = $(e.target).data('panel');
+        $.openPanel(panel);
+    });
+    $(document).on("click", ".close-panel, .panel-overlay", function(e) {
+        $.closePanel();
+    });
+    /*======================================================
+     ************   Swipe panels   ************
+     ======================================================*/
+    $.initSwipePanels = function () {
+        var panel, side;
+        var swipePanel = $.smConfig.swipePanel;
+        var swipePanelOnlyClose = $.smConfig.swipePanelOnlyClose;
+        var swipePanelCloseOpposite = true;
+        var swipePanelActiveArea = false;
+        var swipePanelThreshold = 2;
+        var swipePanelNoFollow = false;
+
+        if(!(swipePanel || swipePanelOnlyClose)) return;
+
+        var panelOverlay = $('.panel-overlay');
+        var isTouched, isMoved, isScrolling, touchesStart = {}, touchStartTime, touchesDiff, translate, opened, panelWidth, effect, direction;
+        var views = $('.page');
+
+        function handleTouchStart(e) {
+            if (!$.allowPanelOpen || (!swipePanel && !swipePanelOnlyClose) || isTouched) return;
+            if ($('.modal-in, .photo-browser-in').length > 0) return;
+            if (!(swipePanelCloseOpposite || swipePanelOnlyClose)) {
+                if ($('.panel.active').length > 0 && !panel.hasClass('active')) return;
+            }
+            touchesStart.x = e.type === 'touchstart' ? e.targetTouches[0].pageX : e.pageX;
+            touchesStart.y = e.type === 'touchstart' ? e.targetTouches[0].pageY : e.pageY;
+            if (swipePanelCloseOpposite || swipePanelOnlyClose) {
+                if ($('.panel.active').length > 0) {
+                    side = $('.panel.active').hasClass('panel-left') ? 'left' : 'right';
+                }
+                else {
+                    if (swipePanelOnlyClose) return;
+                    side = swipePanel;
+                }
+                if (!side) return;
+            }
+            panel = $('.panel.panel-' + side);
+            if(!panel[0]) return;
+            opened = panel.hasClass('active');
+            if (swipePanelActiveArea && !opened) {
+                if (side === 'left') {
+                    if (touchesStart.x > swipePanelActiveArea) return;
+                }
+                if (side === 'right') {
+                    if (touchesStart.x < window.innerWidth - swipePanelActiveArea) return;
+                }
+            }
+            isMoved = false;
+            isTouched = true;
+            isScrolling = undefined;
+
+            touchStartTime = (new Date()).getTime();
+            direction = undefined;
+        }
+        function handleTouchMove(e) {
+            if (!isTouched) return;
+            if(!panel[0]) return;
+            if (e.f7PreventPanelSwipe) return;
+            var pageX = e.type === 'touchmove' ? e.targetTouches[0].pageX : e.pageX;
+            var pageY = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY;
+            if (typeof isScrolling === 'undefined') {
+                isScrolling = !!(isScrolling || Math.abs(pageY - touchesStart.y) > Math.abs(pageX - touchesStart.x));
+            }
+            if (isScrolling) {
+                isTouched = false;
+                return;
+            }
+            if (!direction) {
+                if (pageX > touchesStart.x) {
+                    direction = 'to-right';
+                }
+                else {
+                    direction = 'to-left';
+                }
+
+                if (
+                        side === 'left' &&
+                        (
+                         direction === 'to-left' && !panel.hasClass('active')
+                        ) ||
+                        side === 'right' &&
+                        (
+                         direction === 'to-right' && !panel.hasClass('active')
+                        )
+                   )
+                {
+                    isTouched = false;
+                    return;
+                }
+            }
+
+            if (swipePanelNoFollow) {
+                var timeDiff = (new Date()).getTime() - touchStartTime;
+                if (timeDiff < 300) {
+                    if (direction === 'to-left') {
+                        if (side === 'right') $.openPanel(side);
+                        if (side === 'left' && panel.hasClass('active')) $.closePanel();
+                    }
+                    if (direction === 'to-right') {
+                        if (side === 'left') $.openPanel(side);
+                        if (side === 'right' && panel.hasClass('active')) $.closePanel();
+                    }
+                }
+                isTouched = false;
+                console.log(3);
+                isMoved = false;
+                return;
+            }
+
+            if (!isMoved) {
+                effect = panel.hasClass('panel-cover') ? 'cover' : 'reveal';
+                if (!opened) {
+                    panel.show();
+                    panelOverlay.show();
+                }
+                panelWidth = panel[0].offsetWidth;
+                panel.transition(0);
+                /*
+                   if (panel.find('.' + app.params.viewClass).length > 0) {
+                   if (app.sizeNavbars) app.sizeNavbars(panel.find('.' + app.params.viewClass)[0]);
+                   }
+                   */
+            }
+
+            isMoved = true;
+
+            e.preventDefault();
+            var threshold = opened ? 0 : -swipePanelThreshold;
+            if (side === 'right') threshold = -threshold;
+
+            touchesDiff = pageX - touchesStart.x + threshold;
+
+            if (side === 'right') {
+                translate = touchesDiff  - (opened ? panelWidth : 0);
+                if (translate > 0) translate = 0;
+                if (translate < -panelWidth) {
+                    translate = -panelWidth;
+                }
+            }
+            else {
+                translate = touchesDiff  + (opened ? panelWidth : 0);
+                if (translate < 0) translate = 0;
+                if (translate > panelWidth) {
+                    translate = panelWidth;
+                }
+            }
+            if (effect === 'reveal') {
+                views.transform('translate3d(' + translate + 'px,0,0)').transition(0);
+                panelOverlay.transform('translate3d(' + translate + 'px,0,0)');
+                //app.pluginHook('swipePanelSetTransform', views[0], panel[0], Math.abs(translate / panelWidth));
+            }
+            else {
+                panel.transform('translate3d(' + translate + 'px,0,0)').transition(0);
+                //app.pluginHook('swipePanelSetTransform', views[0], panel[0], Math.abs(translate / panelWidth));
+            }
+        }
+        function handleTouchEnd(e) {
+            if (!isTouched || !isMoved) {
+                isTouched = false;
+                isMoved = false;
+                return;
+            }
+            isTouched = false;
+            isMoved = false;
+            var timeDiff = (new Date()).getTime() - touchStartTime;
+            var action;
+            var edge = (translate === 0 || Math.abs(translate) === panelWidth);
+
+            if (!opened) {
+                if (translate === 0) {
+                    action = 'reset';
+                }
+                else if (
+                        timeDiff < 300 && Math.abs(translate) > 0 ||
+                        timeDiff >= 300 && (Math.abs(translate) >= panelWidth / 2)
+                        ) {
+                            action = 'swap';
+                        }
+                else {
+                    action = 'reset';
+                }
+            }
+            else {
+                if (translate === -panelWidth) {
+                    action = 'reset';
+                }
+                else if (
+                        timeDiff < 300 && Math.abs(translate) >= 0 ||
+                        timeDiff >= 300 && (Math.abs(translate) <= panelWidth / 2)
+                        ) {
+                            if (side === 'left' && translate === panelWidth) action = 'reset';
+                            else action = 'swap';
+                        }
+                else {
+                    action = 'reset';
+                }
+            }
+            if (action === 'swap') {
+                $.allowPanelOpen = true;
+                if (opened) {
+                    $.closePanel();
+                    if (edge) {
+                        panel.css({display: ''});
+                        $('body').removeClass('panel-closing');
+                    }
+                }
+                else {
+                    $.openPanel(side);
+                }
+                if (edge) $.allowPanelOpen = true;
+            }
+            if (action === 'reset') {
+                if (opened) {
+                    $.allowPanelOpen = true;
+                    $.openPanel(side);
+                }
+                else {
+                    $.closePanel();
+                    if (edge) {
+                        $.allowPanelOpen = true;
+                        panel.css({display: ''});
+                    }
+                    else {
+                        var target = effect === 'reveal' ? views : panel;
+                        $('body').addClass('panel-closing');
+                        target.transitionEnd(function () {
+                            $.allowPanelOpen = true;
+                            panel.css({display: ''});
+                            $('body').removeClass('panel-closing');
+                        });
+                    }
+                }
+            }
+            if (effect === 'reveal') {
+                views.transition('');
+                views.transform('');
+            }
+            panel.transition('').transform('');
+            panelOverlay.css({display: ''}).transform('');
+        }
+        $(document).on($.touchEvents.start, handleTouchStart);
+        $(document).on($.touchEvents.move, handleTouchMove);
+        $(document).on($.touchEvents.end, handleTouchEnd);
+    };
+
+    $.initSwipePanels();
+}(Zepto);
+
+/**
+ * 路由
+ *
+ * 路由功能将接管页面的链接点击行为，最后达到动画切换的效果，具体如下：
+ *  1. 链接对应的是另一个页面，那么则尝试 ajax 加载，然后把新页面里的符合约定的结构提取出来，然后做动画切换；如果没法 ajax 或结构不符合，那么则回退为普通的页面跳转
+ *  2. 链接是当前页面的锚点，并且该锚点对应的元素存在且符合路由约定，那么则把该元素做动画切入
+ *  3. 浏览器前进后退（history.forward/history.back）时，也使用动画效果
+ *  4. 如果链接有 back 这个 class，那么则忽略一切，直接调用 history.back() 来后退
+ *
+ * 路由功能默认开启，如果需要关闭路由功能，那么在 zepto 之后，msui 脚本之前设置 $.config.router = false 即可（intro.js 中会 extend 到 $.smConfig 中）。
+ *
+ * 可以设置 $.config.routerFilter 函数来设置当前点击链接是否使用路由功能，实参是 a 链接的 zepto 对象；返回 false 表示不使用 router 功能。
+ *
+ * ajax 载入新的文档时，并不会执行里面的 js。到目前为止，在开启路由功能时，建议的做法是：
+ *  把所有页面的 js 都放到同一个脚本里，js 里面的事件绑定使用委托而不是直接的绑定在元素上（因为动态加载的页面元素还不存在），然后所有页面都引用相同的 js 脚本。非事件类可以通过监控 pageInit 事件，根据里面的 pageId 来做对应区别处理。
+ *
+ * 如果有需要
+ *
+ * 对外暴露的方法
+ *  - load （原 loadPage 效果一致,但后者已标记为待移除）
+ *  - forward
+ *  - back
+ *
+ * 事件
+ * pageLoad* 系列在发生 ajax 加载时才会触发；当是块切换或已缓存的情况下，不会发送这些事件
+ *  - pageLoadCancel: 如果前一个还没加载完,那么取消并发送该事件
+ *  - pageLoadStart: 开始加载
+ *  - pageLodComplete: ajax complete 完成
+ *  - pageLoadError: ajax 发生 error
+ *  - pageAnimationStart: 执行动画切换前，实参是 event，sectionId 和 $section
+ *  - pageAnimationEnd: 执行动画完毕，实参是 event，sectionId 和 $section
+ *  - beforePageRemove: 新 document 载入且动画切换完毕，旧的 document remove 之前在 window 上触发，实参是 event 和 $pageContainer
+ *  - pageRemoved: 新的 document 载入且动画切换完毕，旧的 document remove 之后在 window 上触发
+ *  - beforePageSwitch: page 切换前，在 pageAnimationStart 前，beforePageSwitch 之后会做一些额外的处理才触发 pageAnimationStart
+ *  - pageInitInternal: （经 init.js 处理后，对外是 pageInit）紧跟着动画完成的事件，实参是 event，sectionId 和 $section
+ *
+ * 术语
+ *  - 文档（document），不带 hash 的 url 关联着的应答 html 结构
+ *  - 块（section），一个文档内有指定块标识的元素
+ *
+ * 路由实现约定
+ *  - 每个文档的需要展示的内容必需位于指定的标识（routerConfig.sectionGroupClass）的元素里面，默认是: div.page-group （注意,如果改变这个需要同时改变 less 中的命名）
+ *  - 每个块必需带有指定的块标识（routerConfig.pageClass），默认是 .page
+ *
+ *  即，使用路由功能的每一个文档应当是下面这样的结构（省略 <body> 等）:
+ *      <div class="page-group">
+ *          <div class="page">xxx</div>
+ *          <div class="page">yyy</div>
+ *      </div>
+ *
+ * 另，每一个块都应当有一个唯一的 ID，这样才能通过 #the-id 的形式来切换定位。
+ * 当一个块没有 id 时，如果是第一个的默认的需要展示的块，那么会给其添加一个随机的 id；否则，没有 id 的块将不会被切换展示。
+ *
+ * 通过 history.state/history.pushState 以及用 sessionStorage 来记录当前 state 以及最大的 state id 来辅助前进后退的切换效果，所以在不支持 sessionStorage 的情况下，将不开启路由功能。
+ *
+ * 为了解决 ajax 载入页面导致重复 ID 以及重复 popup 等功能，上面约定了使用路由功能的所有可展示内容都必需位于指定元素内。从而可以在进行文档间切换时可以进行两个文档的整体移动，切换完毕后再把前一个文档的内容从页面之间移除。
+ *
+ * 默认地过滤了部分协议的链接，包括 tel:, javascript:, mailto:，这些链接将不会使用路由功能。如果有更多的自定义控制需求，可以在 $.config.routerFilter 实现
+ *
+ * 注: 以 _ 开头的函数标明用于此处内部使用，可根据需要随时重构变更，不对外确保兼容性。
+ *
+ */
++function($) {
+    'use strict';
+
+    if (!window.CustomEvent) {
+        window.CustomEvent = function(type, config) {
+            config = config || { bubbles: false, cancelable: false, detail: undefined};
+            var e = document.createEvent('CustomEvent');
+            e.initCustomEvent(type, config.bubbles, config.cancelable, config.detail);
+            return e;
+        };
+
+        window.CustomEvent.prototype = window.Event.prototype;
+    }
+
+    var EVENTS = {
+        pageLoadStart: 'pageLoadStart', // ajax 开始加载新页面前
+        pageLoadCancel: 'pageLoadCancel', // 取消前一个 ajax 加载动作后
+        pageLoadError: 'pageLoadError', // ajax 加载页面失败后
+        pageLoadComplete: 'pageLoadComplete', // ajax 加载页面完成后（不论成功与否）
+        pageAnimationStart: 'pageAnimationStart', // 动画切换 page 前
+        pageAnimationEnd: 'pageAnimationEnd', // 动画切换 page 结束后
+        beforePageRemove: 'beforePageRemove', // 移除旧 document 前（适用于非内联 page 切换）
+        pageRemoved: 'pageRemoved', // 移除旧 document 后（适用于非内联 page 切换）
+        beforePageSwitch: 'beforePageSwitch', // page 切换前，在 pageAnimationStart 前，beforePageSwitch 之后会做一些额外的处理才触发 pageAnimationStart
+        pageInit: 'pageInitInternal' // 目前是定义为一个 page 加载完毕后（实际和 pageAnimationEnd 等同）
+    };
+
+    var Util = {
+        /**
+         * 获取 url 的 fragment（即 hash 中去掉 # 的剩余部分）
+         *
+         * 如果没有则返回空字符串
+         * 如: http://example.com/path/?query=d#123 => 123
+         *
+         * @param {String} url url
+         * @returns {String}
+         */
+        getUrlFragment: function(url) {
+            var hashIndex = url.indexOf('#');
+            return hashIndex === -1 ? '' : url.slice(hashIndex + 1);
+        },
+        /**
+         * 获取一个链接相对于当前页面的绝对地址形式
+         *
+         * 假设当前页面是 http://a.com/b/c
+         * 那么有以下情况:
+         * d => http://a.com/b/d
+         * /e => http://a.com/e
+         * #1 => http://a.com/b/c#1
+         * http://b.com/f => http://b.com/f
+         *
+         * @param {String} url url
+         * @returns {String}
+         */
+        getAbsoluteUrl: function(url) {
+            var link = document.createElement('a');
+            link.setAttribute('href', url);
+            var absoluteUrl = link.href;
+            link = null;
+            return absoluteUrl;
+        },
+        /**
+         * 获取一个 url 的基本部分，即不包括 hash
+         *
+         * @param {String} url url
+         * @returns {String}
+         */
+        getBaseUrl: function(url) {
+            var hashIndex = url.indexOf('#');
+            return hashIndex === -1 ? url.slice(0) : url.slice(0, hashIndex);
+        },
+        /**
+         * 把一个字符串的 url 转为一个可获取其 base 和 fragment 等的对象
+         *
+         * @param {String} url url
+         * @returns {UrlObject}
+         */
+        toUrlObject: function(url) {
+            var fullUrl = this.getAbsoluteUrl(url),
+                baseUrl = this.getBaseUrl(fullUrl),
+                fragment = this.getUrlFragment(url);
+
+            return {
+                base: baseUrl,
+                full: fullUrl,
+                original: url,
+                fragment: fragment
+            };
+        },
+        /**
+         * 判断浏览器是否支持 sessionStorage，支持返回 true，否则返回 false
+         * @returns {Boolean}
+         */
+        supportStorage: function() {
+            var mod = 'sm.router.storage.ability';
+            try {
+                sessionStorage.setItem(mod, mod);
+                sessionStorage.removeItem(mod);
+                return true;
+            } catch(e) {
+                return false;
+            }
+        }
+    };
+
+    var routerConfig = {
+        sectionGroupClass: 'page-group',
+        // 表示是当前 page 的 class
+        curPageClass: 'page-current',
+        // 用来辅助切换时表示 page 是 visible 的,
+        // 之所以不用 curPageClass，是因为 page-current 已被赋予了「当前 page」这一含义而不仅仅是 display: block
+        // 并且，别的地方已经使用了，所以不方便做变更，故新增一个
+        visiblePageClass: 'page-visible',
+        // 表示是 page 的 class，注意，仅是标志 class，而不是所有的 class
+        pageClass: 'page'
+    };
+
+    var DIRECTION = {
+        leftToRight: 'from-left-to-right',
+        rightToLeft: 'from-right-to-left'
+    };
+
+    var theHistory = window.history;
+
+    var Router = function() {
+        this.sessionNames = {
+            currentState: 'sm.router.currentState',
+            maxStateId: 'sm.router.maxStateId'
+        };
+
+        this._init();
+        this.xhr = null;
+        window.addEventListener('popstate', this._onPopState.bind(this));
+    };
+
+    /**
+     * 初始化
+     *
+     * - 把当前文档内容缓存起来
+     * - 查找默认展示的块内容，查找顺序如下
+     *      1. id 是 url 中的 fragment 的元素
+     *      2. 有当前块 class 标识的第一个元素
+     *      3. 第一个块
+     * - 初始页面 state 处理
+     *
+     * @private
+     */
+    Router.prototype._init = function() {
+
+        this.$view = $('body');
+
+        // 用来保存 document 的 map
+        this.cache = {};
+        var $doc = $(document);
+        var currentUrl = location.href;
+        this._saveDocumentIntoCache($doc, currentUrl);
+
+        var curPageId;
+
+        var currentUrlObj = Util.toUrlObject(currentUrl);
+        var $allSection = $doc.find('.' + routerConfig.pageClass);
+        var $visibleSection = $doc.find('.' + routerConfig.curPageClass);
+        var $curVisibleSection = $visibleSection.eq(0);
+        var $hashSection;
+
+        if (currentUrlObj.fragment) {
+            $hashSection = $doc.find('#' + currentUrlObj.fragment);
+        }
+        if ($hashSection && $hashSection.length) {
+            $visibleSection = $hashSection.eq(0);
+        } else if (!$visibleSection.length) {
+            $visibleSection = $allSection.eq(0);
+        }
+        if (!$visibleSection.attr('id')) {
+            $visibleSection.attr('id', this._generateRandomId());
+        }
+
+        if ($curVisibleSection.length &&
+            ($curVisibleSection.attr('id') !== $visibleSection.attr('id'))) {
+            // 在 router 到 inner page 的情况下，刷新（或者直接访问该链接）
+            // 直接切换 class 会有「闪」的现象,或许可以采用 animateSection 来减缓一下
+            $curVisibleSection.removeClass(routerConfig.curPageClass);
+            $visibleSection.addClass(routerConfig.curPageClass);
+        } else {
+            $visibleSection.addClass(routerConfig.curPageClass);
+        }
+        curPageId = $visibleSection.attr('id');
+
+
+        // 新进入一个使用 history.state 相关技术的页面时，如果第一个 state 不 push/replace,
+        // 那么在后退回该页面时，将不触发 popState 事件
+        if (theHistory.state === null) {
+            var curState = {
+                id: this._getNextStateId(),
+                url: Util.toUrlObject(currentUrl),
+                pageId: curPageId
+            };
+
+            theHistory.replaceState(curState, '', currentUrl);
+            this._saveAsCurrentState(curState);
+            this._incMaxStateId();
+        }
+    };
+
+    /**
+     * 切换到 url 指定的块或文档
+     *
+     * 如果 url 指向的是当前页面，那么认为是切换块；
+     * 否则是切换文档
+     *
+     * @param {String} url url
+     * @param {Boolean=} ignoreCache 是否强制请求不使用缓存，对 document 生效，默认是 false
+     */
+    Router.prototype.load = function(url, ignoreCache) {
+        if (ignoreCache === undefined) {
+            ignoreCache = false;
+        }
+
+        if (this._isTheSameDocument(location.href, url)) {
+            this._switchToSection(Util.getUrlFragment(url));
+        } else {
+            this._saveDocumentIntoCache($(document), location.href);
+            this._switchToDocument(url, ignoreCache);
+        }
+    };
+
+    /**
+     * 调用 history.forward()
+     */
+    Router.prototype.forward = function() {
+        theHistory.forward();
+    };
+
+    /**
+     * 调用 history.back()
+     */
+    Router.prototype.back = function() {
+        theHistory.back();
+    };
+
+    //noinspection JSUnusedGlobalSymbols
+    /**
+     * @deprecated
+     */
+    Router.prototype.loadPage = Router.prototype.load;
+
+    /**
+     * 切换显示当前文档另一个块
+     *
+     * 把新块从右边切入展示，同时会把新的块的记录用 history.pushState 来保存起来
+     *
+     * 如果已经是当前显示的块，那么不做任何处理；
+     * 如果没对应的块，那么忽略。
+     *
+     * @param {String} sectionId 待切换显示的块的 id
+     * @private
+     */
+    Router.prototype._switchToSection = function(sectionId) {
+        if (!sectionId) {
+            return;
+        }
+
+        var $curPage = this._getCurrentSection(),
+            $newPage = $('#' + sectionId);
+
+        // 如果已经是当前页，不做任何处理
+        if ($curPage === $newPage) {
+            return;
+        }
+
+        this._animateSection($curPage, $newPage, DIRECTION.rightToLeft);
+        this._pushNewState('#' + sectionId, sectionId);
+    };
+
+    /**
+     * 载入显示一个新的文档
+     *
+     * - 如果有缓存，那么直接利用缓存来切换
+     * - 否则，先把页面加载过来缓存，然后再切换
+     *      - 如果解析失败，那么用 location.href 的方式来跳转
+     *
+     * 注意：不能在这里以及其之后用 location.href 来 **读取** 切换前的页面的 url，
+     *     因为如果是 popState 时的调用，那么此时 location 已经是 pop 出来的 state 的了
+     *
+     * @param {String} url 新的文档的 url
+     * @param {Boolean=} ignoreCache 是否不使用缓存强制加载页面
+     * @param {Boolean=} isPushState 是否需要 pushState
+     * @param {String=} direction 新文档切入的方向
+     * @private
+     */
+    Router.prototype._switchToDocument = function(url, ignoreCache, isPushState, direction) {
+        var baseUrl = Util.toUrlObject(url).base;
+
+        if (ignoreCache) {
+            delete this.cache[baseUrl];
+        }
+
+        var cacheDocument = this.cache[baseUrl];
+        var context = this;
+
+        if (cacheDocument) {
+            this._doSwitchDocument(url, isPushState, direction);
+        } else {
+            this._loadDocument(url, {
+                success: function($doc) {
+                    try {
+                        context._parseDocument(url, $doc);
+                        context._doSwitchDocument(url, isPushState, direction);
+                    } catch (e) {
+                        location.href = url;
+                    }
+                },
+                error: function() {
+                    location.href = url;
+                }
+            });
+        }
+    };
+
+    /**
+     * 利用缓存来做具体的切换文档操作
+     *
+     * - 确定待切入的文档的默认展示 section
+     * - 把新文档 append 到 view 中
+     * - 动画切换文档
+     * - 如果需要 pushState，那么把最新的状态 push 进去并把当前状态更新为该状态
+     *
+     * @param {String} url 待切换的文档的 url
+     * @param {Boolean} isPushState 加载页面后是否需要 pushState，默认是 true
+     * @param {String} direction 动画切换方向，默认是 DIRECTION.rightToLeft
+     * @private
+     */
+    Router.prototype._doSwitchDocument = function(url, isPushState, direction) {
+        if (typeof isPushState === 'undefined') {
+            isPushState = true;
+        }
+
+        var urlObj = Util.toUrlObject(url);
+        var $currentDoc = this.$view.find('.' + routerConfig.sectionGroupClass);
+        var $newDoc = $($('<div></div>').append(this.cache[urlObj.base].$content).html());
+
+        // 确定一个 document 展示 section 的顺序
+        // 1. 与 hash 关联的 element
+        // 2. 默认的标识为 current 的 element
+        // 3. 第一个 section
+        var $allSection = $newDoc.find('.' + routerConfig.pageClass);
+        var $visibleSection = $newDoc.find('.' + routerConfig.curPageClass);
+        var $hashSection;
+
+        if (urlObj.fragment) {
+            $hashSection = $newDoc.find('#' + urlObj.fragment);
+        }
+        if ($hashSection && $hashSection.length) {
+            $visibleSection = $hashSection.eq(0);
+        } else if (!$visibleSection.length) {
+            $visibleSection = $allSection.eq(0);
+        }
+        if (!$visibleSection.attr('id')) {
+            $visibleSection.attr('id', this._generateRandomId());
+        }
+
+        var $currentSection = this._getCurrentSection();
+        $currentSection.trigger(EVENTS.beforePageSwitch, [$currentSection.attr('id'), $currentSection]);
+
+        $allSection.removeClass(routerConfig.curPageClass);
+        $visibleSection.addClass(routerConfig.curPageClass);
+
+        // prepend 而不 append 的目的是避免 append 进去新的 document 在后面，
+        // 其里面的默认展示的(.page-current) 的页面直接就覆盖了原显示的页面（因为都是 absolute）
+        this.$view.prepend($newDoc);
+
+        this._animateDocument($currentDoc, $newDoc, $visibleSection, direction);
+
+        if (isPushState) {
+            this._pushNewState(url, $visibleSection.attr('id'));
+        }
+    };
+
+    /**
+     * 判断两个 url 指向的页面是否是同一个
+     *
+     * 判断方式: 如果两个 url 的 base 形式（不带 hash 的绝对形式）相同，那么认为是同一个页面
+     *
+     * @param {String} url
+     * @param {String} anotherUrl
+     * @returns {Boolean}
+     * @private
+     */
+    Router.prototype._isTheSameDocument = function(url, anotherUrl) {
+        return Util.toUrlObject(url).base === Util.toUrlObject(anotherUrl).base;
+    };
+
+    /**
+     * ajax 加载 url 指定的页面内容
+     *
+     * 加载过程中会发出以下事件
+     *  pageLoadCancel: 如果前一个还没加载完,那么取消并发送该事件
+     *  pageLoadStart: 开始加载
+     *  pageLodComplete: ajax complete 完成
+     *  pageLoadError: ajax 发生 error
+     *
+     *
+     * @param {String} url url
+     * @param {Object=} callback 回调函数配置，可选，可以配置 success\error 和 complete
+     *      所有回调函数的 this 都是 null，各自实参如下：
+     *      success: $doc, status, xhr
+     *      error: xhr, status, err
+     *      complete: xhr, status
+     *
+     * @private
+     */
+    Router.prototype._loadDocument = function(url, callback) {
+        if (this.xhr && this.xhr.readyState < 4) {
+            this.xhr.onreadystatechange = function() {
+            };
+            this.xhr.abort();
+            this.dispatch(EVENTS.pageLoadCancel);
+        }
+
+        this.dispatch(EVENTS.pageLoadStart);
+
+        callback = callback || {};
+        var self = this;
+
+        this.xhr = $.ajax({
+            url: url,
+            success: $.proxy(function(data, status, xhr) {
+                // 给包一层 <html/>，从而可以拿到完整的结构
+                var $doc = $('<html></html>');
+                $doc.append(data);
+                callback.success && callback.success.call(null, $doc, status, xhr);
+            }, this),
+            error: function(xhr, status, err) {
+                callback.error && callback.error.call(null, xhr, status, err);
+                self.dispatch(EVENTS.pageLoadError);
+            },
+            complete: function(xhr, status) {
+                callback.complete && callback.complete.call(null, xhr, status);
+                self.dispatch(EVENTS.pageLoadComplete);
+            }
+        });
+    };
+
+    /**
+     * 对于 ajax 加载进来的页面，把其缓存起来
+     *
+     * @param {String} url url
+     * @param $doc ajax 载入的页面的 jq 对象，可以看做是该页面的 $(document)
+     * @private
+     */
+    Router.prototype._parseDocument = function(url, $doc) {
+        var $innerView = $doc.find('.' + routerConfig.sectionGroupClass);
+
+        if (!$innerView.length) {
+            throw new Error('missing router view mark: ' + routerConfig.sectionGroupClass);
+        }
+
+        this._saveDocumentIntoCache($doc, url);
+    };
+
+    /**
+     * 把一个页面的相关信息保存到 this.cache 中
+     *
+     * 以页面的 baseUrl 为 key,而 value 则是一个 DocumentCache
+     *
+     * @param {*} doc doc
+     * @param {String} url url
+     * @private
+     */
+    Router.prototype._saveDocumentIntoCache = function(doc, url) {
+        var urlAsKey = Util.toUrlObject(url).base;
+        var $doc = $(doc);
+
+        this.cache[urlAsKey] = {
+            $doc: $doc,
+            $content: $doc.find('.' + routerConfig.sectionGroupClass)
+        };
+    };
+
+    /**
+     * 从 sessionStorage 中获取保存下来的「当前状态」
+     *
+     * 如果解析失败，那么认为当前状态是 null
+     *
+     * @returns {State|null}
+     * @private
+     */
+    Router.prototype._getLastState = function() {
+        var currentState = sessionStorage.getItem(this.sessionNames.currentState);
+        try {
+            currentState = JSON.parse(currentState);
+        } catch(e) {
+            currentState = null;
+        }
+
+        return currentState;
+    };
+
+    /**
+     * 把一个状态设为当前状态，保存仅 sessionStorage 中
+     *
+     * @param {State} state
+     * @private
+     */
+    Router.prototype._saveAsCurrentState = function(state) {
+        sessionStorage.setItem(this.sessionNames.currentState, JSON.stringify(state));
+    };
+
+    /**
+     * 获取下一个 state 的 id
+     *
+     * 读取 sessionStorage 里的最后的状态的 id，然后 + 1；如果原没设置，那么返回 1
+     *
+     * @returns {number}
+     * @private
+     */
+    Router.prototype._getNextStateId = function() {
+        var maxStateId = sessionStorage.getItem(this.sessionNames.maxStateId);
+        return maxStateId ? parseInt(maxStateId, 10) + 1 : 1;
+    };
+
+    /**
+     * 把 sessionStorage 里的最后状态的 id 自加 1
+     *
+     * @private
+     */
+    Router.prototype._incMaxStateId = function() {
+        sessionStorage.setItem(this.sessionNames.maxStateId, this._getNextStateId());
+    };
+
+    /**
+     * 从一个文档切换为显示另一个文档
+     *
+     * @param $from 目前显示的文档
+     * @param $to 待切换显示的新文档
+     * @param $visibleSection 新文档中展示的 section 元素
+     * @param direction 新文档切入方向
+     * @private
+     */
+    Router.prototype._animateDocument = function($from, $to, $visibleSection, direction) {
+        var sectionId = $visibleSection.attr('id');
+
+
+        var $visibleSectionInFrom = $from.find('.' + routerConfig.curPageClass);
+        $visibleSectionInFrom.addClass(routerConfig.visiblePageClass).removeClass(routerConfig.curPageClass);
+
+        $visibleSection.trigger(EVENTS.pageAnimationStart, [sectionId, $visibleSection]);
+
+        this._animateElement($from, $to, direction);
+
+        $from.animationEnd(function() {
+            $visibleSectionInFrom.removeClass(routerConfig.visiblePageClass);
+            // 移除 document 前后，发送 beforePageRemove 和 pageRemoved 事件
+            $(window).trigger(EVENTS.beforePageRemove, [$from]);
+            $from.remove();
+            $(window).trigger(EVENTS.pageRemoved);
+        });
+
+        $to.animationEnd(function() {
+            $visibleSection.trigger(EVENTS.pageAnimationEnd, [sectionId, $visibleSection]);
+            // 外层（init.js）中会绑定 pageInitInternal 事件，然后对页面进行初始化
+            $visibleSection.trigger(EVENTS.pageInit, [sectionId, $visibleSection]);
+        });
+    };
+
+    /**
+     * 把当前文档的展示 section 从一个 section 切换到另一个 section
+     *
+     * @param $from
+     * @param $to
+     * @param direction
+     * @private
+     */
+    Router.prototype._animateSection = function($from, $to, direction) {
+        var toId = $to.attr('id');
+        $from.trigger(EVENTS.beforePageSwitch, [$from.attr('id'), $from]);
+
+        $from.removeClass(routerConfig.curPageClass);
+        $to.addClass(routerConfig.curPageClass);
+        $to.trigger(EVENTS.pageAnimationStart, [toId, $to]);
+        this._animateElement($from, $to, direction);
+        $to.animationEnd(function() {
+            $to.trigger(EVENTS.pageAnimationEnd, [toId, $to]);
+            // 外层（init.js）中会绑定 pageInitInternal 事件，然后对页面进行初始化
+            $to.trigger(EVENTS.pageInit, [toId, $to]);
+        });
+    };
+
+    /**
+     * 切换显示两个元素
+     *
+     * 切换是通过更新 class 来实现的，而具体的切换动画则是 class 关联的 css 来实现
+     *
+     * @param $from 当前显示的元素
+     * @param $to 待显示的元素
+     * @param direction 切换的方向
+     * @private
+     */
+    Router.prototype._animateElement = function($from, $to, direction) {
+        // todo: 可考虑如果入参不指定，那么尝试读取 $to 的属性，再没有再使用默认的
+        // 考虑读取点击的链接上指定的方向
+        if (typeof direction === 'undefined') {
+            direction = DIRECTION.rightToLeft;
+        }
+
+        var animPageClasses = [
+            'page-from-center-to-left',
+            'page-from-center-to-right',
+            'page-from-right-to-center',
+            'page-from-left-to-center'].join(' ');
+
+        var classForFrom, classForTo;
+        switch(direction) {
+            case DIRECTION.rightToLeft:
+                classForFrom = 'page-from-center-to-left';
+                classForTo = 'page-from-right-to-center';
+                break;
+            case DIRECTION.leftToRight:
+                classForFrom = 'page-from-center-to-right';
+                classForTo = 'page-from-left-to-center';
+                break;
+            default:
+                classForFrom = 'page-from-center-to-left';
+                classForTo = 'page-from-right-to-center';
+                break;
+        }
+
+        $from.removeClass(animPageClasses).addClass(classForFrom);
+        $to.removeClass(animPageClasses).addClass(classForTo);
+
+        $from.animationEnd(function() {
+            $from.removeClass(animPageClasses);
+        });
+        $to.animationEnd(function() {
+            $to.removeClass(animPageClasses);
+        });
+    };
+
+    /**
+     * 获取当前显示的第一个 section
+     *
+     * @returns {*}
+     * @private
+     */
+    Router.prototype._getCurrentSection = function() {
+        return this.$view.find('.' + routerConfig.curPageClass).eq(0);
+    };
+
+    /**
+     * popState 事件关联着的后退处理
+     *
+     * 判断两个 state 判断是否是属于同一个文档，然后做对应的 section 或文档切换；
+     * 同时在切换后把新 state 设为当前 state
+     *
+     * @param {State} state 新 state
+     * @param {State} fromState 旧 state
+     * @private
+     */
+    Router.prototype._back = function(state, fromState) {
+        if (this._isTheSameDocument(state.url.full, fromState.url.full)) {
+            var $newPage = $('#' + state.pageId);
+            if ($newPage.length) {
+                var $currentPage = this._getCurrentSection();
+                this._animateSection($currentPage, $newPage, DIRECTION.leftToRight);
+                this._saveAsCurrentState(state);
+            } else {
+                location.href = state.url.full;
+            }
+        } else {
+            this._saveDocumentIntoCache($(document), fromState.url.full);
+            this._switchToDocument(state.url.full, false, false, DIRECTION.leftToRight);
+            this._saveAsCurrentState(state);
+        }
+    };
+
+    /**
+     * popState 事件关联着的前进处理,类似于 _back，不同的是切换方向
+     *
+     * @param {State} state 新 state
+     * @param {State} fromState 旧 state
+     * @private
+     */
+    Router.prototype._forward = function(state, fromState) {
+        if (this._isTheSameDocument(state.url.full, fromState.url.full)) {
+            var $newPage = $('#' + state.pageId);
+            if ($newPage.length) {
+                var $currentPage = this._getCurrentSection();
+                this._animateSection($currentPage, $newPage, DIRECTION.rightToLeft);
+                this._saveAsCurrentState(state);
+            } else {
+                location.href = state.url.full;
+            }
+        } else {
+            this._saveDocumentIntoCache($(document), fromState.url.full);
+            this._switchToDocument(state.url.full, false, false, DIRECTION.rightToLeft);
+            this._saveAsCurrentState(state);
+        }
+    };
+
+    /**
+     * popState 事件处理
+     *
+     * 根据 pop 出来的 state 和当前 state 来判断是前进还是后退
+     *
+     * @param event
+     * @private
+     */
+    Router.prototype._onPopState = function(event) {
+        var state = event.state;
+        // if not a valid state, do nothing
+        if (!state || !state.pageId) {
+            return;
+        }
+
+        var lastState = this._getLastState();
+
+        if (!lastState) {
+            console.error && console.error('Missing last state when backward or forward');
+            return;
+        }
+
+        if (state.id === lastState.id) {
+            return;
+        }
+
+        if (state.id < lastState.id) {
+            this._back(state, lastState);
+        } else {
+            this._forward(state, lastState);
+        }
+    };
+
+    /**
+     * 页面进入到一个新状态
+     *
+     * 把新状态 push 进去，设置为当前的状态，然后把 maxState 的 id +1。
+     *
+     * @param {String} url 新状态的 url
+     * @param {String} sectionId 新状态中显示的 section 元素的 id
+     * @private
+     */
+    Router.prototype._pushNewState = function(url, sectionId) {
+        var state = {
+            id: this._getNextStateId(),
+            pageId: sectionId,
+            url: Util.toUrlObject(url)
+        };
+
+        theHistory.pushState(state, '', url);
+        this._saveAsCurrentState(state);
+        this._incMaxStateId();
+    };
+
+    /**
+     * 生成一个随机的 id
+     *
+     * @returns {string}
+     * @private
+     */
+    Router.prototype._generateRandomId = function() {
+        return "page-" + (+new Date());
+    };
+
+    Router.prototype.dispatch = function(event) {
+        var e = new CustomEvent(event, {
+            bubbles: true,
+            cancelable: true
+        });
+
+        //noinspection JSUnresolvedFunction
+        window.dispatchEvent(e);
+    };
+
+    /**
+     * 判断一个链接是否使用 router 来处理
+     *
+     * @param $link
+     * @returns {boolean}
+     */
+    function isInRouterBlackList($link) {
+        var classBlackList = [
+            'external',
+            'tab-link',
+            'open-popup',
+            'close-popup',
+            'open-panel',
+            'close-panel'
+        ];
+
+        for (var i = classBlackList.length -1 ; i >= 0; i--) {
+            if ($link.hasClass(classBlackList[i])) {
+                return true;
+            }
+        }
+
+        var linkEle = $link.get(0);
+        var linkHref = linkEle.getAttribute('href');
+
+        var protoWhiteList = [
+            'http',
+            'https'
+        ];
+
+        //如果非noscheme形式的链接，且协议不是http(s)，那么路由不会处理这类链接
+        if (/^(\w+):/.test(linkHref) && protoWhiteList.indexOf(RegExp.$1) < 0) {
+            return true;
+        }
+
+        //noinspection RedundantIfStatementJS
+        if (linkEle.hasAttribute('external')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * 自定义是否执行路由功能的过滤器
+     *
+     * 可以在外部定义 $.config.routerFilter 函数，实参是点击链接的 Zepto 对象。
+     *
+     * @param $link 当前点击的链接的 Zepto 对象
+     * @returns {boolean} 返回 true 表示执行路由功能，否则不做路由处理
+     */
+    function customClickFilter($link) {
+        var customRouterFilter = $.smConfig.routerFilter;
+        if ($.isFunction(customRouterFilter)) {
+            var filterResult = customRouterFilter($link);
+            if (typeof filterResult === 'boolean') {
+                return filterResult;
+            }
+        }
+
+        return true;
+    }
+
+    $(function() {
+        // 用户可选关闭router功能
+        if (!$.smConfig.router) {
+            return;
+        }
+
+        if (!Util.supportStorage()) {
+            return;
+        }
+
+        var $pages = $('.' + routerConfig.pageClass);
+        if (!$pages.length) {
+            var warnMsg = 'Disable router function because of no .page elements';
+            if (window.console && window.console.warn) {
+                console.warn(warnMsg);
+            }
+            return;
+        }
+
+        var router = $.router = new Router();
+
+        $(document).on('click', 'a', function(e) {
+            var $target = $(e.currentTarget);
+
+            var filterResult = customClickFilter($target);
+            if (!filterResult) {
+                return;
+            }
+
+            if (isInRouterBlackList($target)) {
+                return;
+            }
+
+            e.preventDefault();
+
+            if ($target.hasClass('back')) {
+                router.back();
+            } else {
+                var url = $target.attr('href');
+                if (!url || url === '#') {
+                    return;
+                }
+
+                var ignoreCache = $target.attr('data-no-cache') === 'true';
+
+                router.load(url, ignoreCache);
+            }
+        });
+    });
+}(Zepto);
+
+/**
+ * @typedef {Object} State
+ * @property {Number} id
+ * @property {String} url
+ * @property {String} pageId
+ */
+
+/**
+ * @typedef {Object} UrlObject 字符串 url 转为的对象
+ * @property {String} base url 的基本路径
+ * @property {String} full url 的完整绝对路径
+ * @property {String} origin 转换前的 url
+ * @property {String} fragment url 的 fragment
+ */
+
+/**
+ * @typedef {Object} DocumentCache
+ * @property {*|HTMLElement} $doc 看做是 $(document)
+ * @property {*|HTMLElement} $content $doc 里的 routerConfig.innerViewClass 元素
+ */
+
+/*======================================================
+************   Modals   ************
+======================================================*/
+/*jshint unused: false*/
++function ($) {
+  "use strict";
+  $.lastPosition =function(options) {
+    if ( !sessionStorage) {
+        return;
+    }
+    // 需要记忆模块的className
+    var needMemoryClass = options.needMemoryClass || [];
+
+    $(window).off('beforePageSwitch').on('beforePageSwitch', function(event,id,arg) {
+      updateMemory(id,arg);
+    });
+    $(window).off('pageAnimationStart').on('pageAnimationStart', function(event,id,arg) {
+      getMemory(id,arg);
+    });
+    //让后退页面回到之前的高度
+    function getMemory(id,arg){
+      needMemoryClass.forEach(function(item, index) {
+          if ($(item).length === 0) {
+              return;
+          }
+          var positionName = id ;
+          // 遍历对应节点设置存储的高度
+          var memoryHeight = sessionStorage.getItem(positionName);
+          arg.find(item).scrollTop(parseInt(memoryHeight));
+
+      });
+    }
+    //记住即将离开的页面的高度
+    function updateMemory(id,arg) {
+        var positionName = id ;
+        // 存储需要记忆模块的高度
+        needMemoryClass.forEach(function(item, index) {
+            if ($(item).length === 0) {
+                return;
+            }
+            sessionStorage.setItem(
+                positionName,
+                arg.find(item).scrollTop()
+            );
+
+        });
+    }
+  };
+}(Zepto);
+
+/*jshint unused: false*/
++function($) {
+    'use strict';
+
+    var getPage = function() {
+        var $page = $(".page-current");
+        if (!$page[0]) $page = $(".page").addClass('page-current');
+        return $page;
+    };
+
+    //初始化页面中的JS组件
+    $.initPage = function(page) {
+        var $page = getPage();
+        if (!$page[0]) $page = $(document.body);
+        var $content = $page.hasClass('content') ?
+                       $page :
+                       $page.find('.content');
+        $content.scroller();  //注意滚动条一定要最先初始化
+
+        $.initPullToRefresh($content);
+        $.initInfiniteScroll($content);
+        $.initCalendar($content);
+
+        //extend
+        if ($.smConfig.autoInitSwiper && $.initSwiper) $.initSwiper($content);
+    };
+
+    if ($.smConfig.showPageLoadingIndicator) {
+        //这里的 以 push 开头的是私有事件，不要用
+        $(window).on('pageLoadStart', function() {
+            $.showIndicator();
+
+        });
+        $(window).on('pageAnimationStart', function() {
+            $.hideIndicator();
+        });
+        $(window).on('pageLoadCancel', function() {
+            $.hideIndicator();
+        });
+        $(window).on('pageLoadComplete', function() {
+            $.hideIndicator();
+        });
+        $(window).on('pageLoadError', function() {
+            $.hideIndicator();
+            $.toast('加载失败');
+        });
+    }
+
+    $(window).on('pageAnimationStart', function(event,id,page) {
+        // 在路由切换页面动画开始前,为了把位于 .page 之外的 popup 等隐藏,此处做些处理
+        $.closeModal();
+        $.closePanel();
+        // 如果 panel 的 effect 是 reveal 时,似乎是 page 的动画或别的样式原因导致了 transitionEnd 时间不会触发
+        // 这里暂且处理一下
+        $('body').removeClass('panel-closing');
+        $.allowPanelOpen = true;
+    });
+
+    $(window).on('pageInit', function() {
+        $.hideIndicator();
+        $.lastPosition({
+            needMemoryClass: [
+                '.content'
+            ]
+        });
+    });
+    // safari 在后退的时候会使用缓存技术，但实现上似乎存在些问题，
+    // 导致路由中绑定的点击事件不会正常如期的运行（log 和 debugger 都没法调试），
+    // 从而后续的跳转等完全乱了套。
+    // 所以，这里检测到是 safari 的 cache 的情况下，做一次 reload
+    // 测试路径(后缀 D 表示是 document，E 表示 external，不使用路由跳转）：
+    // 1. aD -> bDE
+    // 2. back
+    // 3. aD -> bD
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            location.reload();
+        }
+    });
+
+    $.init = function() {
+        var $page = getPage();
+        var id = $page[0].id;
+        $.initPage();
+        $page.trigger('pageInit', [id, $page]);
+    };
+
+    //DOM READY
+    $(function() {
+        //直接绑定
+        FastClick.attach(document.body);
+
+        if ($.smConfig.autoInit) {
+            $.init();
+        }
+
+        $(document).on('pageInitInternal', function(e, id, page) {
+            $.init();
+        });
+    });
+
+}(Zepto);
+
+/**
+ * ScrollFix v0.1
+ * http://www.joelambert.co.uk
+ *
+ * Copyright 2011, Joe Lambert.
+ * Free to use under the MIT license.
+ * http://www.opensource.org/licenses/mit-license.php
+ */
+/* ===============================================================================
+************   ScrollFix   ************
+=============================================================================== */
+
++ function($) {
+    "use strict";
+    //安卓微信中使用scrollfix会有问题，因此只在ios中使用，安卓机器按照原来的逻辑
+
+    if($.device.ios){
+        var ScrollFix = function(elem) {
+
+            // Variables to track inputs
+            var startY;
+            var startTopScroll;
+
+            elem = elem || document.querySelector(elem);
+
+            // If there is no element, then do nothing
+            if(!elem)
+                return;
+
+            // Handle the start of interactions
+            elem.addEventListener('touchstart', function(event){
+                startY = event.touches[0].pageY;
+                startTopScroll = elem.scrollTop;
+
+                if(startTopScroll <= 0)
+                elem.scrollTop = 1;
+
+            if(startTopScroll + elem.offsetHeight >= elem.scrollHeight)
+                elem.scrollTop = elem.scrollHeight - elem.offsetHeight - 1;
+            }, false);
+        };
+
+        var initScrollFix = function(){
+            var prefix = $('.page-current').length > 0 ? '.page-current ' : '';
+            var scrollable = $(prefix + ".content");
+            new ScrollFix(scrollable[0]);
+        };
+
+        $(document).on($.touchEvents.move, ".page-current .bar",function(){
+            event.preventDefault();
+        });
+        //监听ajax页面跳转
+        $(document).on("pageLoadComplete", function(){
+             initScrollFix();
+        });
+        //监听内联页面跳转
+        $(document).on("pageAnimationEnd", function(){
+             initScrollFix();
+        });
+        initScrollFix();
+    }
+
+}(Zepto);

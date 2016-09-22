@@ -1,1 +1,11 @@
-define(["zepto","app"],function(n,i){var t={};return t.init=function(){i.setPageTitle("我的")},n(document).off("click","#my .item-inner").on("click","#my .item-inner",function(){var i=n(this).data("link");n.router.load(i,!1)}),t});
+define(['zepto','app'],function($,app){
+  var exportsObj = {};
+  exportsObj.init = function () {
+    app.setPageTitle("我的");
+  }
+  $(document).off('click','#my .item-inner').on('click','#my .item-inner',function(){
+    var link = $(this).data('link');
+    $.router.load(link,false);
+  })
+  return exportsObj;
+})
