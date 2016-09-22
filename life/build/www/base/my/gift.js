@@ -1,0 +1,1 @@
+define(["zepto","app"],function(e,n){var t={};return t.init=function(){n.setPageTitle("礼品")},t});

@@ -1,0 +1,13 @@
+@import '_fn';
+.borderT{
+    @include setTopLineAfter();
+}
+.borderB{
+    @include setBottomLineAfter();
+}
+.borderL{
+    @include setLeftLineAfter();
+}
+.borderR{
+    @include setRightLineAfter();
+}

@@ -1,0 +1,16 @@
+@import '../../base/_fn';
+.footer_borderR:after{
+    content: " ";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 1px;
+    height: 70%;
+    border-right: 1px solid $borderColor_default;
+    color: $borderColor_default;
+    transform-origin: 100% 0;
+    transform: scaleX(0.5) translateY(-50%);
+}
+.bar-tab .tab-item.active, .bar-tab .tab-item:active{
+    color:$mainColor;
+}

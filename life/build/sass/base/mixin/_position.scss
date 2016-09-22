@@ -1,0 +1,12 @@
+@mixin middleByTranslate() {
+    top:50%;
+    left:50%;
+    transform: translate3d(-50%, -50%, 0);
+}
+
+@mixin middleByMargin($w,$h){
+    top:50%;
+    left:50%;
+    margin-left: -($w/2)px;
+    margin-left: -($h/2)px;
+}

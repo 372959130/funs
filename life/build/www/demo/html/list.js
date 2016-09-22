@@ -1,0 +1,1 @@
+define(["zepto","smExtend"],function(e){e(".swiper-container").swiper({freeMode:!0,slidesPerView:"auto"})});
