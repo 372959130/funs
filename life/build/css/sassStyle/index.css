@@ -209,14 +209,14 @@ input, textarea {
     flex-basis: 49.5%;
     max-width: 49.5%; }
   .threeItem-layout .threeItem-big {
-    padding-top: 100%;
+    padding-top: 104.076%;
     width: 100%;
     position: relative;
     background: url() center no-repeat;
     -webkit-background-size: 100% 100%;
     background-size: 100% 100%; }
   .threeItem-layout .threeItem-small {
-    padding-top: 49.5%;
+    padding-top: 51%;
     width: 100%;
     position: relative;
     background: url() center no-repeat;
@@ -225,7 +225,7 @@ input, textarea {
   .threeItem-layout > div.vertical-layout {
     margin-left: 1%; }
   .threeItem-layout > div.vertical-layout > div:last-child {
-    margin-top: 1%; }
+    margin-top: 1.75%; }
 
 .horn {
   display: -webkit-box;
@@ -240,7 +240,8 @@ input, textarea {
     -ms-flex-negative: 0;
     flex-shrink: 0;
     line-height: 32px;
-    width: 110px; }
+    width: 110px;
+    top: 1px; }
     .horn .horn-title .lb {
       width: 12px;
       height: 12px;
@@ -305,7 +306,7 @@ input, textarea {
     .homeBanner-recommend .swiper-slide:nth-child(3n):before {
       background-image: url(../../images/index/y.png); }
   .homeBanner-recommend .recommend-box {
-    padding-top: 142.224%;
+    padding-top: 144%;
     width: 100%;
     position: relative;
     overflow: hidden; }
@@ -330,7 +331,8 @@ input, textarea {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      word-wrap: normal; }
+      word-wrap: normal;
+      font-size: 0.75rem; }
     .homeBanner-recommend .recommend-content .recommend-icon {
       margin: 0 auto;
       overflow: hidden;

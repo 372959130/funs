@@ -10,12 +10,31 @@
     <link rel="stylesheet" href="../../../js/sui/css/sm.min.css">
     <link rel="stylesheet" href="../../../js/sui/css/sm-extend.min.css">
     <link rel="stylesheet" href="../../../css/sassStyle/index.css">
+    
+<!-- <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=vSY6UbC7hvUr6wmOSeReB6ptb05C5UhK"></script>
+<script type="text/javascript">
+    // 百度地图API功能
+    var geolocation = new BMap.Geolocation();
+    geolocation.getCurrentPosition(function(r){
+        if(this.getStatus() == BMAP_STATUS_SUCCESS){
+            var mk = new BMap.Marker(r.point);
+            alert('您的位置：'+r.point.lng+','+r.point.lat);
+        }
+        else {
+            alert('failed'+this.getStatus());
+        }        
+    },{enableHighAccuracy: true})
+</script> -->
 
   </head>
   <body>
 
   <div class="page-group">
-        <div class="page page-curren" id="index">
+        <div class="page page-curren" id="categoryList">
+            <!-- 标题栏 -->
+            <header class="bar bar-nav">
+                <h1 class="title">亲，欢迎来到广电生活服务平台</h1>
+            </header>
 
             <!-- 工具栏 -->
             <nav class="bar bar-tab">
@@ -32,10 +51,6 @@
             <!-- 这里是页面内容区 -->
             <div class="content" data-type="js">
             <div class="content-inner">
-            <!-- 标题栏 -->
-            <header class="bar bar-nav" style="position: relative;">
-                <h1 class="title">亲，欢迎来到广电生活服务平台</h1>
-            </header>
               <!-- Slider -->
               <div class="homeBanner">
                 <div class="swiper-container">
@@ -84,8 +99,8 @@
                     <div class="swiper-slide">
                       <div class="recommend-box">
                           <div class="recommend-content">
-                              <h3>湘里乡亲</h3>
-                              <p>每满100减5元</p>
+                              <h3>推荐</h3>
+                              <p>简介</p>
                               <div class="recommend-icon" style="background-image: url(../../../images/demo/1.png)"></div>
                           </div>
                       </div>
@@ -93,8 +108,8 @@
                     <div class="swiper-slide">
                       <div class="recommend-box">
                           <div class="recommend-content">
-                              <h3>点都德</h3>
-                              <p>消费送5元代金券</p>
+                              <h3>推荐</h3>
+                              <p>简介</p>
                               <div class="recommend-icon" style="background-image: url(../../../images/demo/2.png)"></div>
                           </div>
                       </div>
@@ -102,8 +117,8 @@
                     <div class="swiper-slide">
                       <div class="recommend-box">
                           <div class="recommend-content">
-                              <h3>堂会KTV</h3>
-                              <p>夜场低至50元</p>
+                              <h3>推荐</h3>
+                              <p>简介</p>
                               <div class="recommend-icon" style="background-image: url(../../../images/demo/3.png)"></div>
                           </div>
                       </div>

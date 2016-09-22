@@ -10,6 +10,8 @@ require.config({
 		//---非通用---
 		smExtend : 'sui/js/sm-extend',//sui的extend库(配对样式表:sm-extend.min.css)
 		smCityPicker : 'sui/js/sm-city-picker',//城市选择
+                        //---百度地图sdk---
+                        baiduMap : 'http//api.map.baidu.com/api?v=2.0&ak=vSY6UbC7hvUr6wmOSeReB6ptb05C5UhK'
 	},
 	shim : {
 		sm : {

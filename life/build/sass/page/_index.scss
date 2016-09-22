@@ -56,12 +56,12 @@
     max-width: 49.5%;
   }
   & .threeItem-big{
-    @include pTimgBox(100%);
+    @include pTimgBox(104.076%);
     background:url() center no-repeat;
     background-size:100% 100%;
   }
   & .threeItem-small{
-    @include pTimgBox(49.5%);
+    @include pTimgBox(51%);
     background:url() center no-repeat;
     background-size:100% 100%;
   }
@@ -69,7 +69,7 @@
     margin-left:1%;
   }
   &>div.vertical-layout>div:last-child{
-    margin-top: 1%;
+    margin-top: 1.75%;
   }
 }
 
@@ -84,6 +84,7 @@
     flex-shrink: 0;
     line-height:$height;
     width:$horn-title_width;
+    top:1px;
     & .lb{
       width:12px;
       height:12px;
@@ -115,8 +116,11 @@
 
 .homeBanner-recommend{
   width:124%;
+  & .swiper-container{
+    padding-bottom:0;
+  }
   & .swiper-slide{
-    width: 0px;
+    width: 0;
     @include setRightLineAfter;
     background:#f8f8f8;
     &:before{
@@ -138,7 +142,7 @@
     }
   }
   & .recommend-box{
-      @include pTimgBox(142.224%);
+      @include pTimgBox(144%);
       overflow:hidden;
   }
   & .recommend-content{
@@ -152,6 +156,7 @@
       }
       & p{
         @include ellipsis(100%);
+        font-size:0.75rem;
       }
       & .recommend-icon{
         margin:0 auto;
