@@ -20,7 +20,7 @@ define(['app','template','smExtend'],function(app,template,smExtend){
 
     //查看更多团购
     $(document).off('click','.moreBtn').on('click','.moreBtn',function () {
-        var isOpen = $(this).data('openmore');
+        var isOpen = $(this).attr('data-openmore');
         var itemContent = $(this).parents('.categoryList-item').find('.categoryList-content');
         var item = itemContent.find('.categoryList-content-inner');
         var itemHeight = item.height();
@@ -41,7 +41,7 @@ define(['app','template','smExtend'],function(app,template,smExtend){
         }
         $.alert(newIsOpenFlag);
         $.alert(changeHeight);
-        $(this).data( 'openmore' , newIsOpenFlag );
+        $(this).attr( 'data-openmore' , newIsOpenFlag );
         itemContent.css('height', changeHeight + 'px' );
     });
 
