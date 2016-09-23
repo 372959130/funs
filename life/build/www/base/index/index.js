@@ -34,7 +34,7 @@ define(['app','template','smExtend'],function(app,template,smExtend){
     });
     $(document).off('click','.linkToCategoryList').on('click','.linkToCategoryList',function () {
         $.router.load("../categoryList/categoryList.html",true);
-    })
+    });
 
     return exportsObj;
 })
