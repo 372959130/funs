@@ -45,7 +45,7 @@ define(['app','template','smExtend'],function(app,template,smExtend){
 
     //更多团购动画结束后,重置js滚动条
     $(document).off('transitionend webkitTransitionEnd oTransitionEnd','.categoryList-content').on('transitionend webkitTransitionEnd oTransitionEnd','.categoryList-content',function () {
-          $.refreshScroller();//更新js滚动条
+          //$.refreshScroller();//更新js滚动条
     });
 
     return exportsObj;
