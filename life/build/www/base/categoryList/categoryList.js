@@ -1,7 +1,7 @@
 define(['app','template','smExtend'],function(app,template,smExtend){
     var exportsObj = {};
     exportsObj.init = function(){
-      app.setPageTitle("分类");
+      app.setPageTitle("美食");
       //初始化swiper
       $('.homeBanner>.swiper-container').swiper({
           pagination: '.swiper-pagination',

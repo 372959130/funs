@@ -1,7 +1,7 @@
 define(['app','template','smExtend'],function(app,template,smExtend){
     var exportsObj = {};
     exportsObj.init = function(){
-      app.setPageTitle("首页");
+      app.setPageTitle("亲，欢迎来到广电生活服务平台");
       //初始化swiper
       $('.homeBanner>.swiper-container').swiper({
           pagination: '.swiper-pagination',

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body {
   font-family: 'Arial, Helvetica, sans-serif,"Microsoft YaHei"';
   max-width: 540px;
@@ -399,7 +400,8 @@ input, textarea {
   .mySearchBar .search-input input {
     border-radius: 100em;
     background-color: rgba(255, 255, 255, 0.35);
-    height: 1.7rem; }
+    height: 1.7rem;
+    color: #fff; }
     .mySearchBar .search-input input::-webkit-input-placeholder {
       color: #fff !important; }
   .mySearchBar .searchbar .searchbar-cancel {
@@ -422,7 +424,7 @@ input, textarea {
   -webkit-transform: scaleY(0.5);
   -ms-transform: scaleY(0.5);
   transform: scaleY(0.5);
-  border: 1px dashed #e1e1e1; }
+  border: 1px dashed #ededed; }
 
 .categoryList .categoryList-item {
   background-color: #fff;
@@ -454,6 +456,8 @@ input, textarea {
     white-space: nowrap;
     word-wrap: normal; }
   .categoryList .categoryList-header .locationKM {
+    display: none;
+    /*一期不显示*/
     color: #ff5b76;
     font-size: 12px;
     border-radius: 100em;
@@ -499,7 +503,7 @@ input, textarea {
       -webkit-transform: scaleY(0.5);
       -ms-transform: scaleY(0.5);
       transform: scaleY(0.5);
-      border: 1px dashed #e1e1e1; }
+      border: 1px dashed #ededed; }
   .categoryList .categoryList-content-inner > div {
     height: 65px;
     overflow: hidden; }
@@ -525,7 +529,9 @@ input, textarea {
       text-overflow: ellipsis;
       display: -webkit-box;
       -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2; }
+      -webkit-line-clamp: 2;
+      word-wrap: break-word;
+      word-break: break-all; }
     .categoryList .categoryList-content-inner .goodsText .orangeBg {
       font-size: 10px;
       background-color: #eeae50;
@@ -565,6 +571,8 @@ input, textarea {
       -ms-flex-negative: 0;
       flex-shrink: 0; }
   .categoryList .categoryList-content-inner div.redBg {
+    display: none;
+    /*一期不显示*/
     -webkit-flex-basis: 14px;
     -ms-flex-preferred-size: 14px;
     flex-basis: 14px;
@@ -579,13 +587,15 @@ input, textarea {
     text-align: center;
     margin: 5px 0; }
   .categoryList .categoryList-content-inner div.priceNow {
-    font-size: 20px;
+    font-size: 18px;
     color: #ff284c;
     line-height: 20px;
-    height: 20px; }
+    height: 20px;
+    letter-spacing: 0px; }
 
 .categoryList .categoryList-footer {
   position: relative;
+  top: -1px;
   display: block;
   text-align: center;
   padding: 0 10px;
@@ -607,7 +617,7 @@ input, textarea {
     -webkit-transform: scaleY(0.5);
     -ms-transform: scaleY(0.5);
     transform: scaleY(0.5);
-    border: 1px dashed #e1e1e1; }
+    border: 1px dashed #ededed; }
   .categoryList .categoryList-footer .moreBtnIcon {
     margin-left: 5px;
     margin-bottom: 1px;
