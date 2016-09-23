@@ -39,11 +39,9 @@ define(['app','template','smExtend'],function(app,template,smExtend){
           newIsOpenFlag = "0";//重置flag
           $(this).find('.moreBtnIcon').removeClass('icon-up').addClass('icon-down');
         }
-        console.log(itemContent);
-        $.alert(newIsOpenFlag);
-        $.alert(changeHeight);
         $(this).data( 'openmore' , newIsOpenFlag );
-        itemContent.css('height', changeHeight );
+        itemContent.css('height', changeHeight+"px" );
+        $.alert( itemContent.css('height') );
     });
 
     //更多团购动画结束后,重置js滚动条
