@@ -39,8 +39,11 @@ define(['app','template','smExtend'],function(app,template,smExtend){
           newIsOpenFlag = "0";//重置flag
           $(this).find('.moreBtnIcon').removeClass('icon-up').addClass('icon-down');
         }
-        $(this).data( 'openmore' , newIsOpenFlag );
+        alert(0);
+        $(this).attr( 'data-openmore' , newIsOpenFlag );
+        alert(1);
         itemContent.css('height', changeHeight+"px" );
+        alert(2);
         $.alert( itemContent.css('height') );
     });
 
