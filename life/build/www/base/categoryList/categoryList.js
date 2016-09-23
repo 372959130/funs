@@ -39,6 +39,8 @@ define(['app','template','smExtend'],function(app,template,smExtend){
           newIsOpenFlag = 0;//重置flag
           $(this).find('.moreBtnIcon').removeClass('icon-up').addClass('icon-down');
         }
+        $.alert(newIsOpenFlag);
+        $.alert(changeHeight);
         $(this).data( 'openmore' , newIsOpenFlag );
         itemContent.css('height', changeHeight + 'px' );
     });
