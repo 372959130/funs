@@ -2,8 +2,7 @@ body {
   font-family: 'Arial, Helvetica, sans-serif,"Microsoft YaHei"';
   max-width: 540px;
   margin: 0 auto;
-  overflow-x: hidden;
-  color: #000000; }
+  overflow-x: hidden; }
 
 ul, li {
   padding: 0;
@@ -97,37 +96,37 @@ input, textarea {
 
 /*widget*/
 .font10 {
-  font-size: 10px; }
+  font-size: 10px !important; }
 
 .font12 {
-  font-size: 12px; }
+  font-size: 12px !important; }
 
 .font14 {
-  font-size: 14px; }
+  font-size: 14px !important; }
 
 .font16 {
-  font-size: 16px; }
+  font-size: 16px !important; }
 
 .font18 {
-  font-size: 18px; }
+  font-size: 18px !important; }
 
 .font20 {
-  font-size: 20px; }
+  font-size: 20px !important; }
 
 .font22 {
-  font-size: 22px; }
+  font-size: 22px !important; }
 
 .font24 {
-  font-size: 24px; }
+  font-size: 24px !important; }
 
 .font26 {
-  font-size: 26px; }
+  font-size: 26px !important; }
 
 .font28 {
-  font-size: 28px; }
+  font-size: 28px !important; }
 
 .font30 {
-  font-size: 30px; }
+  font-size: 30px !important; }
 
 .mainColor {
   color: #ff284c; }
@@ -361,6 +360,53 @@ input, textarea {
       -webkit-background-size: 100% 100%;
       background-size: 100% 100%; }
 
+.mySearchBar {
+  font-size: 16px;
+  position: relative;
+  top: 0px;
+  background-color: #ff3254;
+  color: #fff;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden; }
+  .mySearchBar:after {
+    height: 0 !important; }
+  .mySearchBar .citySelect {
+    -webkit-flex-basis: 70px;
+    -ms-flex-preferred-size: 70px;
+    flex-basis: 70px;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center; }
+    .mySearchBar .citySelect .icon {
+      margin-left: 6px; }
+  .mySearchBar .searchbar {
+    background-color: transparent;
+    width: 100%;
+    padding-top: 0.25rem; }
+  .mySearchBar .search-input .icon {
+    color: #fff; }
+  .mySearchBar .search-input input {
+    border-radius: 100em;
+    background-color: rgba(255, 255, 255, 0.6);
+    height: 1.7rem; }
+    .mySearchBar .search-input input::-webkit-input-placeholder {
+      color: #fff !important; }
+  .mySearchBar .searchbar .searchbar-cancel {
+    color: #fff;
+    height: 1.7rem;
+    line-height: 1.7rem; }
+
 .borer-dashed:after {
   content: " ";
   position: absolute;
@@ -376,7 +422,7 @@ input, textarea {
   -webkit-transform: scaleY(0.5);
   -ms-transform: scaleY(0.5);
   transform: scaleY(0.5);
-  border: 1px dashed #C7C7C7; }
+  border: 1px dashed #e1e1e1; }
 
 .categoryList .categoryList-item {
   background-color: #fff;
@@ -453,7 +499,7 @@ input, textarea {
       -webkit-transform: scaleY(0.5);
       -ms-transform: scaleY(0.5);
       transform: scaleY(0.5);
-      border: 1px dashed #C7C7C7; }
+      border: 1px dashed #e1e1e1; }
   .categoryList .categoryList-content-inner > div {
     height: 65px;
     overflow: hidden; }
@@ -526,18 +572,7 @@ input, textarea {
     color: #f2f2f2;
     text-align: center;
     width: 6em;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center; }
+    line-height: 14px; }
   .categoryList .categoryList-content-inner div.priceOld {
     font-size: 12px;
     color: #999;
@@ -572,7 +607,7 @@ input, textarea {
     -webkit-transform: scaleY(0.5);
     -ms-transform: scaleY(0.5);
     transform: scaleY(0.5);
-    border: 1px dashed #C7C7C7; }
+    border: 1px dashed #e1e1e1; }
   .categoryList .categoryList-footer .moreBtnIcon {
     margin-left: 5px;
     margin-bottom: 1px;
