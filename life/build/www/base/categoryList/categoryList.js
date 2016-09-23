@@ -28,7 +28,7 @@ define(['app','template','smExtend'],function(app,template,smExtend){
         var twoItemHeight = itemHeight * 2;//未展开的高度
         var allItemHeight = itemHeight * itemLength;//展开的高度
         var changeHeight = 0;
-        var newIsOpenFlag = 0;
+        var newIsOpenFlag = "0";
         if (isOpen=="0") {
           //未展开
           changeHeight = allItemHeight;
@@ -43,7 +43,7 @@ define(['app','template','smExtend'],function(app,template,smExtend){
         $.alert(newIsOpenFlag);
         $.alert(changeHeight);
         $(this).data( 'openmore' , newIsOpenFlag );
-        itemContent.css('height', changeHeight + 'px' );
+        itemContent.css('height', changeHeight );
     });
 
     //更多团购动画结束后,重置js滚动条
