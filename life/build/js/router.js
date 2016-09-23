@@ -3,12 +3,12 @@ require.config({
 	paths : {
 		//---通用---
 		zepto : 'tool/zepto-1.2.0',
-		sm : 'sui/js/sm',//sui的base库
+		sm : 'sui/js/sm.min',//sui的base库
 		smConfig : 'fun/sm-config',//sui的配置 $.config
 		app : 'fun/app',//通用工具类模块
 		template : 'tool/artTemplate',//JS模板引擎
 		//---非通用---
-		smExtend : 'sui/js/sm-extend',//sui的extend库(配对样式表:sm-extend.min.css)
+		smExtend : 'sui/js/sm-extend.min',//sui的extend库(配对样式表:sm-extend.min.css)
 		smCityPicker : 'sui/js/sm-city-picker',//城市选择
                         //---百度地图sdk---
                         baiduMap : 'http//api.map.baidu.com/api?v=2.0&ak=vSY6UbC7hvUr6wmOSeReB6ptb05C5UhK'
