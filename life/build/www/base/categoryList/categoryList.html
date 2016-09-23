@@ -31,10 +31,6 @@
 
   <div class="page-group">
         <div class="page page-curren" id="categoryList">
-            <!-- 标题栏 -->
-            <header class="bar bar-nav">
-                <h1 class="title">亲，欢迎来到广电生活服务平台</h1>
-            </header>
 
             <!-- 工具栏 -->
             <nav class="bar bar-tab">
@@ -49,8 +45,18 @@
             </nav>
 
             <!-- 这里是页面内容区 -->
-            <div class="content" data-type="js">
+            <div class="content" data-type="auto">
             <div class="content-inner">
+
+              <!-- 标题栏 -->
+              <header class="bar bar-nav" style="position: relative;">
+                  <a class="button button-link button-nav pull-left back" href="#">
+                    <span class="icon icon-left blackColor"></span>
+                  </a>
+                  <h1 class="title">美食</h1>
+              </header>
+              <!--搜索栏-->
+              <div></div>
               <!-- Slider -->
               <div class="homeBanner">
                 <div class="swiper-container">
@@ -61,73 +67,174 @@
                 </div>
               </div>
 
-              <div class="threeItem-layout">
-                <div class="threeItem">
-                    <div class="threeItem-big" style="background-image: url(../../../images/demo/food.png);"></div>
-                </div>
-                <div class="threeItem vertical-layout">
-                    <div class="threeItem-small"  style="background-image: url(../../../images/demo/play.png);"></div>
-                    <div class="threeItem-small"  style="background-image: url(../../../images/demo/other.png);"></div>
-                </div>
-              </div>
-
-              <!--小喇叭-->
-              <div class="horn">
-                  <div class="horn-title"><img class="lb" src="../../../images/index/lb.png"><img class="lb-title" src="../../../images/index/lb-title.png"></div>
-                  <div class="homeBanner-vertical">
-                    <div class="swiper-container">
-                      <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                          『最红星期五』全场9.5折
+              <!--列表-->
+              <section class="categoryList">
+                <ul>
+                  <!--店铺团购-->
+                  <li class="categoryList-item">
+                    <div class="categoryList-header borer-dashed"><h4>椰风雨林海南主题餐厅（科学城店）</h4><div class="locationKM">科学城2.8km</div></div>
+                    <ul class="categoryList-content">
+                      <!--店铺内所有团购-->
+                      <li class="categoryList-content-inner borer-dashed">
+                        <div class="pic">
+                          <img src="../../../images/demo/a1.png">
                         </div>
-                        <div class="swiper-slide">
-                          『最红星期天』全场8.8折
+                        <div class="goodsText">
+                          <p>乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！</p>
+                          <span class="orangeBg">免预约</span>
                         </div>
-                        <div class="swiper-slide">
-                          『最红星期三』全场9.8折
+                        <div class="goodsPrice-warp">
+                          <div class="redBg font10">新客专享价</div>
+                          <div class="priceOld">原价<del>¥36</del></div>
+                          <div class="priceNow"><small>¥</small><span class="fontBold">1000.01</span></div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-              </div>
+                      </li>
 
-              <!--推荐-->
-              <div class="homeBanner-recommend">
-                <div class="swiper-container">
-                  <div class="swiper-wrapper">
+                      <li class="categoryList-content-inner borer-dashed">
+                        <div class="pic">
+                          <img src="../../../images/demo/a1.png">
+                        </div>
+                        <div class="goodsText">
+                          <p>乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！</p>
+                          <span class="orangeBg">免预约</span>
+                        </div>
+                        <div class="goodsPrice-warp">
+                          <div class="redBg font10">新客专享价</div>
+                          <div class="priceOld">原价<del>¥36</del></div>
+                          <div class="priceNow"><small>¥</small><span class="fontBold">1000.01</span></div>
+                        </div>
+                      </li>
 
-                    <div class="swiper-slide">
-                      <div class="recommend-box">
-                          <div class="recommend-content">
-                              <h3>推荐</h3>
-                              <p>简介</p>
-                              <div class="recommend-icon" style="background-image: url(../../../images/demo/1.png)"></div>
-                          </div>
-                      </div>
-                    </div>
-                    <div class="swiper-slide">
-                      <div class="recommend-box">
-                          <div class="recommend-content">
-                              <h3>推荐</h3>
-                              <p>简介</p>
-                              <div class="recommend-icon" style="background-image: url(../../../images/demo/2.png)"></div>
-                          </div>
-                      </div>
-                    </div>
-                    <div class="swiper-slide">
-                      <div class="recommend-box">
-                          <div class="recommend-content">
-                              <h3>推荐</h3>
-                              <p>简介</p>
-                              <div class="recommend-icon" style="background-image: url(../../../images/demo/3.png)"></div>
-                          </div>
-                      </div>
-                    </div>
+                      <li class="categoryList-content-inner borer-dashed">
+                        <div class="pic">
+                          <img src="../../../images/demo/a1.png">
+                        </div>
+                        <div class="goodsText">
+                          <p>乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！</p>
+                          <span class="orangeBg">免预约</span>
+                        </div>
+                        <div class="goodsPrice-warp">
+                          <div class="redBg font10">新客专享价</div>
+                          <div class="priceOld">原价<del>¥36</del></div>
+                          <div class="priceNow"><small>¥</small><span class="fontBold">1000.01</span></div>
+                        </div>
+                      </li>
 
-                  </div>
-                </div>
-              </div>
+                    </ul>
+                    <div class="categoryList-footer moreBtn" data-openmore='0'>其它一个团购<span class="icon icon-down moreBtnIcon"></span></div>
+                  </li>
+                  <!--店铺团购.end-->
+                  <!--店铺团购-->
+                  <li class="categoryList-item">
+                    <div class="categoryList-header borer-dashed"><h4>椰风雨林海南主题餐厅（科学城店）</h4><div class="locationKM">科学城2.8km</div></div>
+                    <ul class="categoryList-content">
+                      <!--店铺内所有团购-->
+                      <li class="categoryList-content-inner borer-dashed">
+                        <div class="pic">
+                          <img src="../../../images/demo/a1.png">
+                        </div>
+                        <div class="goodsText">
+                          <p>乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！</p>
+                          <span class="orangeBg">免预约</span>
+                        </div>
+                        <div class="goodsPrice-warp">
+                          <div class="redBg font10">新客专享价</div>
+                          <div class="priceOld">原价<del>¥36</del></div>
+                          <div class="priceNow"><small>¥</small><span class="fontBold">1000.01</span></div>
+                        </div>
+                      </li>
 
+                      <li class="categoryList-content-inner borer-dashed">
+                        <div class="pic">
+                          <img src="../../../images/demo/a1.png">
+                        </div>
+                        <div class="goodsText">
+                          <p>乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！</p>
+                          <span class="orangeBg">免预约</span>
+                        </div>
+                        <div class="goodsPrice-warp">
+                          <div class="redBg font10">新客专享价</div>
+                          <div class="priceOld">原价<del>¥36</del></div>
+                          <div class="priceNow"><small>¥</small><span class="fontBold">1000.01</span></div>
+                        </div>
+                      </li>
+
+                      <li class="categoryList-content-inner borer-dashed">
+                        <div class="pic">
+                          <img src="../../../images/demo/a1.png">
+                        </div>
+                        <div class="goodsText">
+                          <p>乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！</p>
+                          <span class="orangeBg">免预约</span>
+                        </div>
+                        <div class="goodsPrice-warp">
+                          <div class="redBg font10">新客专享价</div>
+                          <div class="priceOld">原价<del>¥36</del></div>
+                          <div class="priceNow"><small>¥</small><span class="fontBold">1000.01</span></div>
+                        </div>
+                      </li>
+
+                    </ul>
+                    <div class="categoryList-footer moreBtn" data-openmore='0'>其它一个团购<span class="icon icon-down moreBtnIcon"></span></div>
+                  </li>
+                  <!--店铺团购.end-->
+                  <!--店铺团购-->
+                  <li class="categoryList-item">
+                    <div class="categoryList-header borer-dashed"><h4>椰风雨林海南主题餐厅（科学城店）</h4><div class="locationKM">科学城2.8km</div></div>
+                    <ul class="categoryList-content">
+                      <!--店铺内所有团购-->
+                      <li class="categoryList-content-inner borer-dashed">
+                        <div class="pic">
+                          <img src="../../../images/demo/a1.png">
+                        </div>
+                        <div class="goodsText">
+                          <p>乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！</p>
+                          <span class="orangeBg">免预约</span>
+                        </div>
+                        <div class="goodsPrice-warp">
+                          <div class="redBg font10">新客专享价</div>
+                          <div class="priceOld">原价<del>¥36</del></div>
+                          <div class="priceNow"><small>¥</small><span class="fontBold">1000.01</span></div>
+                        </div>
+                      </li>
+
+                      <li class="categoryList-content-inner borer-dashed">
+                        <div class="pic">
+                          <img src="../../../images/demo/a1.png">
+                        </div>
+                        <div class="goodsText">
+                          <p>乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！</p>
+                          <span class="orangeBg">免预约</span>
+                        </div>
+                        <div class="goodsPrice-warp">
+                          <div class="redBg font10">新客专享价</div>
+                          <div class="priceOld">原价<del>¥36</del></div>
+                          <div class="priceNow"><small>¥</small><span class="fontBold">1000.01</span></div>
+                        </div>
+                      </li>
+
+                      <li class="categoryList-content-inner borer-dashed">
+                        <div class="pic">
+                          <img src="../../../images/demo/a1.png">
+                        </div>
+                        <div class="goodsText">
+                          <p>乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！乳鸽1只！免费WIFI！</p>
+                          <span class="orangeBg">免预约</span>
+                        </div>
+                        <div class="goodsPrice-warp">
+                          <div class="redBg font10">新客专享价</div>
+                          <div class="priceOld">原价<del>¥36</del></div>
+                          <div class="priceNow"><small>¥</small><span class="fontBold">1000.01</span></div>
+                        </div>
+                      </li>
+
+                    </ul>
+                    <div class="categoryList-footer moreBtn" data-openmore='0'>其它一个团购<span class="icon icon-down moreBtnIcon"></span></div>
+                  </li>
+                  <!--店铺团购.end-->
+                </ul>
+              </section>
+              <!--列表.end-->
             </div>
             </div>
             <!--content-->
