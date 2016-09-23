@@ -398,7 +398,7 @@ input, textarea {
     color: #fff; }
   .mySearchBar .search-input input {
     border-radius: 100em;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.35);
     height: 1.7rem; }
     .mySearchBar .search-input input::-webkit-input-placeholder {
       color: #fff !important; }
