@@ -20,7 +20,7 @@ define(['app','template','smExtend'],function(app,template,smExtend){
 
     //查看更多团购
     $(document).off('click','.moreBtn').on('click','.moreBtn',function () {
-        var isOpen = $(this).attr('data-openmore');
+        var isOpen = $(this).data('openmore');
         var itemContent = $(this).parents('.categoryList-item').find('.categoryList-content');
         var item = itemContent.find('.categoryList-content-inner');
         var itemHeight = item.height();
@@ -29,19 +29,20 @@ define(['app','template','smExtend'],function(app,template,smExtend){
         var allItemHeight = itemHeight * itemLength;//展开的高度
         var changeHeight = 0;
         var newIsOpenFlag = 0;
-        if (isOpen==0) {
+        if (isOpen=="0") {
           //未展开
           changeHeight = allItemHeight;
-          newIsOpenFlag = 1;//重置flag
+          newIsOpenFlag = "1";//重置flag
           $(this).find('.moreBtnIcon').removeClass('icon-down').addClass('icon-up');
         }else{
           changeHeight = twoItemHeight;
-          newIsOpenFlag = 0;//重置flag
+          newIsOpenFlag = "0";//重置flag
           $(this).find('.moreBtnIcon').removeClass('icon-up').addClass('icon-down');
         }
+        console.log(itemContent);
         $.alert(newIsOpenFlag);
         $.alert(changeHeight);
-        $(this).attr( 'data-openmore' , newIsOpenFlag );
+        $(this).data( 'openmore' , newIsOpenFlag );
         itemContent.css('height', changeHeight + 'px' );
     });
 
