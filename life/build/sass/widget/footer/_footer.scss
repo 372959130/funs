@@ -14,3 +14,31 @@
 .bar-tab .tab-item.active, .bar-tab .tab-item:active{
     color:$mainColor;
 }
+.bar-tab{
+  & .my-icon-index{
+    position:relative;
+  }
+  & .my-icon:before{
+    position:absolute;
+    top:50%;
+    left:50%;
+    content:"";
+    background:url() center no-repeat;
+    background-size:100% 100%;
+    width:1rem;
+    height:1rem;
+    transform:translate3d(-50%,-50%,0);
+  }
+  & .my-icon-index:before{
+    background-image:url(../../images/index/index.png);
+  }
+  & .active .my-icon-index:before{
+    background-image:url(../../images/index/index-active.png);
+  }
+  & .my-icon-my:before{
+    background-image:url(../../images/index/my.png);
+  }
+  & .active .my-icon-my:before{
+    background-image:url(../../images/index/my-active.png);
+  }
+}

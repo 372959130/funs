@@ -5,5 +5,10 @@
 /*widget*/
 @import 'widget/common/_common';
 @import 'widget/footer/_footer';
+@import 'widget/swiper/_mySwiper';
+@import 'widget/popup/_byPopup';//立即购买浮层
+@import 'widget/num/_num';//计数器
 /*page*/
 @import 'page/_index';
+@import 'page/_categoryList';
+@import 'page/_goods';

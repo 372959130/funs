@@ -18,16 +18,7 @@
         <div class="page page-curren" id="index">
 
             <!-- 工具栏 -->
-            <nav class="bar bar-tab">
-                <a class="tab-item footer_borderR active" external href="#index">
-                    <span class="icon my-icon my-icon-index"></span>
-                    <span class="tab-label">首页</span>
-                </a>
-                <a class="tab-item" href="../my/my.html" data-no-cache="true">
-                    <span class="icon my-icon my-icon-my"></span>
-                    <span class="tab-label">我的</span>
-                </a>
-            </nav>
+            <div data-acive="home" id="lifeFooterBar"></div>
 
             <!-- 这里是页面内容区 -->
             <div class="content" data-type="js">
@@ -44,11 +35,11 @@
 
               <div class="threeItem-layout">
                 <div class="threeItem">
-                    <div class="threeItem-big linkToCategoryList" style="background-image: url(../../../images/demo/food.png);"></div>
+                    <div class="threeItem-big linkToCategoryList" id="meishi" data-catid="" style="background-image: url(../../../images/demo/food.png);"></div>
                 </div>
                 <div class="threeItem vertical-layout">
-                    <div class="threeItem-small"  style="background-image: url(../../../images/demo/play.png);"></div>
-                    <div class="threeItem-small"  style="background-image: url(../../../images/demo/other.png);"></div>
+                    <div class="threeItem-small linkToCategoryList" id="yule" data-catid=""  style="background-image: url(../../../images/demo/play.png);"></div>
+                    <div class="threeItem-small linkToCategoryList" id="qita" data-catid=""  style="background-image: url(../../../images/demo/other.png);"></div>
                 </div>
               </div>
 
@@ -81,7 +72,7 @@
                       <div class="recommend-box">
                           <div class="recommend-content">
                               <h3>湘里乡亲</h3>
-                              <p>每满100减5元</p>
+                              <!-- <p>每满100减5元</p> -->
                               <div class="recommend-icon" style="background-image: url(../../../images/demo/1.png)"></div>
                           </div>
                       </div>
@@ -90,7 +81,7 @@
                       <div class="recommend-box">
                           <div class="recommend-content">
                               <h3>点都德</h3>
-                              <p>消费送5元代金券</p>
+                              <!-- <p>消费送5元代金券</p> -->
                               <div class="recommend-icon" style="background-image: url(../../../images/demo/2.png)"></div>
                           </div>
                       </div>
@@ -99,7 +90,7 @@
                       <div class="recommend-box">
                           <div class="recommend-content">
                               <h3>堂会KTV</h3>
-                              <p>夜场低至50元</p>
+                              <!-- <p>夜场低至50元</p> -->
                               <div class="recommend-icon" style="background-image: url(../../../images/demo/3.png)"></div>
                           </div>
                       </div>
@@ -115,20 +106,20 @@
 
         </div>
         <!--JS模板-->
-        <script type="text/html" id="goodlist_TPL">
-            {{each}}
-                <div class="col-50 goodsItem" data-goodid="{{$value.goodId}}">
-                    <div class="pic">
-                      <img src="{{$value.img}}">
-                    </div>
-                    <div class="goodsName">
-                        {{$value.goodName}}
-                    </div>
+        <!--首页商家展示模板-->
+        <script type="text/html" id="shopListTpl">
+          {{each result}}
+          <div class="swiper-slide" data-shopid="{{$value.shopid}}">
+              <div class="recommend-box">
+                  <div class="recommend-content">
+                      <h3>{{$value.shop_name}}</h3>
+                      <div class="recommend-icon" style="background-image: url({{$value.tiny_image}})"></div>
+                  </div>
               </div>
+            </div>
             {{/each}}
         </script>
     </div>
-<div id="allmap"></div>
 <!--moduleJS begin-->
 <script type="text/javascript" data-main="../../../js/router.js" src="../../../js/require.js"></script>
   </body>

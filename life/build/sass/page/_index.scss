@@ -1,56 +1,9 @@
 @import '../base/_fn';
-.bar-tab{
-  & .my-icon-index{
-    position:relative;
-  }
-  & .my-icon:before{
-    position:absolute;
-    top:50%;
-    left:50%;
-    content:"";
-    background:url() center no-repeat;
-    background-size:100% 100%;
-    width:1rem;
-    height:1rem;
-    transform:translate3d(-50%,-50%,0);
-  }
-  & .my-icon-index:before{
-    background-image:url(../../images/index/index.png);
-  }
-  & .active .my-icon-index:before{
-    background-image:url(../../images/index/index-active.png);
-  }
-  & .my-icon-my:before{
-    background-image:url(../../images/index/my.png);
-  }
-  & .active .my-icon-my:before{
-    background-image:url(../../images/index/my-active.png);
-  }
-}
-.homeBanner .swiper-container{
-  padding-bottom: 0;
-}
-.homeBanner .swiper-container-horizontal>.swiper-pagination{
-  bottom:0;
-}
-.homeBanner .swiper-slide{
-  @include pTimgBox(42.667%);
-}
-.homeBanner .swiper-slide img{
-  @include pTimgChild;
-}
-.homeBanner .swiper-pagination-bullet{
-  width:6px;
-  height:6px;
-}
-.homeBanner .swiper-pagination-bullet-active{
-  background:$mainColor;
-}
 
 .threeItem-layout{
   display:flex;
   background:#fff;
-  margin:0.5rem 0;
+  margin:$listMargin 0;
   &>.threeItem{
     flex-basis: 49.5%;
     max-width: 49.5%;
@@ -69,7 +22,7 @@
     margin-left:1%;
   }
   &>div.vertical-layout>div:last-child{
-    margin-top: 1.75%;
+    margin-top: 2.04%;
   }
 }
 
@@ -78,7 +31,7 @@
   $height:32px;
   display:flex;
   background:#fff;
-  margin:0.5rem 0;
+  margin:$listMargin 0;
   & .horn-title{
     position:relative;
     flex-shrink: 0;
@@ -150,16 +103,19 @@
       text-align:center;
       & h3{
           margin:0;
+          margin-left:10px; 
           margin-top:5px;
+          @include ellipsis(90%);
+          width:calc(100% - 15px);
           color:#000000;
-          @include ellipsis(100%);
+          font-size:16px;
       }
       & p{
         @include ellipsis(100%);
-        font-size:0.75rem;
+        font-size:14px;
       }
       & .recommend-icon{
-        margin:0 auto;
+        margin:15px auto 0 auto;
         overflow:hidden;
         border-radius: 100%;
         @include pTimgBox(87.5%);

@@ -7,6 +7,8 @@ require.config({
 		smConfig : 'fun/sm-config',//sui的配置 $.config
 		app : 'fun/app',//通用工具类模块
 		template : 'tool/artTemplate',//JS模板引擎
+            //---页面组件---
+            footer : 'components/footer',//页脚
 		//---非通用---
 		smExtend : 'sui/js/sm-extend.min',//sui的extend库(配对样式表:sm-extend.min.css)
 		smCityPicker : 'sui/js/sm-city-picker',//城市选择
@@ -26,7 +28,7 @@ require.config({
 	}
 });
 //---------路由分发---------//
-require(['zepto','sm','smExtend','app','template'], function($,sm,smExtend,app,template){
+require(['zepto','sm','smExtend','app','template','footer'], function($,sm,smExtend,app,template,footer){
 	$(function(){
 
 	  var myRouter = {

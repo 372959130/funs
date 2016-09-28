@@ -14,6 +14,9 @@ p {
   margin: 0;
   padding: 0; }
 
+img {
+  max-width: 100%; }
+
 .content {
   overflow-x: hidden; }
 
@@ -455,6 +458,167 @@ input, textarea {
   width: 100%;
   position: relative; }
 
+.popup-buy {
+  top: 40% !important;
+  height: 60% !important;
+  font-size: 14px;
+  overflow: visible; }
+  .popup-buy #close-popup-buy {
+    position: absolute;
+    right: 3%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    display: block;
+    width: 26px;
+    height: 26px; }
+    .popup-buy #close-popup-buy img {
+      display: block;
+      width: 100%;
+      height: 100%; }
+  .popup-buy .popup-buy-content {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    bottom: 72px;
+    width: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch; }
+  .popup-buy .popup-goodInfo {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    position: relative;
+    padding: 12px 14px; }
+    .popup-buy .popup-goodInfo .popup-goodImg {
+      -webkit-flex-basis: 110px;
+      -ms-flex-preferred-size: 110px;
+      flex-basis: 110px;
+      -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+      flex-shrink: 0;
+      max-width: 110px;
+      height: 65px;
+      overflow: hidden; }
+      .popup-buy .popup-goodInfo .popup-goodImg img {
+        display: block;
+        width: 100%;
+        height: 100%; }
+    .popup-buy .popup-goodInfo .popup-goodName {
+      padding-left: 0.5em;
+      color: #3d4145; }
+  .popup-buy .popup-goodNum {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 12px 14px; }
+  .popup-buy .popup-goodFooter {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 12px 14px; }
+
+.numberInputBox {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #fff;
+  position: relative; }
+  .numberInputBox > a {
+    display: block;
+    font-size: 20px;
+    width: 35px;
+    height: 30px;
+    color: #3d4145;
+    text-align: center;
+    line-height: 30px;
+    position: relative;
+    z-index: 2; }
+  .numberInputBox:after {
+    content: "";
+    width: 200%;
+    height: 200%;
+    border: solid 1px #000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-transform: scale(0.5);
+    -ms-transform: scale(0.5);
+    transform: scale(0.5);
+    -webkit-transform-origin: top left;
+    -ms-transform-origin: top left;
+    transform-origin: top left; }
+
+.numberInputLeft {
+  line-height: 28px !important; }
+  .numberInputLeft:after {
+    content: " ";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    border-right: 1px solid #C7C7C7;
+    color: #C7C7C7;
+    -webkit-transform-origin: 100% 0;
+    -ms-transform-origin: 100% 0;
+    transform-origin: 100% 0;
+    -webkit-transform: scaleX(0.5);
+    -ms-transform: scaleX(0.5);
+    transform: scaleX(0.5);
+    top: 0;
+    right: -1px;
+    border-color: #000; }
+
+.numberInputRight:after {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  border-left: 1px solid #C7C7C7;
+  color: #C7C7C7;
+  -webkit-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scaleX(0.5);
+  -ms-transform: scaleX(0.5);
+  transform: scaleX(0.5);
+  top: 0;
+  left: 0;
+  border-color: #000; }
+
+.numberInputMid {
+  -webkit-appearance: none;
+  border: none;
+  width: 35px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  padding: 0 5px;
+  position: relative;
+  background-color: transparent;
+  z-index: 2; }
+
+.touchPlus {
+  background: rgba(204, 204, 204, 0.6); }
+
+.touchReduce {
+  background: rgba(204, 204, 204, 0.6); }
+
 /*page*/
 .threeItem-layout {
   display: -webkit-box;
@@ -579,14 +743,16 @@ input, textarea {
     text-align: center; }
     .homeBanner-recommend .recommend-content h3 {
       margin: 0;
+      margin-left: 10px;
       margin-top: 5px;
-      color: #000000;
-      font-size: 16px;
-      width: 100%;
+      width: 90%;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      word-wrap: normal; }
+      word-wrap: normal;
+      width: calc(100% - 15px);
+      color: #000000;
+      font-size: 16px; }
     .homeBanner-recommend .recommend-content p {
       width: 100%;
       overflow: hidden;
@@ -595,7 +761,7 @@ input, textarea {
       word-wrap: normal;
       font-size: 14px; }
     .homeBanner-recommend .recommend-content .recommend-icon {
-      margin: 0 auto;
+      margin: 15px auto 0 auto;
       overflow: hidden;
       border-radius: 100%;
       padding-top: 87.5%;
@@ -695,7 +861,7 @@ input, textarea {
     margin-left: 10px;
     margin-top: 0;
     margin-bottom: 0;
-    width: 70%;
+    width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -842,7 +1008,7 @@ input, textarea {
 .categoryList .categoryList-footer {
   position: relative;
   top: -1px;
-  display: block;
+  display: none;
   text-align: center;
   padding: 0 10px;
   height: 44px;
@@ -868,6 +1034,9 @@ input, textarea {
     margin-left: 5px;
     margin-bottom: 1px;
     font-size: 0.9em; }
+
+*[isPictureView="true"] {
+  display: none; }
 
 .gDetailList {
   background: #fff;
@@ -915,6 +1084,16 @@ input, textarea {
     -ms-flex-pack: justify;
     justify-content: space-between;
     font-size: 12px; }
+    .gDetailList .priceBox .priceBox-left {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column; }
   .gDetailList .service {
     display: -webkit-box;
     display: -webkit-flex;
@@ -987,50 +1166,145 @@ input, textarea {
     -webkit-justify-content: space-between;
     -ms-flex-pack: justify;
     justify-content: space-between; }
+    .gDetailList .toSeePicture:active {
+      background-color: #f8f8f8; }
   .gDetailList .goodsTips {
     font-size: 12px;
     color: #5f5f5f; }
-  .gDetailList .gDetailList-footer {
+
+.pictureView {
+  background-color: #fff;
+  margin-bottom: 0.5rem; }
+  .pictureView .pictureView-tab {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 5;
+    background-color: #fff;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
-    display: flex; }
-    .gDetailList .gDetailList-footer > div:first-child {
-      -webkit-flex-basis: 105px;
-      -ms-flex-preferred-size: 105px;
-      flex-basis: 105px;
-      -webkit-flex-shrink: 0;
-      -ms-flex-negative: 0;
-      flex-shrink: 0; }
-    .gDetailList .gDetailList-footer .goodsDetailBtnGround {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-pack: justify;
-      -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
-      justify-content: space-between;
-      width: 100%;
-      -webkit-box-align: end;
-      -webkit-align-items: flex-end;
-      -ms-flex-align: end;
-      align-items: flex-end; }
-      .gDetailList .gDetailList-footer .goodsDetailBtnGround .myBtn {
-        font-size: 14px;
-        display: block;
-        width: 46%;
-        height: 32px;
-        line-height: 32px;
-        color: #fff;
-        text-align: center;
-        border-radius: 5px;
-        background-color: gray; }
-        .gDetailList .gDetailList-footer .goodsDetailBtnGround .myBtn.redBtn {
-          background: #ff284c; }
-          .gDetailList .gDetailList-footer .goodsDetailBtnGround .myBtn.redBtn:active {
-            background: #f40029; }
-        .gDetailList .gDetailList-footer .goodsDetailBtnGround .myBtn.orgBtn {
-          background: #f89901; }
-          .gDetailList .gDetailList-footer .goodsDetailBtnGround .myBtn.orgBtn:active {
-            background: #c57a01; }
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    text-align: center;
+    height: 49px;
+    overflow: hidden; }
+    .pictureView .pictureView-tab > div {
+      position: relative;
+      -webkit-flex-basis: 50%;
+      -ms-flex-preferred-size: 50%;
+      flex-basis: 50%;
+      padding: 12px 0;
+      font-weight: bold; }
+      .pictureView .pictureView-tab > div:last-child:before {
+        content: " ";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1px;
+        height: 100%;
+        border-left: 1px solid #C7C7C7;
+        color: #C7C7C7;
+        -webkit-transform-origin: 0 0;
+        -ms-transform-origin: 0 0;
+        transform-origin: 0 0;
+        -webkit-transform: scaleX(0.5);
+        -ms-transform: scaleX(0.5);
+        transform: scaleX(0.5);
+        top: 20%;
+        height: 60%; }
+      .pictureView .pictureView-tab > div:last-child:after {
+        content: " ";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        border-bottom: 1px solid #C7C7C7;
+        color: #C7C7C7;
+        -webkit-transform-origin: 0 100%;
+        -ms-transform-origin: 0 100%;
+        transform-origin: 0 100%;
+        -webkit-transform: scaleY(0.5);
+        -ms-transform: scaleY(0.5);
+        transform: scaleY(0.5);
+        left: 50%;
+        width: 6.5em;
+        border-width: 6px;
+        border-color: #ff4968;
+        -webkit-transform: scaleY(0.5) translateX(-50%);
+        -ms-transform: scaleY(0.5) translateX(-50%);
+        transform: scaleY(0.5) translateX(-50%); }
+    .pictureView .pictureView-tab .active {
+      color: #ff284c; }
+  .pictureView .pictureViewTitle {
+    position: relative;
+    margin-top: 49px; }
+  .pictureView .pictureDetail {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    position: relative; }
+
+.gDetailList-footer {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+  .gDetailList-footer > div:first-child {
+    -webkit-flex-basis: 125px;
+    -ms-flex-preferred-size: 125px;
+    flex-basis: 125px;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    color: #999999; }
+  .gDetailList-footer .goodsDetailBtnGround {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    width: 100%;
+    -webkit-box-align: end;
+    -webkit-align-items: flex-end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    -webkit-flex-direction: row-reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse; }
+    .gDetailList-footer .goodsDetailBtnGround .myBtn {
+      font-size: 14px;
+      display: block;
+      width: 46%;
+      height: 32px;
+      line-height: 32px;
+      color: #fff;
+      text-align: center;
+      border-radius: 5px;
+      background-color: gray; }
+      .gDetailList-footer .goodsDetailBtnGround .myBtn.redBtn {
+        background: #ff284c; }
+        .gDetailList-footer .goodsDetailBtnGround .myBtn.redBtn:active {
+          background: #f40029; }
+      .gDetailList-footer .goodsDetailBtnGround .myBtn.orgBtn {
+        background: #f89901; }
+        .gDetailList-footer .goodsDetailBtnGround .myBtn.orgBtn:active {
+          background: #c57a01; }

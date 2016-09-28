@@ -1,0 +1,204 @@
+@import '../base/_fn';
+.mySearchBar{
+    font-size: 16px;
+    position: relative;
+    top: 0px;
+    background-color: lighten($mainColor,2%);
+    color: #fff;
+    display: flex;
+    overflow: hidden;
+    &:after{
+        height:0 !important;
+    }
+    & .citySelect{
+        flex-basis: 70px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        & .icon{
+            margin-left: 6px;
+        }
+    }
+    & .searchbar{
+        background-color: transparent;
+        width: 100%;
+        padding-top: 0.25rem;
+    }
+    & .search-input .icon{
+        color: #fff;
+    }
+    & .search-input input{
+        border-radius: 100em;
+        background-color: rgba(255,255,255,0.35);
+        height: 1.7rem;
+        color: #fff;
+        &::-webkit-input-placeholder{
+            color:#fff !important;
+        }
+    }
+    & .searchbar .searchbar-cancel{
+        color: #fff;
+        height: 1.7rem;
+        line-height: 1.7rem;
+    }
+}
+.borer-dashed{
+    &:after{
+        @include setBottomLine();
+        border:1px dashed $borderColor_lighten;
+    }
+}
+.categoryList{
+
+    $paddingLR:10px;
+    $paddingTB:10px;
+    $contentInner_height:85px;
+
+    & .categoryList-item{
+        background-color: #fff;
+        margin: $listMargin 0;
+    }
+    & .categoryList-header{
+        position: relative;
+        padding: 0 $paddingLR;
+        height: 40px;
+        line-height: 40px;
+        &:before{
+            content:"";
+            position: absolute;
+            top: 50%;
+            left: $paddingLR;
+            transform: translate3d(0,-50%,0);
+            height: 15px;
+            width: 4px;
+            background-color: $mainColor;
+        }
+        & h4{
+            font-size: 14px;
+            margin-left: 10px;
+            margin-top: 0;
+            margin-bottom: 0;
+            @include ellipsis(100%);
+        }
+        & .locationKM{
+            display: none;/*一期不显示*/
+            $lightenColor:lighten($mainColor,10%);
+            color: $lightenColor;
+            font-size: 12px;
+            border-radius: 100em;
+            border:1px solid $lightenColor;
+            text-align:center;
+            position: absolute;
+            right: $paddingLR;
+            top: 50%;
+            height: 1.5em;
+            line-height: 1.5em;
+            padding:0 0.75em;
+            transform: translate3d(0,-50%,0);
+        }
+    }
+    & .categoryList-content{
+        height: 2 * $contentInner_height;
+        overflow: hidden;
+        transition: height 0.3s ease-in-out;
+    }
+    & .categoryList-content-inner{
+        position: relative;
+        padding: $paddingTB $paddingLR;
+        height: $contentInner_height;
+        display: flex;
+        &:first-child{
+                margin-top:0.5px;
+                &:before{
+                    @include setTopLine();
+                    border:1px dashed $borderColor_lighten;
+                }
+        }
+        &>div{
+            height: 65px;
+            overflow: hidden;
+        }
+        & .pic{
+            flex-basis: 110px;
+            flex-shrink: 0;
+            max-width: 110px;
+            & img{
+                display: block;
+                height: 100%;
+                width: 100%;
+            }
+        }
+        & .goodsText{
+            width: 100%;
+            padding:0 0.5em;
+            &>p{
+                font-size: 12px;
+                line-height: 1.5;
+                @include ellipsisLn(2);
+                @include text_wrap;
+                letter-spacing: 0px;
+            }
+            & .orangeBg{
+                font-size: 10px;
+                background-color: #eeae50;
+                color: #fff;
+                padding:2px 4px;
+            }
+        }
+        & .goodsPrice-warp{
+            flex-basis: 80px;
+            flex-shrink: 0;
+            max-width: 80px;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-end;
+            &>div{
+                flex-basis: 20px;
+                flex-shrink: 0;
+            }
+        }
+        & div.redBg{
+            display: none;/*一期不显示*/
+            flex-basis: 14px;
+            background-color: $mainColor;
+            color: #f2f2f2;
+            text-align: center;
+            width: 6em;
+            line-height: 14px;
+        }
+        & div.priceOld{
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+            margin:5px 0;
+        }
+        & div.priceNow{
+            font-size: 18px;
+            color: $mainColor;
+            line-height: 20px;
+            height: 20px;
+            letter-spacing: 0px;
+        }
+    }
+    & .categoryList-footer{
+        position: relative;
+        top: -1px;
+        display:none;
+        text-align: center;
+        padding: 0 $paddingLR;
+        height: 44px;
+        line-height: 44px;
+        font-size: 14px;
+        &:after{
+            @include setTopLine();
+            border:1px dashed $borderColor_lighten;
+        }
+        & .moreBtnIcon{
+            margin-left: 5px;
+            margin-bottom: 1px;
+            font-size: 0.9em;
+        }
+    }
+}

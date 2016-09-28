@@ -2,6 +2,17 @@ define(['zepto'],function($){
 
     var exportsObj = {};
 
+    exportsObj.baseUrl = "/clusterscheme/";
+    exportsObj.baseUrl_commcenter = "/standard_commcenter/";
+
+    exportsObj.toJson = function(data){
+      if (typeof data == "string") {
+            return JSON.parse(data);
+      }else{
+            return data
+      }
+    }
+
     exportsObj.include = function(file) {
       var files = typeof file == "string" ? [ file ] : file;
       for (var i = 0; i < files.length; i++) {
@@ -101,47 +112,17 @@ define(['zepto'],function($){
     }
 
     /**
-     * 格式化金额
+     * 格式化金额-分转元
      * @param {Object} num 传入金钱数值
-     * @param {Object} isThousand 是否需要逗号隔开(bool)
-     * @param {Object} cent 小数位数
      */
-     exportsObj.format_money = function(num,isThousand,cent){
-      var sign = "";
-      if (parseFloat(num)<0){
-        sign = "-" ;
-      }
-      num = Math.abs(parseFloat(num)).toString();
-      if(isNaN(cent)){//确保传入小数位为数值型数值.
-        cent = 0;
-      }
-      cent = parseInt(cent);
-      var array = num.split(".");
-      if (isNaN(array[1])) {
-        array[1] = "0";
-      }
-      while(array[1].length<cent) {
-        array[1] = array[1] + "0";
-      }
+   exportsObj.format_money =  function(num){
 
-
-      if(!isThousand){ //不需要千分位符.
-        if (cent == 0){
-          return ( sign + array[0] );
-        }else{
-          return ( sign + array[0] + "." + array[1].substring(0,cent));
-        }
-      }else{
-        for (var i = 0; i < Math.floor((array[0].length-(1+i))/3); i++){
-          array[0] = array[0].substring(0,array[0].length-(4*i+3))+','+
-          array[0].substring(array[0].length-(4*i+3));
-        }
-        if (cent == 0){
-          return (sign + array[0]);
-        }else {
-          return (sign + array[0] + '.' + array[1].substring(0,cent));
-        }
-      }
+      var str = (num/100).toFixed(2) + '';
+      //var intSum = str.substring(0,str.indexOf(".")).replace( /\B(?=(?:\d{3})+$)/g, ',' );//取到整数部分
+      var intSum = str.substring(0,str.indexOf(".")).replace( /\B(?=(?:\d{3})+$)/g, '' );//取到整数部分
+      var dot = str.substring(str.length,str.indexOf("."))//取到小数部分
+      var ret = intSum + dot;
+      return ret;
 
     }
 

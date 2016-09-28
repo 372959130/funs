@@ -1,1 +1,0 @@
-define(["zepto","smExtend"],function(e){e(".swiper-container").swiper({paginationClickable:!0,slidesPerView:"auto"})});
