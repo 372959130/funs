@@ -8,8 +8,11 @@ define(['app','template','smExtend','footer'],function(app,template,smExtend,foo
     var cat_ids = "";
     var city_id = "";//城市id-北京--test
     exportsObj.init = function(request){
-      app.setPageTitle("分类");
+      app.setPageTitle("分类页");
       cat_ids = request.catid;
+      if (typeof request.keyword != 'undefined') {
+        keyword = request.keyword;
+      }
       city_id = 100010000;//城市id-北京--test
 
       footer.init($('#lifeFooterBar'));//初始化页脚
@@ -29,12 +32,12 @@ define(['app','template','smExtend','footer'],function(app,template,smExtend,foo
 
     //搜索
     $(document).off('submit', '#searchForm').on('submit', '#searchForm',function(event) {
-        event.preventDefault();//阻止表单提交(type=search的input必须在表单内,手机的键盘才会有"搜索"按钮)
+        // event.preventDefault();//阻止表单提交(type=search的input必须在表单内,手机的键盘才会有"搜索"按钮)
         keyword = $('#search').val();
         page=1;//重置
         maxPage=99;//重置
         getShopData();
-        $(this).submit();
+        location.href = location.pathname + "?catid="+cat_ids+"&keyword="+keyword;
     });
 
     //滚动刷新
