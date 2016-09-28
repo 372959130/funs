@@ -751,7 +751,6 @@ input, textarea {
       white-space: nowrap;
       word-wrap: normal;
       width: calc(100% - 15px);
-      color: #000000;
       font-size: 15px; }
     .homeBanner-recommend .recommend-content p {
       width: 100%;
@@ -950,10 +949,6 @@ input, textarea {
       color: #fff;
       padding: 2px 4px; }
   .categoryList .categoryList-content-inner .goodsPrice-warp {
-    max-width: 90px;
-    -webkit-flex-basis: 90px;
-    -ms-flex-preferred-size: 90px;
-    flex-basis: 90px;
     -webkit-flex-shrink: 0;
     -ms-flex-negative: 0;
     flex-shrink: 0;
@@ -1076,10 +1071,10 @@ input, textarea {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: baseline;
-    -webkit-align-items: baseline;
-    -ms-flex-align: baseline;
-    align-items: baseline;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     -webkit-box-pack: justify;
     -webkit-justify-content: space-between;
     -ms-flex-pack: justify;
@@ -1310,20 +1305,27 @@ input, textarea {
         .gDetailList-footer .goodsDetailBtnGround .myBtn.orgBtn:active {
           background: #c57a01; }
 
+#confirm li {
+  background: white; }
+
 #confirm li > div {
   padding: 0 10px; }
 
 #confirm li {
-  padding: 10px 0; }
+  padding: 14px 0; }
 
 #confirm .phone {
-  margin-top: 20px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   font-size: 16px;
   font-weight: bold; }
+  #confirm .phone > div:first-child {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1; }
 
 #confirm .order {
   display: -webkit-box;
@@ -1332,10 +1334,59 @@ input, textarea {
   display: flex;
   color: #BEBEBE; }
 
-#confirm .confirm_b_l {
-  width: 70px;
-  height: 1.5rem;
-  line-height: 1.5rem; }
+#confirm .goodBox {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+  #confirm .goodBox .goodImgBox {
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    -webkit-flex-basis: 110px;
+    -ms-flex-preferred-size: 110px;
+    flex-basis: 110px;
+    height: 65px; }
+    #confirm .goodBox .goodImgBox img {
+      width: 100%;
+      height: 100%; }
+  #confirm .goodBox .goodsText {
+    padding: 0 0.5em;
+    margin-top: 5px;
+    font-size: 12px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    height: 4.5em;
+    line-height: 1.5; }
+  #confirm .goodBox .goodsPrice-warp {
+    margin-top: 5px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: column;
+    -ms-flex-flow: column;
+    flex-flow: column;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    font-size: 14px;
+    text-align: right; }
+
+#confirm .moneyBox {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-around;
+  -ms-flex-pack: distribute;
+  justify-content: space-around; }
+  #confirm .moneyBox > div {
+    width: 100%; }
 
 #confirm .weui_btn {
   position: relative;
@@ -1531,3 +1582,54 @@ input, textarea {
 
 .weui_cell {
   position: relative; }
+
+#my li {
+  padding: 10px; }
+
+#my .head_b {
+  background: -webkit-gradient(linear, left top, left bottom, from(#75C5DB), to(#D57581));
+  background: -webkit-linear-gradient(#75C5DB, #D57581);
+  background: linear-gradient(#75C5DB, #D57581);
+  width: 100%;
+  padding: 30px 100px; }
+  #my .head_b .head_content {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 0; }
+
+#my .line {
+  border-bottom: 1px solid #C7C7C7; }
+
+#my li .order_c {
+  position: relative;
+  left: 25%; }
+  #my li .order_c .order_img_c {
+    height: 31px; }
+
+#my li .name {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  padding-left: 10px; }
+
+#my .img_left {
+  height: 23px;
+  position: relative;
+  /*top: 3px;*/
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+
+#my .dot {
+  background: red;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  color: white;
+  font-size: 5px;
+  position: absolute;
+  top: -6px;
+  left: 31px;
+  text-indent: 5px; }
