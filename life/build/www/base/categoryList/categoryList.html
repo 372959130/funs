@@ -42,13 +42,15 @@
               <div class="bar bar-header-secondary mySearchBar">
                 <div class="citySelect">广州<span class="icon icon-down font14"></span></div>
                 <div class="searchbar">
-                  <form id="searchForm" onsubmit="return false">
+                  <form id="searchForm" onsubmit="return false" target="submitFrame">
                   <a class="searchbar-cancel">取消</a>
                   <div class="search-input">
                     <label class="icon icon-search" for="search"></label>
                     <input type="search" id='search' placeholder='输入关键字...'/>
                   </div>
                   </form>
+                  <iframe style="width:0; height:0;position: absolute; left:-100em;" name="submitFrame" src="about:blank"></iframe>
+                  <!--手机软键盘的搜索按钮,必须提交表单才能触发,所以此处加一个iframe,让iframe去刷新,不影响当前页面-->
                 </div>
               </div>
               <!-- Slider -->

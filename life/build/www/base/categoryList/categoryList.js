@@ -32,12 +32,12 @@ define(['app','template','smExtend','footer'],function(app,template,smExtend,foo
 
     //搜索
     $(document).off('submit', '#searchForm').on('submit', '#searchForm',function(event) {
-        // event.preventDefault();//阻止表单提交(type=search的input必须在表单内,手机的键盘才会有"搜索"按钮)
+        //提交表单后,才能触发 type=search 的软键盘中"搜索"按钮
+        //把表单提交到iframe,实际上是要执行getShopData的异步请求
         keyword = $('#search').val();
         page=1;//重置
         maxPage=99;//重置
         getShopData();
-        location.href = location.pathname + "?catid="+cat_ids+"&keyword="+keyword;
     });
 
     //滚动刷新
