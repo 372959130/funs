@@ -8,7 +8,7 @@ define(['app','template','smExtend','footer'],function(app,template,smExtend,foo
     var cat_ids = "";
     var city_id = "";//城市id-北京--test
     exportsObj.init = function(request){
-      app.setPageTitle("分类页");
+      app.setPageTitle("分类");
       cat_ids = request.catid;
       if (typeof request.keyword != 'undefined') {
         keyword = request.keyword;
@@ -38,6 +38,7 @@ define(['app','template','smExtend','footer'],function(app,template,smExtend,foo
         page=1;//重置
         maxPage=99;//重置
         getShopData();
+        $('#search').blur();
     });
 
     //滚动刷新
