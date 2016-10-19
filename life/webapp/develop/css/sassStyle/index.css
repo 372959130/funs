@@ -1565,14 +1565,19 @@ input, textarea {
 *[isPictureView="true"] {
   display: none; }
 
+.buBoxFooter ~ .content {
+  bottom: 80px; }
+
 .gDetailList {
   background: #fff;
   margin-bottom: 0.5rem;
   font-size: 14px; }
   .gDetailList.buyBox {
-    position: fixed;
+    position: absolute;
     z-index: 6;
-    bottom: 2.5rem;
+    bottom: 0;
+    left: 0;
+    height: 80px;
     width: 100%;
     max-width: 540px; }
   .gDetailList .lightenGray {

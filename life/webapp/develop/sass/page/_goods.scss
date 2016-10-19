@@ -3,96 +3,103 @@ $goodsDetailListPaddingTB: 16px !default;
 $goodsDetailListPaddingLR: 14px !default;
 $lightenGray:#999999 !default;
 $darkGray:#5f5f5f !default;
-*[isPictureView="true"]{
+$bottomHeight:80px !default;
+*[isPictureView="true"] {
     display: none;
 }
-.gDetailList{
-    background:#fff;
-    margin-bottom:$listMargin;
+
+.buBoxFooter~.content {
+    bottom: $bottomHeight;
+}
+
+.gDetailList {
+    background: #fff;
+    margin-bottom: $listMargin;
     font-size: 14px;
-    &.buyBox{
-        position: fixed;
+    &.buyBox {
+        position: absolute;
         z-index: 6;
-        bottom: 2.5rem;
+        bottom: 0;
+        left: 0;
+        height: $bottomHeight;
         width: 100%;
-        max-width:$maxWidth;
+        max-width: $maxWidth;
     }
-    .lightenGray{
+    .lightenGray {
         color: $lightenGray;
     }
-    .darkGray{
+    .darkGray {
         color: $darkGray;
     }
-    &:last-child{
-        margin-bottom:0;
+    &:last-child {
+        margin-bottom: 0;
     }
-    &>li{
-        background:#fff;
-        position:relative;
-        display:block;
-        padding:$goodsDetailListPaddingTB $goodsDetailListPaddingLR;
+    &>li {
+        background: #fff;
+        position: relative;
+        display: block;
+        padding: $goodsDetailListPaddingTB $goodsDetailListPaddingLR;
         @include setBottomLineAfter($borderColor_lighten);
-        &:last-child:after{
-            border:none;
+        &:last-child:after {
+            border: none;
         }
     }
-    & .priceBox{
-        display:flex;
+    & .priceBox {
+        display: flex;
         align-items: center;
         justify-content: space-between;
         font-size: 12px;
-        & .priceBox-left{
-            display:flex;
+        & .priceBox-left {
+            display: flex;
             flex-direction: column;
         }
     }
-    & .serviceBox{
+    & .serviceBox {
         display: flex;
         align-items: baseline;
         align-items: center;
-        & .service{
-            flex:1;
+        & .service {
+            flex: 1;
             display: flex;
             align-items: baseline;
             align-items: center;
             align-items: center;
             flex-wrap: wrap;
-            & .myCheckBox{
+            & .myCheckBox {
                 position: relative;
                 display: flex;
                 align-items: flex-start;
                 align-items: center;
                 margin-right: 10px;
-                &:before{
-                    content:"";
+                &:before {
+                    content: "";
                     background: url(../../images/goods/yes_grey.png) center no-repeat;
                     width: 18px;
                     height: 18px;
                     background-size: 100% 100%;
                     margin-right: 0.5em;
                 }
-                &.myChecked:before{
+                &.myChecked:before {
                     background-image: url(../../images/goods/yes_red.png);
                 }
             }
         }
-        & .shopPhone{
-            & img{
-                width:18px;
-                height:18px;
+        & .shopPhone {
+            & img {
+                width: 18px;
+                height: 18px;
             }
         }
     }
-    
-    & .shopLocation{
+    & .shopLocation {
         line-height: 1.75;
     }
-    & .goodsDetailTextBox{
+    & .goodsDetailTextBox {
         display: flex;
         align-items: center;
         line-height: 1.75;
-        &.dot:before{
-            content:"·";
+        &.dot:before {
+            content: "·";
             align-self: baseline;
             position: relative;
             top: -4.5px;
@@ -100,47 +107,47 @@ $darkGray:#5f5f5f !default;
             height: 18px;
         }
     }
-    & .toSeePicture{
+    & .toSeePicture {
         color: $baseFontColor !important;
         display: flex;
         justify-content: space-between;
-        &:active{
+        &:active {
             background-color: #f8f8f8;
         }
     }
-    & .goodsTips{
+    & .goodsTips {
         font-size: 12px;
         color: $darkGray;
     }
 }
 
-.pictureView{
+.pictureView {
     background-color: #fff;
-    margin-bottom:0.5rem;
-    & .pictureView-tab{
+    margin-bottom: 0.5rem;
+    & .pictureView-tab {
         position: fixed;
         top: 0;
-        width:100%;
+        width: 100%;
         z-index: 5;
         background-color: #fff;
-        display:flex;
+        display: flex;
         justify-content: center;
         align-items: center;
         text-align: center;
         height: 49px;
         overflow: hidden;
-        &>div{
+        &>div {
             position: relative;
             flex-basis: 50%;
-            padding:12px 0;
+            padding: 12px 0;
             font-weight: bold;
-            &:last-child{
-                &:before{
+            &:last-child {
+                &:before {
                     @include setLeftLine;
                     top: 20%;
                     height: 60%;
                 }
-                &:after{
+                &:after {
                     @include setBottomLine;
                     left: 50%;
                     width: 6.5em;
@@ -150,35 +157,35 @@ $darkGray:#5f5f5f !default;
                 }
             }
         }
-        & .active{
+        & .active {
             color: $mainColor;
         }
     }
-    & .pictureViewTitle{
+    & .pictureViewTitle {
         position: relative;
         margin-top: 49px;
     }
-    & .pictureDetail{
+    & .pictureDetail {
         display: flex;
         justify-content: center;
         position: relative;
     }
 }
 
-.gDetailList-footer{
+.gDetailList-footer {
     display: flex;
-    &>div:first-child{
-        flex-basis:125px;
+    &>div:first-child {
+        flex-basis: 125px;
         flex-shrink: 0;
-        color:$lightenGray;
+        color: $lightenGray;
     }
-    & .goodsDetailBtnGround{
+    & .goodsDetailBtnGround {
         display: flex;
         justify-content: space-between;
         width: 100%;
         align-items: flex-end;
         flex-direction: row-reverse;
-        & .myBtn{
+        & .myBtn {
             font-size: 14px;
             display: block;
             width: 46%;
@@ -188,16 +195,16 @@ $darkGray:#5f5f5f !default;
             text-align: center;
             border-radius: 5px;
             background-color: gray;
-            &.redBtn{
+            &.redBtn {
                 background: $mainColor;
-                &:active{
-                    background: darken($mainColor,10%);
+                &:active {
+                    background: darken($mainColor, 10%);
                 }
             }
-            &.orgBtn{
+            &.orgBtn {
                 background: $orangeColor;
-                &:active{
-                    background: darken($orangeColor,10%);
+                &:active {
+                    background: darken($orangeColor, 10%);
                 }
             }
         }

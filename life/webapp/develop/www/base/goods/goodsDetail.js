@@ -18,7 +18,7 @@ define(['app','template','smExtend','footer'],function(app,template,smExtend,foo
       app.setPageTitle("美食");
       deal_id = request.deal_id;
       shop_id = request.shop_id;
-      footer.init($('#lifeFooterBar'));//初始化页脚
+      // footer.init($('#lifeFooterBar'));//初始化页脚
       getGoodData();//获取商品信息
       getShopData();//获取店铺信息
       $.refreshScroller();//更新js滚动条
