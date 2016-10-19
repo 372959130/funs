@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>确认信息</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../../../js/sui/css/sm.min.css">
+    <link rel="stylesheet" href="../../../js/sui/css/sm-extend.min.css">
+    <link rel="stylesheet" href="../../../css/sassStyle/index.css">
+
+  </head>
+  <body ontouchstart="">
+
+  <div class="page-group">
+        <div class="page page-curren" id="confirm">
+
+            <!-- 工具栏 -->
+            <div data-acive="home" id="lifeFooterBar"></div>
+
+            <!-- 这里是页面内容区 -->
+            <div class="content" data-type="auto">
+            <div class="content-inner">
+              
+              <section class="confirm">
+                <ul>
+                  <li class="font14">
+                    <div class="order">
+                      <div style="-webkit-box-flex: 1;-webkit-flex: 1;-ms-flex: 1;flex: 1;">订单号: <span id="orderId" class="paddingL10">6546 5456 8789 223</span> </div>
+                      <div class="mainColor font12">未支付</div>
+                    </div>
+
+                    <div class="order">
+                      <div>下单时间:</div>
+                      <div id="createTime" class="paddingL10">2016/10/19 15:52:25</div>
+                    </div>
+                  </li>
+                </ul>
+                <ul style="margin-top: 0.5rem;display: none;">
+                  <li>
+                    <div class="phone">
+                      <div>联系人电话号码</div>
+                      <!-- <div>陈宇明</div> -->
+                      <!-- <div style="flex: 1;text-align: right;padding-right: 20px;">15820283415</div> -->
+                      <div>
+                         <span class="icon icon-right"></span>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+                <ul style="margin-top: 0.5rem">
+                  <li>
+                    <div>
+                      <div class="font16 fontBold">订单信息</div>
+                      <div class="font14" style="color: #7F7F7F;">支付后，即可领取您的消费码，届时凭消费码到店消费即可</div>
+                    </div>
+                  </li>
+                </ul>
+                <ul style="margin-top: 0.5rem;position: relative;" class="borderB">
+                  <li>
+                    <div class="goodBox">
+                      <div class="goodImgBox">
+                          <img src="">
+                      </div>
+                      <div id="goodsText" class="goodsText"></div>
+                      <div class="goodsPrice-warp">
+                        <div class="mainColor">¥<span id="goodPrice">--</span></div>
+                        <div id="goodCount">×1</div>
+                      </div>  
+                    </div>
+                  </li>
+                </ul>
+                <ul>
+                  <li>
+                    <div class="moneyBox">
+                      <div>
+                        <!-- <div>运费: <span class="mainColor">¥ 0</span> </div> -->
+                      </div>
+                      <div>
+                        <div style="text-align: right;">实付: <span class="mainColor"> ¥ <span id="payMoney">1080.00</span></span></div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+
+                <div style="height: 150px;width: 100%;background: #fff;padding-top: 25px;margin-top: 0.5rem;">
+                  <a id="pay" href="javascript:;" class="weui_btn weui_btn_warn" style="margin: 0 10px;background-color: #E51537;">支付</a>
+                </div>
+                
+              </section>
+              
+            </div>
+            </div>
+            <!--content-->
+
+        </div>
+    </div>
+<!--moduleJS begin-->
+<script type="text/javascript" data-main="../../../js/router.js" src="../../../js/require.js"></script>
+  </body>
+</html>

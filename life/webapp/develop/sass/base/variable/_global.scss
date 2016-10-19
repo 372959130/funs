@@ -1,0 +1,14 @@
+$maxWidth:540px;
+$baseFont:"Arial", "Helvetica", "sans-serif","Microsoft YaHei";
+$baseFontSize:16px !default;
+$baseFontColor:#3d4145 !default;
+//border颜色
+$borderColor_default:#C7C7C7 !default;
+$borderColor_lighten:lighten($borderColor_default,15%) !default;
+
+//页面风格//
+$mainColor:#ff284c !default;//主色调
+$orangeColor:#f89901 !default;//橙色
+
+//列表间隔
+$listMargin:0.5rem !default;
