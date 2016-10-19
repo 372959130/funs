@@ -69,6 +69,8 @@ require(['zepto','sm','smExtend','app','template','linkTo','footer','dialog','ad
     $(window).on('beforePageRemove', function(event,$pageContainer) {
           try {
             myRouter.thePageModule.destroy();
+            $.closeModal();//关闭popup
+            $.hidePreloader();//隐藏loding
           } catch (e) {
 
           }

@@ -221,7 +221,7 @@ define(['app','template','smExtend','footer'],function(app,template,smExtend,foo
               return false;
             }
             setTimeout(function(){
-                $.hidePreloader();//loding
+                $.hidePreloader();//隐藏loding
                 $.router.load("../confirm/confirm.html",true);
             },1500);
     });
