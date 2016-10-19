@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>可使用订单</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta content="telephone=no" name="format-detection"> 
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../../../js/sui/css/sm.min.css">
+    <link rel="stylesheet" href="../../../js/sui/css/sm-extend.min.css">
+    <link rel="stylesheet" href="../../../css/sassStyle/index.css">
+
+  </head>
+  <body ontouchstart="">
+
+  <div class="page-group">
+        <div class="page page-curren" id="orderUse">
+
+            <!-- 工具栏 -->
+            <div data-acive="my" id="lifeFooterBar"></div>
+
+            <!-- 这里是页面内容区 -->
+            <div class="content infinite-scroll" id="myRefresh" data-distance="100" data-type="auto">
+            <div class="content-inner">
+
+              <div class="orderUseTips borderB"><div class="titleStyle"><span>以下为可使用SN码的订单</span></div></div>
+        
+              <div id="orderListBox"></div>
+              <!-- <div class="orderList">
+
+                  <ul>
+                      
+                      <li class="borderB">
+                          <ul class="goodListCommon">
+                            <li class="goodListCommon-item">
+                              <div class="goodListCommon-goodBox">
+                                <div class="goodListCommon-goodImgBox">
+                                    <img src="../../../images/demo/a1.png">
+                                </div>
+                                <div class="goodListCommon-middleBox goodListCommon-middleBox-vertical ellipsis">
+                                      <div class="ellipsis font14 fontBold">乳鸽一只</div>
+                                      <div class="ellipsis font12">椰风雨林海南主题餐厅椰风雨林海南主题餐厅椰风雨林海南主题餐厅</div>
+                                      <div class="ellipsis mainColor">查看详情</div>
+                                </div>
+                                <div class="goodListCommon-rightBox">
+                                  <div class="font12">×1</div>
+                                  <div class="font12 lightenGray">原价<del>¥128</del></div>
+                                  <div class="font18 mainColor">¥100</div>
+                                </div>  
+                              </div>
+                            </li>
+                          </ul>
+                      </li>
+
+                      <li class="font14">
+                            <div class="lightenGray">订单号:<span class="paddingL8">86691458043068931</span></div>
+                            <div class="lightenGray">下单时间:<span class="paddingL8">2016-03-15 19:57:48</span></div>
+                            <div>SN码:<span class="paddingL8">0213456897562241</span></div>
+                      </li>
+
+                </ul>
+
+              </div>
+ -->
+            </div>
+            <!-- 加载提示符 -->
+            <div class="infinite-scroll-preloader">
+                <div class="preloader"></div>
+            </div>
+            </div>
+            <!--content-->
+
+        </div>
+        <!--JS模板-->
+        <script type="text/html" id="orderListTPL">
+        {{each}}
+              <div class="orderList">
+
+                  <ul>
+                      
+                      <li class="borderB">
+                          <ul class="goodListCommon">
+                            <li class="goodListCommon-item">
+                              <div class="goodListCommon-goodBox">
+                                <div class="goodListCommon-goodImgBox">
+                                    <img src="{{$value.tiny_image}}">
+                                </div>
+                                <div class="goodListCommon-middleBox goodListCommon-middleBox-vertical ellipsis">
+                                      <div class="ellipsis font14 fontBold">{{$value.good_name}}</div>
+                                      <div class="ellipsis font12">{{$value.shop_name}}</div>
+                                      <div data-goodid="{{$value.good_id}}" class="ellipsis mainColor toGoodsDetail">查看详情</div>
+                                </div>
+                                <div class="goodListCommon-rightBox">
+                                  <div class="font12">×1</div>
+                                  <div class="font12 lightenGray">原价<del>¥{{$value.market_price_yuan}}</del></div>
+                                  <div class="font18 mainColor">¥{{$value.good_price_yuan}}</div>
+                                </div>  
+                              </div>
+                            </li>
+                          </ul>
+                      </li>
+
+                      <li class="font14">
+                            <div class="lightenGray">订单号:<span class="paddingL8">{{$value.order_id}}</span></div>
+                            <div class="lightenGray">下单时间:<span class="paddingL8">{{$value.committime}}</span></div>
+                            <div>SN码:<span class="paddingL8">{{$value.coupon_code}}</span></div>
+                      </li>
+
+                </ul>
+
+              </div>
+        {{/each}}
+        </script>
+    </div>
+<!--moduleJS begin-->
+<script type="text/javascript" data-main="../../../js/router.js" src="../../../js/require.js"></script>
+  </body>
+</html>

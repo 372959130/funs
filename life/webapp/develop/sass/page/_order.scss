@@ -1,0 +1,73 @@
+@import '../base/_fn';
+.orderList{
+  $lightenGray:#999999 !default;
+  margin-bottom:$listMargin;
+  .lightenGray{
+    color:$lightenGray;
+  }
+  &>ul{
+      position: relative;
+      background: white;
+      &>li{
+        position: relative;
+        padding: 14px 0;
+      }
+  }
+  & .order{
+    display: flex;
+    color: $lightenGray;
+  }
+  li>div{
+    padding: 0 10px;
+  }
+  .remove{
+    width:18.5px;
+    height: 20.5px;
+    margin-right: 10px;
+  }
+  .goodTextBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    &>div{
+      display: flex;
+    }
+  }
+  .displayF{
+    display: flex;
+  }
+  .flex1{
+      flex: 1;
+  }
+  .flex-flow{
+      flex-flow: column;
+  }
+  .margin0{
+    margin: 0;
+  }
+}
+
+.orderUseTips{
+  position:relative;
+  & .titleStyle{
+    padding:0 1.8rem;
+    background:#fff;
+    height:44px;
+    font-size:14px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    &>span{
+      flex-basis: 13em;
+      flex-shrink: 0;
+      text-align: center;
+    }
+    &:before,&:after{
+      content:"";
+      height:1px;
+      width: 60%;
+      background-color: $lightenGray;
+    }
+  }
+}

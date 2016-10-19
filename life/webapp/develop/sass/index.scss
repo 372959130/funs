@@ -1,0 +1,22 @@
+@charset "UTF-8";
+@import 'base/_fn';
+@import 'base/_reset';
+@import 'base/_border';
+
+/*widget*/
+@import 'widget/common/_common';
+@import 'widget/common/_star';
+@import 'widget/footer/_footer';
+@import 'widget/swiper/_mySwiper';
+@import 'widget/popup/_buyPopup';
+@import 'widget/popup/_dialog';
+@import 'widget/num/_num';
+@import 'widget/layout/_goodList';
+
+/*page*/
+@import 'page/_index';
+@import 'page/_categoryList';
+@import 'page/_goods';
+@import 'page/_confirm';
+@import 'page/_my';
+@import 'page/_order';

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>未支付订单</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta content="telephone=no" name="format-detection"> 
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../../../js/sui/css/sm.min.css">
+    <link rel="stylesheet" href="../../../js/sui/css/sm-extend.min.css">
+    <link rel="stylesheet" href="../../../css/sassStyle/index.css">
+
+  </head>
+  <body ontouchstart="">
+
+  <div class="page-group">
+        <div class="page page-curren" id="waitPayOrder">
+
+            <!-- 工具栏 -->
+            <div data-acive="my" id="lifeFooterBar"></div>
+
+            <!-- 这里是页面内容区 -->
+            <div class="content infinite-scroll" id="myRefresh" data-distance="100" data-type="auto">
+            <div class="content-inner">
+
+            <div id="unPayListBox"></div>
+<!--               <div class="orderList">
+                <ul>
+                  <li class="font14">
+                    <div class="order">
+                      <div class="flex1">订单号: <span>0201314520</span> </div>
+                      <div>删除订单</div>
+                    </div>
+
+                    <div class="order displayF">
+                      <div>下单时间:</div>
+                      <div class="paddingL10 flex1" >2016-03-15 19:23:12</div>
+                      <img class="remove" src="../../../images/my/remove.png">
+                    </div>
+                  </li>
+                </ul>
+
+                  <ul class="borderT">
+                      
+                      <li class="borderB">
+                          <ul class="goodListCommon">
+                            <li class="goodListCommon-item">
+                              <div class="goodListCommon-goodBox">
+                                <div class="goodListCommon-goodImgBox">
+                                    <img src="../../../images/demo/a1.png">
+                                </div>
+                                <div class="goodListCommon-middleBox goodListCommon-middleBox-vertical ellipsis">
+                                      <div class="ellipsis font14 fontBold">乳鸽一只</div>
+                                      <div class="ellipsis font12">椰风雨林海南主题餐厅椰风雨林海南主题餐厅椰风雨林海南主题餐厅</div>
+                                      <div class="ellipsis mainColor">查看详情</div>
+                                </div>
+                                <div class="goodListCommon-rightBox">
+                                  <div class="font12">×1</div>
+                                  <div class="font12 lightenGray">原价<del>¥128</del></div>
+                                  <div class="font18 mainColor">¥100</div>
+                                </div>  
+                              </div>
+                            </li>
+                          </ul>
+                      </li>
+
+                      <li>
+                          <div class="displayF">
+                            <div class="flex1">
+                              <span class="fontBold font16">实付:</span>
+                              <span><span class="fontBold font20 mainColor">¥ 20</span></span>
+                            </div>
+                            <div>
+                              <a href="#" class="button  button-fill button-danger">立即支付</a>
+                            </div>
+                          </div>
+                      </li>
+
+                </ul>
+              </div> -->
+
+            </div>
+            <!-- 加载提示符 -->
+            <div class="infinite-scroll-preloader">
+                <div class="preloader"></div>
+            </div>
+            </div>
+            <!--content-->
+
+        </div>
+        <!--JS模板-->
+        <script type="text/html" id="unPaylistTpl">
+        {{each}}
+          <div class="orderList">
+                <ul>
+                  <li class="font14">
+                    <div class="order">
+                      <div class="flex1">订单号: <span>{{$value.order_id}}</span> </div>
+                      <div>删除订单</div>
+                    </div>
+
+                    <div class="order displayF">
+                      <div>下单时间:</div>
+                      <div class="paddingL10 flex1" >{{$value.committime}}</div>
+                      <img class="remove noUse" src="../../../images/my/remove.png">
+                    </div>
+                  </li>
+                </ul>
+
+                  <ul class="borderT">
+                      
+                      <li class="borderB">
+                          <ul class="goodListCommon">
+                            <li class="goodListCommon-item">
+                              <div class="goodListCommon-goodBox">
+                                <div class="goodListCommon-goodImgBox">
+                                    <img src="{{$value.tiny_image}}">
+                                </div>
+                                <div class="goodListCommon-middleBox goodListCommon-middleBox-vertical ellipsis">
+                                      <div class="ellipsis font14 fontBold">{{$value.good_name}}</div>
+                                      <div class="ellipsis font12">{{$value.shop_name}}</div>
+                                      <div data-goodid="{{$value.good_id}}" class="ellipsis mainColor toGoodsDetail">查看详情</div>
+                                </div>
+                                <div class="goodListCommon-rightBox">
+                                  <div class="font12">×{{$value.good_num}}</div>
+                                  <div class="font12 lightenGray">原价<del>¥{{$value.market_price_yuan}}</del></div>
+                                  <div class="font18 mainColor">¥{{$value.good_price_yuan}}</div>
+                                </div>  
+                              </div>
+                            </li>
+                          </ul>
+                      </li>
+
+                      <li>
+                          <div class="displayF">
+                            <div class="flex1">
+                              <span class="fontBold font16">实付:</span>
+                              <span><span class="fontBold font20 mainColor">¥ {{$value.total_money_yuan}}</span></span>
+                            </div>
+                            <div>
+                              <a href="javascript:;" class="button  button-fill button-danger toConfirm">
+                                <span>立即支付</span>
+                                <form class="buyForm" action="" method="post">
+                                    <input class="shopId" type="hidden" name="shop_id" value="{{$value.shop_id}}">
+                                    <input class="goodId" type="hidden" name="goodId" value="{{$value.good_id}}">
+                                    <input class="count" type="hidden" name="count" value="{{$value.good_num}}">  
+                                  <input class="callBackUrl" type="hidden" name="callBackUrl" value="">
+                                </form>
+                              </a>
+                            </div>
+                          </div>
+                      </li>
+
+                </ul>
+              </div>
+        {{/each}}
+        </script>
+    </div>
+<!--moduleJS begin-->
+<script type="text/javascript" data-main="../../../js/router.js" src="../../../js/require.js"></script>
+  </body>
+</html>

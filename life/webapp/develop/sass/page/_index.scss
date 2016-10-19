@@ -1,0 +1,126 @@
+@import '../base/_fn';
+
+.threeItem-layout{
+  display:flex;
+  background:#fff;
+  margin:$listMargin 0;
+  &>.threeItem{
+    flex-basis: 49.5%;
+    max-width: 49.5%;
+    &:first-child{
+      margin-right:1%;
+    }
+  }
+  & .threeItem-big{
+    @include pTimgBox(104.076%);
+    background:url() center no-repeat;
+    background-size:100% 100%;
+  }
+  & .threeItem-small{
+    @include pTimgBox(51%);
+    background:url() center no-repeat;
+    background-size:100% 100%;
+  }
+  &>div.vertical-layout>div:last-child{
+    margin-top: 2.04%;
+  }
+}
+
+.horn{
+  $horn-title_width:110px;
+  $height:32px;
+  display:flex;
+  background:#fff;
+  margin:$listMargin 0;
+  & .horn-title{
+    position:relative;
+    flex-shrink: 0;
+    line-height:$height;
+    width:$horn-title_width;
+    top:1px;
+    & .lb{
+      width:12px;
+      height:12px;
+      margin-left:5px;
+      margin-right:9px;
+      position:relative;
+      top:-2px;
+    }
+    & .lb-title{
+      width:70px;
+      height:15px;
+    }
+  }
+  & .homeBanner-vertical {
+      width:210px;
+      width:calc(100% - #{$horn-title_width});
+      & .swiper-container{
+        height: $height !important;
+        overflow: hidden;
+      }
+      & .swiper-slide{
+        line-height:$height;
+        font-size:12px;
+        color:#999999;
+        @include ellipsis;
+      }
+  }
+}
+
+.homeBanner-recommend{
+  width:124%;
+  & .swiper-container{
+    padding-bottom:0;
+  }
+  & .swiper-slide{
+    width: 0;
+    @include setRightLineAfter;
+    background:#f8f8f8;
+    &:before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      width:0.5rem;
+      height:0.95rem;
+      background:url() center no-repeat;
+      background-image:url(../../images/index/g.png);
+      background-size:100% 100%;
+    }
+    &:nth-child(3n-1):before{
+      background-image:url(../../images/index/p.png);
+    }
+    &:nth-child(3n):before{
+      background-image:url(../../images/index/y.png);
+    }
+  }
+  & .recommend-box{
+      @include pTimgBox(144%);
+      overflow:hidden;
+  }
+  & .recommend-content{
+      @include pTimgChild;
+      text-align:center;
+      & h3{
+          margin:0;
+          margin-left:10px; 
+          margin-top:5px;
+          @include ellipsis(90%);
+          width:calc(100% - 15px);
+          font-size:15px;
+      }
+      & p{
+        @include ellipsis(100%);
+        font-size:14px;
+      }
+      & .recommend-icon{
+        margin:15px auto 0 auto;
+        overflow:hidden;
+        border-radius: 100%;
+        @include pTimgBox(87.5%);
+        width: 87.5%;
+        background: url() center no-repeat;
+        background-size: cover;
+      }
+  }
+}

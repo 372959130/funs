@@ -1,0 +1,39 @@
+// tapcolor
+@mixin setTapColor($c:rgba(0,0,0,0)) {
+    -webkit-tap-highlight-color: $c;
+}
+
+//user action
+@mixin no_select() {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+//dpr
+@mixin setDpr($dpr:2){
+        @media only screen and (-webkit-min-device-pixel-ratio: $dpr),
+        only screen and (-moz-min-device-pixel-ratio: $dpr),
+        only screen and (min-device-pixel-ratio: $dpr) 
+        {
+            @content;
+        }
+}
+
+
+@mixin pTimgBox($top: 100%, $position: relative, $width: 100%) {//use padding-top's box
+    padding-top: $top;
+    width: $width;
+    position: $position;
+}
+
+@mixin pTimgChild{//the child of use padding-top's box
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
