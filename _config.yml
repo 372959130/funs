@@ -1,0 +1,8 @@
+title: sui mobile + require.js + gulp 集成框架
+description: "@lzsheng"
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-cayman
+
+gems:
+  - jekyll-mentions
