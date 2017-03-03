@@ -1,1 +1,5 @@
-define(["jquery"],function(e){var n={};return n});
+define(['jquery'],function($){
+    var port = {};
+
+    return port;
+})

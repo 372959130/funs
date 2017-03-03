@@ -43,13 +43,14 @@ gulp.task('buildCss',['copyFile'], function(){//压缩css
 		.pipe(gulp.dest(ops.dir+'/css'));
 });
 
-//压缩、合并amdjs
-gulp.task('rjs',['copyFile'], function () {
-	return gulp.src(ops.dir+'/js/router.js')
+gulp.task('rjs',['copyFile'], function () {//压缩、合并amdjs //模块路径相对于 主入口文件--不读config的baseURL
+	return gulp.src([
+			ops.dir+'/js/app/wheel.js'
+		])
 		.pipe(requirejsOptimize({
-			mainConfigFile: ops.dir+'/js/router.js',
+			mainConfigFile: ops.dir+'/js/config.js',
 		}))
-		.pipe(gulp.dest(ops.dir+'/js/'));
+		.pipe(gulp.dest(ops.dir+'/js/app'));
 });
 
 gulp.task('buildJs',['rjs'], function(){//压缩js
@@ -75,4 +76,4 @@ gulp.task('rev',['buildJs'], function () {//添加版本号
 
 //===构建任务===//
 
-gulp.task('default', ['cleanFile','copyFile','buildCss', 'rjs', 'buildJs','rev']);
+gulp.task('default', ['cleanFile','copyFile','buildCss', 'rjs', 'buildJs']);
