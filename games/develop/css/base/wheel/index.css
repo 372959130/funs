@@ -401,8 +401,8 @@ p{
   transform: translate3d(-115%,-50%,0);
 }
 .infoBox .title:after{
-  -webkit-transform: translate3d(115%,-50%,0) rotate(180deg);
-  transform: translate3d(115%,-50%,0) rotate(180deg);
+  -webkit-transform: translate3d(215%,-50%,0) rotate(180deg);
+  transform: translate3d(215%,-50%,0) rotate(180deg);
 }
 /*活动规则*/
 .infoBox .activityDetail p{
